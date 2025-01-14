@@ -1,0 +1,310 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.Resources
+<div class="ui account form">
+    <div class="two fields">
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.MainAccount
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("MainaccountTree", ViewBag.MainaccountTree as SelectList, "--Select --", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch1(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.FristBranche
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("fristbranche", new SelectList(""), "select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch2(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+    </div>
+
+    <div class="two fields">
+        <div class="field">
+            <div class="control-label col-md-2">
+                @GeneralResource.SecondBranche
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("Secondbranche", new SelectList(""), "Select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch3(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+        <div class="field">
+            <div class="control-label col-md-2">
+                @GeneralResource.ThirdBranche
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("Thirdbranche", new SelectList(""), "Select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch4(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+    </div>
+    <div class="field">
+        <div class="control-label col-md-2">
+            @GeneralResource.FourthBranch
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownList("Fourthbranche", new SelectList(""), "Select", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessage("", "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+
+
+    <div class="actions">
+        <button type="submit" id="Save" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    $('#Save').click(function () {
+
+        var fristbranche = $('#fristbranche').val();
+        var Secondbranche = $('#Secondbranche').val();
+        var Thirdbranche = $('#Thirdbranche').val();
+        var Fourthbranche = $('#Fourthbranche').val();
+
+        var SecondbrancheText = $("#Secondbranche option:selected").text();
+        var ThirdbrancheText = $("#Thirdbranche option:selected").text();
+        var FourthbrancheText = $("#Fourthbranche option:selected").text();
+
+      
+        if (FourthbrancheText != "Select")
+        {
+            $('#AccountNameEN').val(FourthbrancheText);
+            $('#AccountTreeID').val(Fourthbranche);
+            $('#Account-Model').modal('hide');
+
+        }
+        else if (ThirdbrancheText != "Select") {
+            $('#AccountNameEN').val(ThirdbrancheText);
+            $('#AccountTreeID').val(Thirdbranche);
+            $('#Account-Model').modal('hide');
+
+        }
+        else if (SecondbrancheText != "Select") {
+            $('#AccountNameEN').val(SecondbrancheText);
+            $('#AccountTreeID').val(Secondbranche);
+            $('#Account-Model').modal('hide');
+
+        }
+        else
+
+        {
+            alert(" please selcet account")
+        }
+
+
+
+    });
+
+</script>
+
+
+    <script>
+
+    function GetBranch1(id) {
+        debugger;
+        var selectedValue = id;
+        $.ajax({
+            url: '/AccountReciveCash/GetBranchsAccount',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var fristbranche = $('#fristbranche');
+                fristbranche.empty();
+                fristbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var fristbranche = $('#fristbranche');
+                fristbranche.empty();
+                fristbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                    debugger;
+                    fristbranche.append(
+                        $('<option/>', {
+                            value: this.AccountTreeID,
+                            html: getLanguage() == 'ar' ?  this.AccountNameAR: this.AccountNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+    </script>
+
+
+    <script>
+
+    function GetBranch2(id) {
+        debugger;
+        var selectedValue = id;
+        $.ajax({
+            url: '/AccountReciveCash/GetBranchsAccount',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Secondbranche = $('#Secondbranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Secondbranche = $('#Secondbranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                    debugger;
+                    Secondbranche.append(
+                        $('<option/>', {
+                            value: this.AccountTreeID,
+                            html: getLanguage() == 'ar' ? this.AccountNameAR : this.AccountNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+    </script>
+
+
+    <script>
+
+    function GetBranch3(id) {
+        debugger;
+        var selectedValue = id;
+        $.ajax({
+            url: '/AccountReciveCash/GetBranchsAccount',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Thirdbranche = $('#Thirdbranche');
+                Thirdbranche.empty();
+                Thirdbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Thirdbranche = $('#Thirdbranche');
+                Thirdbranche.empty();
+                Thirdbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                    debugger;
+                    Thirdbranche.append(
+                        $('<option/>', {
+                            value: this.AccountTreeID,
+                            html: getLanguage() == 'ar' ? this.AccountNameAR : this.AccountNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+    </script>
+
+
+
+    <script>
+
+    function GetBranch4(id) {
+        debugger;
+        var selectedValue = id;
+        $.ajax({
+            url: '/AccountReciveCash/GetBranchsAccount',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Fourthbranche = $('#Fourthbranche');
+                Fourthbranche.empty();
+                Fourthbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Fourthbranche = $('#Fourthbranche');
+                Fourthbranche.empty();
+                Fourthbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                    debugger;
+                    Fourthbranche.append(
+                        $('<option/>', {
+                            value: this.AccountTreeID,
+                            html: getLanguage() == 'ar' ? this.AccountNameAR : this.AccountNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+    </script>
+
+
+  

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeViewModel>
+@using Campus.School.Management.Logic.BusinessLayer;
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable single line striped celled  table" id="list-Employee">
+    <thead>
+        <tr class="">
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameEn)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jobName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgUrl)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr class="" data-id="@item.Employee_ID">
+
+                <td class="action">
+
+
+
+                    @if (item.IsTerminated)
+                    {
+                        <a class="ui red small label" onclick="TerminationDetails(@item.Employee_ID);">
+                           terminated
+                        </a>
+                    }
+                    else
+                    {
+                        <input type="checkbox" class="ui checkbox"  name="empId" value="@item.Employee_ID" />
+                        <a href="#" onclick="Edit(@item.Employee_ID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+                        <a href="#" onclick="Delete(@item.Employee_ID);" class="editDialog"> <i class="feather red icon-trash"></i></a>
+
+                    }
+
+                </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameAr)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameEn)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mail)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NationalityName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jobName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkDate)
+                    </td>
+                    <td>
+                        <img class="ui mini image" src="@Url.Content(@Statistics.StudentImagesPath+item.ImgUrl)" />
+                    </td>
+                </tr>
+                }
+            </tbody>
+</table>
+
+
+<script>
+
+    $(function () {
+
+        $('[name="empId"]').click(function () {
+            var $this = $(this);
+            $this.attr('checked', true);
+            
+
+         
+
+            $("input:checkbox").not($this).attr('checked', false);
+
+        })
+
+    })
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+
+    
+        function InitIndex()
+        {
+            $('#list-Employee').DataTable();
+            var Msg = '@TempData["Msg"]';
+
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+            else if (Msg == 5) {
+                toastr.error("@GeneralResource.toastrEmailExist")
+            }
+
+        };
+        InitIndex();
+       
+    });
+</script>

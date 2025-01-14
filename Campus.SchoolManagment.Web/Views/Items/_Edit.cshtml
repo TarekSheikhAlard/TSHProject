@@ -1,0 +1,235 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.ItemViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "Items", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ItemId)
+    <div class="two fields">
+
+        <div class="field" onclick="SearchInventory('ItemInventoryStructureName','ItemInventoryStructureId')">
+            @Html.LabelFor(model => model.ItemInventoryStructureId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.ItemInventoryStructureName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ItemInventoryStructureId, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ItemInventoryStructureId)
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.ItemNumber, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.ItemNumber, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.ItemNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.nameEn, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.nameEn, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.nameEn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.nameAr, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.nameAr, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.nameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="four fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Supplier, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Supplier, ViewBag.Supplier as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Supplier, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.PlaceofManufacture, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.PlaceofManufacture, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.PlaceofManufacture, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.material, ViewBag.material as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.ItemModel, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.ItemModel, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.ItemModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.maximumLimit, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.maximumLimit, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.maximumLimit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.minimumLimit, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.minimumLimit, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.minimumLimit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.requestLimit, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.requestLimit, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.requestLimit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="four fields">
+        <div class="field">
+            @Html.LabelFor(model => model.currentBalance, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.currentBalance, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.currentBalance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.TotalCost, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.TotalCost, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.TotalCost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.purchasingCost, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.purchasingCost, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.purchasingCost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.lastPurchasingCost, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.lastPurchasingCost, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.lastPurchasingCost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.unitNumber, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.unitNumber, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.unitNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.unitName, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.unitName, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.unitName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.barcode, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.barcode, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.barcode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.exchangeRate, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.exchangeRate, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.exchangeRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.unitPrice, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.unitPrice, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.unitPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.wholeSalePrice, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.wholeSalePrice, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.wholeSalePrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.storeNumber, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.storeNumber, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.storeNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.storeName, htmlAttributes: new { @class = "" })
+            <div class="">
+                @Html.EditorFor(model => model.storeName, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.storeName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "" })
+            <div class="">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(model => model.status)
+                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="ui primary button">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+
+
+}
+

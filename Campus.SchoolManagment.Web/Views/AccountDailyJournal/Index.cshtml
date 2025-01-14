@@ -1,0 +1,163 @@
+﻿
+@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalViewModel>
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel
+@using Campus.School.Management.Logic.BusinessLayer;
+
+
+
+@{
+    ViewBag.Title = GeneralResource.DailyJournal; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+    UserPermissionViewModel _Permission = ViewBag.Permission as UserPermissionViewModel;
+    bool supper = false;
+    if (User.IsInRole("SuperAdmin"))
+    { supper = true; }
+
+}
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.DailyJournal
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.DailyJournal)
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+
+
+
+    <div class="ui segment anim ">
+        <div class="toolspace">
+
+            <a href="#" id="Add" class="ui labeled icon primary  button">
+                <i class="plus icon"></i>
+                @GeneralResource.CreateNew
+            </a>
+
+            @*<a href="#" id="DownloadExcel" class="ui labeled icon button">
+                    <i class="file excel outline icon"></i>
+                    @GeneralResource.Download
+                </a>*@
+
+
+
+
+
+            <div class="ui  buttons">
+                <div class="ui download icon button">  <i class="download  icon"></i> @GeneralResource.Download</div>
+                <div class="ui floating dropdown icon button">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" id="DownloadExcel" class="item">
+                            <i class="file excel outline icon"></i>
+                            @GeneralResource.Excel
+                        </a>
+                        <a href="#" id="DownloadPDF" class="item">
+                            <i class="file pdf outline icon"></i>
+                            @GeneralResource.PDF
+                        </a>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            @Html.DropDownList("JournalType", ViewBag.JournalTypes as SelectList, GeneralResource.Select, htmlAttributes: new { @class = "ui search selection dropdown", @onchange = "GetList(this.value);" })
+
+
+
+
+
+
+
+        </div>
+        <div class="ui container">
+            <div id="div-record">
+                @Html.Partial("_List", Model)
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui inverted loading dimmer">
+        <div class="ui text loader">@GeneralResource.Loading</div>
+    </div>
+
+</div>
+
+@{ string New = GeneralResource.New + " " + GeneralResource.DailyJournal;
+    string Update = GeneralResource.Update + " " + GeneralResource.DailyJournal;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.DailyJournal;
+    string Details = GeneralResource.Details + " " + GeneralResource.DailyJournal;
+}
+
+
+<div class="ui add large scrolling modal " id="Add-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @New
+    </div>
+    <div id="divForAdd" class="divForAdd scrolling content">
+
+    </div>
+</div>
+<div class="ui edit large modal " id="Edit-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Update
+    </div>
+    <div id="divForUpdate" class="divForUpdate scrolling content">
+    </div>
+</div>
+<div class="ui delete  modal " id="Delete-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Delete
+
+    </div>
+    <div id="divForDelete" class="divForDelete content">
+    </div>
+</div>
+<div id="myModal" class="ui details large scrolling modal">
+    <!-- Modal content-->
+    <i class="close feather icon-x"></i>
+    <div class="header">
+        @Details
+    </div>
+    <div id="popupDetail" class=" scrolling content">
+
+    </div>
+
+    @*<div class="actions">
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>&nbsp;Close</button>
+
+        </div>*@
+</div>
+<div class="ui basic image-viewer modal" data-root="@Url.Content(ViewBag.AttachedDocumentPath)">
+   <i class="icon close" style="color: #fff;"> </i>
+   <div class="ui center aligned container">
+       <img class="ui centered huge image" src="~/Content/Images/noimage.png" />
+   </div>
+    
+   
+</div>
+
+<script src="~/Scripts/DevelopmentJS/AccountDailyJournalJS.js"></script>
+
+

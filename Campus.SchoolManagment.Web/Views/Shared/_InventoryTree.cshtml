@@ -1,0 +1,194 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.Resources
+
+<div  class="ui Inventory form">
+   
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.Inventory
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("MainInventoryTree", ViewBag.MainInventoryTree as SelectList, "--Select --", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch1(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.FristBranche
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("fristInventorybranche", new SelectList(""), "select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch2(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+  
+
+ 
+        <div class="field">
+            <div class="control-label col-md-2">
+                @GeneralResource.SecondBranche
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("SecondInventorybranche", new SelectList(""), "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+     
+    <div class="actions">
+        <button type="submit" id="ok" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+</div>
+
+
+<script>
+    $(function () {
+
+        $('#ok').click(function () {
+
+            var fristbranche = $('#fristInventorybranche').val();
+            var Secondbranche = $('#SecondInventorybranche').val();
+
+
+            var SecondbrancheText = $("#SecondInventorybranche option:selected").text();
+
+            var $nameElem = $("#" + $(this).attr('data-elem-name'));
+            var $IdElem = $("#" + $(this).attr('data-elem-value'));
+
+
+            if (SecondbrancheText != "Select") {
+
+                $nameElem.val(SecondbrancheText);
+
+                $IdElem.val(Secondbranche);
+
+                $('.inventory.modal').modal('hide');
+
+
+            }
+            else {
+
+                toastr.error("Select a branch")
+            }
+
+
+
+        });
+    })
+  
+
+</script>
+
+
+<script>
+
+    function GetBranch1(id) {
+       
+        var selectedValue = id;
+        $.ajax({
+            url: '/InventoryTree/GetBranchsInventory',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var fristbranche = $('#fristInventorybranche');
+                fristbranche.empty();
+                fristbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var fristbranche = $('#fristInventorybranche');
+                fristbranche.empty();
+                fristbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                  
+                    fristbranche.append(
+                        $('<option/>', {
+                            value: this.InventoryTreeID,
+                            html: getLanguage() == 'ar' ? this.InventoryNameAR : this.InventoryNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+<script>
+
+    function GetBranch2(id) {
+       
+        var selectedValue = id;
+        $.ajax({
+            url: '/InventoryTree/GetBranchsInventory',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Secondbranche = $('#SecondInventorybranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Secondbranche = $('#SecondInventorybranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                    
+                    Secondbranche.append(
+                        $('<option/>', {
+                            value: this.InventoryTreeID,
+                            html: getLanguage() == 'ar' ? this.InventoryNameAR : this.InventoryNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalViewModel>
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel
+
+
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+
+
+
+
+   <table>
+        <thead>
+            <tr class="">
+          
+                <th>
+                    @DailyJornal.Serial_No
+                 
+                </th>
+
+               
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Debit)
+                </th>
+                <th >
+
+                    @Html.DisplayNameFor(model => model.Credit)
+                </th>
+
+                <th>
+                      @DailyJornal.DailyJournal_Date
+                   
+                </th>
+                
+
+            
+             
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+
+           
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                        
+                     <td>
+
+                        @Html.DisplayFor(model => item.SerialNo)
+                    </td>
+
+                   
+                    <td>
+
+                        @Html.DisplayFor(model => item.Debit)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(model => item.Credit)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => item.DailyJournalDate)
+                    </td>
+
+                 
+                 
+                    <td>
+
+                        @Html.DisplayFor(model => item.Description)
+                    </td>
+                    </tr>
+                   
+            }
+        </tbody>
+    </table>
+
+
+   
+      

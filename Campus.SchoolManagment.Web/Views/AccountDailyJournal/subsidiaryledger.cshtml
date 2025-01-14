@@ -1,0 +1,96 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+<div class="row">
+
+
+    <div class="ui blue segment">
+
+
+        <div class="ui large dividing header">
+            @GeneralResource.subsidiaryledger
+        </div>
+
+
+        <div class="ui container">
+
+
+            <div class="form-group " style="padding-left:20px">
+
+
+                <div class="col-md-3">
+
+
+                    @GeneralResource.AccountName
+                </div>
+
+                <div class="col-md-3">
+                    @Html.TextBox("Account", "", new { @class = "form-control form-control", @readonly = "readonly" })
+                    @Html.Hidden("AccountCode")
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" id="Search" value="....." onclick="SearchAccount()" class="ui primary button " />
+                </div>
+
+            </div>
+            <br /> <br />
+            <div class="form-group " style="padding-left:20px">
+
+                <div class="control-label col-md-1">
+                    @GeneralResource.FromDate
+                </div>
+
+                <div class="col-md-3">
+                    @Html.TextBox("From", "", new { @class = "form-control form-control-inline input-medium date-picker" })
+                </div>
+
+                <div class="control-label col-md-1">
+                    @GeneralResource.ToDate
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBox("To", "", new { @class = "form-control form-control-inline input-medium date-picker" })
+                </div>
+
+                <div class="col-md-2">
+                    <input type="submit" id="Search" value="@GeneralResource.Search" onclick="SearchAccountsubsidiaryledger()" class="ui primary button " />
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<div id="div-record">
+
+</div>
+
+
+
+
+<div class="ui modal " id="Account-Model">
+
+    <div class="header">
+        <i classs="close icon"></i>
+        @GeneralResource.AccountTree
+    </div>
+    <div id="divForaccount" class="divForUpdate content">
+    </div>
+</div>
+
+
+<script src="~/Scripts/DevelopmentJS/AccountDailyJournalJS.js"></script>

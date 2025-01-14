@@ -1,0 +1,56 @@
+﻿
+
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+<div class="row">
+
+
+    <div class="portlet box blue ">
+
+
+        <div class="ui large dividing header">
+            <i class="fa fa-search"></i>@GeneralResource.AccountProf
+        </div>
+    </div>
+    <div class="ui container">
+        <div class="form-group " style="padding-left:20px">
+
+
+            <div class="col-md-3">
+                @Html.TextBox("From", "From", new { @class = "form-control form-control-inline input-medium date-picker" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.TextBox("To", "To", new { @class = "form-control form-control-inline input-medium date-picker" })
+            </div>
+            <div class="col-md-3">
+                @Html.DropDownList("Accounttree", ViewBag.Year as SelectList, "ShowAll", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                <input type="submit" id="Search" value="Search" onclick="SearchAccountProf()" class="ui primary button " />
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="portlet-body">
+    <div id="div-record">
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/DevelopmentJS/AccountDailyJournalJS.js"></script>

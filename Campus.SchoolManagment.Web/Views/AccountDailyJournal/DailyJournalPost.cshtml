@@ -1,0 +1,116 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = "Index";
+    if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="reply" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.DailyJournalUNPosted
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.DailyJournal)
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container ">
+    <div class="ui segment anim">
+        <div class="toolspace">
+            <div class="ui form" >
+                <div class="inline fields">
+                    <div class="field">
+                        @Html.TextBox("From", "From", new { @class = " date-picker" })
+                    </div>
+
+                    <div class="field">
+                        @Html.TextBox("To", "To", new { @class = " date-picker" })
+                    </div>
+                    <div class="field">
+                        <input type="submit" id="Search" value="@GeneralResource.Search" onclick="Search()" class="ui primary button " />
+                      
+                    </div>               
+                    <div class="ui  buttons">
+                        <div class="ui download icon button">  <i class="download icon"></i> @GeneralResource.Download</div>
+                        <div class="ui floating dropdown icon button">
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="#" id="DownloadExcelPost" class="item">
+                                    <i class="file excel outline icon"></i>
+                                    @GeneralResource.Excel
+                                </a>
+                                <a href="#" id="DownloadPDFPost" class="item">
+                                    <i class="file pdf outline icon"></i>
+                                    @GeneralResource.PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui container">
+        <div id="div-record">
+
+        </div>
+       </div>
+    </div>
+</div>
+
+
+
+@{ string Details = GeneralResource.Details + " " + GeneralResource.DailyJournal; }
+
+<div id="myModal" class="ui details large scrolling modal">
+    <i class="close feather icon-x"></i>
+    <div class="header">
+        @Details
+
+    </div>
+    <div id="popupDetail" class="scrolling content">
+
+    </div>
+    @*<div class="actions">
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>Close</button>
+        </div>*@
+</div>
+
+<script src="~/Scripts/DevelopmentJS/AccountDailyJournalJS.js"></script>
+
+<script>
+      $(document).ready(function ()
+      {
+          function InitIndex() {
+
+              InitC();
+
+              var Msg = '@TempData["Msg"]';
+              if (Msg == 1) {
+                  toastr.success("@GeneralResource.DailyJournalPosted")
+              }
+
+              else if (Msg == 4) {
+                  toastr.error("@GeneralResource.toastrOperationFaild")
+              }
+
+          };
+          InitIndex();
+    });
+    function InitC() {
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+        });
+    };
+</script>

@@ -1,0 +1,249 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentFeeViewModel>
+@{
+    if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<script src="~/Content/Scripts/PowerTable/PowerTable.js"></script>
+<script src="~/Content/Scripts/PowerTable/PowerTable.en.js"></script>
+<script src="~/Content/Scripts/PowerTable/PowerTable.ar.js"></script>
+
+@using Campus.School.Management.Logic.Resources
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="accessibility-2" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    Fee Payment
+
+                </div>
+
+
+                <div id="Sub" class="sub header">
+                    <form class="ui tiny fee form" style=" margin-top:7px;">
+
+
+
+                        <div class=" fields">
+                            <div class=" six wide field">
+                                <div class="ui search student selection dropdown">
+                                    <input type="hidden" id="StudentAcdID" name="StudentAcdID">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">@GeneralResource.Student</div>
+                                </div>
+
+
+                                @*<input type="text" name="SupplierName" placeholder="Student" value="" readonly="readonly">*@
+                            </div>
+
+                            <div class=" four wide field">
+
+                                <input type="text" name="Date" placeholder="Date" class="date-picker">
+                            </div>
+                        </div>
+                        <div class="fields">
+
+
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="ui main container">
+    <div class="ui  segment">
+        <div class="ui form">
+            <div class="inline fields">
+                <label>Select Payment Mode</label>
+                <div class="field">
+                    <div class="ui radio feemode checkbox">
+                        <input type="radio" name="frequency" checked="checked" value="man">
+                        <label>Manual</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio feemode checkbox">
+                        <input type="radio" name="frequency" value="auto">
+                        <label>Automatic (by priority)</label>
+                    </div>
+                </div>
+                <div class="field" style="width: 20%;">
+                    <div class="ui small disabled autot fluid input"><input type="text" name="autAmount" class="auto-text" placeholder="Enter Amount (SAR)"></div>
+                </div>
+            </div>
+        </div>
+        <h3>
+            <b>Fee Details</b>
+        </h3>
+
+        <div class="ui fee container">
+            <div class="ui inverted feePayment dimmer">
+                <div class="ui text loader">Loading</div>
+            </div>
+            <div id="FeeTable">
+
+            </div>
+            <div class="ui  basic  segment" style="min-height:30vh">
+                <div class="ui clearing divider"></div>
+                <h3 class="ui right floated header">
+                    Total : <text id="grandTotal">0</text>
+
+                    <div class="ui amount form ">
+                        <div class="inline fields">
+                            <div class="field">
+                                <label>Amount</label>
+                                <input type="number" name="amountPaid" />
+                            </div>
+                        </div>
+                        <div class="inline fields">
+                            <div class=" field">
+                                <label>Balance</label>
+                                <input type="number" name="amountBalance" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                </h3>
+            </div>
+
+        </div>
+
+        @*<div class="ui container">
+                <div class="ui primary segment" style="width:50%">
+
+
+                </div>
+            </div>*@
+
+        <div class="ui primary fees payment submit button">
+            Make Payment
+            <i class="right chevron icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui receipt large  modal">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        receipt
+    </div>
+    <div id="divForReceipt" class=" divForReceipt scrolling content">
+
+    </div>
+</div>
+<script src="~/Scripts/DevelopmentJS/FeePayment.js"></script>
+<script>
+    $(function () {
+
+        getAllStudents();
+
+        InitC();
+
+        $('[name="autAmount"]').on('keyup', function () {
+            selectFeeOnPriority(this);
+        })
+
+        // PowerTable.Create($('.quotation.table'));
+
+        $('.ui.radio.feemode.checkbox').checkbox({
+            onChange: function (elem) {
+                alert();
+                var va = $('.ui.radio.checkbox.checked :input').val();
+                if (va === "auto") {
+
+                    $('.fee.container').css({
+                        "opacity": "0.6",
+                        "pointer-events": "none"
+                    });
+
+                    $('.autot').removeClass('disabled')
+                    getFeeDetails();
+
+                };
+                if (va === "man") {
+                      $('.fee.container').css({
+                        "opacity": "1",
+                        "pointer-events": "all"
+                    });
+                    $('.autot').addClass('disabled')
+                }
+
+
+            }
+        });
+
+        BindAmountBox();
+
+        $('.fees.payment.button').click(function () {
+            data = $('.feePayment.table :input').serialize()
+                + '&' + $('[name="amountPaid"]').serialize()
+                + '&' + $('[name="amountBalance"]').serialize()
+                + '&' + $('[name="StudentAcdID"]').serialize()
+
+            $.ajax({
+                url: '/Student/PayFees/',
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    $('#divForReceipt').html(response);
+                    $('.receipt.modal').modal('show');
+
+                }
+            });
+
+        });
+
+
+
+    });
+
+</script>
+
+@*<table class="ui very basic small  celled quotation table" data-form-type="FeePayment">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>   @Html.DisplayNameFor(model => model.AccountTreeID)</th>
+                <th class="four wide"> @Html.DisplayNameFor(model => model.Amount) </th>
+                <th class="six wide">@Html.DisplayNameFor(model => model.PaidAmount)</th>
+                <th class="two wide">@Html.DisplayNameFor(model => model.installment)</th>
+            </tr>
+        </thead>
+       <tbody>
+
+                <tr data-rowid="0">
+                    <td data-name="srno">1</td>
+                    <td data-name="del"><i class="feather red icon-trash" onclick="RemoveRow(this);"></i></td>
+                    <td data-name="item">
+                        <div class="ui small fluid item input ">
+                            <input type="text" name="ItemName" onclick="bindItemDropdown(this)">
+                            <input type="hidden" name="ItemsList[0].ItemId">
+                        </div>
+                    </td>
+                    <td data-name="desc"><div class="ui small fluid input"><input type="text" name="ItemsList[0].Description"></div></td>
+
+                    <td data-name="amount"><div class="ui small fluid input"><input type="text" name="ItemsList[0].amount"></div></td>
+                </tr>
+
+                <tr data-rowid="1">
+                    <td data-name="srno">2</td>
+                    <td data-name="del"><i class="feather red icon-trash" onclick="RemoveRow(this);"></i></td>
+                    <td data-name="item">
+                        <div class="ui small fluid item  input ">
+                            <input type="text" name="ItemName" onclick="bindItemDropdown(this)" onfocus="AddItemsRow(this)">
+                            <input type="hidden" name="ItemsList[1].ItemId">
+                        </div>
+                    </td>
+                    <td data-name="desc"><div class="ui small fluid input"><input type="text" name="ItemsList[1].Description"></div></td>
+
+                    <td data-name="amount"><div class="ui small fluid input"><input type="text" name="ItemsList[1].amount"></div></td>
+
+                </tr>
+
+            </tbody>
+    </table>*@

@@ -1,0 +1,101 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeViewModel
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<div>
+    <table>
+        <thead class="">
+            <tr>
+                <th colspan="3">Employee Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b> @Html.DisplayNameFor(model => model.Employee_ID):</b> @Html.DisplayFor(model => model.Employee_ID)</td>
+                <td><b>@Html.LabelFor(model => model.NameAr):</b>@Html.DisplayFor(model => model.NameAr)</td>
+                <td><b>@Html.LabelFor(model => model.NameEn):</b>@Html.DisplayFor(model => model.NameEn)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.LabelFor(model => model.DepartmentName):</b>@Html.DisplayFor(model => model.DepartmentName)</td>
+                <td><b>@Html.LabelFor(model => model.jobName):</b>@Html.DisplayFor(model => model.jobName)</td>
+                <td><b>@Html.LabelFor(model => model.WorkDate):</b>@Html.DisplayFor(model => model.WorkDate)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.LabelFor(model => model.ContractDuration):</b>@Html.DisplayFor(model => model.ContractDuration)</td>
+                <td><b>@Html.LabelFor(model => model.CurrentSponsor):</b>@Html.DisplayFor(model => model.CurrentSponsor)</td>
+                <td><b>@Html.LabelFor(model => model.IsTerminated):</b>@Html.DisplayFor(model => model.IsTerminated)</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+    <table>
+        <thead class="">
+            <tr>
+                <th colspan="3">Personel Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b> @Html.DisplayNameFor(model => model.NationalityName):</b> @Html.DisplayFor(model => model.NationalityName)</td>
+                <td><b>@Html.LabelFor(model => model.sex):</b>@Html.DisplayFor(model => model.sex)</td>
+                <td><b>@Html.LabelFor(model => model.religion):</b>@Html.DisplayFor(model => model.NameEn)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.LabelFor(model => model.BirthDate):</b>@Html.DisplayFor(model => model.BirthDate)</td>
+                <td><b>@Html.LabelFor(model => model.Maritalstatus):</b>@Html.DisplayFor(model => model.Maritalstatus)</td>
+                <td><b>@Html.LabelFor(model => model.childNumber):</b>@Html.DisplayFor(model => model.childNumber)</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+
+    <table>
+        <thead class="">
+            <tr>
+                <th colspan="2">Contact Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b> @Html.DisplayNameFor(model => model.Address):</b> @Html.DisplayFor(model => model.Address)</td>
+                <td><b>@Html.LabelFor(model => model.Mobile):</b>@Html.DisplayFor(model => model.Mobile)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.LabelFor(model => model.Mail):</b>@Html.DisplayFor(model => model.Mail)</td>
+                <td><b>@Html.LabelFor(model => model.Tel):</b>@Html.DisplayFor(model => model.Tel)</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+
+    <table>
+        <thead class="">
+            <tr>
+                <th colspan="4">Identity Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b> @Html.DisplayNameFor(model => model.National_ID):</b> @Html.DisplayFor(model => model.National_ID)</td>
+                <td><b>@Html.LabelFor(model => model.pleaceNational_ID):</b>@Html.DisplayFor(model => model.pleaceNational_ID)</td>
+                <td><b>@Html.LabelFor(model => model.ReleaseNational_ID_date):</b>@Html.DisplayFor(model => model.ReleaseNational_ID_date)</td>
+                <td><b>@Html.LabelFor(model => model.EndNational_ID_date):</b>@Html.DisplayFor(model => model.EndNational_ID_date)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.LabelFor(model => model.visaNumber):</b>@Html.DisplayFor(model => model.visaNumber)</td>
+                <td><b>@Html.LabelFor(model => model.visajob):</b>@Html.DisplayFor(model => model.visajob)</td>
+                <td><b>@Html.LabelFor(model => model.visadate):</b>@Html.DisplayFor(model => model.visadate)</td>
+                <td><b>@Html.LabelFor(model => model.NumberEnterBorder):</b>@Html.DisplayFor(model => model.NumberEnterBorder)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.LabelFor(model => model.passportNumber):</b>@Html.DisplayFor(model => model.passportNumber)</td>
+                <td><b>@Html.LabelFor(model => model.passportpleace):</b>@Html.DisplayFor(model => model.passportpleace)</td>
+                <td><b>@Html.LabelFor(model => model.Releasepassport_date):</b>@Html.DisplayFor(model => model.Releasepassport_date)</td>
+                <td><b>@Html.LabelFor(model => model.Endpassport_date):</b>@Html.DisplayFor(model => model.Endpassport_date)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

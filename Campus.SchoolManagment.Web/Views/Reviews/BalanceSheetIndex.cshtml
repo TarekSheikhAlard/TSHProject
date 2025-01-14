@@ -1,0 +1,174 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BalanceSheetViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+@{
+
+    if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.balancesheet
+                </div>
+                @*<div id="Sub" class="sub header">
+                        @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.IncomeStatement)
+                    </div>*@
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="ui main container">
+    <div class="ui segment anim">
+        <div class="toolspace">
+
+
+            @using (Ajax.BeginForm("GetBalanceSheet", "Reviews", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record" }, new { @class = "ui trailbalance form" }))
+            {
+                @Html.AntiForgeryToken()
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="inline fields">
+
+                <div class=" two wide field">
+
+
+                    @Html.Editor("From", new { htmlAttributes = new { @class = " date-picker ui input", @placeholder = "Date", @autocomplete = false } })
+
+
+                </div>
+                @*<div class=" two wide field">
+            @Html.Editor("To", new { htmlAttributes = new { @class = "date-picker ui input", @placeholder = "To", @autocomplete = false } })
+
+        </div>*@
+                @*<div class="field">
+            <button type="submit" id="Search" value="Search" onclick="GetLedgerReport(this)" class="ui primary submit button ">Run Report</button>
+        </div>*@
+                <div class="actions">
+                    <button type="submit" class="ui primary button " name="cmd"> Run Report</button>
+                </div>
+                <div class="field">
+                    <div class="ui  buttons">
+                        <div class="ui download icon button">  <i class="download  icon"></i> Export</div>
+                        <div class="ui floating dropdown icon button">
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="#" id="DownloadExcel" class="item">
+                                    <i class="file excel outline icon"></i>
+                                    @GeneralResource.Excel
+                                </a>
+                                <a href="#" id="DownloadPDF" class="item">
+                                    <i class="file pdf outline icon"></i>
+                                    @GeneralResource.PDF
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<a href="#" id="DownloadPDF" class="ui download icon button">
+                        <i class="file pdf outline icon"></i>
+                        Export @GeneralResource.PDF
+                    </a>*@
+                </div>
+            </div>
+
+
+
+
+            }
+        </div>
+
+        <div id="div-record" class="ui basic segment">
+
+            @*@Html.Partial("_List", Model)*@
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+
+    function InitC() {
+
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            todayHighlight: true
+        });
+      $("#DownloadPDF").click(function () {
+
+        var $parent = $('.download.button');
+             var date = $('[name="From"]').val();
+        $parent
+            .addClass("loading");
+
+        if (date !== '' ) {
+            $.fileDownload("/Reviews/ExportPdfBalanceSheet/?From=" + date , {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+        } else {
+             $parent
+            .removeClass("loading");
+
+            toastr.error("Select Account ")
+        }
+
+
+      });
+             $("#DownloadPDF").click(function () {
+
+        var $parent = $('.download.button');
+             var date = $('[name="From"]').val();
+        $parent
+            .addClass("loading");
+
+        if (date !== '' ) {
+            $.fileDownload("/Reviews/ExportExcelBalanceSheet/?From=" + date , {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+        } else {
+             $parent
+            .removeClass("loading");
+
+            toastr.error("Select Account ")
+        }
+
+
+    });
+  
+      //  $('.monthly,.period').hide();
+
+    };
+    InitC();
+</script>
+

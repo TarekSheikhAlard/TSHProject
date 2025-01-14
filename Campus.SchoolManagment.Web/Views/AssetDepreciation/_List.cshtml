@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AssetDepreciationViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line striped celled  compact table" id="myTable">
+
+    <thead>
+        <tr class="">
+            <th>@GeneralResource.Actions</th>
+      
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dailyjournalID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPost)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr data-rowid="@item.dailyjournalID">
+            <td style="text-align:center">
+                <a href='#' onclick="GetDetail(@item.dailyjournalID)"><i class="feather icon-eye"> </i> </a>
+
+                @if (!item.IsPost)
+                {
+
+                    <a href="#" id="deleteDep" onclick="Delete(@item.dailyjournalID)"><i class="feather red  icon-trash "></i></a>
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dailyjournalID)
+            </td>
+            <td>
+                @if (item.IsPost)
+                {
+
+                    <div class="ui small blue label">
+                        Posted
+                    </div>
+
+                }
+                else
+                {
+
+                    <div class="ui small yellow label">
+                        Not Posted
+                    </div>
+
+
+                }
+
+            </td>
+
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<div>
+
+    <button id="PostDepreciation" data-id="@ViewBag.AssetTreeID" class="ui primary button">Post</button>
+
+</div>
+@{ }
+
+<div id="myModal" class="ui  modal">
+
+
+
+    <!-- Modal content-->
+
+    <div class="header">
+     
+        @Details
+    </div>
+    <div id="popupDetail" class="content">
+
+    </div>
+
+    @*<div class="actions">
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>&nbsp;Close</button>
+
+        </div>*@
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        function InitIndex() {
+            $('#myTable').DataTable();
+        }
+
+        $('#PostDepreciation').click(function () {
+
+            $elem = $(this);
+
+            var id = $elem.attr("data-id");
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: { id },
+                url: '/AssetDepreciation/PostDepreciation',
+                success: function (response) {
+
+                    if (!response.IsError) {
+
+                        $.get("/AssetDepreciation/GetDepreciation/" + response.AssetTreeID, function (data) {
+
+                            $('#div-record')
+                                .removeClass("placeholder")
+                                .html(data);
+
+                        });
+
+                    }
+                }
+            });
+
+
+        });
+
+
+        InitIndex();
+
+
+    });
+</script>

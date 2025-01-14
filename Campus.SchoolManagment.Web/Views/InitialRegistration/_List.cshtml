@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AdmInitialStudRegistrationViewModel>
+@using Campus.School.Management.Logic.Resources
+
+    <table class="ui selectable  single line Striped celled  compact table" id="initRegisterTable">
+        <thead>
+            <tr>
+                <th>
+                    @GeneralResource.Actions
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GradeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullNameEn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullNameAr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DOB)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BirthPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NationalityName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastSchool)
+                </th>
+              
+               
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+               
+                <td>
+                    @if (item.isRegistered)
+                    {
+                        <div class="ui green  small label">
+                            registered
+                        </div>
+                    }
+                    @if (item.isRegistered == false)
+                    {
+                        <a href="#" onclick="Edit(@item.id);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+                        <a href="#" onclick="Delete(@item.id);" class="editDialog"> <i class="feather red icon-trash"></i></a>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullNameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullNameAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NationalityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastSchool)
+                </td>
+
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#initRegisterTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+    </script>

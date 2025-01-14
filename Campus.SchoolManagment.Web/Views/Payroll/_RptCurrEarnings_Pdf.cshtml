@@ -1,0 +1,67 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.RptCurrEarningFullViewModel
+
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+
+
+<table class="" id="RptCurrEarningTbl">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Earnings.First().EmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Earnings.First().NameE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Earnings.First().SalaryMonthId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Earnings.First().TotalSalary)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Earnings)
+        {
+            <tr>
+                <td>
+                    <strong>@Html.DisplayFor(modelItem => item.EmployeeId)</strong>
+                </td>
+                <td>
+                    <strong>  @Html.DisplayFor(modelItem => item.NameE)</strong>
+                </td>
+                <td>
+                    <strong> @Html.DisplayFor(modelItem => item.SalaryMonthId)</strong>
+                </td>
+                <td>
+                    <strong> @Html.DisplayFor(modelItem => item.TotalSalary)</strong>
+                </td>
+            </tr>
+            foreach (var detail in Model.Earningsdetails)
+            {
+                if (item.Id == detail.Id)
+                {
+                    <tr>
+
+                        <td colspan="3" style="text-align:right; border-top: 0px;" class="primary"> <strong>@Html.DisplayFor(modelItem => detail.SalaryType)</strong>  </td>
+                        <td style="border-top: 0px">  @Html.DisplayFor(modelItem => detail.Amount)</td>
+
+                    </tr>
+
+                }
+
+            }
+
+            @*<tr>1
+                    <td colspan="3"></td>
+                    <td  style="text-align:left; margin-bottom:7px">  <strong> @Html.DisplayFor(modelItem => item.TotalSalary)</strong></td>
+
+
+                </tr>*@
+
+        }
+    </tbody>
+
+</table>

@@ -1,0 +1,500 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+@using Microsoft.AspNet.Identity
+@using Campus.SchoolManagment.Web.Helper
+
+
+
+<!DOCTYPE html>
+<html dir="@(System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale1=.0">
+    <title>@GeneralResource.Home</title>
+
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+
+
+    @if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
+    {
+        @Html.Partial("CSSAr")
+
+    }
+    else
+    {
+
+        @Html.Partial("CSS")
+
+    }
+
+    @{
+        var themeCookie = HttpContext.Current.Request.Cookies["_theme"];
+        string theme;
+
+        if (themeCookie != null)
+        {
+            theme = themeCookie.Value + ".css";
+
+        }
+        else
+        {
+            theme = "blue.css";
+        }
+    }
+
+
+
+    <link href="~/Content/Css/themes/@theme" rel="stylesheet" />
+
+    <link href="~/Content/Css/clr-icons.min.css" rel="stylesheet" />
+
+    <link href="~/Content/Css/assets/feather/src/css/iconfont.css" rel="stylesheet" />
+
+    @*<script src="https://code.jquery.com/jquery-1.10.2.js"></script>*@
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @*<script src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
+
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*@RenderSection("scripts", required: false)*@
+
+
+
+    @*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="~/Content/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="~/Content/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>*@
+
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    @*<script src="~/Content/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>*@
+
+    @*<script src="~/Content/Scripts/bootstrap.min.js"></script>*@
+
+
+    @*<script src="~/Content/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="~/Content/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="~/Content/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="~/Content/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+        <script src="~/Content/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+        <script src="~/Content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>*@
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    @*<script type="text/javascript" src="~/Content/assets/global/plugins/select2/select2.min.js"></script>*@
+
+    @*<script src="~/Content/MultiSelectDDL/JS/jquery.dropdown.min.js"></script>
+        <script type="text/javascript" src="~/Content/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="~/Content/assets/global/plugins/select2/select2.min.js"></script>
+        <script type="text/javascript" src="~/Content/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"</script>
+
+        @*<script src="~/Content/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="~/Content/assets/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+            <script type="text/javascript" src="~/Content/assets/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js"></script>
+            <script type="text/javascript" src="~/Content/assets/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js"></script>*@
+
+    @*<script type="text/javascript" src="~/Content/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBW8rhGD5Kx57RFrcI5N4LDNPVCChbuHQ">
+    </script>
+
+
+    <script src="~/Content/Scripts/semantic.min.js"></script>
+    <script src="~/Content/Scripts/doc.js"></script>
+    <script src="~/Content/Scripts/message.js"></script>
+    <script src="~/Content/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
+    <script src="~/Content/Scripts/DataTables/dataTables.semanticui.min.js"></script>
+    <script src="~/Content/Scripts/Site/Site.dataTable.js"></script>
+    <script src="~/Content/Scripts/SimpleAjaxUploader.min.js"></script>
+    <script src="~/Content/Scripts/jquery.fileDownload.js"></script>
+    @*<script src="~/Content/assets/global/plugins/datatables/plugins/semantic/dataTables.semanticui.min.js"></script>*@
+
+    @*<script src="~/Content/Scripts/datepicker.min.js"></script>
+        <script src="~/Content/Scripts/datepicker.en.js"></script>*@
+
+    <script src="~/Content/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <!--Notify -->
+    <script src="~/Content/theme/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+    <!--Tabs-->
+    @*<script src="~/Content/theme/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>*@
+    @*<script src="~/Content/assets/global/plugins/jstree/dist/jstree.min.js"></script>*@
+
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    @*<script src="~/Content/assets/admin/pages/scripts/ui-tree.js"></script>*@
+
+    <script src="~/Content/theme/assets/admin/pages/scripts/ui-toastr.js"></script>
+    @*<script src="~/Content/assets/global/scripts/metronic.js"></script>*@
+    @*<script src="~/Content/assets/admin/layout4/scripts/layout.js"></script>
+        <script src="~/Content/assets/admin/layout4/scripts/demo.js"></script>*@
+    @*<script src="~/Content/assets/admin/pages/scripts/table-advanced.js"></script>*@
+    <script src="~/Content/Scripts/jquery.pjax.js"></script>
+    @*<script src="~/Content/assets/admin/pages/scripts/components-dropdowns.js"></script>
+        <script src="~/Content/assets/admin/pages/scripts/table-managed.js"></script>*@
+
+    <script src="~/Content/Scripts/Site/Site.ui.js"></script>
+    <script src="~/Content/Scripts/custom-elements.min.js"></script>
+    <script src="~/Content/Scripts/clr-icons.min.js"></script>
+    <script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/Scripts/PowerTable/PowerTable.js"></script>
+    <script src="~/Content/Scripts/PowerTable/PowerTable.en.js"></script>
+    <script src="~/Content/Scripts/PowerTable/PowerTable.ar.js"></script>
+</head>
+
+
+<body id="example" class="">
+
+    <style>
+        /*REMOVE THIS STYLE TO SHOW ICONS IN EACH CAPTION*/
+        div.caption i {
+            display: none !important;
+        }
+    </style>
+    <div class=" " style="position: absolute;
+
+    right: 20px;
+    z-index: 10;
+    margin-top: 0px;">
+
+        <div class="ui secondary small menu">
+            @if (Request.IsAuthenticated)
+            {
+                <a class="item active " id="UserProfile" style="padding-left:.7em;padding-right:.7em;">
+                    <i class="feather primary small icon-user"></i>
+                    @User.Identity.Name
+                </a>
+
+                @*<div class="ui simple  dropdown item">
+                        <i class="dropdown icon"></i>
+                        Display
+                        <div class="menu">
+                            <div class="header">Text Size</div>
+                            <a class="item">Small</a>
+                            <a class="item">Medium</a>
+                            <a class="item">Large</a>
+                        </div>
+                    </div>*@
+
+                @*<a class="item pop" style="padding-left:.7em;padding-right:.7em;">
+                        <i class="feather primary small icon-settings"></i>
+                        language
+                    </a>*@
+
+                <div class="ui dropdown item">
+                    <text name="Language">Language (لغة)</text> <i class="dropdown icon"></i>
+                    <div class="menu ">
+                        <div class="item" data-value="en">
+
+                            <a style="color: rgba(0, 0, 0, 0.87) !important;">English</a>
+                        </div>
+                        <div class="item" data-value="ar">
+
+                            <a style="color: rgba(0, 0, 0, 0.87) !important;">العربية</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ui top icon left mini pointing dropdown item " title="theme">
+                    <i class="paint primary brush icon"></i>
+                    @*<span class="">theme</span>*@
+                    @*<i class="dropdown icon"></i>*@
+                    <div class="menu">
+                        <div class="item" data-theme="blue" style="color:#2185d0 !important;">
+                            @*<div class="red color-circle" style="background-color:#2185d0"></div>*@
+                            @*<a href="#" data-theme="blue">Blue </a>*@
+                            <div class="circle" style="background-color: #2185d0">
+
+                            </div>
+                        </div>
+                        <div class="item " data-theme="orange" style="color: #F44336 !important">
+
+                            @*<a href="#" data-theme="default"> </a>*@
+
+                            <div class="circle" style="background-color: #F44336 !important">
+
+                            </div>
+                            @*@Html.ActionLink("Default", "ChangeTheme", "Home", new { theme="default" }, null)*@
+
+                            @*<div class="red color-circle" style="background-color:#2185d0"></div>*@
+                        </div>
+
+                        <div class="item" data-theme="black" style="color:#343637 !important;">
+                            @*<div class="red color-circle" style="background-color:#2185d0"></div>*@
+                            @*<a href="#" data-theme="black">Black </a>*@
+                            <div class="circle" style="background-color:#343637;">
+
+                            </div>
+                        </div>
+                        <div class="item" data-theme="teal" style="color:#009c95 !important;">
+                            @*<div class="red color-circle" style="background-color:#2185d0"></div>*@
+                            @*<a href="#" data-theme="teal">Teal </a>*@
+                            <div class="circle" style="background-color:#009c95;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = " item", @style = "padding-left:.7em;padding-right:.7em;" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a class="item" style="cursor:pointer;" onclick="javascript:document.getElementById('logoutForm').submit()" title="@GeneralResource.logoff">
+                        <i class="feather primary icon-power"></i>
+                        @*@GeneralResource.logoff*@
+                    </a>
+                }
+            }
+
+        </div>
+
+
+    </div>
+
+    @Html.Partial("_Sidebar")
+    <div class="pusher">
+
+        @*<div class="full height">*@
+        @*<div class="toc" style="height:auto">*@
+
+
+        @*</div>*@
+
+
+
+        <div class="article">
+            <button class="ui icon  button" onclick="$('.sidebar').sidebar('toggle')" style="position:absolute; top :20px;left:0px;z-index:10000;">
+                <clr-icon shape="menu" size="18"></clr-icon>
+            </button>
+
+            @*@Html.Partial("_Header")*@
+            <div class=" renderbody">
+
+                @RenderBody()
+            </div>
+        </div>
+
+        @*</div>*@
+    </div>
+    <div class="ui userProfile large modal ">
+        <i class=" close feather icon-x "></i>
+        <div class="header">
+            User Profile
+        </div>
+        <div id="divForUserProfile" class="scrolling content">
+            <div class="ui   error message">
+                <p>
+                    <i class="info icon"></i>
+                    No User Information Found
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui place picker  modal ">
+        <i class=" close feather icon-x "></i>
+        <div class="header">
+            Place Picker
+        </div>
+        <div id="divForPlacePicker" class="scrolling content">
+            <div id="map" style="height:35vh">
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    //$.fn.datepicker.language =
+                    //    language = 'en'
+                    //Metronic.init(); // init metronic core components
+                    //Layout.init(); // init current layout
+                    //Demo.init(); // init demo features
+
+
+                    UIToastr.init();
+                    semantic.init();
+                    //UITree.init();
+                    //$('.ui.dropdown')
+                    //    .dropdown();
+
+                    $(document).pjax('a.item:not(.nojax)', '.renderbody');
+
+                    $(document).on('pjax:complete', function () {
+                        $('.ui.dimmer.modals.page').html("");
+                        semantic.init();
+                        if (!$('.anim').hasClass("animated")) {
+                            $('.anim').transition({
+                                animation: 'fade up',
+                                duration: 700,
+                                interval: 50,
+                            });
+                            $('.anim').addClass("animated");
+
+                        }
+
+                    });
+
+                    $('div[data-theme]').click(function () {
+
+                        var $this = $(this),
+                            theme = $this.attr('data-theme'),
+                            link;
+                        if (theme != undefined);
+
+                        link = '<link id="theme" rel="stylesheet" type="text/css" href="/Content/Css/themes/' + theme + '.css">';
+
+                        $('#theme').remove();
+
+                        $('head').append(link);
+
+                        $.ajax({
+                            url: "@Url.Action("ChangeTheme","Home")",
+                            type: 'post',
+                            data: { theme: theme},
+                            dataType: 'json',
+                            success: function (response) {
+
+                            },
+                            complete: function () {
+
+                            }
+                        });
+
+                    })
+                    //$('.date-picker').datepicker({
+
+                    //    format: 'yyyy/mm/dd',
+                    //    endDate: "today",
+                    //    autoclose: true,
+                    //    todayHighlight: true
+                    //});
+
+                    $("body").attr("dir", "ltr");
+
+                    $('.ui.accordion')
+                        .accordion()
+                        ;
+
+
+                    var flag = getParameterByName('Flage');
+                    //alert(flag);
+                    if (flag == 1) {
+                        $('#flag1').addClass("active");
+                    }
+                    else if (flag == 2) {
+                        $('#flag2').addClass("active");
+
+                    }
+                    else if (flag == 3) {
+                        $('#flag3').addClass("active");
+
+                    }
+
+                    function getParameterByName(name, url) {
+                        if (!url) url = window.location.href;
+                        name = name.replace(/[\[\]]/g, "\\$&");
+                        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                            results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, " "));
+                    }
+                    //ComponentsDropdowns.init();
+                    //TableManaged.init();
+
+                    //TableAdvanced.init();
+                });
+
+    </script>
+    <script>
+        $(function () {
+            $('#UserProfile').click(function () {
+
+                $('.userProfile.modal').modal('show');
+
+            })
+
+
+           
+
+        })
+
+     bindMapFeatures = function (id,$el ) {
+
+         var location,lat,lng;
+       
+         location = $el.val();
+
+         if (location && location !==',') {
+             lat = location.split(',')[0];
+             lng = location.split(',')[1];
+         }
+                var Coordinates, zoom;
+
+
+                if (!isNaN(lat) && !isNaN(lng)) {
+
+                    Coordinates = { lat: parseFloat(lat), lng: parseFloat(lng) };
+                    zoom = 15;
+                } else {
+                    Coordinates = { lat: 24.68, lng: 46.65 };
+                    zoom = 5
+                }
+
+                var map = new google.maps.Map(
+
+                    document.getElementById(id), {
+                        center: Coordinates,
+                        zoom: zoom,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+                    });
+
+                var marker = new google.maps.Marker({
+                    position: Coordinates,
+                    map: map,
+                    draggable: true
+                });
+
+                google.maps.event.addListener(map, 'click', function (e) {
+
+                    console.log("Latitude: " + e.latLng.lat() + " " + ", longitude: " + e.latLng.lng());
+                    marker.setPosition(e.latLng);
+                    $el.val(e.latLng.lat()+","+e.latLng.lng())
+
+                    //if (!$latInput.prop('disabled') && !$lngInput.prop('disabled')) {
+                    //    $latInput.val(e.latLng.lat())
+                    //    $lngInput.val(e.latLng.lng())
+                    //}
+                });
+
+
+                google.maps.event.addListener(marker, 'drag', function (e) {
+
+                    //if (!$latInput.prop('disabled') && !$lngInput.prop('disabled')) {
+                    //    $latInput.val(e.latLng.lat())
+                    //    $lngInput.val(e.latLng.lng())
+                    //}
+                     $el.val(e.latLng.lat()+","+e.latLng.lng())
+                    console.log("Latitude: " + e.latLng.lat() + " " + ", longitude: " + e.latLng.lng());
+                });
+
+
+            }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusViewModel
+@using Campus.School.Management.Logic.Resources
+
+<div class="ui basic  segment ">
+    
+       
+  
+   <div class="ui container">
+        <table class="ui selectable  single line Striped celled  compact table" >
+            <thead class="">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.Label("Employee")
+                    </th>
+                    <th>
+                        @Html.Label("LicenseExpiryDate ")
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+           
+            @foreach (var item in Model._BusDetails)
+            {
+                @Html.Partial("_BusDetailsItem", item)
+            }
+
+
+        </table>
+    </div>
+
+</div>

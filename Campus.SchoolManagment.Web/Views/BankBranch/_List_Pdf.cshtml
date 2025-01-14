@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BankBranchViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<table>
+    <thead>
+        <tr class="">
+          
+         
+            <th>
+                @Html.DisplayNameFor(model => model.BranchNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchNameAr)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BankNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchMobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchFax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNameAR)
+            </th>
+
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+         <tr>
+     
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchNameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchNameAr)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BankNameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchMobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchFax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNameAR)
+            </td>
+
+        </tr>
+        }
+
+</table>

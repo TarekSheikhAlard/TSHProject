@@ -1,0 +1,34 @@
+﻿@*@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BankViewModel>*@
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                 Payroll Setup
+                </div>
+                <div id="Sub" class="sub header">
+                    Add or remove Payroll Settings 
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui segment anim">
+
+        @Html.Partial("_SettingsTabs")
+
+    </div>
+</div>
+
+

@@ -1,0 +1,19 @@
+﻿* {
+    font-family: 'Tajawal',Arial;
+}
+
+h1, h2, .portlet.box.green-haze > .portlet-title > .caption, a {
+    font-family: 'Tajawal',Arial !important;
+}
+
+.title {
+    font-family: 'Tajawal',Arial !important;
+}
+
+body {
+    font-family: 'Tajawal',Arial !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Tajawal',Arial !important;
+}
+

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.HolidayTypesViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HolidayID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HolidayNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HolidayNameAr)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Days)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a href="#" onclick="Edit(@item.HolidayID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+                <a href="#" onclick="Delete(@item.HolidayID);" class="editDialog"> <i class="feather red icon-delete"></i></a>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.HolidayID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HolidayNameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HolidayNameAr)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Days)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+
+        </tr>
+        }
+        </tbody>
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

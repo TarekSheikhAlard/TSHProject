@@ -1,0 +1,303 @@
+﻿@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+body {
+ 
+    font-family: 'Changa', sans-serif;
+
+}
+h1, h2  ,.portlet.box.green-haze > .portlet-title > .caption ,a{
+
+ 
+    font-family: 'Changa', sans-serif;
+}
+.page-content {
+    background-color: #f5f5f5;
+
+}
+.page-sidebar.navbar-collapse, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover.navbar-collapse {
+    margin-top:0px;
+}
+.logo-default {
+width:120px; height:70px;
+}
+.page-header.navbar .page-logo .logo-default {
+    margin: 5px 10px 0 10px;
+}
+.green.btn {
+
+margin-bottom:10px;
+background-color     :#2769c1;
+}
+.green.btn:hover {
+
+
+background-color     :#4f8ad8;
+}
+.body-content {
+width:99%;
+}
+.modal-dialog {
+   width:1000px; padding:10px;
+    
+}
+ .modal-full{
+
+        padding-right: 10px;
+    margin-top: 10px;
+    /* border-radius: 8px; */
+    width: 750px;
+    height: 460px;
+    padding-right: 400px;
+}
+.modal_content_style {
+    min-width: 990px;
+    min-height:440px;
+    border-radius: 8px;
+}
+
+.modal_Padding  {
+
+    padding:20px;
+}
+
+.modal .modal-content {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    border: 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.modal .modal-header {
+    border-bottom: 1px solid #d24040;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color:#000;
+    /*font-family: 'Changa', sans-serif;*/
+    font-family: 'Changa', sans-serif;
+font-family: 'Reem Kufi', sans-serif;
+font-family: “Droid Arabic Kufi” , serif;
+}
+.textearia {
+ 
+
+
+}
+
+.modal_content_style_delete {
+        min-width: 740px;
+    min-height: 300px;
+    border-radius: 8px;
+    }
+
+.modal .modal-content .modal-footer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.delete_msg {
+        text-align: center;
+    padding-right: 0px;
+    font-size:16px; font-weight:bold;
+    color:#d24040;
+    PADDING-LEFT :10%;
+}
+.modal .modal-content .modal-title {
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.modal_delete_dialog {
+    width: 670px;
+    padding: 10px;
+    padding-left:100px;
+}
+
+.table-scrollable {
+text-align:center;
+ 
+
+}
+. ,. th {
+
+text-align:center;
+background-color: #e0e9f1;
+}
+.glyphicon-remove {
+color:#a32727;
+
+}
+
+.glyphicon-edit
+ {
+color:#6387ea;
+
+}
+.page-content-wrapper .page-content {
+    padding: 10px 0 0 2px;
+}
+.form-horizontal .control-label {
+
+text-align:center; margin:0 auto;
+}
+
+.form-group {
+    margin-bottom :4px;
+
+}
+.img_div_style {
+
+width:100%; height:130px;  
+
+}
+
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li:hover > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.open > a, .page-sidebar .page-sidebar-menu > li:hover > a, .page-sidebar .page-sidebar-menu > li.open > a {
+    background: #dbebf7;
+    color: #5b9bd1;
+}
+
+.page-sidebar .page-sidebar-menu > li, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li {
+
+        border-bottom: 1px solid #ececec;
+}
+
+.page-sidebar .page-sidebar-menu .sub-menu li, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li {
+    
+}
+
+.welcome_banner   {
+   background-color:#eeeeee;
+}
+.thumbnail_summary h4 {
+    font-size:20px; font-weight:bold;
+}
+
+.glyphicon_style {
+    display: inline-block;
+    margin-top: 1px;
+    font-size: 60px;
+    line-height: 28px;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 40px;
+}
+
+.uploadImg
+{ 
+border: 2px solid #d06b6b;
+    border-radius: 8px;
+ }
+
+.uploadfile {
+        margin-top: 30px;
+
+}
+
+   .student_box_style {
+        background-color: #f5f5f5;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 7px;
+        border: 1px solid #dad7bc;
+       
+    }
+    .upload_label {
+        padding-top: 30PX;
+    }
+    
+
+       .student_box_style {
+        background-color: #f5f5f5;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 7px;
+        border: 1px solid #dad7bc;
+    }
+
+    .upload_title 
+    {
+     padding-top:30PX;
+
+    }
+.LL {
+
+direction:rtl;
+}        
+      .datepicker {
+        direction: rtl;
+      }             
+    .datepicker.dropdown-menu {
+right: initial;             
+      }
+
+#School_logo {
+ margin:0px auto ;  
+}
+    #School_logo img {
+    border:1px solid #4b9f3f;
+     margin-right: 25%;
+       border-radius: 7px;
+    }
+
+.portlet.box.green-haze > .portlet-title {
+    background-color:#ff934b;
+      font-family: 'Changa', sans-serif;
+}
+#class_newheader {
+      background-color:#ff934b;
+}
+#double_table {
+        background-color: #47a073;
+}
+
+.red-haze.btn {
+background-color:#cb3b3b; 
+color: #f5f5f5;
+
+}
+.flag {
+float:left;
+width:90PX; height:30PX; padding-left:17PX; color:#000;
+}
+.flag img  {
+    margin-top:0PX; width:20px; height:12px;
+}
+.dropdown-menu {
+
+min-width:100PX;
+}
+
+.green {
+background-color:#2177ef;
+
+}
+
+hr {
+  margin: 8px 0;
+  border: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 0;
+}
+
+.txt_Dailydetails_code {
+    width:80px;
+}
+.txt_Dailydetails {
+width:130px;
+
+}
+
+.caption {
+
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.portlet.box.blue > .portlet-title {
+    background-color: #26a69a;
+
+}

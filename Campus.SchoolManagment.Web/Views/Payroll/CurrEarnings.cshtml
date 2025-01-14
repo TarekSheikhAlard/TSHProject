@@ -1,0 +1,232 @@
+﻿@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <div id="heading" class="content">
+                    Current Earnings
+                </div>
+
+            </h1>
+            <div style="margin-top:7px">
+                <div class="ui mini payrollBy form">
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checked  checkbox">
+                                <input type="radio" name="payrollBy" value="dept" checked="checked">
+                                <label>By Department</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="payrollBy" value="emp">
+                                <label>By Employee Id</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="ui small inheader form " style="">
+
+                    <div class="five fields">
+                        <div class="field">
+                            @Html.Editor("fromDt", new { htmlAttributes = new { @class = " date-picker ui input", @placeholder = "From Date", @autocomplete = "off" } })
+                        </div>
+                        <div class="field">
+                            @Html.Editor("toDt", new { htmlAttributes = new { @class = " date-picker ui input", @placeholder = "To Date", @autocomplete = "off" } })
+                        </div>
+
+                        @*<div class="field">
+                                @Html.DropDown("month", ViewBag.SalaryMonths as List<SemanticControls.DropdownList>, new { @class = " ui  search  fluid selection   dropdown ", @placeholder = "Select Month" })
+                            </div>*@
+
+                        <div class="field">
+                            @Html.DropDown("DeptId", ViewBag.DepartmentList as List<SemanticControls.DropdownList>, new { @class = " ui  search  fluid selection DeptId  dropdown ", @placeholder = "Select Department" })
+                            <input name="EmpId" placeholder="Employee Id" class="hide none" />
+                        </div>
+
+                        <div class="field">
+                            <button id="RunReport" class="ui primary  button">Run Report</button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    
+ 
+        <div id="div-record">
+
+        </div>
+
+
+
+</div>
+
+<script>
+    $(function () {
+        var rptTable;
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('.ui.inheader.form')
+            .form({
+                fields: {
+                    DeptId: 'empty',
+                    fromDt: 'empty',
+                    toDt: 'empty'
+
+                }
+            });
+
+
+        $('.payrollBy.form .ui.checkbox').checkbox({
+
+            onChecked: function () {
+
+                var $el = $(this);
+                var select = $el.val();
+                if (select === 'dept') {
+                    $('.DeptId.dropdown').removeClass('hide none')
+                    $('[name="EmpId"]').addClass('hide none')
+
+                    $('.ui.inheader.form')
+                        .form({
+                            fields: {
+                                DeptId: 'empty',
+                                month: 'empty'
+
+
+                            }
+                        });
+                }
+                if (select === 'emp') {
+                    $('.DeptId.dropdown').addClass('hide none')
+                    $('[name="EmpId"]').removeClass('hide none')
+                    $('.ui.inheader.form')
+                        .form({
+                            fields: {
+                                EmpId: 'empty',
+                                month: 'empty'
+
+                            }
+                        });
+                }
+
+            }
+        })
+
+
+
+        $('#RunReport').click(function (e) {
+
+            var checked = "";
+            var $this = $(this);
+            var data;
+            if ($('.radio.checked input').val() === 'dept') {
+                data = { deptId: $('[name="DeptId"]').val(), fromDt: $('[name="fromDt"]').val(), toDt: $('[name="toDt"]').val() };
+            } else {
+
+                data = { empId: $('[name="EmpId"]').val(), fromDt: $('[name="fromDt"]').val(), toDt: $('[name="toDt"]').val() };
+
+            }
+
+            if ($('.ui.inheader.form').form('validate form')) {
+                $this.addClass("loading");
+
+
+                $.ajax({
+                    type: "Get",
+                    data: data,
+                    datatype: "JSON",
+                    url: '/Payroll/GetCurrEarnings',
+                    success: function (response) {
+                        $('#div-record').empty();
+                        $('#div-record').html(response);
+                        //  CreateCurrEarningsReport(response);
+                    },
+                    complete: function () {
+                        $this.removeClass("loading");
+                    }
+                });
+
+
+
+
+            }
+            return false;
+
+
+        })
+
+
+
+  
+
+    })
+
+
+    RptFullDetails = function (id, el) {
+
+
+        $.ajax({
+            type: "Get",
+
+            url: '/Payroll/GetCurrEarnings/' + id,
+            success: function (response) {
+
+                CreateRptFullDetails(response, el);
+            },
+            complete: function () {
+                $this.removeClass("loading");
+            }
+
+        });
+
+    }
+    CreateRptFullDetails = function (data, el) {
+
+        var tr = $(this).closest('tr');
+        var row = rptTable.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
+    }
+
+    formatRpt = function (d) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" class="">' +
+            '<tr>' +
+            '<td>Allowance Type:</td>' +
+            '<td>' + d.SalaryType + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Amount:</td>' +
+            '<td>' + d.Amount + '</td>' +
+            '</tr>' +
+            '</table>';
+    }
+
+
+</script>

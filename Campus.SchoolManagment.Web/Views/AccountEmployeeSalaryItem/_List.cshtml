@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountEmployeeSalaryItemViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+    <table  class="ui selectable  single line Striped celled  compact table" id="myTable">
+        <thead>
+            <tr class="">
+                <th>
+                    @GeneralResource.Actions
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().AccountSalaryItemTypeName)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().AccountSalaryItemName)
+                </th>
+
+
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Notes)
+                </th>
+
+
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().OperationDate)
+                </th>
+             
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>
+                    <a href="#" onclick="Edit(@item.ID);" class="editDialog"> <i class=" feather icon-edit-1"></i></a>
+
+                
+                    <a href="#" onclick="Delete(@item.ID);" class="editDialog"> <i class=" feather red icon-trash"></i></a>
+
+                    @*<a href='@Url.Action("Delete", "AccountEmployeeSalaryItem", new { id = item.ID})'><span class="glyphicon glyphicon-remove"> </span> </a>*@
+                    @*@Ajax.ActionLink(" ", "Delete", "AccountEmployeeSalaryItem", new { @id = item.ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-record", Confirm = "are you sure delete", LoadingElementId = "im", LoadingElementDuration = 1000  }, new { @class = "glyphicon glyphicon-remove" })*@
+
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountSalaryItemTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountSalaryItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperationDate, "{0:dd/MM/yyyy}")
+                </td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

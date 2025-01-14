@@ -1,0 +1,1713 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87B31BDB-96AC-46D5-9AD0-928B1EBC9F59}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Campus.School.Management.Logic</RootNamespace>
+    <AssemblyName>Campus.School.Management.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.4\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WkHtmlToXSharp">
+      <HintPath>..\..\..\Docs\html to pdf dll\WkHtmlToXSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessLayer\Abstract\IRepository.cs" />
+    <Compile Include="BusinessLayer\app.cs" />
+    <Compile Include="BusinessLayer\Common.cs" />
+    <Compile Include="BusinessLayer\ExternalSchoolContext.cs" />
+    <Compile Include="BusinessLayer\Handler\AcademicCostHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccFeeItemHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountAssetHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountchequePayableHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountchequesreceivableHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountCostCenterHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountCustomerHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccStudentConfigHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccStudentFeeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AdmInitialRegistrationHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AspNetRolesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AspNetUserRolesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AssetTreeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountEmployeeSalaryItemHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountEmployeesMonthlySalaryHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountEmployeesSalaryHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountFirstBalanceHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountPayableCashHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountReciveCashHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountSalaryItemHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccStudentFeesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BankTransactionsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusCostHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusDetailsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusExpensesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusExpensesItemHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusStudentOccupationHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\DepartmentTreeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeAddedBenefitsOthersHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeAssetsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeBenfitsOtherHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeLoansHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeReturnHistoryHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeTerminationHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeVacationHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\GardesFeeConfigHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\HolidayTypesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\HRAllowanceEntryHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\InventoryReceiveItemsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\InventoryTreeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\ItemsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\JournalTypesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\MaterialManufacture.cs" />
+    <Compile Include="BusinessLayer\Handler\MenuPageHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountDailyJournalDetailHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountDailyJournalHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountNotespayableHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountNotesReceivableHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountStatementTypeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountTreasuryHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\AccountTreeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BankBranchHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BankCurrencyHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BankHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\BusTripHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\CityHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\CompanyHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\DepartmentHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\EmployeeHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\JobsHandlar.cs" />
+    <Compile Include="BusinessLayer\Handler\NationalityHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\PhysicalYearHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\PurchaseOrderHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\ReceiptHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\StorePlacesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\StoresHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\StudentHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\StudentTransactionsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\StudyYearHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\SupplierFormHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\SupplierHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\TransportBusesHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\TransportDriverHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\TransportSupervisorHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\UnitsMeasurementsHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\UserPermissionHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\SchoolHandler.cs" />
+    <Compile Include="BusinessLayer\Handler\SchoolUserHandler.cs" />
+    <Compile Include="BusinessLayer\IdentityModels.cs" />
+    <Compile Include="BusinessLayer\Statistics.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AcademicCostViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AcadimicYearViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccFeeItemViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountAssetViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountchequePayableViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountchequesreceivableViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountCostCenterViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountCustomerViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountDailyJournalDetailItemViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountDailyJournalDetailViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountDailyJournalViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountEmployeeSalaryItemViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountEmployeesMonthlySalaryViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountEmployeesSalaryViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountFirstBalanceViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountNotespayableViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountNotesReceivableViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountPayableCashViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountProfViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountReciveCashViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountSalaryItemViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountStatementTypeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountStudentFeesListViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountTreasuryViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccStudentConfigViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccStudentFeesViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AdmInitialStudRegistrationViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AdmStudent_ClassViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AspNetRolesViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AspNetUserRolesViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AssetDepreciationViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AssetTreeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BalanceSheetViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BankTransactionsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusExpenseItemViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusExpenseViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusStudentOccupationViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeAddedBenefitsOthersViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeBenefitsOthersViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeePayrollHistoryViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeePayrollSetupViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeePayrollViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\RptCurrEarningViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StudentTransactionsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\ClassRoomViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\DepartmentTreeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeAccountReportViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeAssetsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeLoansViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeePromotionViewModal.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeReturnHistoryViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeSalaryReportViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeTerminationViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeVacationViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\GenericVModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\GradesFeeConfigViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\GradesSchoolViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\HolidayTypesViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\HRAllowanceEntryViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\IncomeStatementViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\InventoryTreeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\ItemViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\JournalTypesViewModal.cs" />
+    <Compile Include="BusinessLayer\ViewModel\MaterialManufactureViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\PageViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountsubsidiaryledgerViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\InventoryReceiveItemsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\PurchaseOrdersViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StorePlacesViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StoreViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StudentFeeReceiptViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\SubLedgerReportViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\SupplierFormViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\SupplierViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\TrailbalanceViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\TransportBusesViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\TransportDriverViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\TransportSupervisorViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\UnitsMeasurementsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\UserPermissionViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\PhysicalYearViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccountTreeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\AccStudentConfigrationViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BankBranchViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BankCurrencyViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BankViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BranchAccountViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusCostViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusDetailsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusTripViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\BusViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\CityViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\CompanyViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\DepartmentViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\JobsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\NationalityViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\SchoolUserViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\SchoolViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StageViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StudentDiscountsViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StudentFeesTypeViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StudentViewModel.cs" />
+    <Compile Include="BusinessLayer\ViewModel\StudyYearViewModel.cs" />
+    <Compile Include="DataBaseLayer\AccAcademicCost.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccAssetDepreciation.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccBusCost.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccFeeItem.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountAsset.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountchequePayable.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\Accountchequesreceivable.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountCostCenter.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountCustomer.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountCustomerTransaction.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountDailyJournal.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountDailyJournalDetail.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountEmployeeSalaryItem.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountEmployeesMonthlySalary.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountEmployeesSalary.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountFirstBalance.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountNotespayable.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountNotesReceivable.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountPayableCash.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountReciveCash.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountSalaryItem.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountStatementType.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountStudentFeesList.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountSupplier.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountTreasury.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccountTree.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccStudentConfig.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccStudentDiscount.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AccStudentFee.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmAcademicYear.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmCity.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmClassRoom.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmCompany.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmDepartment.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmEmployee.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\admGrade.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmGradesSchool.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmGrade_Courses.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmInitialStudRegistration.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmJob.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmSchool.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmStudent.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmStudent_Class.cs">
+      <DependentUpon>ExternalSchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\admStudyear.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmUser.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AdmUser_Level.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AspNetRole.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AspNetUser.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AspNetUserClaim.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AspNetUserLogin.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\AssetTree.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\Bank.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BankBranch.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BankCurrency.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BankTransaction.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\Bank_Action.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\Bus.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BusDetail.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BusExpens.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BusExpensesItem.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BusStudentOccupation.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\BusTrip.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\C__MigrationHistory.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\DepartmentTree.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeAddedBenefitsOther.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeAsset.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeBenefitsOthersType.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeBenfitsOther.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeLoan.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeReturnHistory.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeTermination.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\EmployeeVacation.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\ExternalSchoolModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExternalSchoolModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\ExternalSchoolModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExternalSchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\ExternalSchoolModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExternalSchoolModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\FeeInstallmentType.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\GradesFeeConfig.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\HolidayType.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\HRAllowanceEntry.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\HRPayroll.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\HRPayrollEmployee.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\HRPayrollEmployeeBenfitsOther.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\HRSalaryMonth.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\InvenotryStoreKeeper.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\InventoryItem.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\InventoryTree.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\item.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\JournalType.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\MaterialManufacture.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\MenuPage.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\Nationality.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\PhysicalYear.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\PurchaseOrder.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\PurchaseOrderDetail.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SchoolGroup.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SchoolModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SchoolModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SchoolModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SchoolUser.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\Store.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\StorePlace.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\StudentReference.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SupplierForm.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\SupplierFormDetail.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\TransactionType.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\TransportBus.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\TransportDriver.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\TransportSupervisor.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\UnitsMeasurement.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\UserGroup.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseLayer\UserPermission.cs">
+      <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Paginginfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AcademicYear.Ar.Designer.cs" />
+    <Compile Include="Resources\AcademicYear.Designer.cs" />
+    <Compile Include="Resources\Academic_Cost.Ar.Designer.cs" />
+    <Compile Include="Resources\Academic_Cost.Designer.cs" />
+    <Compile Include="Resources\AccFeeItem1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccFeeItem.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountAsset.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountAsset.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountAsset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountAsset.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountCustomer.AR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountCustomer.AR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountCustomer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountCustomer.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountEmployeeSalaryItems.Ar.Designer.cs" />
+    <Compile Include="Resources\AccountEmployeeSalaryItems.Designer.cs" />
+    <Compile Include="Resources\AccountEmployeesSalary.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountEmployeesSalary.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountEmployeesSalary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountEmployeesSalary.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountEmployeMonthlySalary.Ar.Designer.cs" />
+    <Compile Include="Resources\AccountEmployeMonthlySalary.Designer.cs" />
+    <Compile Include="Resources\AccountStudentFeesList.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountStudentFeesList.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountStudentFeesList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountStudentFeesList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountTrees.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountTrees.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccountTrees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountTrees.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccStudentConfig.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccStudentConfig.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccStudentConfig.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccStudentConfig.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccStudentConfigrations.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccStudentConfigrations.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccStudentConfigrations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccStudentConfigrations.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccStudentFees.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccStudentFees.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AccStudentFees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccStudentFees.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AdmInitialStudRegistration.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdmInitialStudRegistration.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AdmInitialStudRegistration.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdmInitialStudRegistration.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AssetTrees.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetTrees.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AssetTrees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetTrees.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Bank.Ar.Designer.cs" />
+    <Compile Include="Resources\Bank.Ar1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Bank1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\BankCurrency.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankCurrency.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\BankCurrency.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankCurrency.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Bank_Branch.Ar.Designer.cs" />
+    <Compile Include="Resources\Bank_Branch.Designer.cs" />
+    <Compile Include="Resources\BonusandDedecation.Ar.Designer.cs" />
+    <Compile Include="Resources\BonusandDedecation.Designer.cs" />
+    <Compile Include="Resources\BranchAccount.Ar.Designer.cs" />
+    <Compile Include="Resources\BranchAccount.Designer.cs" />
+    <Compile Include="Resources\BusCost.Ar.Designer.cs" />
+    <Compile Include="Resources\BusCost.Designer.cs" />
+    <Compile Include="Resources\Buses.Ar.Designer.cs" />
+    <Compile Include="Resources\Buses.Designer.cs" />
+    <Compile Include="Resources\BusExpenseItem.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusExpenseItem.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\BusExpenseItem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusExpenseItem.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\BusExpenses.Ar.Designer.cs" />
+    <Compile Include="Resources\BusExpenses.Designer.cs" />
+    <Compile Include="Resources\BusStudentOccupations.Ar.Designer.cs" />
+    <Compile Include="Resources\BusStudentOccupations.Designer.cs" />
+    <Compile Include="Resources\BusTrips.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusTrips.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\BusTrips.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusTrips.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\chequesPayable.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chequesPayable.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\chequesPayable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chequesPayable.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\City.Ar.Designer.cs" />
+    <Compile Include="Resources\City.Designer.cs" />
+    <Compile Include="Resources\ClassRoom.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassRoom.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClassRoom.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassRoom.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Company.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Company.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Company.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Company.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CostCenter.AR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CostCenter.AR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CostCenter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CostCenter.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DailyJornal.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyJornal.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DailyJornal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyJornal.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DailyJournalDetailsItems.Ar.Designer.cs" />
+    <Compile Include="Resources\DailyJournalDetailsItems.Designer.cs" />
+    <Compile Include="Resources\Department.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Department.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Department.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Department.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DepartmentTrees.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartmentTrees.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\DepartmentTrees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartmentTrees.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Employee.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Employee.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeAssets.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeAssets.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeAssets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeAssets.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeLoans.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeLoans.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeLoans.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeLoans.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeReturnHistory.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeReturnHistory.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeReturnHistory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeReturnHistory.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeTermination.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeTermination.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeTermination.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeTermination.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeVacation.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeVacation.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EmployeeVacation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeVacation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\FirstBalance.Ar.Designer.cs" />
+    <Compile Include="Resources\FirstBalance.Designer.cs" />
+    <Compile Include="Resources\GeneralResource.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralResource.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\GeneralResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\HolidayTypes.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HolidayTypes.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\HolidayTypes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HolidayTypes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\InventoryTree.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryTree.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\InventoryTree.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryTree.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Jobs.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Jobs.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Jobs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Jobs.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MaterialManufactures.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaterialManufactures.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MaterialManufactures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaterialManufactures.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Nationality.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nationality.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Nationality.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nationality.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\PhysicalYear.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhysicalYear.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\PhysicalYear.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhysicalYear.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Qurter.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Qurter.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Qurter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Qurter.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Schools.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Schools.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Schools.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Schools.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SchoolsUsers.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolsUsers.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SchoolsUsers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolsUsers.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Semster.Ar1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Semster.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Semster1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Semster.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Stage.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Stage.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Stage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Stage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StatementType.Ar.Designer.cs" />
+    <Compile Include="Resources\StatementType.Designer.cs" />
+    <Compile Include="Resources\StorePlaces.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StorePlaces.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StorePlaces.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StorePlaces.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Stores.Ar.Designer.cs">
+      <DependentUpon>Stores.Ar.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Stores.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Stores.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Student.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Student.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudentDiscounts.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentDiscounts.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudentDiscounts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentDiscounts.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudentFeesType.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentFeesType.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudentFeesType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentFeesType.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudentTransactions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentTransactions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudyYear.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudyYear.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\StudyYear1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudyYear.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Supplier_res.AR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supplier_res.AR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Supplier_res.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supplier_res.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Transport.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transport.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Transport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transport.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Treasury.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Treasury.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Treasury.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Treasury.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UnitsMeasurement.Ar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitsMeasurement.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UnitsMeasurements.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitsMeasurements.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\User_Permission.Ar1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User_Permission.Ar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\User_Permission1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User_Permission.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="DataBaseLayer\SchoolModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SchoolModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DataBaseLayer\ExternalSchoolModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ExternalSchoolModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataBaseLayer\ExternalSchoolModel.edmx.diagram">
+      <DependentUpon>ExternalSchoolModel.edmx</DependentUpon>
+    </None>
+    <None Include="DataBaseLayer\SchoolModel.edmx.diagram">
+      <DependentUpon>SchoolModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataBaseLayer\ExternalSchoolModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ExternalSchoolModel.edmx</DependentUpon>
+      <LastGenOutput>ExternalSchoolModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataBaseLayer\ExternalSchoolModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ExternalSchoolModel.edmx</DependentUpon>
+      <LastGenOutput>ExternalSchoolModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataBaseLayer\SchoolModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SchoolModel.edmx</DependentUpon>
+      <LastGenOutput>SchoolModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataBaseLayer\SchoolModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SchoolModel.edmx</DependentUpon>
+      <LastGenOutput>SchoolModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AcademicYear.Ar.resx" />
+    <EmbeddedResource Include="Resources\AcademicYear.resx" />
+    <EmbeddedResource Include="Resources\Academic_Cost.Ar.resx" />
+    <EmbeddedResource Include="Resources\Academic_Cost.resx" />
+    <EmbeddedResource Include="Resources\AccFeeItem.Ar.resx" />
+    <EmbeddedResource Include="Resources\AccFeeItem.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccFeeItem1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountAsset.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountAsset.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountAsset.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountAsset.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountCustomer.AR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountCustomer.AR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountCustomer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountCustomer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountEmployeeSalaryItems.Ar.resx" />
+    <EmbeddedResource Include="Resources\AccountEmployeeSalaryItems.resx" />
+    <EmbeddedResource Include="Resources\AccountEmployeesSalary.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountEmployeesSalary.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountEmployeesSalary.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountEmployeesSalary.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountEmployeMonthlySalary.Ar.resx" />
+    <EmbeddedResource Include="Resources\AccountEmployeMonthlySalary.resx" />
+    <EmbeddedResource Include="Resources\AccountStudentFeesList.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountStudentFeesList.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountStudentFeesList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountStudentFeesList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountTrees.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountTrees.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccountTrees.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountTrees.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccStudentConfig.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccStudentConfig.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccStudentConfig.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccStudentConfig.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccStudentConfigrations.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccStudentConfigrations.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccStudentConfigrations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccStudentConfigrations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccStudentFees.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccStudentFees.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AccStudentFees.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccStudentFees.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdmInitialStudRegistration.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdmInitialStudRegistration.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdmInitialStudRegistration.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdmInitialStudRegistration.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AssetTrees.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetTrees.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AssetTrees.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetTrees.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Bank.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Bank.Ar1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Bank.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Bank1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BankCurrency.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BankCurrency.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BankCurrency.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BankCurrency.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Bank_Branch.Ar.resx" />
+    <EmbeddedResource Include="Resources\Bank_Branch.resx" />
+    <EmbeddedResource Include="Resources\BonusandDedecation.Ar.resx" />
+    <EmbeddedResource Include="Resources\BonusandDedecation.resx" />
+    <EmbeddedResource Include="Resources\BranchAccount.Ar.resx" />
+    <EmbeddedResource Include="Resources\BranchAccount.resx" />
+    <EmbeddedResource Include="Resources\BusCost.Ar.resx" />
+    <EmbeddedResource Include="Resources\BusCost.resx" />
+    <EmbeddedResource Include="Resources\Buses.Ar.resx" />
+    <EmbeddedResource Include="Resources\Buses.resx" />
+    <EmbeddedResource Include="Resources\BusExpenseItem.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusExpenseItem.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BusExpenseItem.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusExpenseItem.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BusExpenses.Ar.resx" />
+    <EmbeddedResource Include="Resources\BusExpenses.resx" />
+    <EmbeddedResource Include="Resources\BusStudentOccupations.Ar.resx" />
+    <EmbeddedResource Include="Resources\BusStudentOccupations.resx" />
+    <EmbeddedResource Include="Resources\BusTrips.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusTrips.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BusTrips.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusTrips.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\chequesPayable.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>chequesPayable.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\chequesPayable.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>chequesPayable.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\City.Ar.resx" />
+    <EmbeddedResource Include="Resources\City.resx" />
+    <EmbeddedResource Include="Resources\ClassRoom.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClassRoom.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClassRoom.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClassRoom.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Company.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Company.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Company.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Company.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CostCenter.AR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CostCenter.AR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CostCenter.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CostCenter.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DailyJornal.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DailyJornal.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DailyJornal.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DailyJornal.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DailyJournalDetailsItems.Ar.resx" />
+    <EmbeddedResource Include="Resources\DailyJournalDetailsItems.resx" />
+    <EmbeddedResource Include="Resources\Department.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Department.Ar.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Department.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Department.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DepartmentTrees.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DepartmentTrees.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DepartmentTrees.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DepartmentTrees.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Employee.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Employee.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Employee.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Employee.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeAssets.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeAssets.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeAssets.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeAssets.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeLoans.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeLoans.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeLoans.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeLoans.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeReturnHistory.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeReturnHistory.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeReturnHistory.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeReturnHistory.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeTermination.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeTermination.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeTermination.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeTermination.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeVacation.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeVacation.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EmployeeVacation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeVacation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\FirstBalance.Ar.resx" />
+    <EmbeddedResource Include="Resources\FirstBalance.resx" />
+    <EmbeddedResource Include="Resources\GeneralResource.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralResource.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GeneralResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\HolidayTypes.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HolidayTypes.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\HolidayTypes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HolidayTypes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InventoryTree.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InventoryTree.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InventoryTree.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InventoryTree.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Jobs.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Jobs.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Jobs.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Jobs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MaterialManufactures.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialManufactures.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MaterialManufactures.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MaterialManufactures.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Nationality.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Nationality.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Nationality.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Nationality.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PhysicalYear.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PhysicalYear.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PhysicalYear.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PhysicalYear.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Qurter.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Qurter.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Qurter.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Qurter.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Schools.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Schools.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Schools.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Schools.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SchoolsUsers.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SchoolsUsers.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SchoolsUsers.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SchoolsUsers.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Semster.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Semster.Ar1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Semster.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Semster1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Stage.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Stage.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Stage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Stage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StatementType.Ar.resx" />
+    <EmbeddedResource Include="Resources\StatementType.resx" />
+    <EmbeddedResource Include="Resources\StorePlaces.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StorePlaces.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StorePlaces.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StorePlaces.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Stores.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Stores.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Stores.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Stores.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Student.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Student.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Student.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Student.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudentDiscounts.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StudentDiscounts.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudentDiscounts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StudentDiscounts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudentFeesType.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StudentFeesType.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudentFeesType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StudentFeesType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudentTransactions.Ar.resx" />
+    <EmbeddedResource Include="Resources\StudentTransactions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StudentTransactions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudyYear.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StudyYear.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\StudyYear.resx">
+      <LastGenOutput>StudyYear1.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Supplier_res.AR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Supplier_res.AR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Supplier_res.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Supplier_res.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Transport.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Transport.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Transport.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Transport.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Treasury.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Treasury.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Treasury.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Treasury.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UnitsMeasurement.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitsMeasurement.Ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UnitsMeasurements.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitsMeasurements.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\User_Permission.Ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User_Permission.Ar1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\User_Permission.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User_Permission1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

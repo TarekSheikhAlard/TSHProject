@@ -1,0 +1,197 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.IncomeStatementViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+@{
+    ViewBag.Title = GeneralResource.IncomeStatement; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.IncomeStatement
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.IncomeStatement)
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui segment anim">
+        <div class="toolspace">
+
+
+            @using (Ajax.BeginForm("GetInconeStatement", "Reviews", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record" }, new { @class = "ui trailbalance form" }))
+            {
+                @Html.AntiForgeryToken()
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="four fields">
+                    <div class="field">
+
+                        @Html.LabelFor(model => model.AccountTreeLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="">
+                            @Html.DropDownListFor(model => model.AccountTreeLevel, new SelectList(new List<Object>
+                               {
+                               new { value = 1 , text = "Level 1"},
+                               new { value = 2 , text ="Level 2"},
+                               new { value = 3 , text ="Level 3"},
+                               new { value = 4 , text ="Level 4"},
+                               new { value = 5 , text ="Level 5"}}, "value", "text"), GeneralResource.Select, new { @class = "ui dropdown"  })
+                            @Html.ValidationMessageFor(model => model.AccountTreeLevel, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="four fields">
+                    <div class="field">
+
+                        @Html.LabelFor(model => model.MonthlyPeriod, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.MonthlyPeriod, new SelectList(new List<Object>
+                               {
+                               new { value = 1 , text = "Monthly"},
+                               new { value = 2 , text ="Period"}}, "value", "text"), GeneralResource.Select, new { @class = "form-control" ,@onchange= "onchangeSelectdate(this);" })
+                            @Html.ValidationMessageFor(model => model.MonthlyPeriod, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="four fields monthly">
+                    <div class="field">
+                        @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="ui input">
+                            @Html.EditorFor(model => model.Month, new { htmlAttributes = new { @class = "form-control form-control-inline  month-picker" } })
+                            @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="four fields period">
+                    <div class="field">
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="ui input">
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="ui input">
+                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="ui primary button " name="cmd"><i class="search icon"></i>  @GeneralResource.Search</button>
+                </div>
+
+            }
+        </div>
+
+        <div id="div-record" class="ui segment">
+           
+            @*@Html.Partial("_List", Model)*@
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<div class="ui account smal  modal fade" id="Account-Model">
+    <div class="header">
+        @GeneralResource.AccountTree
+    </div>
+    <div id="divForaccount" class="divForUpdate scrolling content">
+    </div>
+</div>
+
+
+
+<script>
+
+    function InitC() {
+       
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('.month-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            viewMode: "months",
+            minViewMode: "months",
+            todayHighlight: true
+        });
+
+        $('.monthly,.period').hide();
+
+    };
+    InitC();
+</script>
+<script>
+
+    function SearchAccount1() {
+
+        $.ajax({
+
+            type: "Get",
+            url: '/Reviews/GetAccounts1',
+            success: function (response) {
+                $('#divForaccount').empty();
+                $('#divForaccount').html(response);
+                $('#Account-Model').modal('show');
+
+            }
+        });
+
+
+
+    };
+
+    function onchangeSelectdate(elem) {
+        var value = $(elem).val();
+        console.log(value)
+        switch (value) {
+            case "1":
+                $('.monthly').show(200);
+                $('.period').hide(100);
+                break;
+            case "2":
+                $('.period').show(200);
+                $('.monthly').hide(100);
+                break;
+            default:
+                $('.period').show();
+                $('.monthly').hide();
+                break;
+        }
+
+
+    }
+
+
+
+</script>

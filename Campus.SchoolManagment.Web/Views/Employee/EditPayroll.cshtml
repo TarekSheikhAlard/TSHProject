@@ -1,0 +1,47 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeePayrollSetupViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using (Ajax.BeginForm("EditPayrollSetup", "Employee", new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#SaveEdit').addClass('loading')", OnComplete = "$('#SaveEdit').removeClass('loading')", OnSuccess = "$('.close').click()" }, new { @class = "ui editEmployee form", @id = "editPayroll" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    @Html.HiddenFor(c => c.Employee_ID)
+
+    <div class="two fields">
+
+        <div class="field">
+            <label>Benefits</label>
+            @Html.DropDownFor(model => model.BenefitID, ViewBag.Benefits as List<SemanticControls.DropdownList>, new { @class = " ui  search selection noselected fluid multiple dropdown ", @placeholder = "Add Benefits" })
+        </div>
+        <div class="field">
+            <label>Deductions</label>
+            @Html.DropDownFor(model => model.DeductID, ViewBag.Deduction as List<SemanticControls.DropdownList>, new { @class = " ui  search selection noselected fluid multiple  dropdown ", @placeholder = "Add Deductions" })
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Taxes</label>
+            @Html.DropDownFor(model => model.TaxesID, ViewBag.Taxes as List<SemanticControls.DropdownList>, new { @class = " ui  search selection noselected fluid multiple dropdown ", @placeholder = "Add Taxes" })
+        </div>
+        <div class="field">
+            <label>Gov Requirements</label>
+            @Html.DropDownFor(model => model.GovID, ViewBag.Gov as List<SemanticControls.DropdownList>, new { @class = " ui  search selection noselected fluid multiple  dropdown ", @placeholder = "Add Government Req" })
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" id="SaveEdit" class="ui primary  button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+
+}

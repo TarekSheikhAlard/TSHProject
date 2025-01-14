@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.TransportBusesViewModel>
+@using Campus.School.Management.Logic.BusinessLayer;
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled   table" id="BusTable">
+    <thead>
+        <tr>
+            <th>@GeneralResource.Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supervisor)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AvaliableSeats)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseExpiryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlateNumber)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="#" onclick="EditBus(@item.Id);"> <i class="feather  icon-edit-1"></i></a>
+                    <a href="#" onclick="DeleteBus(@item.Id);"> <i class="feather red icon-trash"></i></a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DriverName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupervisorName)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvaliableSeats)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseExpiryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlateNumber)
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+<script>
+    $(document).ready(function () {
+
+        function InitIndex()
+        {
+
+
+            $('#BusTable').DataTable();
+
+
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

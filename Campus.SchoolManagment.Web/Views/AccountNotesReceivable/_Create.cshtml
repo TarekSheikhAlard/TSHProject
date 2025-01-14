@@ -1,0 +1,164 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountNotesReceivableViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@using (Ajax.BeginForm("Create", "AccountNotesReceivable", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.InvoiceCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.InvoiceCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.InvoiceCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.docementNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.docementNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.docementNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.AccountTreeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.AccountTreeID, ViewBag.Tree as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.AccountTreeCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.AccountTreeCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccountTreeCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.costcenterID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.costcenterID, ViewBag.CostCenter as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.costcenterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.TreasuryID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.TreasuryID, ViewBag.Treasury as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TreasuryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.InvoiceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.IsRelay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+
+                @Html.CheckBoxFor(model => model.IsRelay)
+                @Html.ValidationMessageFor(model => model.IsRelay, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+  
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+
+        }
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+
+
+        <script>
+
+            function InitC() {
+
+                $('.date-picker').datepicker({
+                    format: 'yyyy/mm/dd'
+                });
+
+            };
+            InitC();
+
+        </script>
+
+
+
+        <script>
+            $("#AccountTreeID").change(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/AccountNotesReceivable/SearchTreeCode',
+                    dataType: "json",
+                    data: { AccountTreeID: $("#AccountTreeID").val() },
+                    success: function (data) {
+                        $('#AccountTreeCode').val(data);
+
+                    }
+                });
+            })
+        </script>
+
+
+
+        <script>
+            $("#AccountTreeCode").keyup(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/AccountNotesReceivable/SearchAccountTree',
+                    data: { AccountTreeCode: $("#AccountTreeCode").val() },
+                    success: function (data) {
+                        $('#AccountTreeID').empty();
+                        $('#AccountTreeID').append(data);
+
+                    }
+                });
+            })
+        </script>

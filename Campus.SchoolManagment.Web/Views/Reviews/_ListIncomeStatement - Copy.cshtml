@@ -1,0 +1,157 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.IncomeStatementViewModel>
+@{ 
+
+    Decimal TotalOperatingExp = 0;
+    Decimal TotalNonOperatingExp = 0;
+    Decimal TotalRevenue = 0;
+    Decimal GrossProfit = 0;
+    Decimal NetIncome = 0;
+    //Decimal Total = 0;
+
+}
+
+<table class="ui selectable blue  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainAccountTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchAccountTotal)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.AccountNumber == "4")
+                {
+                    TotalExpenses = item.MainAccountTotal;
+                }
+                @if (item.AccountNumber == "3")
+                {
+                    TotalRevenue = item.MainAccountTotal;
+                }
+
+                <td>
+                    @if (item.AccountNumber == "4" || item.AccountNumber == "3")
+                    {
+                        <b>@Html.DisplayFor(modelItem => item.AccountNumber)</b>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.AccountNumber)
+
+                    }
+                </td>
+                <td>
+                    @if (item.AccountNumber == "4" || item.AccountNumber == "3")
+                    {
+                        <b>  @Html.DisplayFor(modelItem => item.AccountName)</b>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.AccountName)
+
+                    }
+                 
+                </td>
+                <td>
+                    @if (item.AccountNumber == "4" || item.AccountNumber == "3")
+                    {
+                        <b>@Html.DisplayFor(modelItem => item.MainAccountTotal)</b>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.MainAccountTotal)
+
+                    }
+                 
+                </td>
+                <td>
+                    @if (item.AccountNumber == "4" || item.AccountNumber == "3")
+                    {
+                        <b>@Html.DisplayFor(modelItem => item.BranchAccountTotal)</b>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.BranchAccountTotal)
+
+                    }
+                  
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        @{
+
+            NetProfit = TotalExpenses - TotalRevenue;
+
+        }
+        <tr>
+            <th></th>
+            <th>
+                <b>Total Expenses</b>
+                <br />
+                <b>Total Revenue</b>
+                <br />
+                <b>Net Profit</b>
+            </th>
+            <th>
+                <b>@TotalExpenses</b>
+                <br />
+                <b>@TotalRevenue</b>
+                <br />
+                <b>@NetProfit</b>
+            </th>
+            <th>
+            </th>
+        </tr>
+        @*<tr>
+            <th></th>
+            <th>
+                <b>Total Revenue</b>
+            </th>
+            <th>
+                <b>@TotalRevenue</b>
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        <tr>
+            <th></th>
+            <th>
+                <b>Net Profit</b>
+            </th>
+            <th>
+                <b>@NetProfit</b>
+            </th>
+            <th>
+            </th>
+        </tr>*@
+    </tfoot>
+</table>
+
+<script>
+  $(document).ready(function () {
+
+        function InitIndex() {
+            $('#myTable').DataTable();
+        }
+
+
+        InitIndex();
+
+
+    });
+</script>

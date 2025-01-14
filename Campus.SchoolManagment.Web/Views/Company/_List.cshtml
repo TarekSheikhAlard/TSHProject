@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.CompanyViewModel>
+@using Campus.School.Management.Logic.BusinessLayer;
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  Striped celled   table" id="myTable">
+    <thead>
+        <tr class="">
+          
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyNameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyMobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+          
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="#" onclick="Edit(@item.CompanyID);"> <i class="feather  icon-edit-1"></i></a>
+                <a href="#" onclick="Delete(@item.CompanyID);"> <i class="feather red icon-trash"></i></a>
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyNameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyNameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyMobile)
+            </td>
+            <td>
+               @* <img data-content=""  class="ui avatar pop image" src="@Url.Content(@Statistics.SchoolImagesPath+item.Logo)" data-html="&lt;img class=&quot;ui small image&quot; src=&quot;@Url.Content(@Statistics.SchoolImagesPath+item.Logo)&quot; /&gt;" />*@
+            </td>
+        
+        </tr>
+    }
+
+</table>
+
+<script>
+    $(document).ready(function () {
+      
+        function InitIndex()
+        {
+           
+            
+            $('#myTable').DataTable();
+            $.fn.dataTableExt.oStdClasses.sPageNext = "checkmark icon" 
+
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+            $(".pop.image").popup();
+        };
+        InitIndex();
+    });
+</script>

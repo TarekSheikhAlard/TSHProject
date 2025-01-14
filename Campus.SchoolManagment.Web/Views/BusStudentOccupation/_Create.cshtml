@@ -1,0 +1,104 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusStudentOccupationViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "BusStudentOccupation", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+    
+    
+       
+   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       <div class="field">
+            @Html.LabelFor(model => model.StudentAcdID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StudentAcdID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StudentAcdID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.StudentName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.BusID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.BusID, ViewBag.bus as SelectList, "--select Bus--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BusID, "", new { @class = "text-danger" })
+            </div>
+      </div>
+
+ @*  <div class="field">
+        @Html.LabelFor(model => model.BusNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.BusNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BusNo, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+       <div class="field">
+            @Html.LabelFor(model => model.MorningTrip, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+               
+                    @Html.CheckBoxFor(model => model.MorningTrip)
+                    @Html.ValidationMessageFor(model => model.MorningTrip, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.EviningTrip, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                
+                    @Html.CheckBoxFor(model => model.EviningTrip)
+                    @Html.ValidationMessageFor(model => model.EviningTrip, "", new { @class = "text-danger" })
+              
+            </div>
+        </div>
+
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+   
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+    $("#StudentAcdID").keyup(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '/BusStudentOccupation/SearchStudentName',
+                dataType: "json",
+                data: { StudentAcdID: $("#StudentAcdID").val() },
+                success: function (data) {
+                    if (data == "")
+                    {
+                        $('#StudentName').val("");
+                    }
+                    else
+                    {
+                        $('#StudentName').val(data);
+                    }
+
+                }
+            });
+        })
+</script>

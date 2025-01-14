@@ -1,0 +1,56 @@
+﻿
+@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeePayrollHistoryViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<table id="Payroll-History" class="">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonthName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BenefitName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonthName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BenefitName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

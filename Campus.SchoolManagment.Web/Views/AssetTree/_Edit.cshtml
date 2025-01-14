@@ -1,0 +1,84 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AssetTreeViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel;
+@using Campus.School.Management.Logic.Resources
+
+@{
+    SchoolUserViewModel _dbUser = Statistics.GetLogiccookie();
+}
+
+
+@using (Ajax.BeginForm("Edit", "AssetTree", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.HiddenFor(model => model.check)
+    @Html.HiddenFor(model => model.AssetTreeID)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+    @Html.HiddenFor(model => model.AssetTreeParentID)
+
+
+    <div class="field">
+        @Html.LabelFor(model => model.AssetNameEN, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AssetNameEN, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AssetNameEN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @if (_dbUser.isArabic)
+    {
+        <div class="field">
+            @Html.LabelFor(model => model.AssetNameAR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AssetNameAR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AssetNameAR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+    <div class="field">
+        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    function InitC() {
+
+        $("#AssetNameAR").valid();
+    }
+
+    InitC();
+
+
+    $("#AssetNameAR").keyup(function () {
+        $("#check").val(true);
+    })
+
+</script>
+

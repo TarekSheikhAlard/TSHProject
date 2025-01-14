@@ -1,0 +1,73 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusExpenseViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+
+<div class="">
+    
+        <div class="ui large dividing header">
+            <i class=""></i><div class="content">  <a href="#"  id="AddDetail" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a>@GeneralResource.Details
+        </div>
+
+    </div>
+   <div class="ui container">
+        <table class="ui celled  compact table" id="DetailContailner">
+
+            <thead class="">
+                <tr>
+                    <th>
+                        @*@Html.Label("Item ")*@
+                        @BusExpenses.Item
+
+                    </th>
+                    <th>
+                        @*@Html.Label("Quantity")*@
+                        @BusExpenses.Quantity
+
+                    </th>
+                    <th>
+                        @*@Html.Label("Amount")*@
+                        @BusExpenses.Amount
+                    </th>
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            @if (Model._BusExpensesItems != null)
+        {
+            foreach (var item in Model._BusExpensesItems)
+            {
+
+            @Html.Partial("_ListItem", item)
+                    
+
+            }
+        }
+
+        </table>
+
+        </div>
+
+    </div>
+
+
+<script>
+    
+    
+ 
+    $("#AddDetail").click(function () {
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: '/BusExpenses/AddDetail',
+            data: { ID: $("#ID").val() },
+            success: function (data) {
+                $('#DetailContailner').append(data);
+                
+            }
+        });
+    })
+
+
+</script>

@@ -1,0 +1,66 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeLoansViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "EmployeeLoans", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "list-EmployeeLoans" }, new { @class = "ui small EmployeeLoans form" }))
+
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Employee_ID)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.AntiForgeryToken()
+
+<div class="three fields">
+    <div class="field">
+        @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="ui input">
+            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.MonthlyDeductionAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="ui input">
+            @Html.EditorFor(model => model.MonthlyDeductionAmt, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.ValidationMessageFor(model => model.MonthlyDeductionAmt, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.StartOfDeduction, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="ui action input">
+            @Html.EditorFor(model => model.StartOfDeduction, new { htmlAttributes = new { @class = "form-control date-picker" } })
+            @Html.ValidationMessageFor(model => model.StartOfDeduction, "", new { @class = "text-danger" })
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Add</button>
+        </div>
+    </div>
+
+    @*<div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>@GeneralResource.Add</button>
+    </div>*@
+</div>
+
+
+       
+
+ 
+}
+<script>
+
+    $(function () {
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+
+        });
+
+    })
+
+</script>
+

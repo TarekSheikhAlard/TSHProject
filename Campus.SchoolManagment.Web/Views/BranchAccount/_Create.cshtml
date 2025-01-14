@@ -1,0 +1,67 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BranchAccountViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "BranchAccount", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+    
+    
+
+ 
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.AccountID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AccountID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccountID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+       <div class="field">
+            @Html.LabelFor(model => model.Account_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Account_Number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Account_Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.BankID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.BankID, ViewBag.Banks as SelectList, "select", htmlAttributes: new { @class = "form-control", @onchange ="GetBranch(this.value);"})
+                @Html.ValidationMessageFor(model => model.BankID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+       <div class="field">
+            @Html.LabelFor(model => model.BranchID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.BranchID, new SelectList(""), "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       <div class="field">
+            @Html.LabelFor(model => model.BankCurrencyID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.BankCurrencyID, ViewBag.Currency as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BankCurrencyID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+   
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

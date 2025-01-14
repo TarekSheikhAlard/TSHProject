@@ -1,0 +1,237 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.InventoryReceiveItemsViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "InventoryReceivedItems", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.IncomingLot, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.IncomingLot, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IncomingLot, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.LotDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.LotDate, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                @Html.ValidationMessageFor(model => model.LotDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.DocumentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.DocumentNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Store, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Store, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Store, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="five fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.PONumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.PONumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PONumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Credit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Credit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Suppiler, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Suppiler, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Suppiler, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui  blue basic items segment">
+
+        <div class="fields" data-rid="1">
+            <div class="three wide field">
+                <label>Item Number</label>
+                <div class="ui mini input">
+                    <input type="text" name="ItemsList[0].ItemBarcode" onpaste="GetItemDetails(this)" />
+                    <input type="hidden" name="ItemsList[0].ItemId" />
+                </div>
+            </div>
+            <div class="four wide field">
+                <label>Item Description</label>
+                <div class="ui mini input">
+                    <input type="text" name="ItemDesc" readonly />
+
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Unit No</label>
+                <div class="ui mini input">
+                    <input type="text" name="UnitNo" />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Unit Name</label>
+
+                <div class="ui mini input">
+                    <input type="text" name="UnitName" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>PO Quantity</label>
+                <div class="ui mini input">
+                    <input type="text" name="POQty" />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label> Quantity</label>
+                <div class="ui mini input">
+                    <input type="text" name="ItemsList[0].ReceivedQty" />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label> Unit Price</label>
+                <div class="ui mini input">
+                    <input type="text" name="UnitPrice" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Discount</label>
+                <div class="ui mini input">
+
+                    <input type="text" name="ItemsList[0].Discount" />
+
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Total</label>
+                <div class="ui mini input">
+                    <input type="text" name="Total" />
+                </div>
+            </div>
+        </div>
+
+        <div class="fields" data-rid="2">
+            <div class="three wide field">
+                <div class="ui mini input">
+                    <input type="text" name="ItemsList[1].ItemBarcode" onfocus="AddItemsRow(this)" onpaste="GetItemDetails(this)" />
+                    <input type="hidden" name="ItemsList[1].ItemId" />
+                </div>
+            </div>
+            <div class="four wide field">
+                <div class="ui mini input">
+                    <input type="text" name="ItemDesc" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+                <div class="ui mini input">
+                    <input type="text" name="UnitNo" />
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="UnitName" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="POQty" />
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="ItemsList[1].ReceivedQty" />
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="UnitPrice" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+
+                    <input type="text" name="ItemsList[1].Discount" />
+
+                </div>
+            </div>
+            <div class="two wide field">
+                <div class="ui mini input">
+                    <input type="text" name="Total" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="actions">
+        <button type="submit" class="ui primary button ">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+
+    </div>
+
+}
+
+<script>
+
+    $(function () {
+        InitC();
+
+    })
+    function InitC() {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        });
+    }
+</script>
+

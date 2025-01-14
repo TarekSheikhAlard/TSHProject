@@ -1,0 +1,148 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.StudyYearViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "StudyYear", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+   
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.YearID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YearID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="two fields">
+
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.YearNameEn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearNameEn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YearNameEn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.YearNameAr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearNameAr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YearNameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.YearStDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="ui input">
+                @Html.EditorFor(model => model.YearStDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.YearStDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.YearEdDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="ui input">
+                @Html.EditorFor(model => model.YearEdDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.YearEdDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.YearStDateHijri, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="ui input">
+                @Html.EditorFor(model => model.YearStDateHijri, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.YearStDateHijri, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.YearEdDateHijri, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="ui input">
+                @Html.EditorFor(model => model.YearEdDateHijri, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.YearEdDateHijri, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.IsDefault, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.IsDefault, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsDefault, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CurrentSem, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CurrentSem, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentSem, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CurrentQ, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CurrentQ, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentQ, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CurrentWeek, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CurrentWeek, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentWeek, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Is_Upload, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Is_Upload, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Is_Upload, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Is_Update, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Is_Update, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Is_Update, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+
+        }
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        <script>
+
+            function InitC() {
+
+
+                $('.date-picker').datepicker({
+                    format: 'yyyy/mm/dd'
+                });
+
+            };
+            InitC();
+
+        </script>

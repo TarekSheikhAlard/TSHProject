@@ -1,0 +1,80 @@
+﻿@model List<Campus.School.Management.Logic.BusinessLayer.ViewModel.BusExpenseItemViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+<div class="ui raised blue segment anim">
+    
+        <div class="ui large dividing header">
+          @GeneralResource.Details
+        </div>
+
+    
+   <div class="ui container">
+        @*<table class="table table-bordered table-responsive">*@
+            <table class="ui selectable  single line Striped celled  compact table" id="DetailTable">
+                <thead class="">
+                    <tr>
+                        <th>
+
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().ItemDesc)
+
+                          
+                        </th>
+                        <th>
+
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Quantity)
+                        </th>
+                        <th>
+
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)
+                        </th>
+
+                        <th>
+
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Total)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="Searchbody">
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#DetailTable').DataTable();
+            
+
+        };
+        InitIndex();
+    });
+</script>

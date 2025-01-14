@@ -1,0 +1,34 @@
+﻿
+@if (!Request.IsAjaxRequest())
+{
+    Layout = "~/Views/Error/Layout.cshtml";
+}
+
+
+<div class="main ui container" style="height:100vh">
+    <div class="ui icon error  message">
+        <i class="remove icon"></i>
+        <div class="content">
+            <div class="header">
+                NO ACCESS
+            </div>
+            <p id="Mesg">You are Not Authorized or You are not assigned to a Group, Contact Your Administrator For More Details.</p>
+
+        </div>
+    </div>
+    <div class="ui item">
+        <button id="Home" class="ui  right labeled icon button" onclick="window.location.replace('@Url.Action("Index","Home")')">
+            <i class="home icon"></i>
+            <text>Back to Home</text>
+        </button>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+    })
+
+
+</script>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeSalaryReportViewModel>
+
+
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hirdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonthlySalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HourlyRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverTimeRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deductions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Absent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetTotal)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hirdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonthlySalary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HourlyRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OverTimeRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Taxes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deductions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Absent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetTotal)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>

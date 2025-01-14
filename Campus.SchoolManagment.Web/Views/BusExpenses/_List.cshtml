@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BusExpenseViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+    <table  class="ui selectable  single line Striped celled  compact table" id="myTable">
+        <thead>
+         
+            <tr>
+                <th>
+                    @GeneralResource.Actions
+                </th>
+                <th>
+                     
+                    @Html.DisplayNameFor(model => model.SerialNo)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.DocumentNumber)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.BusName)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Place)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.OperationDate)
+                </th>
+
+            
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>
+                    <a href='#' data-toggle="modal" onclick="GetDetail(@item.ID)"><i class="feather icon-eye"> </i> </a>
+
+                    <a href="#" onclick="Edit(@item.ID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+
+
+                    <a href="#" onclick="Delete(@item.ID);" class="editDialog"> <i class="feather red icon-delete"></i></a>
+
+                    @*<a href='@Url.Action("Delete", "AccountEmployeeSalaryItem", new { id = item.ID})'><span class="glyphicon glyphicon-remove"> </span> </a>*@
+                    @*@Ajax.ActionLink(" ", "Delete", "AccountEmployeeSalaryItem", new { @id = item.ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-record", Confirm = "are you sure delete", LoadingElementId = "im", LoadingElementDuration = 1000  }, new { @class = "glyphicon glyphicon-remove" })*@
+
+
+                </td>
+                <td>
+
+                    @Html.DisplayFor(model => item.SerialNo)
+                </td>
+
+                <td>
+
+                    @Html.DisplayFor(model => item.DocumentNumber)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(model => item.BusName)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(model => item.EmployeeName)
+                </td>
+
+                <td>
+
+                    @Html.DisplayFor(model => item.Total)
+                </td>
+
+                <td>
+
+                    @Html.DisplayFor(model => item.Place)
+                </td>
+
+                <td>
+
+                    @item.OperationDate.Value.ToShortDateString()
+                    @*Html.DisplayFor(model => item.OperationDate)*@
+                </td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+<div id="myModal" class=" ui modal " >
+    
+
+
+            <!-- Modal content-->
+         
+                <div class="header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 @GeneralResource.Details 
+                </div>
+                <div id="popupDetail" class=" content">
+
+                </div>
+                <div class="actions">
+                    <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;>@GeneralResource.Close</button>
+
+</div>
+            </div>
+ 
+    
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

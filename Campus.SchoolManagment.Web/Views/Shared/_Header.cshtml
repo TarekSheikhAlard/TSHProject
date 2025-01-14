@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNet.Identity
+@using Campus.School.Management.Logic.Resources
+
+
+
+
+<div class="ui small  top attached menu" style=" margin-top:0px!important; ">
+    <div class="ui-logo">
+
+        <a class="ui logo icon image " href="/">
+            @*<img src="https://media.licdn.com/media-proxy/ext?w=800&h=800&hash=roeymK0PnOGUf9yz70JBzoUb8xk%3D&ora=1%2CaFBCTXdkRmpGL2lvQUFBPQ%2CxAVta5g-0R6jnhodx1Ey9KGTqAGj6E5DQJHUA3L0CHH05IbfPWjqL5SNKrL3pUBDfSQIjQA6f7y1EWHnGo7qeYLtdIl32sO0LML5aRUPbhU4hGUB5sE-Pg" width="110"  />*@
+        </a>
+    </div>
+
+    <div class="right menu">
+
+        @if (Request.IsAuthenticated)
+        {
+            <div class="ui dropdown item">
+                <i class="user blue icon "></i>
+
+                @User.Identity.Name
+                <div class="menu">
+                    @*<div class="item" data-value="Settings">
+                            <i class="world icon"></i>
+                            language
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a class="item">English</a>
+                                <a class="item">Arabic</a>
+                            </div>
+                        </div>*@
+                    @*<div class="item" data-value="Settings">
+                            <i class="cog icon"></i>
+                            <text name="Settings"></text>
+                        </div>*@
+                </div>
+            </div>
+        }
+        else { }
+
+        <div data-id="LangSelect" class="ui dropdown item">
+            <text data-id="Language" name="Language">@GeneralResource.Language</text> <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item" data-value="en">
+                    <i class="sa flag"></i>
+                    @*<a style="color: rgba(0, 0, 0, 0.87) !important;">English</a>*@
+                    @Html.ActionLink("عربي", "ChangeLanguage", "Home", new { lang = "ar-EG", returnUrl = Request.Url.PathAndQuery }, null)
+                </div>
+                <div class="item" data-value="ar">
+                    <i class="us flag"></i>
+                    @*<a style="color: rgba(0, 0, 0, 0.87) !important;">العربية</a>*@
+                    @Html.ActionLink("English", "ChangeLanguage", "Home", new { lang = "En", returnUrl = Request.Url.PathAndQuery }, null)
+                </div>
+            </div>
+        </div>
+
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right " }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="item ">
+                    <div class="ui primary animated button" onclick="javascript:document.getElementById('logoutForm').submit()">
+                        <div class="visible content"><text data-id="SignOut" name="SignOut">@GeneralResource.logoff</text></div>
+                        <div class="hidden content">
+                            <i class="sign out alternate icon"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else { }
+    </div>
+</div>
+
+

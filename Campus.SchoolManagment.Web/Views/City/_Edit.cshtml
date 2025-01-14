@@ -1,0 +1,54 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.CityViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using (Ajax.BeginForm("Edit", "City", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+
+{
+    @Html.AntiForgeryToken()
+    
+    
+        <h4> </h4>
+      
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+     
+       <div class="field">
+            @Html.LabelFor(model => model.CityEn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CityEn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CityEn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       <div class="field">
+            @Html.LabelFor(model => model.CityAr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CityAr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CityAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.NationalityID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.NationalityID, ViewBag.Nationality as SelectList, "Select Country", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NationalityID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+        
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

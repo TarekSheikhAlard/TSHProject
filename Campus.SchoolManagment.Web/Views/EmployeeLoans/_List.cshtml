@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeLoansViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable single line striped celled primary compact table" id="EmployeeLoans-table">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonthlyDeductionAmt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartOfDeduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="details">
+                    @*<a href="#" onclick="Edit(@item.ID);"> <i class="feather icon-edit-1"></i></a>
+                    <a href="#" onclick="Delete(@item.ID);"> <i class="feather red icon-trash"></i></a>*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonthlyDeductionAmt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartOfDeduction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+
+            setTimeout(function () {
+                var table = $('#EmployeeLoans-table').DataTable();
+
+                //$('#EmployeeLoans-table tbody').on('click', 'td.details', function () {
+                //    var tr = $(this).closest('tr');
+                //    var row = table.row(tr);
+
+                //    if (row.child.isShown()) {
+                //        // This row is already open - close it
+                //        row.child.hide();
+                //        tr.removeClass('shown');
+                //    }
+                //    else {
+                //        // Open this row
+                //        row.child(format(row.data())).show();
+                //        tr.addClass('shown');
+                //    }
+                //});
+                //function format(d) {
+                //    // `d` is the original data object for the row
+                //    return '<table class="ui selectable single line striped celled primary compact table" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                //        '<tr>' +
+                //        '<td>Full name:</td>' +
+                //        '<td>hello</td>' +
+                //        '</tr>' +
+                //        '<tr>' +
+                //        '<td>Extension number:</td>' +
+                //        '<td>hello</td>' +
+                //        '</tr>' +
+                //        '<tr>' +
+                //        '<td>Extra info:</td>' +
+                //        '<td>And any further details here (images etc)...</td>' +
+                //        '</tr>' +
+                //        '</table>';
+                //}
+
+            }, 2)
+
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success('Save is a SuccessFully Done')
+            }
+            else if (Msg == 2)
+            {
+                toastr.success('Edit is a SuccessFully Done')
+            }
+            else if (Msg == 3)
+            {
+                toastr.success('Delete is a SuccessFully Done')
+            }
+            else if (Msg == 4) {
+                toastr.error('This Operation id Faild')
+            }
+
+        };
+        InitIndex();
+    });
+</script>

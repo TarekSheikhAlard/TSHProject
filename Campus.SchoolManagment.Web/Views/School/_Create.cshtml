@@ -1,0 +1,308 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.SchoolViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-group ">
+        @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="uploadFile" disabled="disabled" style="width:250px;" />
+
+            <label for="file_upload" class="btn btn-primary" style="border-radius:8px;width:100px;"><span class="glyphicon glyphicon-arrow-up"></span>  @GeneralResource.upload</label>
+            <input id="file_upload" style="visibility:hidden;" type="file" name="file_upload" required>
+            <p id="demo"></p>
+            <img id="display" src="#" alt="" style="height:50px; width:75px;" />
+        </div>
+    </div>
+
+}
+
+@using (Ajax.BeginForm("Create", "School", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(c => c.SchoolID)
+    @Html.HiddenFor(c => c.IsNew)
+
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.SchoolNameEn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SchoolNameEn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SchoolNameEn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.CompanyID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.SchoolNameAr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SchoolNameAr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SchoolNameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.CityID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownList("CityID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <p id="EmailDiv"></p>
+                </div>
+            </div>*@
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                </div>
+
+                   <div class="field">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="field">
+            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.SchSuperVision, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SchSuperVision, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SchSuperVision, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.LicenseNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.LicenseNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LicenseNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Facebook, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Facebook, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.whatsApp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.whatsApp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.whatsApp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.SmsSender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SmsSender, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SmsSender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="actions">
+        <button type="submit" id="Save" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+
+}
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script>
+    $(function () {
+
+        $("input[name='Location']").on("click",function () {
+
+            $(".place.picker").modal({
+                  allowMultiple: true
+
+            }) .modal('show');
+
+        })
+
+        bindMapFeatures("map",$("input[name='Location']"))
+    })
+        document.getElementById("file_upload").onchange = function () {
+
+            document.getElementById("uploadFile").value = this.value;
+            document.getElementById("display").src = window.URL.createObjectURL(this.files[0]);
+
+        };
+
+        $("#Save").click(function (event) {
+            debugger;
+
+            var inpObj = $("#file_upload").get(0).files;
+            if (inpObj.length == 0) {
+                $("#demo").html("<p style='color:red'>@GeneralResource.ImageRequire</p>");
+
+                event.preventDefault();
+
+            }
+            else {
+                $("#demo").html("");
+                $(this).isDefaultPrevented();
+            }
+
+        });
+
+
+            $("#file_upload").change(function ()
+            {
+                $("#demo").html("");
+
+                var fileData = new FormData();
+
+                var img = $("#file_upload").get(0).files;
+
+                debugger;
+                fileData.append("ImageFile", img[0]);
+                $.ajax({
+                    type: "Post",
+                    url: '/School/AddImage/',
+                    data: fileData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) { }
+                });
+
+
+            });
+            @*$("#Email").blur(function (e) {
+
+        $.ajax({
+            url: "/SchoolUser/CheckEmail/",
+            type: "POST",
+            data: { Email: $('#Email').val() },
+            success: function (response) {
+                var target = e.target
+                if (response == 1) {
+                     $("#EmailDiv").html("<p style='color:red'>@GeneralResource.toastrEmailExist</p>");
+
+                }
+                else {
+                    $("#EmailDiv").html("");
+
+                }
+            }
+        });
+    });*@
+</script>
+
+@**@

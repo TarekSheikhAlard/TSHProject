@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.IncomeStatementViewModel>
+    <link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+@{
+
+    Decimal TotalOperatingExp = 0;
+    Decimal TotalNonOperatingExp = 0;
+    Decimal TotalRevenue = 0;
+    Decimal GrossProfit = 0;
+    Decimal NetIncome = 0;
+    int currentAccount = 0;
+    //Decimal Total = 0;
+
+}   
+
+<table >
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            if (item.AccountTreeID == 11)
+            {
+                TotalRevenue = item.Amount;
+            }
+            if (item.AccountTreeID == 12)
+            {
+                TotalOperatingExp = item.Amount;
+
+                <tr>
+                    <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red; border-bottom: 3px double red;"><b>Total Revenue</b></td>
+                    <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red; border-bottom: 3px double red;"><b>@TotalRevenue</b></td>
+                </tr>
+
+            }
+            if (item.AccountTreeID == 13)
+            {
+                TotalNonOperatingExp = item.Amount;
+                GrossProfit = TotalRevenue - TotalOperatingExp;
+                NetIncome = GrossProfit - TotalNonOperatingExp;
+                <tr>
+                    <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>Total Cost Sales (Operating Expenses)</b></td>
+                    <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>@TotalOperatingExp</b></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                        <b>Gross Profit</b>
+                    </td>
+                    <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                        <b>
+                            @GrossProfit
+                        </b>
+                    </td>
+                </tr>
+            }
+
+
+
+            <tr class="level-@item.AccountTreeLevel">
+
+                <td>
+                    @if (item.AccountTreeLevel < 4)
+                    {
+                        <b>@Html.DisplayFor(modelItem => item.AccountName)</b>
+
+                    }
+                    else
+                    {
+
+                        @Html.DisplayFor(modelItem => item.AccountName)
+                    }
+
+
+                </td>
+                <td>
+                    @if (item.AccountTreeLevel >= 4)
+                    {
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    }
+                </td>
+
+            </tr>
+
+        }
+        <tr>
+            <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>Total Expenses</b></td>
+            <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>@TotalNonOperatingExp</b></td>
+        </tr>
+        <tr>
+            <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                <b>Net Income</b>
+            </td>
+            <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                <b>
+                    @NetIncome SAR
+                </b>
+            </td>
+        </tr>
+
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>
+

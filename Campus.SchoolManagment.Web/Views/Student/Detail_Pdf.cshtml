@@ -1,0 +1,434 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.StudentViewModel
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+
+
+
+<table>
+    <thead class="">
+        <tr>
+            <th colspan="2">Student Details </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.StudentAcdID)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.StudentAcdID)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.YearName)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.YearName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.GradeName)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.GradeName)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.NameEn)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.NameEn)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.ArabicName)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.ArabicName)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.AdmDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.AdmDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.BirthDate)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.BirthPlace)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.BirthPlace)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Address)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Address)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Sex)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Sex)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.IqamaNo)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.IqamaNo)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.IqamaStartDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.IqamaStartDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.IqamaEndDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.IqamaEndDate)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.PassportNo)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.PassportNo)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.PassportStartDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.PassportStartDate)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.PassEndDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.PassEndDate)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Mobile)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Tel)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Tel)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.ParentJob)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.ParentJob)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.ParentTell)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.ParentTell)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.ParentAddress)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.ParentAddress)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Requirments)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Requirments)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Orignalfees)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Orignalfees)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduShcool1)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduShcool1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduShcool2)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduShcool2)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduCity1)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduCity1)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduCity2)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduCity2)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduDateFrom1)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduDateFrom1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduDateFrom2)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduDateFrom2)
+            </td>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduFull1)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduFull1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.LastEduFull2)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.LastEduFull2)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.PersonStm)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.PersonStm)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Refrences)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Refrences)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Parentmobile)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Parentmobile)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.ParentMail)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.ParentMail)
+
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.IqamaPlace)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.IqamaPlace)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.IsArchives)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.IsArchives)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.PrevSchool)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.PrevSchool)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.ParentEqmEndDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.ParentEqmEndDate)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.GraduateDate)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.GraduateDate)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.PrevSchAr)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.PrevSchAr)
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.NationalityEn)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.NationalityEn)
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Mail)
+                : </b>
+
+
+                @Html.DisplayFor(model => model.Mail)
+            </td>
+        </tr>
+
+    </tbody>
+</table>

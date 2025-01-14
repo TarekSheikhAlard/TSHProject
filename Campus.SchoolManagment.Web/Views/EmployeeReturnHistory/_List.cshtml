@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeReturnHistoryViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable single line striped celled primary compact table" id="EmployeeReturnList-table">
+    <thead>
+        <tr>
+            <th> @GeneralResource.Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedbyID)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> <a href="#" onclick="Delete(@item.ID);"> <i class="feather red icon-trash"></i></a></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedbyID)
+            </td>             
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+
+
+    $(function () {
+
+        setTimeout(function () {
+            var table = $('#EmployeeReturnList-table').DataTable();
+        },0);
+    })
+</script>

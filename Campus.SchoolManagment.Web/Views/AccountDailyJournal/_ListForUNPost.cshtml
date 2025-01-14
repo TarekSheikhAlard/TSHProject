@@ -1,0 +1,145 @@
+﻿
+
+@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+@using (Ajax.BeginForm("ApproveUNpost", "AccountDailyJournal",new  { DateTo= ViewBag.DateTo , DateFrom = ViewBag.DateFrom }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record" }))
+
+{
+    @*<input id="DateTo" type="hidden" value="@ViewBag.DateTo" />
+    <input id="DateFrom" type="hidden" value="@ViewBag.DateFrom" />*@
+
+    <table class="ui selectable  single line striped celled  compact table" id="myTable">
+        <thead>
+            <tr class="">
+
+                <th>@GeneralResource.Details</th>
+
+
+                <th>
+
+                    <input type="checkbox" name="check-all" id="check-all" />
+                    @GeneralResource.unpost
+                </th>
+
+                <th>
+                    @DailyJornal.Serial_No
+
+                </th>
+
+               
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Credit)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Debit)
+                </th>
+
+
+
+                <th>
+                    @DailyJornal.DailyJournal_Date
+
+                </th>
+                <th >
+
+                        @Html.DisplayNameFor(model => model.Note)
+                    </th>
+
+             
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+
+
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href='#' data-toggle="modal" onclick="GetDetail(@item.DailyJournalID)"><i class="feather icon-eye"> </i> </a>
+                    
+                        <a href="#" onclick="DownloadPdfDetail(@item.DailyJournalID,this);" title="@GeneralResource.DownloadPdf" class=""> <i class="feather icon-download"></i></a>
+                    
+                    </td>
+
+
+
+                    <td>
+
+                        <input type="checkbox" name="ids" value="@item.DailyJournalID" />
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(model => item.SerialNo)
+                    </td>
+
+                  
+                    <td>
+
+                        @Html.DisplayFor(model => item.Credit)
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(model => item.Debit)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(model => item.DailyJournalDate)
+                    </td>
+
+                    <td >
+                            @Html.DisplayFor(model => item.Note)
+                        </td>
+                   
+                    <td>
+
+                        @Html.DisplayFor(model => item.Description)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <input type="submit" value="@GeneralResource.unpost" class="ui primary button" />
+}
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+        $('#check-all').click(function () {
+            var $this = $(this);
+            if ($this.is(':checked')) {
+                $("input:checkbox").attr('checked', true);
+            }
+            else {
+                $("input:checkbox").attr('checked', false);
+            }
+
+        });
+
+    });
+
+</script>
+
+
+

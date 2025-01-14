@@ -1,0 +1,104 @@
+﻿<div class="ui grid ">
+
+
+    <div class=" three wide column ">
+
+        <div id="payrollsetup" class="ui vertical steps">
+            <a class=" active step" data-tab="first">
+                <div class="content">
+                    <div class="title">Benifits</div>
+                    <div class="description">Add Benifits that your Company Offers </div>
+                </div>
+            </a>
+            <a class="  step" data-tab="second">
+                <div class="content">
+                    <div class="title">Deductions</div>
+                    <div class="description">Add Company's Deduction Policy</div>
+                </div>
+            </a>
+            <a class=" step" data-tab="third">
+                <div class="content">
+                    <div class="title">Taxes</div>
+                    <div class="description">Add Taxes on the employee</div>
+                </div>
+            </a>
+            <a class=" step" data-tab="fourth">
+                <div class="content">
+                    <div class="title">Gov Requirements </div>
+                    <div class="description">Add Gov Requirements </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="thirteen wide column">
+        <div class="ui  tab active segment" data-tab="first">
+            @{Html.RenderAction("Benefits");}
+        </div>
+        <div class="ui  tab  segment" style="margin-top: 0" data-tab="second">
+            @{Html.RenderAction("Deductions");}
+        </div>
+        <div class="ui tab segment" style="margin-top: 0" data-tab="third">
+            @{Html.RenderAction("Taxes");}
+        </div>
+        <div class="ui tab segment" style="margin-top: 0" data-tab="fourth">
+            @{Html.RenderAction("Gov");}
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        $('#payrollsetup.steps .step').tab();
+
+    })
+
+</script>
+<script>
+    addPayrollSetup = function (el) {
+        $el = $(el);
+        var type = $el.attr("data-create")
+        $.ajax({
+            type: "Get",
+            url: '/PayrollSetup/Create/'+type,
+            success: function (response) {
+                $('#divForUpdate').empty();
+                $('#divForAdd').html(response);
+                $('#Add-Model').modal('show');
+
+            }
+        });
+
+
+    }
+
+ function Edit(id) {
+
+    $.ajax({
+        type: "Get",
+        url: '/PayrollSetup/Edit/' + id,
+        success: function (response) {
+            $('#divForAdd').empty();
+            $('#divForUpdate').html(response);
+            $('#Edit-Model').modal('show');
+
+        }
+    });
+};
+
+
+function Delete(id) {
+
+    $.ajax({
+        type: "Get",
+        url: '/PayrollSetup/Delete/' + id,
+        success: function (response) {
+            $('#divForDelete').html(response);
+            $('#Delete-Model').modal('show');
+        }
+    });
+};
+
+
+</script>

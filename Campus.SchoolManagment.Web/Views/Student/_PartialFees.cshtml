@@ -1,0 +1,577 @@
+﻿
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentFeesViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+@Html.AntiForgeryToken()
+
+@Html.HiddenFor(model => model.ID)
+
+@Html.HiddenFor(model => model.StudentConfigrationID)
+
+    
+
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<!-- payment section readonly  -->
+        <div class="ui  segment ">
+            <h4 class="top attached header">@GeneralResource.TotalFees</h4>
+            <hr />
+            <div class="text container">
+                <div class="ui small paymentDetails form">
+                   
+                    <div class=" four fields">
+                        <div class=" field">
+                            @Html.LabelFor(model => model.totalBeforeTax, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.totalBeforeTax, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.totalBeforeTax, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class=" field">
+                            @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class=" field">
+                            @Html.LabelFor(model => model.PaidAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.PaidAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class=" field">
+
+                            @Html.LabelFor(model => model.remainderAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.remainderAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.remainderAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                  
+                </div>
+             </div>
+            </div>
+
+
+        @if (Model.AccStudentFee.Count == 0 || Model.AccStudentFee.OrderBy(x => x.ID).LastOrDefault().IsPaid == false)
+        {
+            using (Ajax.BeginForm("CreateFees", "Student", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divgrid", OnSuccess = "onSuccessFeePayment()",OnBegin="onBeginFeePayment()" },new { @class="ui payment form"}))
+            {
+
+                @Html.HiddenFor(model => model.StudentConfigrationID)
+                @Html.HiddenFor(model => model.StudRefID)
+                @Html.HiddenFor(model => model.GradeID)
+                @Html.HiddenFor(model => model.YearID)
+                @Html.HiddenFor(model=>model.TotalAmount)
+           <div class="ui blue  segment">
+            <h4 class="top attached header">  @GeneralResource.Installment</h4>
+            <hr />
+
+            <div class="three fields">
+                <div class="field">
+                    @Html.LabelFor(model => model.Employee_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.Employee_ID, ViewBag.employee as SelectList, "Select", htmlAttributes: new { @class = "ui search selection dropdown" })
+                        @Html.ValidationMessageFor(model => model.Employee_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.PaymentType, new SelectList(new List<Object>
+                       {
+                       new { value = 1, text = "Credit"  },
+                       new { value = 2, text = "Cash"}}, "value", "text"), "Select", new { @class = "ui search selection dropdown" })
+                        @Html.ValidationMessageFor(model => model.PaymentType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="field">
+                    @Html.LabelFor(model => model.PaymentWay, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.DropDownListFor(model => model.PaymentWay, new SelectList(new List<Object>
+                   {
+                   new { value = 1, text = "monetary"  },
+                   new { value = 2, text = "visa"}, new { value = 3, text = "bank" },new {value=4,text="Cheque" } }, "value", "text"), "Select", new { @class = "ui search selection dropdown" })
+
+                    @Html.ValidationMessageFor(model => model.PaymentWay, "", new { @class = "text-danger" })
+
+                </div>
+
+              
+
+            </div>
+            <div class="three fields">
+                <div class="field">
+                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field">
+
+                    @Html.LabelFor(model => model.docementNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.docementNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.docementNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="field">
+
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+          
+            <div class="three fields">
+                <div class="field">
+
+                    @Html.LabelFor(model => model.BankCurrencyID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.BankCurrencyID, ViewBag.Currency as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BankCurrencyID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="field">
+
+                    @Html.LabelFor(model => model.CostCenterID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.CostCenterID, ViewBag.CostCenter as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CostCenterID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="field">
+                    @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="ui input">
+                        @Html.EditorFor(model => model.OperationDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                        @Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="two fields">
+                <div id="Treasurydiv" class="field">
+
+
+                    @Html.LabelFor(model => model.TreasuryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.TreasuryID, ViewBag.Treasury as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TreasuryID, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div id="fromdiv" class="field" onclick="SearchAccount1()">
+
+                    @Html.LabelFor(model => model.fromAccount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.AccountNameEN1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.HiddenFor(model => model.fromAccount)
+                        @Html.ValidationMessageFor(model => model.fromAccount, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="field" onclick="SearchAccount2()">
+
+                    @Html.LabelFor(model => model.AccountTreeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.AccountNameEN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.HiddenFor(model => model.AccountTreeID)
+                        @Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+
+                    </div>
+
+                </div>
+            </div>
+           
+              
+            <div id="ChequeDiv">
+                <div class="four fields">
+
+
+                    <div class="field">
+
+                        @Html.LabelFor(model => model.ChequeDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ChequeDate, new { htmlAttributes = new { @class = "form-control form-control-inline date-picker" } })
+                            @Html.ValidationMessageFor(model => model.ChequeDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="field">
+
+                        @Html.LabelFor(model => model.collectionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.collectionDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.collectionDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="field">
+
+                        @Html.LabelFor(model => model.BankBranchID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.BankBranchID, ViewBag.BranchList as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BankBranchID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="field">
+                        @Html.LabelFor(model => model.isCollected, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+
+                            @Html.CheckBoxFor(model => model.isCollected)
+                            @Html.ValidationMessageFor(model => model.isCollected, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+     
+
+                <div id="bankSatatement" class="field">
+
+
+                    @Html.LabelFor(model => model.bankStatement, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.bankStatement, new { htmlAttributes = new { @class = "form-control " } })
+                        @Html.ValidationMessageFor(model => model.bankStatement, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+
+            <div style="text-align:center">
+                <button type="submit" class="ui primary button " style="width:200px" id="Save1">@GeneralResource.Save</button>
+            </div>
+            }
+         }
+
+            <br />
+            <div id="divgrid" class="panel panel-default">
+                @if (Model.AccStudentFee.Count > 0)
+                {
+
+                    @Html.Partial("_PartialGrid", Model)
+
+                }
+            </div>
+
+
+            @Html.Hidden("currencyfactor")
+
+            <script src="~/Content/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+            <script>
+
+
+                function Init() {
+                    $('.date-picker').datepicker({
+                        format: 'yyyy/mm/dd',
+                        endDate: "today",
+                        autoclose: true,
+                        todayHighlight: true
+                    });
+                    $('#bankSatatement').hide();
+                    $('#ChequeDiv').hide();
+                    $('#fromdiv').hide();
+                };
+                Init();
+
+
+            </script>
+
+
+            <script>
+
+
+
+                $('#PaymentWay').change(function () {
+                    if ($('#PaymentWay').val() == 3) {
+                        $('#bankSatatement').show();
+                    }
+                    else {
+                        $('#bankSatatement').hide();
+                    }
+
+                    if ($('#PaymentWay').val() == 4) {
+                        $('#ChequeDiv').show();
+                        $('#fromdiv').show();
+                        $('#Treasurydiv').hide();
+                        //  fromdiv
+                    }
+                    else {
+                        $('#fromdiv').hide();
+                        $('#Treasurydiv').show();
+                        $('#ChequeDiv').hide();
+
+                    }
+
+                });
+
+
+
+            </script>
+
+            <script>
+
+
+                $("#Save1").click(function (event) {
+
+                    var factor = parseFloat($('#currencyfactor').val());
+
+
+                    if ($('#PaymentType').val() == 2) {
+                        if ((parseInt($('#Amount').val()) * factor) > parseInt($('#remainderAmount').val())) {
+                            alert("المبلغ المدفوع يجب ان يساوى اجمالى المتبقى ");
+
+                            event.preventDefault();
+
+                        }
+
+                    }
+                    else if ($('#PaymentType').val() == 1) {
+
+
+                        var x = (parseInt($('#Amount').val()) * factor) + parseInt($('#PaidAmount').val());
+                        var y = parseInt($('#TotalAmount').val());
+                        if (x > y) {
+                            alert(" المبلغ المدفوع يجب ان يساوى اجمالى المتبقى او اقل منه")
+                            event.preventDefault();
+                        }
+
+
+
+                    }
+                    else {
+                        return true;
+                    }
+
+                });
+
+
+            </script>
+
+
+            <script>
+
+                $('#isCollected').click(function () {
+                    var $this = $(this);
+
+                    if ($this.is(':checked')) {
+                        $('#collectionDate').removeAttr("disabled");
+                    }
+                    else {
+                        $('#collectionDate').attr("disabled", "disabled");
+
+
+                        $('#collectionDate').val("");
+
+
+                    }
+                });
+
+            </script>
+
+            <script>
+                $(function () {
+
+                    $('select.dropdown').dropdown();
+                })
+
+                $('#BankCurrencyID').change(function () {
+                    debugger;
+                    $.ajax({
+                        type: "GET",
+                        url: '/BankCurrency/currencyfactor',
+                        data: { BankCurrencyID: $("#BankCurrencyID").val() },
+                        success: function (response) {
+                            $('#currencyfactor').val(response);
+
+                        }
+                    });
+
+                });
+
+
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @*<script>
+
+
+            //$(function () {
+            //    var valid=false;
+            //    $('#Note').hide();
+            //    $('#Note').removeClass("text-danger");
+            //    function checkamount() {
+            //        debugger;
+            //        var total= $('#TotalAmount').val();
+            //        var PaidAmount=0;
+            //        if ($('#PaidAmount').val()!="") {
+            //            var PaidAmount= $('#PaidAmount').val();
+            //        }
+
+
+            //        if ( $('#PaymentType').val()==2 ) {
+            //            if (!(parseInt($('#Amount').val()) == parseInt(total))) {
+
+            //                $("label[for='Note']").show();
+            //                $("label[for='Note']").html("you must enter value equivelant to total")
+            //                $("label[for='Note']").addClass("text-danger");
+            //                valid=false;
+
+            //            }else {
+            //                valid=true;
+            //                $("label[for='Note']").hide();
+            //                $("label[for='Note']").removeClass("text-danger");
+            //            }
+            //        }
+            //        else  if ( $('#PaymentType').val() == 1) {
+            //            if (!((parseInt($('#Amount').val()) + parseInt(PaidAmount)) <= parseInt(total))) {
+            //                valid=false;
+            //                $("label[for='Note']").show();
+            //                $("label[for='Note']").html("you must enter value <= total")
+            //                $("label[for='Note']").addClass("text-danger");
+            //            }else {
+            //                valid=true;
+            //                $("label[for='Note']").hide();
+            //                $("label[for='Note']").removeClass("text-danger");
+            //            }
+            //        }
+            //        else {
+            //            valid=true;
+            //            $("label[for='Note']").hide();
+            //            $("label[for='Note']").removeClass("text-danger");
+            //        }
+            //        if (valid) {
+            //            var paid=parseInt($('#PaidAmount').val()) + (parseInt($('#Amount').val()));
+            //            $('#PaidAmount').val(paid);
+            //        }
+            //        return valid;
+            //    };
+            //    $("#Save").click(function () {
+            //        debugger;
+            //        var formvalid=false;
+            //        if ($('#PaymentType').val() != "" && $('#PaymentWay').val() != ""  && $('#Amount').val() != "" && $('#OperationDate').val() != "" ) {
+            //            if (!($('#PaymentWay').val() == 3 &&  $('#bankStatement').val() == "")) {
+            //                formvalid=true;
+            //            }
+
+            //        }
+
+            //        if (formvalid) {
+
+            //            var model ={
+            //                PaymentType :$('#PaymentType').val(),
+            //                PaymentWay:$('#PaymentWay').val(),
+            //                bankStatement: $('#bankStatement').val(),
+            //                Amount :$('#Amount').val(),
+            //                OperationDate:$('#OperationDate').val(),
+            //                StudAcdID:$('#StudAcdID').val(),
+            //                StudentConfigrationID: $('#StudentConfigrationID').val(),
+            //                TotalAmount: $('#TotalAmount').val(),
+            //                GradeID: $('#GradeID').val(),
+            //                YearID: $('#YearID').val(),
+            //                StudAcdID:S('#StudAcdID').val()
+            //            }
+
+            //            valid=checkamount() ;
+
+            //            if (valid) {
+            //                $("label[for='Note']").hide();
+            //                $("label[for='Note']").removeClass("text-danger");
+            //                $.ajax({
+            //                    type: "Post",
+            //                    url: '/Student/CreateFees',
+            //                    data: { model: model},
+            //                    success: function (data) {
+            //                        debugger;
+            //                        $('#FeeSearch-Model').modal('hide');
+            //                        $('#PaymentType').val("");
+            //                       $('#PaymentWay').val("");
+            //                        $('#bankStatement').val("");
+            //                        $('#Amount').val("");
+            //                       $('#OperationDate').val("");
+            //                    }
+            //                });
+            //            }
+            //        }
+            //        else {
+            //            $("label[for='Note']").show();
+            //            $("label[for='Note']").html("you must enter All data")
+            //            $("label[for='Note']").addClass("text-danger");
+            //        }
+            //    })
+
+            //    $('#bankSatatement').hide();
+            //    $('#PaymentWay').change(function () {
+            //        if ($('#PaymentWay').val() == 3) {
+            //            $('#bankSatatement').show();
+            //        } else {
+            //            $('#bankSatatement').hide();
+            //        }
+            //    });
+            //});
+
+        @*</script>*@
+

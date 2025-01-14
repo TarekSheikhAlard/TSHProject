@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.HRAllowanceEntryViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable single line striped celled primary compact table" id="HREntry-table-@ViewBag.tableid">
+    <thead>
+        <tr>
+            <th> @GeneralResource.Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Allowance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllowanceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CREATED_DATE)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> <a href="#" onclick="DeleteEntry(@item.ID);"> <i class="feather red icon-trash"></i></a></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Allowance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowanceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CREATED_DATE)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>    
+    $(function () {
+        setTimeout(function () {            
+            $("#HREntry-table-@ViewBag.tableid").DataTable();
+
+
+        },2)  
+    })
+</script>

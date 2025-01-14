@@ -1,0 +1,81 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.ClassRoomViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using (Ajax.BeginForm("Edit", "ClassRoom", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+    
+    
+     
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ClassID)
+     
+
+       <div class="field">
+            @Html.LabelFor(model => model.ClassCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ClassCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClassCode, "", new { @class = "text-danger" })
+            </div>
+        @*</div>
+
+       <div class="field">*@
+            @Html.LabelFor(model => model.ClassName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ClassName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClassName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.ClassNameAr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ClassNameAr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClassNameAr, "", new { @class = "text-danger" })
+            </div>
+        @*</div>
+
+       <div class="field">*@
+            @Html.LabelFor(model => model.StudentCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StudentCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StudentCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.ClassLeaderID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.ClassLeaderID, ViewBag.ClassLeader as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ClassLeaderID, "", new { @class = "text-danger" })
+            </div>
+        @*</div>
+
+       <div class="field">*@
+            @Html.LabelFor(model => model.AcademicYearID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.AcademicYearID, ViewBag.AcademicYear as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AcademicYearID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+     
+
+    
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

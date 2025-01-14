@@ -1,0 +1,184 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.PurchaseOrdersViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "InventoryReceivedItems", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="three fields">
+
+    <div class="field">
+        @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "", @readonly = true } })
+            @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Supplier, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Supplier, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.Supplier, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "" })
+        <div class="ui input">
+            @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "date-picker" } })
+            @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+
+
+
+    <div class="ui  blue basic items segment">
+
+        <div class="fields" data-rid="0">
+            <div class="three wide field">
+                <label>Item Number</label>
+                <div class="ui mini item input">
+                    <input type="text" class="itemInput" name="ItemsList[0].ItemBarcodeNo" onpaste="GetItemDetails(this)" onclick="bindItemDropdown(this)" />
+                    <input type="hidden" name="ItemsList[0].ItemId" />
+                </div>
+            </div>
+            <div class="four wide field">
+                <label>Item Description</label>
+                <div class="ui mini input">
+                    <input type="text" name="ItemDesc" readonly />
+
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Qty</label>
+                <div class="ui mini input">
+                    <input type="text" name="ItemsList[0].POQty" />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Unit Name</label>
+
+                <div class="ui mini input">
+                    <select type="text" name="UnitName" readonly></select>
+                </div>
+            </div>
+
+            <div class="two wide field">
+                <label> Unit Price</label>
+                <div class="ui mini input">
+                    <input type="text" name="UnitPrice" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+                <label>Total</label>
+                <div class="ui mini input">
+                    <input type="text" name="Total" />
+                </div>
+            </div>
+        </div>
+
+        <div class="fields" data-rid="1">
+            <div class="three wide field">
+                <div class="ui mini item input">
+                    <input type="text" class="itemInput" name="ItemsList[1].ItemBarcodeNo" onfocus="AddItemsRow(this)" onpaste="GetItemDetails(this)" onclick="bindItemDropdown(this)" />
+                    <input type="hidden" name="ItemsList[1].ItemId" />
+                </div>
+            </div>
+            <div class="four wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="ItemDesc" readonly />
+
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="ItemsList[1].POQty" />
+                </div>
+            </div>
+            <div class="two wide field">
+
+
+                <div class="ui mini input">
+                    <select type="text" name="UnitName" readonly></select>
+                </div>
+            </div>
+
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="UnitPrice" readonly />
+                </div>
+            </div>
+            <div class="two wide field">
+
+                <div class="ui mini input">
+                    <input type="text" name="Total" />
+                </div>
+            </div>
+            <div class=" inline-del">
+                <i class="feather red icon-trash" onclick="delPOItem(this)"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.TotalCredit, htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TotalCredit, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.TotalCredit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Tax, htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tax, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.Tax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+    </div>
+}
+
+
+
+<script>
+
+    $(function () {
+        InitC();
+        $("#PODate").val("");
+    })
+    function InitC() {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        });
+    }
+</script>

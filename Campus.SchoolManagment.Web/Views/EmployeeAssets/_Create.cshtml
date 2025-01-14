@@ -1,0 +1,40 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeAssetsViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "EmployeeAssets", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "list-EmployeeAssets" }, new { @class = "ui small EmployeeAssets form" }))
+
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model=>model.Employee_ID)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+  
+
+    @*<div class="field">
+        @Html.LabelFor(model => model.EmployeeName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+<div class="inline fields">
+    <div class="field">
+        @Html.LabelFor(model => model.AssetName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="ui action input">
+            @Html.EditorFor(model => model.AssetName, new { htmlAttributes = new { @class = "form-control",@onclick="SearchAsset()",@onkeypress="return false;", autocomplete = "off" } })
+            @Html.HiddenFor(model => model.AssetId)
+            @Html.ValidationMessageFor(model => model.AssetId, "", new { @class = "text-danger" })
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Add</button>
+        </div>
+    </div>
+</div>
+    
+
+}
+    

@@ -1,0 +1,533 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.StudentViewModel>
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer;
+
+
+
+<table class="ui selectable  single line striped celled  compact table" id="StudentTable">
+    <thead>
+        <tr class="">
+
+            <th>
+                @GeneralResource.Actions
+            </th>
+
+            <th>
+                Paid Flag
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StudentAcdID)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.YearID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.YearName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.GradeID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.GradeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameEn)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ArabicName)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.className)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.IqamaNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IqamaStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IqamaEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassportNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassportStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mail)
+            </th>
+            @*  <th>
+                     @Html.DisplayNameFor(model => model.ParentJob)
+                 </th>
+                 <th>
+                     @Html.DisplayNameFor(model => model.ParentTell)
+                 </th>
+                 <th>
+                     @Html.DisplayNameFor(model => model.ParentAddress)
+                 </th>
+                 <th>
+                     @Html.DisplayNameFor(model => model.Requirments)
+                 </th>
+                <th>
+                     @Html.DisplayNameFor(model => model.Orignalfees)
+                 </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduShcool1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduShcool2)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduCity1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduCity2)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduDateFrom1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduDateFrom2)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduFull1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastEduFull2)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PersonStm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Refrences)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Parentmobile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ParentMail)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IqamaPlace)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsArchives)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PrevSchool)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ParentEqmEndDate)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.AdmDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GraduateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.password)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Is_Upload)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Is_Update)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PrevSchAr)
+                        </th>
+                       <th>
+                            @Html.DisplayNameFor(model => model.NationalityID)
+                        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.NationalityEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student_Img)
+            </th>
+
+            @*@if (ViewBag.Flage == 1)
+                {
+                    <th>@GeneralResource.Edit</th>
+                    <th>@GeneralResource.Delete</th>
+                }
+                @if (ViewBag.Flage == 2)
+                {
+
+                            <th>@GeneralResource.Configuration</th>
+                }
+                @if (ViewBag.Flage == 3)
+                {
+                    <th>@GeneralResource.StudentFees</th>
+                }*@
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @*@foreach (var item in Model)
+            {*@
+        <tr>
+
+
+            @if (ViewBag.Flage == 1)
+            {
+                <td>
+                    @*<a href="#" onclick="DownloadPdfDetail(@item.ID,this);" title="@GeneralResource.DownloadPdf" class=""> <i class="feather icon-download"></i></a>
+
+
+                        <a href="#" onclick="Configration(@item.StudRefID);"><i class="feather icon-settings"> </i></a>*@
+
+
+
+                </td>
+
+            }
+
+
+            @*@if (ViewBag.Flage == 3)
+                {
+                    <td>
+                        @if (item.StudentConfigCount > 0)
+                            {
+
+                                <a href="#" onclick="FeeSearch(@item.StudRefID);"><i class="feather  icon-credit-card"></i></a>
+                            }
+                    </td>
+                }*@
+
+            <td>
+                @*   @Html.CheckBoxFor(modelItem => item.IsArchives)*@
+            </td>
+            <td>
+                @* @Html.ActionLink(item.StudentAcdID.ToString(), "StudentDetails", "Student", new { id = item.StudentAcdID }, null)*@
+
+                @*@Html.DisplayFor(modelItem => item.StudentAcdID)*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.YearID)
+                </td>*@
+            <td>
+                @* @Html.DisplayFor(modelItem => item.YearName)*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.GradeID)
+                </td>*@
+            <td>
+                @* @Html.DisplayFor(modelItem => item.GradeName)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.NameEn)*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ArabicName)
+                </td>*@
+            <td>
+                @*    @Html.DisplayFor(modelItem => item.BirthDate)*@
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.BirthPlace)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Address)*@
+            </td>
+            <td>
+                @*  @Html.DisplayFor(modelItem => item.Sex)*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.className)
+                </td>*@
+            <td>
+                @* @Html.DisplayFor(modelItem => item.IqamaNo)*@
+            </td>
+            <td>
+                @*  @item.IqamaStartDate*@
+                @*@Html.DisplayFor(modelItem => item.IqamaStartDate)*@
+            </td>
+            <td>
+                @*@item.IqamaEndDate*@
+                @*@Html.DisplayFor(modelItem => item.IqamaEndDate)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.PassportNo)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.PassportStartDate)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.PassEndDate)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Mobile)*@
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Tel)*@
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Mail)*@
+            </td>
+            @* <td>
+                     @Html.DisplayFor(modelItem => item.ParentJob)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.ParentTell)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.ParentAddress)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Requirments)
+                 </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.Orignalfees)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduShcool1)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduShcool2)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduCity1)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduCity2)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduDateFrom1)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduDateFrom2)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduFull1)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.LastEduFull2)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.PersonStm)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Refrences)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Parentmobile)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.ParentMail)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.IqamaPlace)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.IsArchives)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.PrevSchool)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.ParentEqmEndDate)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.AdmDate)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.GraduateDate)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.password)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Is_Upload)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Is_Update)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.PrevSchAr)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.NationalityID)
+                 </td>*@
+            <td>
+                @*@Html.DisplayFor(modelItem => item.NationalityEn)*@
+            </td>
+            <td>
+                @*<img src="@Url.Content(@Statistics.StudentImagesPath+item.Student_Img)" width="60" height="60" />*@
+            </td>
+
+        </tr>
+        @* }*@
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+
+        function InitIndex()
+        {
+          // $('#myTable').DataTable();
+
+         $('#StudentTable').DataTable({
+
+                destroy: true,
+
+                info: true,
+
+                bLengthChange: false,
+
+                sPaginationType: "full_numbers",
+                processing: true,
+
+                serverSide: false,
+
+                filter: false,
+
+                pageLength: 10,
+
+                dom: 'Bfrtip',
+
+                autoWidth: true,
+
+
+                    ajax: {
+
+                        url: "/Student/StudentList/",
+
+                        type: "POST",
+                        data: function (d) {
+
+                            var year = $("select#YearID").val();
+
+                             var gradeID = $("select#GradeID").val();
+
+                            var yearID = year == null || year == undefined ? null : year;
+                            if (year !==""&&gradeID!=="") {
+                                 d.YearID = $("select#YearID").val();
+
+                                d.GradeID = $("select#GradeID").val();
+                                  return d;
+                            }
+
+
+                        },
+                        datatype: "json",
+                        complete: function () {
+                          $('#div-record').removeClass('loading')
+
+                         }
+                    },
+
+                    columns: [
+
+                        {
+                            render: function (data, type, row) {
+                            //console.log(row)
+                  var html=  '<a href="#" onclick="DownloadPdfDetail('+row.ID+',this);" title="Download PDF" class=""> <i class="feather icon-download"></i></a>';
+
+
+
+
+                return html;
+
+            } },
+                        { render: function ( data, type, row ) {
+
+                            return "";
+            } },
+
+                        { "data": "StudentAcdID", "name": "StudentAcdID", "autoWidth": true,render: function ( data, type, row ) {
+
+
+                            return '<a href="student/studentDetails/' +data+'">'+data+' </a>';
+            }  },
+
+                        { "data": "YearName", "name": "YearName", "autoWidth": true },
+
+                        { "data": "GradeName", "name": "GradeName", "autoWidth": true },
+
+
+                         { "data": "NameEn", "name": "NameEn", "autoWidth": true },
+
+                        { "data": "BirthDate", "name": "BirthDate", "autoWidth": true },
+                        { "data": "BirthPlace", "name": "BirthPlace", "autoWidth": true },
+                        { "data": "Address", "name": "Address", "autoWidth": true },
+                        { "data": "Sex", "name": "Sex", "autoWidth": true },
+                        { "data": "IqamaNo", "name": "IqamaNo", "autoWidth": true },
+                        { "data": "IqamaStartDate", "name": "IqamaStartDate", "autoWidth": true },
+                        { "data": "IqamaEndDate", "name": "IqamaEndDate", "autoWidth": true },
+                        { "data": "PassportStartDate", "name": "PassportStartDate", "autoWidth": true },
+                        { "data": "PassEndDate", "name": "PassEndDate", "autoWidth": true },
+                        { "data": "Mobile", "name": "Mobile", "autoWidth": true },
+                        { "data": "Tel", "name": "Tel", "autoWidth": true },
+                        { "data": "Mail", "name": "Mail", "autoWidth": true },
+                        { "data": "NationalityEn", "name": "NationalityEn", "autoWidth": true },
+                         { render: function ( data, type, row ) {
+                // Combine the first and last names into a single table field
+                            return "";
+            } },
+                        { render: function ( data, type, row ) {
+                // Combine the first and last names into a single table field
+                            return "";
+            } },
+
+
+
+
+
+
+                    ]
+
+
+
+            });
+
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+            else if (Msg == 5) {
+                toastr.error("@GeneralResource.toastrEmailExist")
+            }
+        };
+
+        InitIndex();
+    });
+</script>

@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.UserPermissionViewModel>
+@using Campus.School.Management.Logic.BusinessLayer;
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+            <th>
+
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.SchoolNameAr)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateAct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EditAct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeleteAct)
+            </th>
+            @*<th>@GeneralResource.Edit</th>*@
+            <th>@GeneralResource.Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.SchoolNameAr)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageName)
+                </td>
+                <td>
+
+                    @if (item.CreateAct)
+                    {
+                        <i class='glyphicon glyphicon-ok'></i>
+
+                    }
+                    else
+                    {
+                        <i class='glyphicon glyphicon-ban-circle' style="color:brown"></i>
+                    }
+
+                </td>
+                <td>
+
+                    @if (item.EditAct)
+                    {
+                        <i class='glyphicon glyphicon-ok'></i>
+
+                    }
+                    else
+                    {
+                        <i class='glyphicon glyphicon-ban-circle' style="color:brown"></i>
+                    }
+
+                </td>
+
+                <td>
+
+                    @if (item.DeleteAct)
+                    {
+                        <i class='glyphicon glyphicon-ok'></i>
+
+                    }
+                    else
+                    {
+                        <i class='glyphicon glyphicon-ban-circle' style="color:brown"></i>
+                    }
+
+                </td>
+
+
+
+                @*<td>
+                    <a href="#" onclick="Edit(@item.ID);" class="editDialog"> <i class="ui edit icon"></i></a>
+
+                </td>*@
+                <td>
+                    <a href="#" onclick="Delete(@item.ID);" class="editDialog"> <i class="ui delete red icon"></i></a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1) {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2) {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3) {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

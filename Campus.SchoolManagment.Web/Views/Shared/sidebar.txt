@@ -1,0 +1,669 @@
+﻿   <div class="page-sidebar-wrapper">
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <div class="page-sidebar md-shadow-z-2-i  navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="300">
+
+                    @*start Home menu*@
+                    <li class="start @Html.IsActive("Home", "Index")">
+                        <a class="menulink" href='@Url.Action("Index", "Home" )'>
+                            <i class="home icon"></i>
+                            <span class="title">  @GeneralResource.Home  </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                    </li>
+                    @* End Home menu*@
+
+
+                    @*start Generaldefinitions menu*@
+                    <li class="@Html.IsActive("Company", "Index")
+                                     @Html.IsActive("School", "Index")
+                                     @Html.IsActive("City", "Index")
+                                     @Html.IsActive("Nationality", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="list icon"></i>
+                            <span class="title"> @GeneralResource.Generaldefinitions </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("Company", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Company" )'>
+                                    <i class="building outline icon"></i>
+                                    @GeneralResource.Company
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("School", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "School" )'>
+                                    <i class="university icon"></i>
+                                    @GeneralResource.School
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("City", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "City" )'>
+                                    <i class="map signs icon"></i>
+                                    @GeneralResource.City
+                                </a>
+                            </li>
+
+                            <li class="@Html.IsActive("Nationality", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Nationality" )'>
+                                    <i class="globe icon"></i>
+                                    @GeneralResource.Nationality
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    @* End Generaldefinitions menu*@
+
+
+
+                    @*start AcademicConfigration menu*@
+                    <li class="@Html.IsActive("Stage", "Index")
+                                     @Html.IsActive("StudyYear", "Index")
+                                     @Html.IsActive("AcademicYear", "Index")
+                                     @Html.IsActive("Semster", "Index")
+                                     @Html.IsActive("ClassRoom", "Index")
+                                     @Html.IsActive("Qurter", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="calendar alternate outline icon"></i>
+                            <span class="title"> @GeneralResource.AcademicConfigration </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("Stage", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Stage" )'>
+
+                                    <i class="hockey puck icon"></i>
+                                    @GeneralResource.Stage
+                                </a>
+                            </li>
+
+                            <li class="@Html.IsActive("StudyYear", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "StudyYear" )'>
+
+                                    <i class="graduation cap icon"></i>
+                                    @GeneralResource.StudyYear
+                                </a>
+                            </li>
+
+                            <li class="@Html.IsActive("AcademicYear", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AcademicYear" )'>
+
+                                    <i class="tasks icon"></i>
+                                    @GeneralResource.AcademicYearName
+                                </a>
+                            </li>
+
+                            <li class="@Html.IsActive("Semster", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Semster" )'>
+
+                                    <i class="book icon"></i>
+                                    @GeneralResource.Semester
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Qurter", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Qurter" )'>
+
+                                    <i class="bookmark icon"></i>
+                                    @GeneralResource.Qurter
+                                </a>
+                            </li>
+
+                            <li class="@Html.IsActive("ClassRoom", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "ClassRoom" )'>
+
+                                    <i class="calendar outline icon"></i>
+                                    @GeneralResource.ClassRoom
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @* End AcademicConfigration menu*@
+
+
+
+                    @*start generalaccounting menu*@
+                    <li class="@Html.IsActive("AccountTree", "Index")
+                                     @Html.IsActive("PhysicalYear", "Index")
+                                     @Html.IsActive("AccountTreasury", "Index")
+                                     @Html.IsActive("AccountCostCenter", "Index")
+                                     @Html.IsActive("AccountFirstBalance", "Index")
+                                     @Html.IsActive("AccountPayableCash", "Index")
+                                     @Html.IsActive("AccountReciveCash", "Index")
+                                     @Html.IsActive("AccountchequePayable", "Index")
+                                     @Html.IsActive("Accountchequesreceivable", "Index")
+                                     @Html.IsActive("AccountNotespayable", "Index")
+                                     @Html.IsActive("AccountNotesReceivable", "Index")
+                                     @Html.IsActive("AccountDailyJournal", "Index")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalPost")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalUNPost")
+                                     @Html.IsActive("AccountDailyJournal", "LedgerIndex")
+                                     @Html.IsActive("AccountDailyJournal", "subsidiaryledger")
+                                          @Html.IsActive("Reviews", "DepreciationIndex")
+                                          @Html.IsActive("TrialBalance", "Index")
+                                          @Html.IsActive("Reviews", "IncomeStatementIndex")
+                                          @Html.IsActive("Reviews", "GeneralbudgetIndex")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="money bill alternate outline icon"></i>
+                            <span class="title">@GeneralResource.generalaccounting</span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("AccountTree", "Index")
+                                     @Html.IsActive("PhysicalYear", "Index")
+                                     @Html.IsActive("AccountTreasury", "Index")
+                                     @Html.IsActive("AccountCostCenter", "Index")
+                                     @Html.IsActive("AccountFirstBalance", "Index")">
+                                <a class="menulink" href="javascript:;">
+                                    <i class="money bill alternate outline icon"></i> @GeneralResource.AccountingConfigration
+                                </a>
+                                @* ------Accounting Configration  Links ------- *@
+                                <ul class="sub-menu">
+                                    <li class="@Html.IsActive("AccountTree", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountTree" )'>
+                                            <i class="chart line     icon  "></i>
+                                            <span class="title">@GeneralResource.AccountTree  </span>
+                                            @*<span class="arrow "></span>*@
+                                        </a>
+                                    </li>
+
+
+                                    <li class="@Html.IsActive("PhysicalYear", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "PhysicalYear" )'>
+
+                                            <i class="calendar alternate outline icon"></i>
+                                            @GeneralResource.PhysicalYear
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountCostCenter", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountCostCenter" )'>
+
+
+                                            <i class="circle icon"></i>
+
+                                            @GeneralResource.CostCenter
+                                        </a>
+                                    </li>
+
+                                    <li class="@Html.IsActive("AccountTreasury", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountTreasury" )'>
+                                            <i class="box icon"></i>
+                                            @GeneralResource.Treasury
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountFirstBalance", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountFirstBalance" )'>
+                                            <i class="calculator icon"></i>
+                                            @GeneralResource.FirstBalance
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+
+
+                            @* ------Bonds  Links ------- *@
+                            <li class="@Html.IsActive("AccountPayableCash", "Index")
+                                     @Html.IsActive("AccountReciveCash", "Index")
+                                     @Html.IsActive("AccountchequePayable", "Index")
+                                     @Html.IsActive("Accountchequesreceivable", "Index")
+                                     @Html.IsActive("AccountNotespayable", "Index")
+                                     @Html.IsActive("AccountNotesReceivable", "Index")">
+                                <a class="menulink" href="javascript:;">
+                                    <i class="certificate icon"></i> @GeneralResource.Bonds
+
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="@Html.IsActive("AccountPayableCash", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountPayableCash" )'>
+                                            <i class="money bill alternate icon"></i>
+                                            @GeneralResource.CashPayable
+                                        </a>
+                                    </li>
+
+                                    <li class="@Html.IsActive("AccountReciveCash", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountReciveCash" )'>
+                                            <i class="money bill alternate outline  icon"></i>
+                                            @GeneralResource.ReciveCash
+                                        </a>
+                                    </li>
+
+                                    <li class="@Html.IsActive("AccountchequePayable", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountchequePayable" )'>
+                                            <i class="window maximize icon"></i>
+                                            @GeneralResource.chequesPayable
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("Accountchequesreceivable", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "Accountchequesreceivable" )'>
+                                            <i class="window maximize outline icon"></i>
+                                            @GeneralResource.chequesReceivable
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountNotespayable", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountNotespayable" )'>
+                                            <i class="sticky note icon"></i>
+                                            @GeneralResource.Notespayable
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountNotesReceivable", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "AccountNotesReceivable")'>
+                                            <i class="sticky note outline icon"></i>
+                                            @GeneralResource.NotesReceivable
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+
+
+
+                            @* ------DailyJournal  Links ------- *@
+                            <li class="@Html.IsActive("AccountDailyJournal", "Index")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalPost")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalUNPost")">
+                                <a class="menulink" href="javascript:;">
+                                    <i class="list alternate outline icon"></i>@GeneralResource.DailyJournal
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="@Html.IsActive("AccountDailyJournal", "Index")">
+
+                                        <a class="menulink" href='@Url.Action("Index", "AccountDailyJournal" )'>
+                                            <i class="list alternate icon"></i>
+                                            <span class="title">@GeneralResource.DailyJournal  </span>
+
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountDailyJournal", "DailyJournalPost")">
+                                        <a class="menulink" href='@Url.Action("DailyJournalPost", "AccountDailyJournal" )'>
+                                            <i class="reply icon"></i>
+                                            <span class="title">@GeneralResource.post  </span>
+
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountDailyJournal", "DailyJournalUNPost")">
+                                        <a class="menulink" href='@Url.Action("DailyJournalUNPost", "AccountDailyJournal" )'>
+                                            <i class="share icon"></i>
+                                            <span class="title">@GeneralResource.unpost  </span>
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+                            @* ------Reviews  Links ------- *@
+                            <li class="   @Html.IsActive("AccountDailyJournal", "LedgerIndex")
+                                          @Html.IsActive("AccountDailyJournal", "subsidiaryledger")
+                                          @Html.IsActive("Reviews", "DepreciationIndex")
+                                          @Html.IsActive("TrialBalance", "Index")
+                                          @Html.IsActive("Reviews", "IncomeStatementIndex")
+                                          @Html.IsActive("Reviews", "GeneralbudgetIndex")">
+                                <a class="menulink" href="javascript:;">
+                                    <i class="eye icon"></i> @GeneralResource.reviews
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="@Html.IsActive("AccountDailyJournal", "LedgerIndex")">
+                                        <a class="menulink" href='@Url.Action("LedgerIndex", "AccountDailyJournal" )'>
+                                            <i class="clipboard icon"></i>
+                                            <span class="title">@GeneralResource.Ledger  </span>
+
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("AccountDailyJournal", "subsidiaryledger")">
+                                        <a class="menulink" href='@Url.Action("subsidiaryledger", "AccountDailyJournal" )'>
+                                            <i class="clipboard outline icon"></i>
+                                            <span class="title">@GeneralResource.subsidiaryledger  </span>
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("Reviews", "DepreciationIndex")">
+                                        <a class="menulink" href='@Url.Action("DepreciationIndex", "Reviews")'>
+                                            <i class="eraser icon"></i>
+                                            <span class="title"> @GeneralResource.depreciation  </span>
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("TrialBalance", "Index")">
+                                        <a class="menulink" href='@Url.Action("Index", "TrialBalance" )'>
+                                            <i class="columns icon"></i>
+                                            <span class="title">@GeneralResource.TrialBalance  </span>
+
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("Reviews", "IncomeStatementIndex")">
+
+                                        <a class="menulink" href='@Url.Action("IncomeStatementIndex", "Reviews")'>
+                                            <i class="file alternate outline icon"></i>
+                                            <span class="title">@GeneralResource.IncomeStatement  </span>
+
+                                        </a>
+                                    </li>
+                                    <li class="@Html.IsActive("Reviews", "GeneralbudgetIndex")">
+                                        <a class="menulink" href='@Url.Action("GeneralbudgetIndex", "Reviews")'>
+                                            <i class="paste icon"></i>
+                                            <span class="title"> @GeneralResource.Generalbudget  </span>
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    @* End generalaccounting menu*@
+
+
+                    @*start Banks menu*@
+                    <li class="@Html.IsActive("BankCurrency", "Index")
+                                          @Html.IsActive("Bank", "Index")
+                                          @Html.IsActive("BankBranch", "Index")
+                                          @Html.IsActive("BranchAccount", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="building icon"></i>
+                            <span class="title">@GeneralResource.banks  </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("BankCurrency", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "BankCurrency" )'>
+                                    <i class="dollar sign icon"></i>
+                                    @GeneralResource.Bankcurrency
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Bank", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Bank" )'>
+                                    <i class="building outline icon"></i>
+                                    @GeneralResource.Bank
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("BankBranch", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "BankBranch" )'>
+                                    <i class="university icon "></i>
+                                    @GeneralResource.BankBranch
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("BranchAccount", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "BranchAccount" )'>
+                                    <i class="chart area icon"></i>
+                                    @GeneralResource.BranchAccount
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+
+                    @* End Banks menu*@
+
+
+
+                    @*start Employee menu*@
+                    <li class="@Html.IsActive("Department", "Index")
+                                          @Html.IsActive("Jobs", "Index")
+                                          @Html.IsActive("Employee", "Index")
+                                          @Html.IsActive("AccountSalaryItem", "Index")
+                                          @Html.IsActive("AccountEmployeeSalaryItem", "Index")
+                                          @Html.IsActive("AccountEmployeesSalary", "Index")
+                                          @Html.IsActive("AccountEmployeesMonthlySalary", "Index")
+                                          @Html.IsActive("AccountEmployeesSalary", "Index")
+                                          @Html.IsActive("AccountEmployeesMonthlySalary", "Index")
+                                          @Html.IsActive("Employee", "PettycashIndex")
+                                          @Html.IsActive("Employee", "DaysOffIndex")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="black tie icon"></i>
+                            <span class="title">@GeneralResource.Employee   </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("Department", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Department" )'>
+                                    <i class="sitemap icon"></i>
+                                    @GeneralResource.Department
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Jobs", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Jobs" )'>
+                                    <i class="suitcase icon"></i>
+                                    @GeneralResource.Jobs
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Employee", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Employee" )'>
+                                    <i class="black tie icon"></i>
+                                    @GeneralResource.Employee
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("AccountSalaryItem", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AccountSalaryItem" )'>
+                                    <i class="square icon"></i>
+                                    @GeneralResource.AccountSalaryItem
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("AccountEmployeeSalaryItem", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AccountEmployeeSalaryItem" )'>
+                                    <i class="square outline icon"></i>
+                                    @GeneralResource.BounsDeduction
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("AccountEmployeesSalary", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AccountEmployeesSalary" )'>
+                                    <i class="money bill alternate icon"></i>
+                                    @GeneralResource.BasicEmployeeSalary
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("AccountEmployeesMonthlySalary", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AccountEmployeesMonthlySalary" )'>
+                                    <i class="money bill alternate outline icon"></i>
+                                    @GeneralResource.EmployeesMonthlySalaries
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Employee", "PettycashIndex")">
+                                <a class="menulink" href='@Url.Action("PettycashIndex", "Employee")'>
+                                    <i class="dollar sign icon"></i>  @GeneralResource.Pettycash
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Employee", "DaysOffIndex")">
+                                <a class="menulink" href='@Url.Action("DaysOffIndex", "Employee" )'>
+                                    <i class="calendar times outline icon"></i> @GeneralResource.DaysOff
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+                    @*End Employee menu*@
+
+                    @*start Assets menu*@
+                    <li class="@Html.IsActive("AccountAsset", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="industry icon"></i>
+                            <span class="title"> @GeneralResource.Assets   </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("AccountAsset", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AccountAsset" )'>
+                                    <i class="industry icon"></i>
+
+                                    @GeneralResource.Assets
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @*End Assets menu*@
+
+                    @*start Customer menu*@
+                    <li class="@Html.IsActive("AccountCustomer", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="users icon"></i>
+                            <span class="title">@GeneralResource.customer   </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("AccountCustomer", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "AccountCustomer" )'>
+                                    <i class="users icon"></i>
+                                    @GeneralResource.customer
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @*End Customer menu*@
+
+                    @*start Supplier menu*@
+                    <li class="@Html.IsActive("Accountsupplier", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="shipping fast icon"></i>
+                            <span class="title">@GeneralResource.Suppliers   </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("Accountsupplier", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Accountsupplier" )'>
+                                    <i class="shipping fast icon"></i>
+                                    @GeneralResource.Suppliers
+
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @*End   Supplier menu*@
+
+                    @*start Bus menu*@
+                    <li class="@Html.IsActive("Bus", "Index")
+                                @Html.IsActive("BusExpenses", "Index")
+                                @Html.IsActive("Buscost", "Index")
+                                 @Html.IsActive("BusStudentOccupation", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="bus icon"></i>
+                            <span class="title">@GeneralResource.Bus  </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("Bus", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Bus" )'>
+                                    <i class="bus icon"></i>
+                                    @GeneralResource.Bus
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("BusExpenses", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "BusExpenses" )'>
+                                    <i class="money bill alternate outline icon"></i>
+                                    @GeneralResource.BusExpenses
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("Buscost", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "Buscost" )'>
+                                    <i class="money bill alternate icon"></i>
+                                    @GeneralResource.BusCost
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("BusStudentOccupation", "Index")">
+                                <a class="menulink" href='@Url.Action("Index", "BusStudentOccupation" )'>
+                                    <i class="user md icon"></i>
+                                    @GeneralResource.BusStudentOccupation
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    @*End   Bus menu*@
+
+                    @*start Student menu*@
+                    <li class="@Html.IsActive("Student", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="child icon"></i>
+                            <span class="title">        @GeneralResource.Student       </span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                        <ul class="sub-menu">
+                            <li id="flag1">
+                                <a class="menulink" href="@Url.Action("index", "Student", new { Flage = 1 })">
+                                    <i class="child icon"></i>
+                                    @GeneralResource.Student
+                                </a>
+                            </li>
+                            <li id="flag2">
+                                <a class="menulink" href="@Url.Action("index", "Student", new { Flage = 2 })">
+                                    <i class="cogs icon"></i>
+                                    @GeneralResource.Student_Configration
+                                </a>
+                            </li>
+                            <li id="flag3">
+                                <a class="menulink" href="@Url.Action("index", "Student", new { Flage = 3 })">
+                                    <i class="money bill alternate outline icon"></i>
+                                    @GeneralResource.Student_fees
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @*End Student menu*@
+
+                    @*start Report menu*@
+                    <li class="last @Html.IsActive("Report", "Index")">
+                        <a class="menulink" href="javascript:;">
+                            <i class="chart pie icon"></i>
+                            <span class="title">@GeneralResource.Reports</span>
+                            @* <span class="arrow "></span>*@
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@Html.IsActive("Report", "Index")">
+
+
+                                <a class="menulink" href='@Url.Action("Index", "Report")'>
+                                    <i class="chart pie icon"></i>
+                                    <span class="title">@GeneralResource.Reports</span>
+
+
+                                </a>
+                            </li>
+
+
+
+                        </ul>
+                    </li>
+                    @*End Report menu*@
+
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+        </div>

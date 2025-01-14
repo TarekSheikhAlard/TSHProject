@@ -1,0 +1,85 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.QurterViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+
+@using Campus.School.Management.Logic.Resources
+
+
+
+
+@using (Ajax.BeginForm("Edit", "Qurter", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+
+    
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        @Html.HiddenFor(c => c.ID)
+        @Html.HiddenFor(c => c.SID)
+        @Html.HiddenFor(c=>c.YearID)
+        @Html.HiddenFor(c => c.SemNameE)
+       <div class="field">
+            @Html.LabelFor(model => model.SemNameE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SemNameE, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })        
+                @Html.ValidationMessageFor(model => model.SemNameE, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.QID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.QID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.QID, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+       <div class="field">
+            @Html.LabelFor(model => model.QStudyWeeks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.QStudyWeeks, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QStudyWeeks, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.QStudyWeeksAbs, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.QStudyWeeksAbs, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QStudyWeeksAbs, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+
+    function Init() {
+        $('#SID').val(@Model.SID);
+       
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+        });
+    };
+
+    Init();
+
+</script>
+

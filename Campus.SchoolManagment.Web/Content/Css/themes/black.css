@@ -1,0 +1,44 @@
+﻿div.mainmenu.inverted.accordion.menu {
+    background-color: #1b1c1d !important;
+}
+.ui.primary.segment:not(.inverted) {
+    border-top: 2px solid #1b1c1d !important;
+}
+.ui.primary.button {
+    background-color: #424242 !important;
+}
+.dark-background {
+    background-color: #000 !important;
+}
+
+.primary.button {
+    background-color: #1b1c1d !important;
+}
+
+
+.ui.selectable.table tbody tr:hover, .ui.table tbody tr td.selectable:hover, .ui.table tbody tr.selected {
+    background: rgba(0,0,0,.07) !important;
+}
+
+.feather.primary, .primary.icon,.theme {
+    color: rgba(0,0,0,.87) ;
+}
+
+table.report thead th {
+    border-bottom: 1.2px solid 2d2e2f !important;
+}
+
+table.report tfoot th {
+    border-top: 3px double 2d2e2f !important;
+    font-weight: bold !important;
+}
+
+table.report tbody tr.level-2 {
+    background-color: #BDBDBD !important ;
+}
+
+table.report tbody tr.level-3 {
+    background-color: #e0e0e0 !important;
+}
+
+

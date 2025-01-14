@@ -1,0 +1,102 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+@*<input type="button" id="AddDetail" class="btn btn-primary" value="@DailyJornal.adddetails" />*@
+
+    @*<h3>
+        <b>   @GeneralResource.Details</b>
+    </h3>*@
+    <div>
+
+        
+        @*<div class="ui large dividing header">
+            <i class=""></i><div class="content">
+                @GeneralResource.Details
+            </div>
+
+        </div>*@
+  
+        <table class="ui very basic small   celled table " id="journalTable">
+            <thead>
+                <tr>
+
+                    <th></th>
+                    <th class="six wide">
+                        @DailyJornal.Account
+
+                    </th>
+                    <th class="three wide">
+                        @DailyJornal.Description
+
+                    </th>
+
+
+                    <th class="two wide">
+                        @DailyJornal.Debit
+
+                    </th>
+                    <th class="two wide">
+                        @DailyJornal.Credit
+                    </th>
+                    <th class="three wide">
+                        @GeneralResource.CostCenter
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="DetailContainer">
+                @if (Model._AccountDailyJournalDetail != null)
+                {
+
+                    foreach (var item in Model._AccountDailyJournalDetail)
+                    {
+
+                        @Html.Partial("_DebitItm", item)
+
+                    }
+
+
+                }
+
+            </tbody>
+          
+            <tfoot class="full-width">
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                    <th><b>@GeneralResource.Total</b>  </th>
+                    <th class="text-center"> @Html.Editor("LsumDebit", new { htmlAttributes = new { @class = "form-control col-md-2", @readonly = "readonly" } })</th>
+                    <th class="text-center"> @Html.Editor("LsumCredit", new { htmlAttributes = new { @class = "form-control col-md-2", @readonly = "readonly" } })</th>
+
+                </tr>
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                    <th><b>@DailyJornal.differencebetweendebitandcredite</b></th>
+                    <th colspan="2"> @Html.Editor("Difference", new { htmlAttributes = new { @class = "form-control col-md-2", @readonly = "readonly" } })</th>
+                </tr>   
+            </tfoot>
+
+        </table>
+
+     
+
+    </div>
+
+
+@Html.Hidden("Edit1", Model._AccountDailyJournalDetail)
+
+   
+
+
+
+<script>
+    $(document).ready(function ()
+    {    
+        AddDetailItem();
+    });
+</script>
+
+
+
+  

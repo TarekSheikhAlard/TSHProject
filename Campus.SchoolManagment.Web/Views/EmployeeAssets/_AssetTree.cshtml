@@ -1,0 +1,199 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.Resources
+
+<div class="ui asset form">
+
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.MainAccount
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("MainassetTree", ViewBag.MainassetTree as SelectList, "--Select --", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch1(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.FristBranche
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("fristAssetbranche", new SelectList(""), "select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch2(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+   
+
+        <div class="field">
+            <div class="control-label col-md-2">
+                @GeneralResource.SecondBranche
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("SecondAssetbranche", new SelectList(""), "Select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch3(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+
+    <div class="actions">
+        <button type="submit" id="SaveAsset-EmployeeAssets" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+</div>
+
+<script>
+
+    $('#SaveAsset-EmployeeAssets').click(function () {
+     
+        var MainassetTree = $('#MainassetTree').val();
+        var fristbranche = $('#fristAssetbranche').val();
+        var Secondbranche = $('#SecondAssetbranche').val();
+
+        
+        var SecondbrancheText = $("#SecondAssetbranche option:selected").text();
+        var fristbrancheText = $("#fristAssetbranche option:selected").text();
+        var MainassetTreeText = $("#MainassetTree option:selected").text();
+
+
+       
+        if (SecondbrancheText != "Select") {
+            $('#AssetName').val(SecondbrancheText);
+            $('#AssetId').val(Secondbranche);
+            $('#Asset-Model').modal('hide');
+
+        } 
+        //    else
+        //    if (fristbrancheText != "Select") {
+
+        //        $('#AssetName').val(fristbrancheText);
+        //        $('#AssetId').val(fristbranche);
+        //        $('#Asset-Model').modal('hide');
+
+        //    } else
+        //        if (MainassetTreeText != "Select") {
+
+        //            $('#AssetName').val(MainassetTreeText);
+        //            $('#AssetId').val(MainassetTree);
+        //            $('#Asset-Model').modal('hide');
+
+        //        } 
+            else {
+            toastr.error(" please select Asset")
+                }
+     
+
+
+
+    });
+
+</script>
+
+
+<script>
+
+    function GetBranch1(id) {
+        debugger;
+        var selectedValue = id;
+        $.ajax({
+            url: '/EmployeeAssets/GetBranchsAsset',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var fristbranche = $('#fristAssetbranche');
+                fristbranche.empty();
+                fristbranche.append(
+                    $('<option/>', {
+                        value: "",
+                        html: "Select"
+                    })
+                );
+
+            },
+            success: function (result) {
+                var fristbranche = $('#fristAssetbranche');
+                fristbranche.empty();
+                fristbranche.append(
+                    $('<option/>', {
+                        value: "",
+                        html: "Select"
+                    })
+                );
+                $.each(result, function () {
+                    debugger;
+                    fristbranche.append(
+                        $('<option/>', {
+                            value: this.AssetTreeID,
+                            html: getLanguage() == 'ar' ? this.AssetNameAR : this.AssetNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+<script>
+
+    function GetBranch2(id) {
+        debugger;
+        var selectedValue = id;
+        $.ajax({
+            url: '/EmployeeAssets/GetBranchsAsset',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Secondbranche = $('#SecondAssetbranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                    $('<option/>', {
+                        value: "",
+                        html: "Select"
+                    })
+                );
+
+            },
+            success: function (result) {
+                var Secondbranche = $('#SecondAssetbranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                    $('<option/>', {
+                        value: "",
+                        html: "Select"
+                    })
+                );
+                $.each(result, function () {
+                    debugger;
+                    Secondbranche.append(
+                        $('<option/>', {
+                            value: this.AssetTreeID,
+                            html: getLanguage() == 'ar' ? this.AssetNameAR : this.AssetNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+
+
+
+

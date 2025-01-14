@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.ClassRoomViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+
+            
+            <th>
+                @Html.DisplayNameFor(model => model.ClassCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassNameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassLeaderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicYearName)
+            </th>
+            <th>@GeneralResource.Edit</th>
+            <th>@GeneralResource.Delete</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+      
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassNameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassLeaderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademicYearName)
+            </td>
+            <td>
+                <a href="#" onclick="Edit(@item.ClassID);"> <i class="ui edit icon"></i></a>
+
+            </td>
+            <td>
+                <a href="#" onclick="Delete(@item.ClassID);"> <i class="ui delete red icon"></i></a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountEmployeesSalaryViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<table>
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Employee_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.JobName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BasicSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllowanceSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BonusesSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.extraSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Socialinsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medicalinsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taxes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dedecation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalDedecated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetSalary)
+            </th>
+
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+
+                @Html.DisplayFor(model => item.JobName)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasicSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowanceSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BonusesSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.extraSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socialinsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medicalinsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dedecation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDedecated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetSalary)
+            </td>
+
+        </tr>
+    }
+
+</table>
+

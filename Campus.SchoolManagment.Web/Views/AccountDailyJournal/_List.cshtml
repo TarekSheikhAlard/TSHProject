@@ -1,0 +1,221 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalViewModel>
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel
+
+@{ 
+//deprecated
+    UserPermissionViewModel _Permission = (UserPermissionViewModel)ViewBag.Permission;
+    bool supper = false;
+    if (User.IsInRole("SuperAdmin"))
+    { supper = true; }
+
+}
+
+
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" />
+    <table  class="ui selectable  single line Striped celled  compact table" id="myTable">
+        <thead>
+            <tr class="">
+                    <th>
+                        @GeneralResource.Actions
+
+                    </th>
+                <th>
+                    @DailyJornal.Serial_No
+                    @*@Html.DisplayNameFor(model => model.SerialNo)*@
+                </th>
+
+              
+               
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Debit)
+                </th>
+                <th >
+
+                    @Html.DisplayNameFor(model => model.Credit)
+                </th>
+
+               
+
+
+
+                <th>
+                      @DailyJornal.DailyJournal_Date
+                    @*@Html.DisplayNameFor(model => model.DailyJournalDate)*@
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+
+                  
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+
+                @*<th>@GeneralResource.Details</th>*@
+
+                @*@if ((_Permission != null && _Permission.EditAct) || supper)
+                {
+                    <th>@GeneralResource.Edit</th>
+                }
+               
+                    <th>@GeneralResource.Delete</th>*@
+           
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @if ((_Permission != null && _Permission.EditAct) || supper)
+                    {
+                        if (item.IsPost == false)
+                        {
+
+                            <a href="#" onclick="Edit(@item.DailyJournalID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+
+                        }
+                        else
+                        {
+                            @*@GeneralResource.Posted*@
+
+
+                        }
+                    }
+                    @if (item.IsPost == false)
+                    {
+                        <a href="#" onclick="Delete(@item.DailyJournalID);"> <i class="feather red icon-trash"></i></a>
+
+
+                    }
+                    else
+                    {
+                        @*@GeneralResource.Posted*@
+
+
+                    }
+
+                    <a href='#' data-toggle="modal" onclick="GetDetail(@item.DailyJournalID)"><i class="feather icon-eye"> </i> </a>
+                    <a href="#" onclick="DownloadPdfDetail(@item.DailyJournalID,this);" title="@GeneralResource.DownloadPdf" class=""> <i class="feather icon-download"></i></a>
+                    @if (!String.IsNullOrEmpty(item.AttachedDocName))
+                    {
+                        <a href="#" onclick="ViewAttachedDocument('@item.AttachedDocName');" title="View attached document" class=""> <i class="feather icon-image"></i></a>
+                      
+                    }
+
+                </td>
+                <td>
+
+                    @Html.DisplayFor(model => item.SerialNo)
+                </td>
+
+
+                <td>
+
+                    @Html.DisplayFor(model => item.Debit)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(model => item.Credit)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.DailyJournalDate)
+                </td>
+
+                <td>
+
+                    @Html.DisplayFor(model => item.Note)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(model => item.Description)
+                </td>
+            </tr>
+                   
+            }
+        </tbody>
+    </table>
+
+
+   
+      
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            var table = $('#myTable').DataTable({
+                buttons: ['excel']
+
+            });
+
+            //$('.ui.deatails.modal').modal({
+
+            //    centered: true,
+            //    closable: false,
+            //    inverted: false,
+            //    blurring: false,
+            //    detachable: true,
+            //    autofocus: false,
+            //    allowMultiple: true,
+            //    transition: 'fade up',
+            //    observeChanges: true
+
+
+            //});
+     
+   
+            //console.log(table.buttons().container())
+            //setTimeout(function () {
+            //    var $buttons = $('button.dt-button'),
+            //        $btnCnt = table.buttons().container();
+
+            //    $buttons.removeClass("dt-button")
+            //        .addClass("ui icon small teal  circular inlinebtn button")
+            //        .prop("title","export excel")
+
+            //    switch ($buttons.html()) {
+            //        case '<span>Excel</span>':
+            //            $buttons.html("<i class=\"file excel icon\"></i>")
+            //            break;
+            //        default:
+            //            break;
+            //    }
+
+
+            //}, 1)
+                
+          
+           //table.buttons().container()
+           //   .appendTo($('.toolbar'));
+  
+
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

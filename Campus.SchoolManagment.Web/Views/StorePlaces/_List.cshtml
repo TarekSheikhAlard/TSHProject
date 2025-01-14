@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.StorePlacesViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="storeTable">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceNameAr)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="#" onclick="Edit(@item.Id);"> <i class="feather icon-edit-1"></i></a>
+                    <a href="#" onclick="Delete(@item.Id);"> <i class="feather red icon-trash"></i></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceNameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceNameAr)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#storeTable').DataTable();
+
+            var Msg = '@TempData["Msg"]';
+
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>
+

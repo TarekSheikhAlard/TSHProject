@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.LedgerTrailBalanceViewModel>
+
+<div class="ui basic segment anim">
+    <div class="ui basic segment">
+
+        <div class="ui text  container center aligned">
+            <h2 class="ui header">
+                <div class="content">
+                     Ledger Trail Balance 
+                    <div class="sub header">@ViewBag.DateFrom</div>
+
+                </div>
+            </h2>
+
+        </div>
+    </div>
+
+    <table class="ui theme very basic  report compact table">
+        <thead>
+            <tr class="">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountTreeCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountNameEn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DebitTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreditTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DebitAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreditAmount)
+                </th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+            <tr class="level-@item.AccountTreeLevel">
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountTreeCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DebitTotal)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DebitAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditAmount)
+                </td>
+
+
+
+            </tr>
+
+            }
+
+        </tbody>
+        </table>
+</div>
+
+<script>
+    $(function () {
+          if (!$('.anim').hasClass("animated")) {
+            $('.anim').transition({
+                animation: 'fade up',
+                duration: 700,
+                interval: 50,
+            });
+            $('.anim').addClass("animated");
+
+        }
+
+
+    })
+
+</script>

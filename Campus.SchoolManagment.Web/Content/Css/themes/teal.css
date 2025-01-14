@@ -1,0 +1,43 @@
+﻿div.mainmenu.inverted.accordion.menu {
+    background-color: #00b5ad !important;
+}
+
+.ui.primary.segment:not(.inverted) {
+    border-top: 2px solid #00b5ad !important;
+}
+
+.dark-background {
+    background-color: #007974 !important;
+}
+.primary.button {
+    background-color: #00b5ad !important;
+}
+
+.ui.selectable.table tbody tr:hover, .ui.table tbody tr td.selectable:hover, .ui.table tbody tr.selected {
+    background: rgba(0,0,0,.05) !important;
+    /*color: #039BE5 !important;*/
+    /*background-color: #039BE5 !important;*/
+    background-color: #00b5ad !important;
+    background-color: #00b5ad2b !important;
+}
+
+.feather.primary, .primary.icon,.theme {
+    color: #00b5ad;
+}
+
+table.report thead th {
+    border-bottom: 1.2px solid #00b5ad !important;
+}
+
+table.report tfoot th {
+    border-top: 3px double #00b5ad !important;
+    font-weight: bold !important;
+}
+
+table.report tbody tr.level-2 {
+    background-color: #a1e3e0 !important;
+}
+
+table.report tbody tr.level-3 {
+    background-color: #d9fbf8 !important;
+}

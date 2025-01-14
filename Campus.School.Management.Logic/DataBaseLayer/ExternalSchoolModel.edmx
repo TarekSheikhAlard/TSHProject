@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="campuserpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admGrades">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="GNameE" Type="nvarchar" MaxLength="10" />
+          <Property Name="GNameA" Type="nvarchar" MaxLength="10" />
+          <Property Name="Is_Upload" Type="bit" />
+          <Property Name="Is_Update" Type="bit" />
+        </EntityType>
+        <EntityType Name="AdmGradesSchool">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="YearID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GradeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GradeOrig" Type="int" Nullable="false" />
+          <Property Name="GradeSchoolNameE" Type="nvarchar" MaxLength="100" />
+          <Property Name="GradeSchoolNameA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Is_Upload" Type="bit" />
+          <Property Name="Is_Update" Type="bit" />
+        </EntityType>
+        <EntityType Name="AdmStudent_Class">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentAcdID" Type="bigint" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="YearID" Type="int" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedbyID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedbyID" Type="int" />
+          <Property Name="DeletedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeletedbyID" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdmStudents">
+          <Key>
+            <PropertyRef Name="StudAcdID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudAcdID" Type="bigint" Nullable="false" />
+          <Property Name="NameFt" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameM" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameFm" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameA" Type="nvarchar" MaxLength="200" />
+          <Property Name="BirthDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthPlace" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthPlace_Ar" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="20" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="50" />
+          <Property Name="IqamaNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IqamaIsDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="IqamaEdDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassIsDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassEdDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParenJob" Type="nvarchar" MaxLength="50" />
+          <Property Name="PTell" Type="nvarchar" MaxLength="50" />
+          <Property Name="PAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Requirments" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Origfees" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisType" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastEduShcool1" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastEduShcool2" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastEduCity1" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastEduCity2" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastEduDateFrom1" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastEduDateFrom2" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastEduFull1" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastEduFull2" Type="nvarchar" MaxLength="50" />
+          <Property Name="PersonStm" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Refrences" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Pmobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="PMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="NationalityA" Type="nvarchar" MaxLength="50" />
+          <Property Name="IqamaPlace" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsArchives" Type="bit" />
+          <Property Name="PrevSch" Type="nvarchar" MaxLength="100" />
+          <Property Name="PrevSch_Ar" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParEqmExpDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdmDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="GraduateDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Is_Upload" Type="bit" />
+          <Property Name="Is_Update" Type="bit" />
+          <Property Name="Ref_Id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="admStudyear">
+          <Key>
+            <PropertyRef Name="YearID" />
+          </Key>
+          <Property Name="S1" Type="int" Nullable="false" />
+          <Property Name="YearID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="YearNameE" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearNameA" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearStDate" Type="datetime" />
+          <Property Name="YearEdDate" Type="datetime" />
+          <Property Name="CurrentYear" Type="int" />
+          <Property Name="CurrentSem" Type="int" />
+          <Property Name="CurrentQ" Type="int" />
+          <Property Name="CurrentWeek" Type="int" />
+          <Property Name="Is_Upload" Type="bit" />
+          <Property Name="Is_Update" Type="bit" />
+        </EntityType>
+        <Association Name="FK_admStudyear_admStudyear">
+          <End Role="admStudyear" Type="Self.admStudyear" Multiplicity="1" />
+          <End Role="admStudyear1" Type="Self.admStudyear" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="admStudyear">
+              <PropertyRef Name="YearID" />
+            </Principal>
+            <Dependent Role="admStudyear1">
+              <PropertyRef Name="YearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="campuserpModelStoreContainer">
+          <EntitySet Name="admGrades" EntityType="Self.admGrades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdmGradesSchool" EntityType="Self.AdmGradesSchool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdmStudent_Class" EntityType="Self.AdmStudent_Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdmStudents" EntityType="Self.AdmStudents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="admStudyear" EntityType="Self.admStudyear" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_admStudyear_admStudyear" Association="Self.FK_admStudyear_admStudyear">
+            <End Role="admStudyear" EntitySet="admStudyear" />
+            <End Role="admStudyear1" EntitySet="admStudyear" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="campuserpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admGrade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="GNameE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GNameA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Upload" Type="Boolean" />
+          <Property Name="Is_Update" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AdmGradesSchool">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="YearID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeOrig" Type="Int32" Nullable="false" />
+          <Property Name="GradeSchoolNameE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GradeSchoolNameA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Upload" Type="Boolean" />
+          <Property Name="Is_Update" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="admStudyear">
+          <Key>
+            <PropertyRef Name="YearID" />
+          </Key>
+          <Property Name="S1" Type="Int32" Nullable="false" />
+          <Property Name="YearID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YearNameE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearNameA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearStDate" Type="DateTime" Precision="3" />
+          <Property Name="YearEdDate" Type="DateTime" Precision="3" />
+          <Property Name="CurrentYear" Type="Int32" />
+          <Property Name="CurrentSem" Type="Int32" />
+          <Property Name="CurrentQ" Type="Int32" />
+          <Property Name="CurrentWeek" Type="Int32" />
+          <Property Name="Is_Upload" Type="Boolean" />
+          <Property Name="Is_Update" Type="Boolean" />
+          <NavigationProperty Name="admStudyear1" Relationship="Self.FK_admStudyear_admStudyear" FromRole="admStudyear" ToRole="admStudyear1" />
+          <NavigationProperty Name="admStudyear2" Relationship="Self.FK_admStudyear_admStudyear" FromRole="admStudyear1" ToRole="admStudyear" />
+        </EntityType>
+        <Association Name="FK_admStudyear_admStudyear">
+          <End Role="admStudyear" Type="Self.admStudyear" Multiplicity="1" />
+          <End Role="admStudyear1" Type="Self.admStudyear" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="admStudyear">
+              <PropertyRef Name="YearID" />
+            </Principal>
+            <Dependent Role="admStudyear1">
+              <PropertyRef Name="YearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="campuserpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admGrades" EntityType="Self.admGrade" />
+          <EntitySet Name="AdmGradesSchools" EntityType="Self.AdmGradesSchool" />
+          <EntitySet Name="admStudyears" EntityType="Self.admStudyear" />
+          <AssociationSet Name="FK_admStudyear_admStudyear" Association="Self.FK_admStudyear_admStudyear">
+            <End Role="admStudyear" EntitySet="admStudyears" />
+            <End Role="admStudyear1" EntitySet="admStudyears" />
+          </AssociationSet>
+          <EntitySet Name="AdmStudent_Class" EntityType="campuserpModel.AdmStudent_Class" />
+          <EntitySet Name="AdmStudents" EntityType="campuserpModel.AdmStudent" />
+        </EntityContainer>
+        <EntityType Name="AdmStudent_Class">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentAcdID" Type="Int64" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="YearID" Type="Int32" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedbyID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedbyID" Type="Int32" />
+          <Property Name="DeletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedbyID" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdmStudent">
+          <Key>
+            <PropertyRef Name="StudAcdID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudAcdID" Type="Int64" Nullable="false" />
+          <Property Name="NameFt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameFm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthPlace_Ar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IqamaNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IqamaIsDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IqamaEdDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassIsDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassEdDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParenJob" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PTell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Requirments" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Origfees" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduShcool1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduShcool2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduCity1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduCity2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduDateFrom1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduDateFrom2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduFull1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastEduFull2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PersonStm" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Refrences" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Pmobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NationalityA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IqamaPlace" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsArchives" Type="Boolean" />
+          <Property Name="PrevSch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PrevSch_Ar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParEqmExpDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdmDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GraduateDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Upload" Type="Boolean" />
+          <Property Name="Is_Update" Type="Boolean" />
+          <Property Name="Ref_Id" Type="Int64" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="campuserpModelStoreContainer" CdmEntityContainer="campuserpEntities">
+          <EntitySetMapping Name="admGrades">
+            <EntityTypeMapping TypeName="campuserpModel.admGrade">
+              <MappingFragment StoreEntitySet="admGrades">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="GNameE" ColumnName="GNameE" />
+                <ScalarProperty Name="GNameA" ColumnName="GNameA" />
+                <ScalarProperty Name="Is_Upload" ColumnName="Is_Upload" />
+                <ScalarProperty Name="Is_Update" ColumnName="Is_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdmGradesSchools">
+            <EntityTypeMapping TypeName="campuserpModel.AdmGradesSchool">
+              <MappingFragment StoreEntitySet="AdmGradesSchool">
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="GradeOrig" ColumnName="GradeOrig" />
+                <ScalarProperty Name="GradeSchoolNameE" ColumnName="GradeSchoolNameE" />
+                <ScalarProperty Name="GradeSchoolNameA" ColumnName="GradeSchoolNameA" />
+                <ScalarProperty Name="Is_Upload" ColumnName="Is_Upload" />
+                <ScalarProperty Name="Is_Update" ColumnName="Is_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="admStudyears">
+            <EntityTypeMapping TypeName="campuserpModel.admStudyear">
+              <MappingFragment StoreEntitySet="admStudyear">
+                <ScalarProperty Name="S1" ColumnName="S1" />
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="YearNameE" ColumnName="YearNameE" />
+                <ScalarProperty Name="YearNameA" ColumnName="YearNameA" />
+                <ScalarProperty Name="YearStDate" ColumnName="YearStDate" />
+                <ScalarProperty Name="YearEdDate" ColumnName="YearEdDate" />
+                <ScalarProperty Name="CurrentYear" ColumnName="CurrentYear" />
+                <ScalarProperty Name="CurrentSem" ColumnName="CurrentSem" />
+                <ScalarProperty Name="CurrentQ" ColumnName="CurrentQ" />
+                <ScalarProperty Name="CurrentWeek" ColumnName="CurrentWeek" />
+                <ScalarProperty Name="Is_Upload" ColumnName="Is_Upload" />
+                <ScalarProperty Name="Is_Update" ColumnName="Is_Update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdmStudent_Class">
+            <EntityTypeMapping TypeName="campuserpModel.AdmStudent_Class">
+              <MappingFragment StoreEntitySet="AdmStudent_Class">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedbyID" ColumnName="DeletedbyID" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="ModifiedbyID" ColumnName="ModifiedbyID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedbyID" ColumnName="CreatedbyID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="StudentAcdID" ColumnName="StudentAcdID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdmStudents">
+            <EntityTypeMapping TypeName="campuserpModel.AdmStudent">
+              <MappingFragment StoreEntitySet="AdmStudents">
+                <ScalarProperty Name="Ref_Id" ColumnName="Ref_Id" />
+                <ScalarProperty Name="Is_Update" ColumnName="Is_Update" />
+                <ScalarProperty Name="Is_Upload" ColumnName="Is_Upload" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="GraduateDate" ColumnName="GraduateDate" />
+                <ScalarProperty Name="AdmDate" ColumnName="AdmDate" />
+                <ScalarProperty Name="ParEqmExpDate" ColumnName="ParEqmExpDate" />
+                <ScalarProperty Name="PrevSch_Ar" ColumnName="PrevSch_Ar" />
+                <ScalarProperty Name="PrevSch" ColumnName="PrevSch" />
+                <ScalarProperty Name="IsArchives" ColumnName="IsArchives" />
+                <ScalarProperty Name="IqamaPlace" ColumnName="IqamaPlace" />
+                <ScalarProperty Name="NationalityA" ColumnName="NationalityA" />
+                <ScalarProperty Name="PMail" ColumnName="PMail" />
+                <ScalarProperty Name="Pmobile" ColumnName="Pmobile" />
+                <ScalarProperty Name="Refrences" ColumnName="Refrences" />
+                <ScalarProperty Name="PersonStm" ColumnName="PersonStm" />
+                <ScalarProperty Name="LastEduFull2" ColumnName="LastEduFull2" />
+                <ScalarProperty Name="LastEduFull1" ColumnName="LastEduFull1" />
+                <ScalarProperty Name="LastEduDateFrom2" ColumnName="LastEduDateFrom2" />
+                <ScalarProperty Name="LastEduDateFrom1" ColumnName="LastEduDateFrom1" />
+                <ScalarProperty Name="LastEduCity2" ColumnName="LastEduCity2" />
+                <ScalarProperty Name="LastEduCity1" ColumnName="LastEduCity1" />
+                <ScalarProperty Name="LastEduShcool2" ColumnName="LastEduShcool2" />
+                <ScalarProperty Name="LastEduShcool1" ColumnName="LastEduShcool1" />
+                <ScalarProperty Name="DisType" ColumnName="DisType" />
+                <ScalarProperty Name="Origfees" ColumnName="Origfees" />
+                <ScalarProperty Name="Requirments" ColumnName="Requirments" />
+                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+                <ScalarProperty Name="PTell" ColumnName="PTell" />
+                <ScalarProperty Name="ParenJob" ColumnName="ParenJob" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PassEdDate" ColumnName="PassEdDate" />
+                <ScalarProperty Name="PassIsDate" ColumnName="PassIsDate" />
+                <ScalarProperty Name="PassNo" ColumnName="PassNo" />
+                <ScalarProperty Name="IqamaEdDate" ColumnName="IqamaEdDate" />
+                <ScalarProperty Name="IqamaIsDate" ColumnName="IqamaIsDate" />
+                <ScalarProperty Name="IqamaNo" ColumnName="IqamaNo" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthPlace_Ar" ColumnName="BirthPlace_Ar" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="NameA" ColumnName="NameA" />
+                <ScalarProperty Name="NameFm" ColumnName="NameFm" />
+                <ScalarProperty Name="NameM" ColumnName="NameM" />
+                <ScalarProperty Name="NameFt" ColumnName="NameFt" />
+                <ScalarProperty Name="StudAcdID" ColumnName="StudAcdID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

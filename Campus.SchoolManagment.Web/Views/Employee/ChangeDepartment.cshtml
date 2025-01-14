@@ -1,0 +1,106 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("ChangeDepartment", "Employee", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccessChangeDepartment" }, new { @class = "ui changeDept form" }))
+
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.Employee_ID)
+
+<div class="field">
+    @Html.LabelFor(model => model.DepartmentName, htmlAttributes: new { @class = "" })
+
+    @Html.EditorFor(model => model.DepartmentName, new { htmlAttributes = new { @class = "form-control", @readonly=true, @onclick = "SearchDepartment()" } })
+    
+    <input name="DepartmentTreeID" type="hidden" />
+</div>
+    <div class="field">
+        @Html.LabelFor(model => model.jobID, htmlAttributes: new { @class = "" })
+        @Html.DropDownListFor(model => model.jobID, new SelectList(""), "select", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessage("", "", new { @class = "text-danger" })
+    </div>
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+
+}
+<script>
+    $(function () {
+        var empId = $("[name='empId']:checked").val();
+        $("#Employee_ID").val(empId);
+
+    })
+
+
+</script>
+
+<script>
+    function OnSuccessChangeDepartment(data) {
+
+   
+    if (data) {
+        toastr.success("@GeneralResource.toastrSave")
+        $('#ChangeDept-Model .close').click()
+
+    } else {
+          toastr.error("@GeneralResource.toastrOperationFaild")
+    }
+};
+    $('.changeDept.form div.field input[name="DepartmentTreeID"]').change(function () {
+        //trigger has been added by _departmentTree.cshtml on ok click 
+        GetJobForPromotion()
+    })
+
+    function GetJobForPromotion() {
+      
+        var selectedValue = $('.changeDept.form div.field input[name="DepartmentTreeID"]').val();
+
+        $.ajax({
+            url: '/Employee/GetJOBS',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var jobList = $('#jobID');
+                jobList.empty();
+                jobList.append(
+                    $('<option/>', {
+                        value: "",
+                        html: "Select"
+                    })
+                );
+
+            },
+            success: function (result) {
+                var jobList = $('#jobID');
+                jobList.empty();
+                jobList.append(
+                    $('<option/>', {
+                        value: "",
+                        html: "Select"
+                    })
+                );
+                $.each(result, function () {
+                 
+                    jobList.append(
+                        $('<option/>', {
+                            value: this.JobID,
+                            html: getLanguage() == 'ar' ? this.JobNameAr : this.JobNameEn
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+

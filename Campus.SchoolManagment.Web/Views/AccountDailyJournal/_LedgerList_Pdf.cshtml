@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.SubLedgerReportViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<div class="ui basic segment anim">
+    <div class="ui basic segment">
+
+
+        <div class="ui text  container center aligned">
+            <h2 class="ui header">
+                <div class="content">
+                    General Ledger - @ViewBag.AccountTreeName
+                    <div class="sub header">@ViewBag.From - @ViewBag.To</div>
+
+                </div>
+            </h2>
+
+        </div>
+    </div>
+
+    @*<div class="ui large dividing header">
+            @*<i class="fa globe"></i><div class="content">  <a href="#" id="Add" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a>Credit
+        </div>*@
+    <style>
+       
+    </style>
+    <table >
+        <thead class="">
+            <tr>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.SerialNo)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Account)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Debit)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Credit)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Balance)
+                </th>
+            </tr>
+        </thead>
+        <tbody id="Searchbody">
+            @{ decimal sumcredit = 0;
+                decimal sumdetbit = 0;
+                int accid = Model.FirstOrDefault().AccountTreeID;
+            }
+            @foreach (var item in Model)
+            {
+                sumcredit = sumcredit + item.Credit;
+                sumdetbit = sumdetbit + item.Debit;
+
+                if (accid != item.AccountTreeID)
+                {
+                    accid = item.AccountTreeID;
+
+                    <tr>
+                        @{ decimal Totalsum = 0;
+
+                            if (sumdetbit > sumcredit)
+                            {
+                                Totalsum = sumdetbit;
+                            }
+                            else
+                            {
+                                Totalsum = sumcredit;
+                            }
+
+                            decimal different = sumdetbit - sumcredit;
+
+                        }
+
+                        <th colspan="3"> </th>
+                        <th>Ending Balance</th>
+                        <th> </th>
+                        <th></th>
+                        <th>@different </th>
+
+                        @{
+                            sumdetbit = 0;
+                            sumcredit = 0;
+
+                        }
+
+
+                    </tr>
+
+                }
+                <tr>
+
+                    <td>
+                        @item.CreatedDate.ToString("dd/MM/yyyy")
+                        @*@Html.DisplayFor(modelItem => item.CreatedDate)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SerialNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Account)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Debit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Credit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    @*<td>
+
+                            @item.DailyJournalDate.Value.ToString("dd/MM/yyyy")
+                        </td>*@
+                    @*@Html.DisplayFor(modelItem => item.DailyJournalDate, "{0:dd/MM/yyyy}") *@
+
+                </tr>
+
+
+
+
+
+            }
+
+        </tbody>
+
+
+        @*<tfoot>
+                <tr>
+
+                    <th colspan="3"> </th>
+                    <th>Ending Balance</th>
+                    <th> @sumdetbit</th>
+                    <th> @sumcredit</th>
+                    <th>@different </th>
+
+                </tr>
+
+            </tfoot>*@
+    </table>
+
+
+</div>
+
+
+

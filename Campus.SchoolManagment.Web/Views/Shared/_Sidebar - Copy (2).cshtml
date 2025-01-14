@@ -1,0 +1,556 @@
+﻿@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+
+<div class="mainmenu ui vertical inverted fixed  accordion menu " style="
+   background-color:#2ca8ff; margin:0px !important;height:100vh;
+   top: 46px; position:fixed; overflow-y:scroll;transition:all .25s ease-in">
+
+    @*<div class="item">
+            <a class="ui logo icon image" href="/">
+                @*<img src="/images/logo.png">
+            </a>
+            <a href="/"><b>CAMPUS ERP</b></a>
+        </div>*@
+
+
+
+    <div class="item">
+        <a class="title header" href='@Url.Action("Index", "Home" )'>
+            <i class="home icon"></i>
+            @GeneralResource.Home
+            @* <span class="arrow "></span>*@
+        </a>
+    </div>
+
+    <div class="item">
+        <a class="title header">
+            <i class="list icon"></i>
+            @GeneralResource.Generaldefinitions
+            @* <span class="arrow "></span>*@
+        </a>
+
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "Company" )'>
+                <i class="building outline icon"></i>
+                @GeneralResource.Company
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "School" )'>
+                <i class="university icon"></i>
+                @GeneralResource.School
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "City" )'>
+                <i class="map signs icon"></i>
+                @GeneralResource.City
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Nationality" )'>
+                <i class="globe icon"></i>
+                @GeneralResource.Nationality
+            </a>
+
+
+        </div>
+
+    </div>
+    @*start AcademicConfigration menu*@
+    <div class=" item @Html.IsActive("Stage", "Index")
+                                     @Html.IsActive("StudyYear", "Index")
+                                     @Html.IsActive("AcademicYear", "Index")
+                                     @Html.IsActive("Semster", "Index")
+                                     @Html.IsActive("ClassRoom", "Index")
+                                     @Html.IsActive("Qurter", "Index")">
+        <a class="title header">
+            <i class="calendar alternate outline icon"></i>
+            @GeneralResource.AcademicConfigration
+            @* <span class="arrow "></span>*@
+        </a>
+
+        <div class="content menu">
+
+            <a class="item @Html.IsActive("Stage", "Index")" href='@Url.Action("Index", "Stage" ) '>
+
+                <i class="hockey puck icon"></i>
+                @GeneralResource.Stage
+            </a>
+
+            <a class="item @Html.IsActive("StudyYear", "Index")" href='@Url.Action("Index", "StudyYear" ) '>
+
+                <i class="graduation cap icon"></i>
+                @GeneralResource.StudyYear
+            </a>
+
+            <a class="item @Html.IsActive("AcademicYear", "Index")" href='@Url.Action("Index", "AcademicYear" ) '>
+
+                <i class="tasks icon"></i>
+                @GeneralResource.AcademicYearName
+            </a>
+
+            <a class="item  @Html.IsActive("Semster", "Index")" href='@Url.Action("Index", "Semster" )'>
+
+                <i class="book icon"></i>
+                @GeneralResource.Semester
+            </a>
+
+
+            <a class="item @Html.IsActive("Qurter", "Index")" href='@Url.Action("Index", "Qurter" ) '>
+
+                <i class="bookmark icon"></i>
+                @GeneralResource.Qurter
+            </a>
+
+            <a class="item @Html.IsActive("ClassRoom", "Index")" href='@Url.Action("Index", "ClassRoom" ) '>
+
+                <i class="calendar outline icon"></i>
+                @GeneralResource.ClassRoom
+            </a>
+
+        </div>
+    </div>
+    @* End AcademicConfigration menu*@
+    @*start generalaccounting menu*@
+    <div class="item @Html.IsActive("AccountTree", "Index")
+                                     @Html.IsActive("PhysicalYear", "Index")
+                                     @Html.IsActive("AccountTreasury", "Index")
+                                     @Html.IsActive("AccountCostCenter", "Index")
+                                     @Html.IsActive("AccountFirstBalance", "Index")
+                                     @Html.IsActive("AccountPayableCash", "Index")
+                                     @Html.IsActive("AccountReciveCash", "Index")
+                                     @Html.IsActive("AccountchequePayable", "Index")
+                                     @Html.IsActive("Accountchequesreceivable", "Index")
+                                     @Html.IsActive("AccountNotespayable", "Index")
+                                     @Html.IsActive("AccountNotesReceivable", "Index")
+                                     @Html.IsActive("AccountDailyJournal", "Index")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalPost")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalUNPost")
+                                     @Html.IsActive("AccountDailyJournal", "LedgerIndex")
+                                     @Html.IsActive("AccountDailyJournal", "subsidiaryledger")
+                                          @Html.IsActive("Reviews", "DepreciationIndex")
+                                          @Html.IsActive("TrialBalance", "Index")
+                                          @Html.IsActive("Reviews", "IncomeStatementIndex")
+                                          @Html.IsActive("Reviews", "GeneralbudgetIndex")">
+        <a class="title header">
+            <i class="money bill alternate outline icon"></i>
+            @GeneralResource.AccountingConfigration
+            @* <span class="arrow "></span>*@
+        </a>
+
+        <div class="content menu">
+            @* ------Accounting Configration  Links ------- *@
+            <div class="content menu">
+
+                <a class="item" href='@Url.Action("Index", "AccountTree" )'>
+                    <i class="chart line     icon  "></i>
+                    <span class="title">@GeneralResource.AccountTree  </span>
+                    @*<span class="arrow "></span>*@
+                </a>
+
+                <a class="item" href='@Url.Action("Index", "PhysicalYear" )'>
+
+                    <i class="calendar alternate outline icon"></i>
+                    @GeneralResource.PhysicalYear
+                </a>
+
+                <a class="item" href='@Url.Action("Index", "AccountCostCenter" )'>
+
+
+                    <i class="circle icon"></i>
+
+                    @GeneralResource.CostCenter
+                </a>
+
+                <a class="item" href='@Url.Action("Index", "AccountTreasury" )'>
+                    <i class="box icon"></i>
+                    @GeneralResource.Treasury
+                </a>
+
+                <a class="item" href='@Url.Action("Index", "AccountFirstBalance" )'>
+                    <i class="calculator icon"></i>
+                    @GeneralResource.FirstBalance
+                </a>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+    @* ------Bonds  Links ------- *@
+    <div class="item">
+        <a class="title header ">
+            <i class="certificate icon"></i> @GeneralResource.Bonds
+
+        </a>
+
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "AccountPayableCash" )'>
+                <i class="money bill alternate icon"></i>
+                @GeneralResource.CashPayable
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountReciveCash" )'>
+                <i class="money bill alternate outline  icon"></i>
+                @GeneralResource.ReciveCash
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountchequePayable" )'>
+                <i class="window maximize icon"></i>
+                @GeneralResource.chequesPayable
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Accountchequesreceivable" )'>
+                <i class="window maximize outline icon"></i>
+                @GeneralResource.chequesReceivable
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountNotespayable" )'>
+                <i class="sticky note icon"></i>
+                @GeneralResource.Notespayable
+            </a>
+
+
+            <a class="item" href='@Url.Action("Index", "AccountNotesReceivable")'>
+                <i class="sticky note outline icon"></i>
+                @GeneralResource.NotesReceivable
+            </a>
+
+
+        </div>
+
+    </div>
+    @* ------DailyJournal  Links ------- *@
+    <div class="item @Html.IsActive("AccountDailyJournal", "Index")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalPost")
+                                     @Html.IsActive("AccountDailyJournal", "DailyJournalUNPost")">
+        <a class="title header">
+            <i class="list alternate outline icon"></i>@GeneralResource.DailyJournal
+        </a>
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "AccountDailyJournal" )'>
+                <i class="list alternate icon"></i>
+                @GeneralResource.DailyJournal
+
+            </a>
+
+            <a class="item" href='@Url.Action("DailyJournalPost", "AccountDailyJournal" )'>
+                <i class="reply icon"></i>
+                @GeneralResource.post
+
+            </a>
+
+            <a class="item" href='@Url.Action("DailyJournalUNPost", "AccountDailyJournal" )'>
+                <i class="share icon"></i>
+                @GeneralResource.unpost
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="item @Html.IsActive("AccountDailyJournal", "LedgerIndex")
+                                          @Html.IsActive("AccountDailyJournal", "subsidiaryledger")
+                                          @Html.IsActive("Reviews", "DepreciationIndex")
+                                          @Html.IsActive("TrialBalance", "Index")
+                                          @Html.IsActive("Reviews", "IncomeStatementIndex")
+                                          @Html.IsActive("Reviews", "GeneralbudgetIndex")">
+        <a class="title header">
+            <i class="eye icon"></i> @GeneralResource.reviews
+        </a>
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("LedgerIndex", "AccountDailyJournal" )'>
+                <i class="clipboard icon"></i>
+                @GeneralResource.Ledger
+
+            </a>
+
+
+            <a class="item" href='@Url.Action("subsidiaryledger", "AccountDailyJournal" )'>
+                <i class="clipboard outline icon"></i>
+                @GeneralResource.subsidiaryledger
+            </a>
+
+            @*<a class="item" href='@Url.Action("DepreciationIndex", "Reviews")'>
+                <i class="eraser icon"></i>
+                @GeneralResource.depreciation
+            </a>*@
+
+            <a class="item" href='@Url.Action("TrialBalanceIndex", "Reviews" )'>
+                <i class="columns icon"></i>
+                @GeneralResource.TrialBalance
+            </a>
+
+
+            <a class="item" href='@Url.Action("IncomeStatementIndex", "Reviews")'>
+                <i class="file alternate outline icon"></i>
+                @GeneralResource.IncomeStatement
+
+            </a>
+
+            <a class="item" href='@Url.Action("GeneralbudgetIndex", "Reviews")'>
+                <i class="paste icon"></i>
+                @GeneralResource.Generalbudget
+
+            </a>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    @*start Banks menu*@
+    <div class="item @Html.IsActive("BankCurrency", "Index")
+                                          @Html.IsActive("Bank", "Index")
+                                          @Html.IsActive("BankBranch", "Index")
+                                          @Html.IsActive("BranchAccount", "Index")">
+        <a class="title header" href="javascript:;">
+            <i class="building icon"></i>
+            @GeneralResource.banks
+            @* <span class="arrow "></span>*@
+        </a>
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "BankCurrency" )'>
+                <i class="dollar sign icon"></i>
+                @GeneralResource.Bankcurrency
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Bank" )'>
+                <i class="building outline icon"></i>
+                @GeneralResource.Bank
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "BankBranch" )'>
+                <i class="university icon "></i>
+                @GeneralResource.BankBranch
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "BranchAccount" )'>
+                <i class="chart area icon"></i>
+                @GeneralResource.BranchAccount
+            </a>
+
+        </div>
+    </div>
+
+
+
+    @* End Banks menu*@
+
+    @*start Employee menu*@
+    <div class="item @Html.IsActive("Department", "Index")
+                                          @Html.IsActive("Jobs", "Index")
+                                          @Html.IsActive("Employee", "Index")
+                                          @Html.IsActive("AccountSalaryItem", "Index")
+                                          @Html.IsActive("AccountEmployeeSalaryItem", "Index")
+                                          @Html.IsActive("AccountEmployeesSalary", "Index")
+                                          @Html.IsActive("AccountEmployeesMonthlySalary", "Index")
+                                          @Html.IsActive("AccountEmployeesSalary", "Index")
+                                          @Html.IsActive("AccountEmployeesMonthlySalary", "Index")
+                                          @Html.IsActive("Employee", "PettycashIndex")
+                                          @Html.IsActive("Employee", "DaysOffIndex")">
+        <a class="title header">
+            <i class=" black tie icon"></i>
+            @GeneralResource.Employee
+            @* <span class="arrow "></span>*@
+        </a>
+
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "Department" )'>
+                <i class="sitemap icon"></i>
+                @GeneralResource.Department
+            </a>
+
+     
+
+            <a class="item" href='@Url.Action("Index", "Jobs" )'>
+                <i class="suitcase icon"></i>
+                @GeneralResource.Jobs
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Employee" )'>
+                <i class="black tie icon"></i>
+                @GeneralResource.Employee
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountSalaryItem" )'>
+                <i class="square icon"></i>
+                @GeneralResource.AccountSalaryItem
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountEmployeeSalaryItem" )'>
+                <i class="square outline icon"></i>
+                @GeneralResource.BounsDeduction
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountEmployeesSalary" )'>
+                <i class="money bill alternate icon"></i>
+                @GeneralResource.BasicEmployeeSalary
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AccountEmployeesMonthlySalary" )'>
+                <i class="money bill alternate outline icon"></i>
+                @GeneralResource.EmployeesMonthlySalaries
+            </a>
+
+            <a class="item" href='@Url.Action("PettycashIndex", "Employee")'>
+                <i class="dollar sign icon"></i>  @GeneralResource.Pettycash
+            </a>
+
+            <a class="item" href='@Url.Action("DaysOffIndex", "Employee" )'>
+                <i class="calendar times outline icon"></i> @GeneralResource.DaysOff
+            </a>
+
+        </div>
+    </div>
+
+
+    @*End Employee menu*@
+
+    @*start Customer menu*@
+    <div class="item  @Html.IsActive("AccountCustomer", "Index")">
+        <a class="title header" href='@Url.Action("Index", "AccountCustomer" )'>
+            <i class="users icon"></i>
+            @GeneralResource.customer
+            @* <span class="arrow "></span>*@
+        </a>
+    </div>
+    @*End Customer menu*@
+    @*start Asset menu*@
+    <div class="item  @Html.IsActive("AccountAsset", "Index")">
+        <a class="title header">
+            <i class="list alternate outline icon"></i>@GeneralResource.Assets
+        </a>
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "AssetTree" )'>
+                <i class="users icon"></i>
+                @GeneralResource.AssetTree
+                @* <span class="arrow "></span>*@
+            </a>
+            <a class="item" href='@Url.Action("Index", "AccountAsset" )'>
+                <i class="users icon"></i>
+                @GeneralResource.Assets
+                @* <span class="arrow "></span>*@
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "AssetDepreciation" )'>
+                <i class="eraser icon"></i>
+                @GeneralResource.depreciation
+                @* <span class="arrow "></span>*@
+            </a>
+
+
+
+        </div>
+    </div>
+
+
+
+    @*End Asset menu*@
+
+    @*start Supplier menu*@
+    <div class="item @Html.IsActive("Accountsupplier", "Index")">
+        <a class="title header" href='@Url.Action("Index", "Accountsupplier" )'>
+            <i class="shipping fast icon"></i>
+            @GeneralResource.Suppliers
+            @* <span class="arrow "></span>*@
+        </a>
+
+    </div>
+    @*End   Supplier menu*@
+
+
+    @*start Bus menu*@
+    <div class="item @Html.IsActive("Bus", "Index")
+                                @Html.IsActive("BusExpenses", "Index")
+                                @Html.IsActive("Buscost", "Index")
+                                 @Html.IsActive("BusStudentOccupation", "Index")">
+        <a class="title header ">
+            <i class="bus icon"></i>
+            @GeneralResource.Bus
+            @* <span class="arrow "></span>*@
+        </a>
+        <div class="menu content">
+
+            <a class="item" href='@Url.Action("Index", "Bus" )'>
+                <i class="bus icon"></i>
+                @GeneralResource.Bus
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "BusExpenses" )'>
+                <i class="money bill alternate outline icon"></i>
+                @GeneralResource.BusExpenses
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Buscost" )'>
+                <i class="money bill alternate icon"></i>
+                @GeneralResource.BusCost
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "BusStudentOccupation" )'>
+                <i class="user md icon"></i>
+                @GeneralResource.BusStudentOccupation
+            </a>
+
+        </div>
+    </div>
+    @*End   Bus menu*@
+
+    @*start Student menu*@
+    <div class="item @Html.IsActive("Student", "Index")">
+        <a class="title header">
+            <i class="child icon"></i>
+            @GeneralResource.Student
+            @* <span class="arrow "></span>*@
+        </a>
+        <div class="content menu">
+
+            <a id="flag1" class="item" href="@Url.Action("index", "Student", new { Flage = 1 })">
+                <i class="child icon"></i>
+                @GeneralResource.Student
+            </a>
+
+            <a id="flag2" class="item" href="@Url.Action("index", "Student", new { Flage = 2 })">
+                <i class="cogs icon"></i>
+                @GeneralResource.Student_Configration
+            </a>
+
+            <a id="flag3" class="item" href="@Url.Action("index", "Student", new { Flage = 3 })">
+                <i class="money bill alternate outline icon"></i>
+                @GeneralResource.Student_fees
+            </a>
+
+        </div>
+    </div>
+    @*End Student menu*@
+    @*start Report menu*@
+    <div class="item last @Html.IsActive("Report", "Index")">
+        <a class="title header ">
+            <i class="chart pie icon"></i>
+            @GeneralResource.Reports
+            @* <span class="arrow "></span>*@
+        </a>
+    </div>
+    @*End Report menu*@
+</div>
+

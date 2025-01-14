@@ -1,0 +1,209 @@
+﻿@model List<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalDetailViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+
+
+
+
+
+   
+
+    <div class="ui basic segment anim">
+
+        @*<div class="ui large dividing header">
+            @*<i class="fa globe"></i><div class="content">  <a href="#" id="Add" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a>Credit
+        </div>*@
+
+        <div class="ui container">
+            <div class="ui two column grid ">
+                <div class=" column">
+
+
+                    <table class="ui selectable single line striped celled compact table" id="myTable1">
+                        <thead class="">
+                            <tr>
+                                <th>
+
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().Credit)
+                                </th>
+                                <th>
+
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AccountNameEN)
+                                </th>
+
+                                <th>
+
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().DailyJournalDate)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="Searchbody">
+                            @{ decimal sumcredit = 0;
+                                decimal sumdetbit = 0;}
+                            @foreach (var item in Model.Where(x => x.Debit == 0).OrderBy(x => x.DailyJournalDate))
+                            {
+                                sumcredit = sumcredit + item.Credit;
+
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Credit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AccountNameEN)
+                                    </td>
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.DailyJournalDate, "{0:dd/MM/yyyy}")*@
+                                        @item.DailyJournalDate.Value.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <div class="column">
+
+                    <table class="ui selectable  single line striped celled  compact table" id="myTable2">
+                        <thead class="">
+                            <tr>
+                                <th>
+
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().Debit)
+                                </th>
+                                <th>
+
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AccountNameEN)
+                                </th>
+
+                                <th>
+
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().DailyJournalDate)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="Searchbody">
+
+                            @foreach (var item in Model.Where(x => x.Credit == 0).OrderBy(x => x.DailyJournalDate))
+                            {
+                                sumdetbit = sumdetbit + item.Debit;
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Debit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AccountNameEN)
+                                    </td>
+                                    <td>
+                                        @item.DailyJournalDate.Value.ToString("dd/MM/yyyy")
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                @{ decimal Totalsum = 0;
+
+                    if (sumdetbit > sumcredit)
+                    {
+                        Totalsum = sumdetbit;
+                    }
+                    else
+                    {
+                        Totalsum = sumcredit;
+                    }
+
+                    decimal different = Math.Abs(sumdetbit - sumcredit);
+                }
+
+                <div class="column">
+                    <div class="ui form">
+
+
+                        <div class="field">
+                            @Html.Label("Different", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+
+                                @if (sumdetbit > sumcredit)
+                                {
+                                    <input class="form-control text-box single-line" id="diffcredit" readonly="readonly" type="text" value="@different">
+                                }
+                                else
+                                {
+                                    <input class="form-control text-box single-line" id="diffcredit" readonly="readonly" type="text" value="">
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            @Html.Label("Total", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @*@Html.Editor("Total", "Total", new { value = "@Totalsum", htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                                <input class="form-control text-box single-line" id="Totalcredit" readonly="readonly" type="text" value="@Totalsum">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui form">
+                        <div class="field">
+                            @Html.Label("Different", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @if (sumdetbit < sumcredit)
+                                {
+                                    <input class="form-control text-box single-line" id="diffcredit" readonly="readonly" type="text" value="@different">
+                                }
+                                else
+                                {
+                                    <input class="form-control text-box single-line" id="diffcredit" readonly="readonly" type="text" value="">
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="field">
+                            @Html.Label("Total", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @*@Html.Editor("Total", "Total", new { value = "@Totalsum", htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                                <input class="form-control text-box single-line" id="TotalDebit" readonly="readonly" type="text" value="@Totalsum">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        if (!$('.anim').hasClass("animated")) {
+            $('.anim').transition({
+                animation: 'fade up',
+                duration: 700,
+                interval: 50,
+            });
+            $('.anim').addClass("animated");
+
+        }
+        function InitIndex() {
+            //$('#myTable1').DataTable();
+            //$('#myTable2').DataTable();
+
+
+        };
+        InitIndex();
+    });
+</script>

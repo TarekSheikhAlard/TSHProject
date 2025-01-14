@@ -1,0 +1,49 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusDetailsViewModel
+@using Campus.SchoolManagment.Web
+@using Campus.School.Management.Logic.Resources
+
+<tbody>
+    <tr>
+        @using (Html.BeginCollectionItem("_BusDetails"))
+        {
+            @Html.HiddenFor(c => c.BusID)
+            @Html.HiddenFor(c => c.IsSuperVisor)
+            @Html.HiddenFor(c => c.BusDetailsID)
+
+            <td>
+                @if (Model.IsSuperVisor)
+                {
+                    @Html.Label("Supervisor")
+                }
+                else
+                {
+                    @Html.Label("Driver")
+                }
+            </td>
+            <td>
+                @{
+                    var li = ViewBag.Employee_ID as SelectList;
+
+                }
+
+                @Html.DropDownListFor(n => n.Employee_ID, Model.Employee, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Employee_ID, "", new { @class = "" })
+            </td>
+
+                    if (!Model.IsSuperVisor)
+                    {
+                        <td>
+                            @Html.TextBoxFor(model => model.LicenseExpiryDate, "{0:MM/dd/yyyy}",  new { @class = "form-control  form-control-inline  date-picker" })
+                            @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "" })
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+
+                    <td></td>
+                    }
+    </tr>
+</tbody>

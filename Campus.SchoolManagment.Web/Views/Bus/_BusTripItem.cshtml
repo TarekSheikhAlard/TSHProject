@@ -1,0 +1,44 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusTripViewModel
+@using Campus.School.Management.Logic.Resources
+
+<tr>
+    @using (Html.BeginCollectionItem("_BusTrips"))
+    {
+        @Html.HiddenFor(c => c.BusID)
+        @Html.HiddenFor(c => c.BusTripID)
+        <td>
+
+            @Html.EditorFor(model => model.BusStation, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+            @Html.ValidationMessageFor(model => model.BusStation, "", new { @class = "" })
+
+        </td>
+        <td>
+           
+                @Html.EditorFor(model => model.PickUpTime , new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                @Html.ValidationMessageFor(model => model.PickUpTime, "", new { @class = "" })
+           
+        </td>
+        <td>
+
+            @Html.EditorFor(model => model.DropTime, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+            @Html.ValidationMessageFor(model => model.DropTime, "", new { @class = "" })
+
+        </td>
+        <td>
+
+            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "" })
+
+        </td>
+        <td>
+
+            @Html.EditorFor(model => model.TripType, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+            @Html.ValidationMessageFor(model => model.TripType, "", new { @class = "" })
+
+        </td>
+        <td>
+            <input type="button" onclick="if (confirm('@GeneralResource.DeleteMessageConfirm')) { $(this).parent().parent($('td')).remove(); }" value="@GeneralResource.Delete">
+        </td>
+        
+    }
+</tr>

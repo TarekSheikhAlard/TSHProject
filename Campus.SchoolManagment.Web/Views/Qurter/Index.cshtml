@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.QurterViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()){Layout = "~/Views/Shared/_Layout.cshtml";}
+}
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+
+
+<div class="row">
+    <div class="col-md-12">
+
+
+        @*<a href="#" id="Add" class="btn green"><i class="glyphicon glyphicon-plus"></i>@GeneralResource.CreateNew</a>*@
+
+        <div>
+            @Html.DropDownList("Year", ViewBag.Year as SelectList, "select", htmlAttributes: new { @class = "form-control",@onchange ="GetQuter(this.value);" })
+        </div>
+        <br><br />
+        <div class="ui raised blue segment anim">
+            
+                <div class="ui large dividing header">
+                    <i class="fa globe"></i><div class="content">  <a href="#" id="Add" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a> @GeneralResource.Qurter
+                </div>
+
+            </div>
+           <div class="ui container">
+             
+              
+                <div id="div-record">
+
+            @*@Html.Partial("_List", Model)*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@{ string New = GeneralResource.New + " " + GeneralResource.Qurter;
+    string Update = GeneralResource.Update + " " + GeneralResource.Qurter;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.Qurter;
+}
+@*<div class="modal fade" id="Add-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-full">
+        <div class="modal-dialog">
+            <div class="modal-content modal_Padding modal_content_style ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">@New </h4>
+                </div>
+                <div id="divForAdd">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="Edit-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-full">
+        <div class="modal-dialog  ">
+            <div class="modal-content modal_Padding modal_content_style">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">@Update </h4>
+                </div>
+                <div id="divForUpdate">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="Delete-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-full">
+        <div class="modal-dialog  modal_delete_dialog ">
+            <div class="modal-content modal_Padding modal_content_style_delete">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">@Delete </h4>
+                </div>
+                <div id="divForDelete">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@<div class="ui add small modal " id="Add-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">  <i class=" close feather icon-x "></i>     <div class="header">         @New     </div>     <div id="divForAdd" class="divForAdd scrolling content">     </div> </div> <div class="ui edit modal " id="Edit-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">       <i class=" close feather icon-x "></i>     <div class="header">         @Update     </div>     <div id="divForUpdate" class="divForUpdate scrolling content">     </div> </div> <div class="ui modal " id="Delete-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">       <i class=" close feather icon-x "></i>     <div class="header">         @Delete     </div>     <div id="divForDelete" class="divForDelete content">     </div> </div><script src="~/Scripts/DevelopmentJS/QurterJS.js"></script>
+
+
+
+

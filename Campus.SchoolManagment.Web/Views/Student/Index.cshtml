@@ -1,0 +1,230 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.StudentViewModel>
+@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = GeneralResource.StudyYear; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+@*<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>*@
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="accessibility-2" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @{ int flag = ViewBag.Flage;}
+
+                    @switch (flag)
+                    {
+                        case 1:
+                            @GeneralResource.Student
+                            break;
+                        case 3:
+                            @GeneralResource.StudentFees
+                            break;
+                    }
+
+
+
+                </div>
+
+
+                <div id="Sub" class="sub header">
+                    @switch (flag)
+                    {
+                        case 1:
+                            @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.Student)
+                            break;
+                        case 3:
+                            @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.Student_fees)
+                            break;
+                    }
+
+
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="ui main container">
+
+    <div class="ui  segment">
+
+        <div class="toolspace">
+
+            <div class="ui form">
+                <div class="  inline fields">
+                    <div class="field">
+                        <b> @GeneralResource.StudyYear</b>  @Html.DropDownList("YearID", ViewBag.YearID as SelectList, GeneralResource.Select, htmlAttributes: new { @class = "ui search year selection dropdown", @onchange = "GetGrade(this.value);" })
+                    </div>
+                    <div class="field">
+                        <b> @GeneralResource.Grade</b>  @Html.DropDownList("GradeID", new SelectList(""), GeneralResource.Select, htmlAttributes: new { @class = "ui search grade selection dropdown", })
+                    </div>
+                    <div class="field">
+                        <input type="button" value="@GeneralResource.GetStudents" class="ui primary button" onclick="GetStudents()" />
+                    </div>
+                    @if (flag == 1)
+                    {
+
+                        <div class="ui  buttons">
+                            <div class="ui download icon button">  <i class="download  icon"></i> @GeneralResource.Download</div>
+                            <div class="ui floating dropdown icon button">
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <a href="#" id="DownloadExcel" class="item">
+                                        <i class="file excel outline icon"></i>
+                                        @GeneralResource.Excel
+                                    </a>
+                                    <a href="#" id="DownloadPDF" class="item">
+                                        <i class="file pdf outline icon"></i>
+                                        @GeneralResource.PDF
+                                    </a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+
+                </div>
+                <div class="ui info small message">
+                    <p><i class="info icon"></i>click on the Student Academic ID for details and more.</p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="ui container">
+            @*@if (ViewBag.Flage == 1)
+                {
+                    <a href="#" id="Add" class="ui labeled icon primary  button">
+                        <i class="plus icon"></i>
+                        @GeneralResource.CreateNew
+                    </a>
+                }*@
+
+
+            <div id="div-record" class="ui  segment">
+
+                @Html.Partial("_List", Model)
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+@{ string New = GeneralResource.New + " " + GeneralResource.Student;
+    string Update = GeneralResource.Update + " " + GeneralResource.Student;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.Student;
+}
+
+
+
+<div class="ui config longer large modal " id="Configuration-Model">
+
+    <div class="header">
+
+        @GeneralResource.Configuration
+    </div>
+    <div id="divForConfigration" class=" scrolling content">
+    </div>
+</div>
+
+
+
+
+<div class="ui longer large feesearch modal " id="FeeSearch-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+
+        @GeneralResource.StudentFees
+    </div>
+    <div id="divForFeeSearch" class=" scrolling content">
+    </div>
+</div>
+
+<div class="ui small editConfig modal " id="EditConfig-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+
+        @GeneralResource.Edit
+    </div>
+    <div id="divForEditConfig" class=" scrolling content">
+    </div>
+</div>
+
+<div class="ui small editConfig modal " id="DeleteConfig-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @GeneralResource.Delete
+    </div>
+    <div id="divForDeleteConfig" class=" scrolling content">
+    </div>
+</div>
+
+<div class=" ui account modal " id="Account-Model">
+
+    <div class="header">
+
+        @GeneralResource.AccountTree
+    </div>
+    <div id="divForaccount" class="divForaccount scrolling content">
+    </div>
+</div>
+
+<div class="ui  large add  modal " id="Add-Model"> 
+    <i class=" close feather icon-x "></i>  
+    <div class="header">    
+    @New   
+        </div>  
+    <div id="divForAdd" class="divForAdd scrolling content"> 
+        </div> 
+    </div> 
+<div class="ui edit modal " id="Edit-Model">  
+    <i class=" close feather icon-x "></i>  
+    <div class="header">    
+    @Update  
+        </div>  
+    <div id="divForUpdate" class="divForUpdate scrolling content">  
+        </div> 
+</div>
+ <div class="ui modal " id="Delete-Model" >    
+    <i class=" close feather icon-x "></i>   
+    <div class="header">    
+     @Delete   
+        </div>  
+    <div id="divForDelete" class="divForDelete content">  
+        </div> 
+ </div>
+<script src="~/Scripts/DevelopmentJS/Student.js"></script>
+
+
+<script>
+    $(function () {
+        //$("#sortable").sortable({
+        //    animation: 150,
+        //    ghostClass: "sortable-ghost", // Class name for the drop placeholder
+        //    chosenClass: "sortable-chosen", // Class name for the chosen item
+        //    dragClass: "sortable-drag"
+
+        //});
+
+
+        $('.year.dropdown').dropdown('set selected',@ViewBag.CurrentYear)
+
+    })
+</script>

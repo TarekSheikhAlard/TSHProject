@@ -1,0 +1,143 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<script src="~/Content/Scripts/Sortable.min.js"></script>
+<script src="~/Content/Scripts/jquery-sortable.js"></script>
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+
+            <h1 class="ui header normal ">
+                <clr-icon shape="book" size="45"></clr-icon>
+                @*<i class="feather big icon-book" ></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.School
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.School)
+                </div>
+            </h1>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui  segment anim">
+        <div class="toolspace">
+            <div class="ui gradeFeeConfig form">
+                <div class="  inline fields">
+                    <div class="field">
+                        <b> @GeneralResource.StudyYear</b>@Html.DropDownList("YearID", ViewBag.YearID as SelectList, GeneralResource.Select, htmlAttributes: new { @class = "ui search selection dropdown", @onchange = "GetGrade(this.value);" })
+                    </div>
+                    <div class="field">
+                        <b> @GeneralResource.Grade</b>  @Html.DropDownList("GradeID", new SelectList(""), GeneralResource.Select, htmlAttributes: new { @class = "ui search selection grade dropdown", })
+                    </div>
+                    <div class="field">
+                            <input type="button" value="Get Fees Report " class="ui primary button" onclick="GetFeesReport()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui container">
+            <div class="ui inverted feeConfig dimmer">
+                <div class="ui text loader">Loading</div>
+            </div>
+            <div class="ui info small message">
+
+                <p><i class="info icon"></i>drag and drop items to arrange priority</p>
+            </div>
+            <div class="ui main basic segment ">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+@{ string New = GeneralResource.New + " " + GeneralResource.School;
+    string Update = GeneralResource.Update + " " + GeneralResource.School;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.School;
+}
+
+
+<div class="ui add  modal " id="Add-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">
+
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @New
+    </div>
+    <div id="divForAdd" class="divForAdd scrolling content">
+    </div>
+
+</div>
+
+<div class="ui fee-report large  modal " id="Fee-Report-Model" >
+
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+       Fee Structure Report
+    </div>
+    <div id="divForReport" class="divForAdd scrolling content">
+    </div>
+
+</div>
+
+
+
+<div class="ui edit modal " id="Edit-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Update
+    </div>
+    <div id="divForUpdate" class="divForUpdate scrolling content">
+    </div>
+</div>
+
+
+
+<div class="ui modal " id="Delete-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Delete
+    </div>
+    <div id="divForDelete" class="divForDelete content">
+    </div>
+
+</div>
+
+<script>
+
+    $(function () {
+        $('.gradeFeeConfig.form').form({
+            fields: {
+                YearID: 'empty',
+                GradeID: 'empty'
+            }
+        });
+    })
+
+</script>
+
+
+<script src="~/Scripts/DevelopmentJS/GradesFeeConfig.js"></script>
+
+
+

@@ -1,0 +1,59 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AcademicYearViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+
+
+
+
+@using (Ajax.BeginForm("Edit", "AcademicYear", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+
+
+       
+   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+@Html.HiddenFor(c => c.AcademicID)
+
+    @Html.HiddenFor(c => c.Stage_ID)
+    <div class="field">
+        @Html.LabelFor(model => model.StageName, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-4">
+            @Html.Label(Model.StageName, new { @class = "control-label" })
+
+
+        </div>
+    </div>
+
+
+            <div class="field">
+                @Html.LabelFor(model => model.AcadmicName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.AcadmicName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AcadmicName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        <div class="actions">
+            <button type="submit" class="ui primary submit button" name="cmd"> @GeneralResource.Edit</button>
+            <button type="button" class="ui deny button" >@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

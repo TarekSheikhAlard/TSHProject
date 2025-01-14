@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcademicYear" xml:space="preserve">
+    <value>الصف الدراسى </value>
+  </data>
+  <data name="accounting" xml:space="preserve">
+    <value>الحسابات العامة</value>
+  </data>
+  <data name="AccountSalaryItem" xml:space="preserve">
+    <value>انواع الجزاءات والمكافأت </value>
+  </data>
+  <data name="AccountTree" xml:space="preserve">
+    <value>شجرة الحسابات</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>بنك</value>
+  </data>
+  <data name="BankBranch" xml:space="preserve">
+    <value>فروع البنوك  </value>
+  </data>
+  <data name="Bankcurrency" xml:space="preserve">
+    <value>العملات </value>
+  </data>
+  <data name="BasicEmployeeSalary" xml:space="preserve">
+    <value>اعدادات الرواتب </value>
+  </data>
+  <data name="BounsDeduction" xml:space="preserve">
+    <value>الجزاءات والمكافأت </value>
+  </data>
+  <data name="BranchAccount" xml:space="preserve">
+    <value>حسابات فروع البنوك </value>
+  </data>
+  <data name="Bus" xml:space="preserve">
+    <value>الأتوبيس</value>
+  </data>
+  <data name="BusCost" xml:space="preserve">
+    <value>سعر رحلات الأتوبيسات </value>
+  </data>
+  <data name="BusExpenses" xml:space="preserve">
+    <value>مصروفات الأتوبيسات </value>
+  </data>
+  <data name="BusStudentOccupation" xml:space="preserve">
+    <value>توزيع الطلاب على الأتوبيسات </value>
+  </data>
+  <data name="BusTrip" xml:space="preserve">
+    <value>رحلات الأتوبيس </value>
+  </data>
+  <data name="CashPayable" xml:space="preserve">
+    <value>الدفع النقدى </value>
+  </data>
+  <data name="chequesPayable" xml:space="preserve">
+    <value>شيكات الصادرة </value>
+  </data>
+  <data name="chequesReceivable" xml:space="preserve">
+    <value>شيكات الوارد</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>المدن</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="ClosePhysicalYear" xml:space="preserve">
+    <value>إغلاق السنة المالية </value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>معلومات الشركة</value>
+  </data>
+  <data name="ComparePassworderror" xml:space="preserve">
+    <value>لا تتطابق كلمة المرور و  تأكيد كلمة مرور </value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>الإعدادات </value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+  <data name="ConfirmPassworderror" xml:space="preserve">
+    <value>الرجاء إدخال تأكيد كلمة المرور</value>
+  </data>
+  <data name="CostCenter" xml:space="preserve">
+    <value>مراكز التكلفة </value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>إنشاء جديد</value>
+  </data>
+  <data name="DailyJournal" xml:space="preserve">
+    <value> قيود اليومية</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteMessageConfirm" xml:space="preserve">
+    <value>هل تريد حذف البيانات </value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>الإدارات</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل </value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>الموظفين</value>
+  </data>
+  <data name="EmployeesMonthlySalaries" xml:space="preserve">
+    <value>استلام الرواتب </value>
+  </data>
+  <data name="E_mailerror" xml:space="preserve">
+    <value>أدخل البريد الالكترونى بشكل صحيح </value>
+  </data>
+  <data name="FirstBalance" xml:space="preserve">
+    <value>رصيد أول المدة </value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="ImageRequire" xml:space="preserve">
+    <value>أختر الصورة  </value>
+  </data>
+  <data name="IncomeStatement" xml:space="preserve">
+    <value>قائمة الدخل </value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>الوظائف</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>الجنسيات</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value> جديد</value>
+  </data>
+  <data name="Notespayable" xml:space="preserve">
+    <value>أورق الدفع </value>
+  </data>
+  <data name="NotesReceivable" xml:space="preserve">
+    <value>أورق قبض</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>موافق</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="Passworderror" xml:space="preserve">
+    <value>الرجاء إدخال كلمة المرور</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>يجب أن يكون {0} على الأقل {2} حرفا</value>
+    <comment>The {0} must be at least {2} characters long.</comment>
+  </data>
+  <data name="PhysicalYear" xml:space="preserve">
+    <value>السنة المالية </value>
+  </data>
+  <data name="ReciveCash" xml:space="preserve">
+    <value>إستلام نقدي</value>
+  </data>
+  <data name="Reg_ExpDigit" xml:space="preserve">
+    <value>أدخل قيمة رقمية</value>
+  </data>
+  <data name="Reg_Expmoney" xml:space="preserve">
+    <value>أدخل القيمة رقمية</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="School" xml:space="preserve">
+    <value>المدارس التابعة للشركة</value>
+  </data>
+  <data name="Stage" xml:space="preserve">
+    <value>المرحلة الدارسية </value>
+  </data>
+  <data name="StatementType" xml:space="preserve">
+    <value>أنواع الحسابات </value>
+  </data>
+  <data name="Student" xml:space="preserve">
+    <value>الطلاب </value>
+  </data>
+  <data name="StudentFees" xml:space="preserve">
+    <value>الرسوم الدارسية </value>
+  </data>
+  <data name="Student_Configration" xml:space="preserve">
+    <value>إعدادات الطلاب </value>
+  </data>
+  <data name="Student_fees" xml:space="preserve">
+    <value>سداد مصروفات الطلاب</value>
+  </data>
+  <data name="StudyYear" xml:space="preserve">
+    <value>السنوات الدراسية</value>
+  </data>
+  <data name="toastrDelete" xml:space="preserve">
+    <value>تم الحذف بنجاح </value>
+  </data>
+  <data name="toastrEdit" xml:space="preserve">
+    <value>تم التعديل بنجاح </value>
+  </data>
+  <data name="toastrOperationFaild" xml:space="preserve">
+    <value>تم فشل العملية </value>
+  </data>
+  <data name="toastrSave" xml:space="preserve">
+    <value>تم الحفظ بنجاح </value>
+  </data>
+  <data name="Treasury" xml:space="preserve">
+    <value>الصناديق المالية</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="welcome" xml:space="preserve">
+    <value>نظام إداره المدارس الخاصة</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة </value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>أختر </value>
+  </data>
+  <data name="upload" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="Ledger" xml:space="preserve">
+    <value>حساب الأستاذ</value>
+  </data>
+  <data name="TrialBalance" xml:space="preserve">
+    <value>ميزان المراجعة</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>الإجمالى</value>
+  </data>
+  <data name="ClassRoom" xml:space="preserve">
+    <value>بيانات الفصول الدراسية</value>
+  </data>
+  <data name="AccountLevelError" xml:space="preserve">
+    <value>غير مسموح بإضافة مستوى حسابات </value>
+  </data>
+  <data name="AccountChild" xml:space="preserve">
+    <value>حسابات فرعية</value>
+  </data>
+  <data name="AccountLevel2" xml:space="preserve">
+    <value>مستوى الحسابات الثانى</value>
+  </data>
+  <data name="toastrEmailExist" xml:space="preserve">
+    <value>البريد الأليكترونى موجود بالفعل</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>صلاحيات المستخدم</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="SchoolFeesList" xml:space="preserve">
+    <value>أسعار الكتب و المصروفات الدراسية</value>
+  </data>
+  <data name="SchoolUser" xml:space="preserve">
+    <value>المستخدمين</value>
+  </data>
+  <data name="Qurter" xml:space="preserve">
+    <value>الارباع (الكوارتر)</value>
+  </data>
+  <data name="Semester" xml:space="preserve">
+    <value>الصفوف الدراسية</value>
+  </data>
+  <data name="AccounttreeName" xml:space="preserve">
+    <value>شجرة الحسابات</value>
+  </data>
+  <data name="AcademicConfigration" xml:space="preserve">
+    <value>اعدادات اكاديمية</value>
+  </data>
+  <data name="AcademicYearName" xml:space="preserve">
+    <value>الصفوف الدراسية</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>شؤون الموظفين</value>
+  </data>
+  <data name="Generaldefinitions" xml:space="preserve">
+    <value>اعدادات عامة</value>
+  </data>
+  <data name="generalaccounting" xml:space="preserve">
+    <value>الحسابات العامة</value>
+  </data>
+  <data name="BankConfigration" xml:space="preserve">
+    <value>اعدادات البنوك</value>
+  </data>
+  <data name="Assets" xml:space="preserve">
+    <value>الأصول</value>
+  </data>
+  <data name="customer" xml:space="preserve">
+    <value>العملاء</value>
+  </data>
+  <data name="Suppliers" xml:space="preserve">
+    <value>الموردين</value>
+  </data>
+  <data name="Bonds" xml:space="preserve">
+    <value>السندات</value>
+  </data>
+  <data name="AccountingConfigration" xml:space="preserve">
+    <value>اعدادات الحسابات</value>
+  </data>
+  <data name="Generalbudget" xml:space="preserve">
+    <value>الميزانيه العمومية</value>
+  </data>
+  <data name="reviews" xml:space="preserve">
+    <value>الحسابات العامة</value>
+  </data>
+  <data name="banks" xml:space="preserve">
+    <value>البنوك</value>
+  </data>
+  <data name="DaysOff" xml:space="preserve">
+    <value>الاجازات</value>
+  </data>
+  <data name="depreciation" xml:space="preserve">
+    <value>الاهلاك</value>
+  </data>
+  <data name="Pettycash" xml:space="preserve">
+    <value>العهدة</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>التقارير</value>
+  </data>
+  <data name="post" xml:space="preserve">
+    <value>ترحيل</value>
+  </data>
+  <data name="DailyJournalPosted" xml:space="preserve">
+    <value>تم ترحيل القيود</value>
+  </data>
+  <data name="DailyJournalUNPosted" xml:space="preserve">
+    <value>تم الغاء الترحيل</value>
+  </data>
+  <data name="unpost" xml:space="preserve">
+    <value>الغاء الترحيل</value>
+  </data>
+  <data name="AccountProf" xml:space="preserve">
+    <value>الاستاذ العام </value>
+  </data>
+  <data name="DailyJournalequal" xml:space="preserve">
+    <value>الطرف الدائن لايساوى الطرف المدين </value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>اسم الحساب </value>
+  </data>
+  <data name="FourthBranch" xml:space="preserve">
+    <value>فرعى رابع </value>
+  </data>
+  <data name="FristBranche" xml:space="preserve">
+    <value>فرعى اول</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>من تاريخ </value>
+  </data>
+  <data name="MainAccount" xml:space="preserve">
+    <value>الحساب الرئيسى </value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="SecondBranche" xml:space="preserve">
+    <value>فرعى ثانى </value>
+  </data>
+  <data name="subsidiaryledger" xml:space="preserve">
+    <value>الاستاذ المساعد</value>
+  </data>
+  <data name="ThirdBranche" xml:space="preserve">
+    <value>فرعى ثالث</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>الى تاريخ </value>
+  </data>
+  <data name="Posted" xml:space="preserve">
+    <value>تم الترحيل </value>
+  </data>
+  <data name="DailyJournalpostedCreated" xml:space="preserve">
+    <value>تم عمل قيد مرحل</value>
+  </data>
+  <data name="DailyJournalunpostedCreated" xml:space="preserve">
+    <value>تم عمل قيد غير  مرحل</value>
+  </data>
+  <data name="Createdby" xml:space="preserve">
+    <value>مدخل  القيد </value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>تاريخ الادخال </value>
+  </data>
+  <data name="Modifiedby" xml:space="preserve">
+    <value>معدل القيد</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>تاريخ التعديل </value>
+  </data>
+  <data name="Installment" xml:space="preserve">
+    <value>الاقساط </value>
+  </data>
+  <data name="StudentfeesHistory" xml:space="preserve">
+    <value>بيان مدفوعات الطالب </value>
+  </data>
+  <data name="TotalFees" xml:space="preserve">
+    <value>اجمالى المصروفات </value>
+  </data>
+  <data name="supplier" xml:space="preserve">
+    <value />
+  </data>
+  <data name="bachelorsdegree" xml:space="preserve">
+    <value>بكالوريوس</value>
+  </data>
+  <data name="Christian" xml:space="preserve">
+    <value>مسيحى </value>
+  </data>
+  <data name="divorced" xml:space="preserve">
+    <value>مطلق</value>
+  </data>
+  <data name="Doctorate" xml:space="preserve">
+    <value>دكتوراه </value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>انثى </value>
+  </data>
+  <data name="HighSchool" xml:space="preserve">
+    <value>ثانوية </value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>ذكر </value>
+  </data>
+  <data name="Married" xml:space="preserve">
+    <value>متزوج </value>
+  </data>
+  <data name="mastersdegree" xml:space="preserve">
+    <value>ماجستير</value>
+  </data>
+  <data name="Muslim" xml:space="preserve">
+    <value>مسلم </value>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>غير ذلك </value>
+  </data>
+  <data name="single" xml:space="preserve">
+    <value>اعزب </value>
+  </data>
+  <data name="Widower" xml:space="preserve">
+    <value>ارمل</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>شهرى </value>
+  </data>
+  <data name="yearly" xml:space="preserve">
+    <value>سنوى </value>
+  </data>
+  <data name="Immediate" xml:space="preserve">
+    <value>فورى </value>
+  </data>
+  <data name="Withsalary" xml:space="preserve">
+    <value>مع المرتب </value>
+  </data>
+  <data name="logoff" xml:space="preserve">
+    <value>إطفاء</value>
+  </data>
+  <data name="ConfigHeader" xml:space="preserve">
+    <value>Configuration Information</value>
+  </data>
+  <data name="Configs" xml:space="preserve">
+    <value>Configurations</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="AssetTree" xml:space="preserve">
+    <value>Asset Tree</value>
+  </data>
+  <data name="AssetLevelError" xml:space="preserve">
+    <value>Not Allowed to Add Asset</value>
+  </data>
+  <data name="DepartmentLevelError" xml:space="preserve">
+    <value>Not Allow to Add Department</value>
+  </data>
+  <data name="DepartmentTree" xml:space="preserve">
+    <value>Department Tree</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DescriptionAddRemove" xml:space="preserve">
+    <value>Add or Remove {0} from the Grid below</value>
+  </data>
+  <data name="NameArError" xml:space="preserve">
+    <value>Name Arabic is Required</value>
+  </data>
+  <data name="NameError" xml:space="preserve">
+    <value>Name is Required </value>
+  </data>
+  <data name="HolidayTypes" xml:space="preserve">
+    <value>HolidayTypes</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AccountFeeTypes" xml:space="preserve">
+    <value>Account Fee Types</value>
+  </data>
+  <data name="GetStudents" xml:space="preserve">
+    <value>Get Students</value>
+  </data>
+  <data name="hr" xml:space="preserve">
+    <value>Human Resources</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="Transportation" xml:space="preserve">
+    <value>Transportation</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>User Management</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="RolesNameError" xml:space="preserve">
+    <value>Role Name is Required</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="UserRoles" xml:space="preserve">
+    <value>User to Roles </value>
+  </data>
+  <data name="Excel" xml:space="preserve">
+    <value>Excel</value>
+  </data>
+  <data name="PDF" xml:space="preserve">
+    <value>PDF</value>
+  </data>
+  <data name="DownloadPdf" xml:space="preserve">
+    <value>Download PDF</value>
+  </data>
+  <data name="InventoryLevelError" xml:space="preserve">
+    <value>Not Allowed to Add Inventory Item</value>
+  </data>
+  <data name="InventoryTree" xml:space="preserve">
+    <value>Inventory Tree</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="MaterialManufacture" xml:space="preserve">
+    <value>Material Manufacture</value>
+  </data>
+  <data name="StorePlaces" xml:space="preserve">
+    <value>Store Places</value>
+  </data>
+  <data name="UnitsMeasurements" xml:space="preserve">
+    <value>Units Measurements</value>
+  </data>
+  <data name="Stores" xml:space="preserve">
+    <value>Stores</value>
+  </data>
+  <data name="JournalTypes" xml:space="preserve">
+    <value>Journal Types</value>
+  </data>
+  <data name="ReceiveItems" xml:space="preserve">
+    <value>Receive Items</value>
+  </data>
+  <data name="EmployeeSalaryReport" xml:space="preserve">
+    <value>Employee Salary Report</value>
+  </data>
+  <data name="MainBranch" xml:space="preserve">
+    <value>Main Branch</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Quotation" xml:space="preserve">
+    <value>Quotation</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaction</value>
+  </data>
+  <data name="InitialRegistration" xml:space="preserve">
+    <value>Initial Registration</value>
+  </data>
+  <data name="balancesheet" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="BankTransactions" xml:space="preserve">
+    <value>Bank Transactions</value>
+  </data>
+  <data name="NotAllowedDelete" xml:space="preserve">
+    <value>Cannot delete this record, record used in other processes </value>
+  </data>
+  <data name="Driver" xml:space="preserve">
+    <value>Driver</value>
+  </data>
+  <data name="Supervisor" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+</root>

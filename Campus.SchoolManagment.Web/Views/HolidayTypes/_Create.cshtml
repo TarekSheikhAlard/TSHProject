@@ -1,0 +1,73 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.HolidayTypesViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "HolidayTypes", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.HolidayID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HolidayID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HolidayID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="field">
+        @Html.LabelFor(model => model.HolidayNameAr, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HolidayNameAr, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HolidayNameAr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.HolidayNameEn, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HolidayNameEn, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HolidayNameEn, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+            @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Days, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Days, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+            @Html.ValidationMessageFor(model => model.Days, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Notes, new { htmlAttributes = new { @class = "", @type = "number" } })
+            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,123 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeBenefitsOthersViewModel
+@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+@{
+    int type = ViewBag.type;
+}
+
+@using (Ajax.BeginForm("Edit", "PayrollSetup", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record-"+type, OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(c => c.Id)
+
+    @Html.HiddenFor(c => c.Type)
+
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Name_AR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Name_AR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name_AR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Name_En, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Name_En, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name_En, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="two fields">
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.AccountTreeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.DropDownFor(model => model.AccountTreeID, ViewBag.AccountTreeList as List<SemanticControls.DropdownList>, new { @class = " ui account  search selection  dropdown ", @placeholder = "Search" })
+
+                @Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <div class="two fields">
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.IsDefault, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.CheckBoxFor(model => model.IsDefault, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsDefault, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @if (Model.Type == 1)
+            {
+                @Html.Label("Percentage", "add % of base pay")
+            }
+            else if (Model.Type == 2)
+            { @Html.Label("Percentage", "deduct % of base pay")}
+        else
+        {
+            @Html.Label("Percentage", " % of base pay")
+        }
+            <div class="">
+                @Html.EditorFor(model => model.Percentage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Percentage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+}
+
+<script>
+      $(function () {
+        setTimeout(function () {
+            
+             $('.ui.account.dropdown')
+            .dropdown({
+                debug: false,
+                match: 'both',
+                ignoreCase: true,
+                fullTextSearch: true
+            })
+
+        }, 2)
+    })
+
+    
+   
+</script>
+

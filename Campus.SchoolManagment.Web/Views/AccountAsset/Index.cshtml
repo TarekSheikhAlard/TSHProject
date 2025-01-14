@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountAssetViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+
+@*<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+         
+                <div id="heading" class="content">
+                    @GeneralResource.Assets
+                </div>
+                <div id="Sub" class="sub header">
+                  
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>*@
+
+
+   
+        @*<a href="#" id="Add" class="btn green"><i class="glyphicon glyphicon-plus"></i>@GeneralResource.CreateNew</a>*@
+
+    <div class=" anim">
+        <div class="toolspace">
+
+            <a href="#" id="Add-asset" class="ui labeled icon primary  button">
+                <i class="plus icon"></i>
+                @GeneralResource.CreateNew
+            </a>
+
+
+            <div class="ui  buttons">
+                <div class="ui download icon button">  <i class="download icon"></i> @GeneralResource.Download</div>
+                <div class="ui floating dropdown icon button">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" id="DownloadExcel-asset" class="item">
+                            <i class="file excel outline icon"></i>
+                            @GeneralResource.Excel
+                        </a>
+                        <a href="#" id="DownloadPDF-asset" class="item">
+                            <i class="file pdf outline icon"></i>
+                            @GeneralResource.PDF
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ui container">
+            <div id="div-record-asset">
+                @Html.Partial("_List", Model)
+            </div>
+        </div>
+
+    </div>
+
+
+
+@{ string New = GeneralResource.New + " " + GeneralResource.Assets;
+    string Update = GeneralResource.Update + " " + GeneralResource.Assets;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.Assets;
+}
+
+
+<div class=" ui small asset modal " id="Asset-Model">
+
+    <div class="header">
+
+        @GeneralResource.AssetTree
+    </div>
+    <div id="divForAsset" class="divForAsset scrolling content">
+    </div>
+</div>
+
+<div class="ui account small  modal " id="Account-Model">
+
+    <div class="header">
+        @GeneralResource.AccountTree
+    </div>
+    <div id="divForaccount" class="divForUpdate scrolling content">
+    </div>
+</div>
+
+<div class="ui add assets modal " id="Add-Model-asset" >
+    <i class=" close feather icon-x "></i>
+    <div class="header"> 
+    @New   
+        </div>  
+    <div id="divForAdd-asset" class="divForAdd scrolling content"> 
+        </div> 
+    </div> 
+<div class="ui edit asset modal " id="Edit-Model-asset" >
+    <i class=" close feather icon-x "></i> 
+    <div class="header">     
+    @Update     </div> 
+    <div id="divForUpdate-asset" class="divForUpdate scrolling content">
+        </div> 
+    </div> 
+<div class="ui delete asset modal " id="Delete-Model-asset" >  
+    <i class=" close feather icon-x "></i>  
+    <div class="header">    
+    @Delete 
+        </div>   
+    <div id="divForDelete" class="divForDelete content">  
+        </div>
+ </div>
+<script src="~/Scripts/DevelopmentJS/AccountAsset.js"></script>

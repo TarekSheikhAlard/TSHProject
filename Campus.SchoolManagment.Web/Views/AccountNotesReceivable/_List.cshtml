@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountNotesReceivableViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.docementNumber)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNameEN)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.AccountTreeCode)
+            </th>*@
+          
+            <th>
+                @Html.DisplayNameFor(model => model.costcenterName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.TreasuryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRelay)
+            </th>
+            <th>@GeneralResource.Edit</th>
+            <th>@GeneralResource.Delete</th>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.docementNumber)
+            </td>
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNameEN)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.AccountTreeCode)
+            </td>*@
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.costcenterName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.TreasuryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRelay)
+            </td>
+            <td>
+                <a href="#" onclick="Edit(@item.ID);"> <i class="ui edit icon"></i></a>
+
+            </td>
+            <td>
+                <a href="#" onclick="Delete(@item.ID);"> <i class="ui delete red icon"></i></a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

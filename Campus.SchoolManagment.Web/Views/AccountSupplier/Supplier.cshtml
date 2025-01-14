@@ -1,0 +1,311 @@
+﻿
+@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.SupplierFormViewModel>
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = "Supplier";
+    if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<script src="~/Content/Scripts/PowerTable/PowerTable.js"></script>
+<script src="~/Content/Scripts/PowerTable/PowerTable.en.js"></script>
+<script src="~/Content/Scripts/PowerTable/PowerTable.ar.js"></script>
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="truck" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @ViewBag.SupplierName
+                </div>
+                <div id="Sub" class="sub header">
+                    <div class="ui horizontal relaxed list">
+                        <div class="item">
+                            <i class="feather  icon-map"></i>
+                            <div class="content">
+                                <div class="header">@GeneralResource.Address</div>
+                                @ViewBag.Address
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="feather  icon-phone"></i>
+                            <div class="content">
+                                <div class="header">@GeneralResource.Phone</div>
+                                @ViewBag.Phone
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="feather  icon-smartphone"></i>
+                            <div class="content">
+                                <div class="header">@GeneralResource.Mobile</div>
+                                @ViewBag.Mobile
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+
+    <div class="ui  segment anim">
+        <div class="toolspace">
+            <div class="ui primary   buttons">
+                <div class="ui   button">
+                    @GeneralResource.CreateNew
+
+                </div>
+                <div class="ui floating dropdown icon button">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" onclick="OpenQmodel();"><i class="clipboard outline icon"></i>@GeneralResource.Quotation </a>
+                        <a class="item"><i class="sync  icon"></i>@GeneralResource.Transaction</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui container">
+            <div id="div-record">
+                @Html.Partial("SupplierFormList", Model)
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="ui quotation entoend  modal " id="Quotation-Model">
+
+    <i class=" close feather icon-x "></i>
+
+    <input type="hidden" name="SupplierId" value="@ViewBag.SupplierId">
+
+    <div class="header" style="font-size:1.9em;">
+
+
+        @GeneralResource.Quotation<text>#152</text>
+
+
+        @Html.AntiForgeryToken()
+
+        <form class="ui tiny quotation form" style="width:50%; margin-top:7px;">
+
+
+
+            <div class=" fields">
+                <div class=" six wide field">
+                    <input type="text" name="SupplierName" placeholder="Supplier Name" value="@ViewBag.SupplierName" readonly="readonly">
+                </div>
+                <div class="seven wide  field">
+                    <input type="text" name="Email" placeholder="Email" value="@ViewBag.Email">
+                </div>
+            </div>
+            <div class="fields">
+                <div class=" six wide field">
+                    <label>Address</label>
+                    <textarea rows="2" type="text" name="Address" value="@ViewBag.Address"></textarea>
+                </div>
+                <div class=" four wide field">
+                    <label>Date</label>
+                    <input type="text" name="Date" class="date-picker">
+                </div>
+                <div class=" four wide field">
+                    <label>Expiration Date</label>
+                    <input type="text" name="Validity" class="date-picker">
+                </div>
+            </div>
+        </form>
+
+
+        <div class="ui horizontal statistics topright">
+            <div class="statistic">
+                <div class="value">
+                    0
+                </div>
+                <div class="label">
+                    SAR
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="divForAdd" class="divForAdd content scrolling" style="min-height:calc(55vh)">
+
+        <h3>
+            <b>Item Details</b>
+        </h3>
+
+        <table class="ui very basic small  celled quotation table" data-form-type="Quotation">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th class="four wide">Item</th>
+                    <th class="six wide">Description</th>
+                    <th class="two wide">Qty</th>
+                    <th class="two wide">Unit Price</th>
+                    <th class="two wide">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-rowid="0">
+                    <td data-name="srno">1</td>
+                    <td data-name="del"><i class="feather red icon-trash" onclick="RemoveRow(this);"></i></td>
+                    <td data-name="item">
+                        <div class="ui small fluid item input ">
+                            <input type="text" name="ItemName" onclick="bindItemDropdown(this)">
+                            <input type="hidden" name="ItemsList[0].ItemId">
+                        </div>
+                    </td>
+                    <td data-name="desc"><div class="ui small fluid input"><input type="text" name="ItemsList[0].Description"></div></td>
+                    <td data-name="qty"><div class="ui small fluid input"><input type="number" name="ItemsList[0].Qty"></div></td>
+                    <td data-name="unitPrice"><div class="ui small fluid input"><input type="number" name="ItemsList[0].UnitPrice"></div></td>
+                    <td data-name="amount"><text name="ItemsList[0].amount"></text></td>
+                </tr>
+
+                <tr data-rowid="1">
+                    <td data-name="srno">2</td>
+                    <td data-name="del"><i class="feather red icon-trash" onclick="RemoveRow(this);"></i></td>
+                    <td data-name="item">
+                        <div class="ui small fluid item  input ">
+                            <input type="text" name="ItemName" onclick="bindItemDropdown(this)" onfocus="AddItemsRow(this)">
+                            <input type="hidden" name="ItemsList[1].ItemId">
+                        </div>
+                    </td>
+                    <td data-name="desc"><div class="ui small fluid input"><input type="text" name="ItemsList[1].Description"></div></td>
+                    <td data-name="qty"><div class="ui small fluid input"><input type="number" name="ItemsList[1].Qty"></div></td>
+                    <td data-name="unitPrice"><div class="ui small fluid input"><input type="number" name="ItemsList[1].UnitPrice"></div></td>
+                    <td data-name="amount"><text name="ItemsList[1].amount"></text></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="ui  basic  segment">
+            <div class="ui clearing divider"></div>
+            <h3 class="ui right floated header">Total : <text id="grandTotal">0</text></h3>
+        </div>
+
+    </div>
+
+
+    <div class="actions">
+        @*<button type="submit" class="ui primary submit button">@GeneralResource.Save   </button>*@
+        <div class="ui primary quotation submit button">
+            Save
+            <i class="right chevron icon"></i>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    $(function () {
+
+        PowerTable.itemDropdown.get();
+
+        InitC();
+
+        $('.quotation.submit').click(function () {
+
+            var data = $('.ui.quotation.modal :input').serialize();
+
+            $.ajax({
+                url: '/AccountSupplier/CreateQuotation/',
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    alert('success')
+
+                }
+            });
+
+        });
+
+        $(document).on('keyup', 'td[data-name="unitPrice"] input', function () {
+
+            var $this = $(this);
+            var $stats = $(".statistics.topright .value");
+
+            var qty = $this.parents("tr").find('td[data-name="qty"] input').val();
+
+            var $amt = $this.parents("tr").find('td[data-name="amount"] text');
+            var delAmt = $amt.html();
+            var iTotal, gTotal = 0;
+
+            iTotal = parseInt(qty) * parseFloat($this.val())
+
+            if (isNaN(iTotal)) {
+                iTotal = 0;
+            }
+            $amt.html(iTotal);
+
+            gTotal = parseFloat($stats.html());
+
+            if (isNaN(gTotal)) {
+                gTotal = 0;
+            }
+            gTotal += iTotal;
+
+
+            $stats.html(gTotal - delAmt);
+            $('#grandTotal').html($stats.html())
+
+
+        })
+
+    });
+
+    function OpenQmodel() {
+        $('.ui.quotation.modal').modal({
+            centered: true,
+            closable: false,
+            transition: 'fade down',
+            //'slide down'//'fly down'
+        }).modal('show');
+    }
+
+    function bindItemDropdown(elem) {
+        PowerTable.itemDropdown.bind(elem);
+    }
+
+
+
+    function AddItemsRow(elem) {
+
+        PowerTable.AddRow(elem)
+
+    }
+    function convertQuotation(elem) {
+        var $elem = $(elem);
+        var id = $elem.attr("data-id");
+        $.ajax({
+            url: '/AccountSupplier/ConvertQuotation/',
+            type: "POST",
+            dataType: "JSON",
+            data: { id },
+            success: function (response) {
+                if (response) {
+                    $('.type.label[data-id="' + id + '"]').html(`<i class="file type alternate outline green icon"></i><text>Purchase order</text>`)
+                    $elem.html(`<a style="cursor:pointer;" onclick="convertQuotation(this)" data-id="` + id + `">View PO</a>`)
+                    toastr.success("Converted to PO Successfully")
+                }
+            }
+        });
+    }
+
+    function InitC() {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        });
+    }
+</script>

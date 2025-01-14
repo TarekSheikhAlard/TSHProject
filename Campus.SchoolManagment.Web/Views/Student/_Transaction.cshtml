@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.StudentTransactionsViewModel>
+
+@using Campus.School.Management.Logic.Resources
+<div class="ui info small message">
+    <p>
+        <i class="info icon"></i>
+        The transactions tab shows all the transactions made by the student both services(fees) and physical items(purschases).
+    </p>
+    </div>
+    <table class="ui selectable  single line striped celled  compact table" id="transactionList">
+        <thead>
+            <tr>
+                <th>
+                    @GeneralResource.Actions
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SerialNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaidAmount)
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+            </tr>
+        </tbody>
+
+    </table>
+    <script>
+
+        downloadReceipt = function (id, el) {
+            $parent = $(el).find('i');
+            $parent
+                .addClass("loading");
+
+            $.fileDownload("/Student/ExportReceipt/" + id, {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+
+        }
+
+    </script>
+    <script>
+
+        $(function () {
+            var StudentAcdID = window.location.pathname.split('/')[3];
+            $('#transactionList').DataTable({
+                destroy: true,
+                info: true,
+                bLengthChange: false,
+                sPaginationType: "full_numbers",
+                processing: true,
+                serverSide: false,
+                filter: false,
+                pageLength: 10,
+                dom: 'Bfrtip',
+                autoWidth: true,
+                "ajax": {
+                    "url": "/Student/getStudentTransactions/",
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": { id: StudentAcdID }
+
+                },
+                "columns": [
+                    {
+                        render: function (data, type, row) {
+                            var html = '<a href="#" onclick="downloadReceipt(' + row.ReceiptCode + ',this);" title="Download PDF" class=""> <i class="feather icon-download"></i></a>';
+                            return html;
+                        }
+                    },
+                    { "data": "SerialNo", "name": "SerialNo", "autoWidth": true },
+                    { "data": "Date", "name": "Date", "autoWidth": true },
+                    { "data": "Description", "name": "Description", "autoWidth": true },
+                    { "data": "Amount", "name": "Amount", "autoWidth": true },
+                    { "data": "Discount", "name": "Discount", "autoWidth": true },
+                    { "data": "Tax", "name": "Tax", "autoWidth": true },
+                    { "data": "TotalAmount", "name": "TotalAmount", "autoWidth": true },
+                    { "data": "PaidAmount", "name": "PaidAmount", "autoWidth": true }
+                ]
+            });
+
+        })
+
+
+    </script>

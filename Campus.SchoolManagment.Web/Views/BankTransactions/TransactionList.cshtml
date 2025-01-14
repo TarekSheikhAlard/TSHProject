@@ -1,0 +1,353 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BankTransactionsViewModel>
+@using Campus.SchoolManagment.Web.Helper
+
+
+<table class="ui very basic small  celled table  " id="BTransacTable">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payee)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TransactionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReferenceNo)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayeeAccountId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Debit)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            int index = 0;
+
+            <tr class="ui Row validate form" data-rid="@index" data-hasAttach="false">
+              
+                <td data-name="del">
+                    <i class="feather red icon-trash" style="display:none" onclick="removeBTransacRow(this);"></i>
+                </td>
+                <td class="two wide ">
+
+                    @Html.TextBoxFor(modelItem => item.Payee, new { @onclick = "addBTransacRow(this)" })
+                </td>
+                @*<td class="two wide ">
+
+                        @Html.TextBoxFor(modelItem => item.TransactionDate, new { })
+                    </td>
+                    <td class="two wide ">
+
+                        @Html.TextBoxFor(modelItem => item.ReferenceNo, new {})
+                    </td>*@
+                <td class="three wide ">
+                    @Html.EditorFor(modelItem => item.Description)
+
+                </td>
+                <td class="two wide ">
+                    @Html.DropDownFor(modelItem => item.TransactionType, ViewBag.TransactionTypeList as List<SemanticControls.DropdownList>, new { @class = " ui transacType search selection   dropdown ", @placeholder = "Search" })
+                    @*<input type="text" name="TransactionTypeName" readonly="readonly" onclick="onClickTransactionType(this)" />
+
+                        @Html.HiddenFor(modelItem => item.TransactionType)*@
+                </td>
+                <td class="two wide ">
+                    <div class="ui search payeeAcc compressed selection dropdown">
+                        @Html.HiddenFor(modelItem => item.PayeeAccountId)
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Search</div>
+                        <div class="menu">
+
+                        </div>
+                    </div>
+
+
+                    @*@Html.DisplayFor(modelItem => item.PayeeAccountId)*@
+                </td>
+                <td class="two wide">
+
+                    @Html.EditorFor(modelItem => item.tax)
+                </td>
+                <td class="two wide ">
+
+                    @Html.EditorFor(modelItem => item.Credit)
+                </td>
+                <td class="two wide ">
+                    @Html.EditorFor(modelItem => item.Debit)
+                </td>
+                <td data-name="uploader">
+                    @Html.HiddenFor(modelItem => item.AttachedDocName)
+                    <i class="feather primary icon-upload"></i>
+                </td>
+            </tr>
+
+
+            index += 1;
+        }
+
+    </tbody>
+</table>
+
+<script>
+    var rowhtml, rindex = 0, uploader = [];
+
+    $(function () {
+        rowhtml = $('tr.Row').html();
+
+        setTimeout(function () {
+            bindTransacTypeEvent();
+            initTableValidation();
+            initUploader(0);
+
+        }, 0)
+
+
+
+
+    })
+
+    $("#BTransacTable tr td:nth-child(2) input").on('click', function () {
+        addBTransacRow(this);
+    })
+
+    bindTransacTypeEvent = function () {
+
+        $('.ui.transacType.dropdown').dropdown({
+            onChange: function (value, text, $choice) {
+                $payeeAccDropdown = $choice.parents('tr').find('td .payeeAcc.dropdown');
+
+                getAccountDropdown($payeeAccDropdown, text);
+            }
+
+        });
+    }
+
+    getAccountDropdown = function ($el, type) {
+        $el.addClass('loading');
+        $.ajax({
+            type: "Get",
+            dataType: "JSON",
+            url: '/BankTransactions/AccountList/',
+            data: { type },
+            success: function (response) {
+                console.log(response)
+                $el.dropdown({
+                    values: response,
+                    clearable: true,
+                    placeholder: 'Search',
+                     match: 'both',
+                    ignoreCase: true,
+                    fullTextSearch: true
+                })
+
+            },
+            complete: function () { $el.removeClass('loading'); }
+
+        });
+
+
+    }
+
+    onClickTransactionType = function (el) {
+        var $typeList = $("#TransacTypeListHtml");
+        var $el = $(el);
+        //var rect = el.getBoundingClientRect();
+        var width = el.offsetWidth;
+        $el.css("display", "none")
+        $typeList.find(".ui.dropdown").css("min-width", width)
+        //console.log(rect.top, rect.right, rect.bottom, rect.left);
+        console.log($typeList.html())
+        $el.parent().prepend($typeList.html());
+        $el.parent().find(".ui.dropdown")
+            .dropdown({
+                onChange: function (value, text, $choice) {
+                    $(this).parent().find('input[type=text][readonly]').val(text);
+
+                    //$choice.parents('.ui.dropdown').remove();
+                }
+
+            })
+            .dropdown('show');
+
+        //$typeList.css({
+        //    position: "absolute",
+        //    top:rect.top +"px",
+        //    right:rect.right +"px",
+        //    bottom: rect.bottom+"px",
+        //    left:  rect.left+"px"
+
+        //})
+
+
+
+
+    }
+
+    addBTransacRow = function (el) {
+        var $el = $(el);
+        var $tbody = $('#BTransacTable tbody');
+        var $row = $("<tr/>").addClass("ui Row  form")
+            .attr("data-rid", rindex + 1)
+            .attr("data-hasAttach","false")
+
+        $el.parents('tr').addClass('validate');
+
+        $row.append(rowhtml);
+        $tbody.append($row);
+        $el.prop("onclick", null).off("click");
+
+        if ($tbody.find('tr').length >= 2) {
+
+            $tbody.find("tr td[data-name='del'] i").css('display', 'block');
+
+        }
+        rindex += 1;
+        bindTransacTypeEvent();
+        initTableValidation();
+        initUploader(rindex);
+    }
+
+    removeBTransacRow = function (elem) {
+        var $elem = $(elem);
+
+        var rowid = $elem.parents('tr').attr('data-rid');
+        var table = $elem.parents('tbody');
+        $elem.parents('tr').remove();
+
+        refreshIndexUploder(rowid);
+        refreshIndexBTransacTable(table);
+
+        table.find('tr:last td:nth-child(2) input').on('click', function () {
+            addBTransacRow(this);
+        })
+
+        if (table.children().length == 1) {
+            table.find("td[data-name='del'] i").css('display', 'none');
+            //.children().children("td[data-name='del']").chi.css('display', 'none')
+        }
+
+
+    }
+
+    refreshIndexBTransacTable = function (table) {
+        table.find('tr').each(function (index, elem) {
+            $(elem).attr('data-rid', index);
+        })
+    }
+    refreshIndexUploder = function (rid) {
+
+        uploader.splice(rid, 1);
+    }
+    initTableValidation = function () {
+
+        $('.ui.Row.validate.form')
+            .form({
+                fields: {
+                    'item.Payee': 'empty',
+                    'item.Description': 'empty',
+                    'item.TransactionType': 'empty',
+                    'item.PayeeAccountId': 'empty',
+                    'item.Credit': 'empty',
+                    'item.Debit': 'empty'
+                }
+            });
+    }
+    initUploader = function (rid) {
+
+        var $btn = $('tr[data-rid="' + rid + '"] td[data-name="uploader"] i');
+        var iconclass = "feather primary icon-upload",
+            spinnerClass = "spinner red loading icon";
+        var allowedExtensions = ['jpg', 'png'];
+
+        uploader.push(new ss.SimpleUpload({
+            button: $btn,
+            url: '/document/uploader',
+            autoSubmit: false,
+            allowedExtensions:allowedExtensions,
+            name: 'uploadedFile',
+            maxSize: 1024,
+            data: {  folderName:"transactions" },
+            onChange: function (filename, extension) {
+               
+         
+                if (allowedExtensions.indexOf(extension) === -1) {
+                    $btn
+                        .removeClass('primary green')
+                        .addClass('red');
+                    toastr.error("Invalid file type, upload file with jpg or png format.")
+                    return false;
+                } else {
+                     $btn
+                    .removeClass('red primary')
+                    .addClass('green');
+                  $('#BTransacTable tbody tr[data-rid="' + rid + '"]').attr('data-hasAttach', 'true')
+                }
+            },
+            onSubmit: function (filename, extension) {
+
+                $btn
+                    .removeClass(iconclass)
+                    .addClass(spinnerClass)
+
+                 
+            },
+            onComplete: function (filename, response) {
+                var totalRowsAttached = $('#BTransacTable tbody tr[data-hasAttach="true"]').length;
+                  $btn
+                      .removeClass(spinnerClass)
+                      .removeClass('green red')
+                    .addClass(iconclass)
+                //console.log(   $('tr[data-rid="' + rid + '"] input[name="item.AttachedDocName"]'))
+               // $('tr[data-rid="' + rid + '"] input[name="item.AttachedDocName"]').val(response.name);
+                response=JSON.parse(response)
+                if (!response.IsError) {
+                    $('tr[data-rid="' + rid + '"] input[name="item.AttachedDocName"]').val(response.name);
+                }
+
+
+                if (rid == (totalRowsAttached -1)) {
+                    var bank = $('[name="BankId"]').val();
+                   
+                      saveTransaction($("#SaveTransactions"),bank);
+                }
+
+
+            },
+            onExtError: function (filename, extension) {
+                 $btn
+                    .removeClass('primary green')
+                    .addClass('red');
+                toastr.error("Invalid file type, upload file with jpg or png format.")
+            },
+              onSizeError: function (filename, extension) {
+                 $btn
+                    .removeClass('primary green')
+                      .addClass('red');
+
+                toastr.error("The File Uploaded is too large.")
+            },
+        }));
+
+    }
+</script>
+
+

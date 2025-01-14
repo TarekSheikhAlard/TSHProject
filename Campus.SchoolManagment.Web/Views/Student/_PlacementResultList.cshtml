@@ -1,0 +1,206 @@
+﻿
+@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AdmInitialStudRegistrationViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+
+<table class="ui selectable  single line Striped celled  compact table" id="initRegisterTable">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullNameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalityName)
+            </th>
+            <th>
+                Result
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr data-id="@item.id" data-grade="@item.GradeID">
+                <td>
+                    @if (item.isRegistered)
+                    {
+                    <div class="ui green  small label">
+                        registered
+                    </div>
+                    }
+
+
+                    @if ((!string.IsNullOrEmpty(item.Result)&&(  item.Result.ToLower().Equals("passed") || item.Result.ToLower().Equals("passed with excellence")))&&(item.isRegistered==false))
+                    {
+                        <a href="#" onclick="registerStudent(@item.id);"> <i class="feather icon-user-plus"></i></a>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullNameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullNameAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NationalityName)
+                </td>
+
+                <td>
+
+
+                    @Html.DropDownListFor(modelItem => item.Result,
+                   new SelectList(new List<object>
+            {
+            new { value = "Failed" , text ="Failed" },
+            new { value = "Passed" , text ="Passed"},
+             new { value = "Passed with excellence" , text ="Passed with excellence"}
+             }, "value", "text", item.Result), GeneralResource.Select, new { @class = "", @onchange = "SaveResult(this)" })
+
+
+
+
+                </td>
+
+
+
+
+
+
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+@{ string New = GeneralResource.New + " " + GeneralResource.Student;
+
+}
+<div class="ui  large register new   modal " >
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @New
+    </div>
+    <div class="divForAdd scrolling content">
+    </div>
+</div>
+
+<script>
+    setTimeout(function () { $('.result.selection.dropdown').dropdown(); }, 0)
+
+    SaveResult = function (el) {
+        var $this = $(el), value = $this.val(),
+            id = $this.parents('tr').attr('data-id'),
+            grade = $this.parents('tr').attr('data-grade');
+
+        if (value.toLowerCase() !== "select" && value !== "" && value != null) {
+
+            $.ajax({
+                type: "POST",
+                url: '/Student/SaveResult/',
+                data: { id, result: value, grade },
+                success: function (response) {
+                    // $('#div-record').removeClass('placeholder').addClass('basic');
+                    $('#div-record').html(response);
+
+                }
+            });
+
+
+
+
+        } else {
+
+            toastr.error("Invalid Selection")
+        }
+
+
+    }
+
+    registerStudent = function (id) {
+        $.ajax({
+            type: "Get",
+            url: '/Student/Create/' + id,
+            success: function (response) {
+                $('#divForUpdate').empty();
+                $('.register.new.modal .divForAdd').html(response);
+                $('.register.new.modal').modal('show');
+
+            }
+        });
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#initRegisterTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

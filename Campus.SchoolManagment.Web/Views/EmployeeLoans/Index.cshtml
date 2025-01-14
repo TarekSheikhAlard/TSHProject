@@ -1,0 +1,44 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+
+
+
+<div class="ui container">
+
+    @{Html.RenderAction("Create", "EmployeeLoans", new { empid = ViewBag.empid });}
+
+</div>
+
+<div class="ui primary segment">
+
+    <div id="list-EmployeeLoans" style="min-height:250px;">
+        @{Html.RenderAction("GetList", "EmployeeLoans", new { empid = ViewBag.empid });}
+    </div>
+</div>
+
+@{ string New = GeneralResource.New + " " + GeneralResource.Assets;
+    string Update = GeneralResource.Update + " " + GeneralResource.Assets;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.Assets;
+}
+
+
+<div class="ui edit modal " id="Edit-Model-EmployeeLoans">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Update
+    </div>
+    <div id="divForUpdate-EmployeeLoans" class="divForUpdate scrolling content">
+    </div>
+</div>
+
+<div class="ui modal " id="Delete-Model-EmployeeLoans">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Delete
+    </div>
+    <div id="divForDelete-EmployeeLoans" class="divForDelete content">
+    </div>
+</div>
+
+
+<script src="~/Scripts/DevelopmentJS/EmployeeLoans.js"></script>

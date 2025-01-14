@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.GenericVModel>
+@using Campus.School.Management.Logic.Resources
+
+
+<div class="row">
+    <div class="col-md-12">
+
+
+        <div class="ui raised blue segment anim">
+            <div  id="double_table" class="portlet-title    ">
+                <div class="ui large dividing header">
+                    <i class="fa globe"></i><div class="content">  <a href="#" id="Add" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a>@GeneralResource.IncomeStatement
+                </div>
+
+            </div>
+           <div class="ui container">
+
+                <table class="ui selectable  single line Striped celled  compact table" id="myTable">
+
+                 
+                    <tbody id="Searchbody">
+                        <tr>
+                            <td style="background-color: gray">
+                                Revenue :
+                            </td>
+                            <td></td>
+                            <td></td>
+
+
+                        </tr>
+                        @{ decimal TotalIncome = 0, TotalExpenses = 0;}
+                        @foreach (var item in Model.Where(x => x.TypeID == 1))
+                        {
+                            TotalIncome = TotalIncome + item.Value;
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Value)
+                                </td>
+                                <td></td>
+
+
+                            </tr>
+                        }
+                        <tr style="background-color: #ccc">
+                            <td>
+                                Total Revenue
+                            </td>
+                            <td></td>
+                            <td>@TotalIncome</td>
+
+
+                        </tr>
+                        <tr>
+                            <td style="background-color: gray">
+                                Expenses :
+                            </td>
+                            <td></td>
+                            <td></td>
+
+
+                        </tr>
+                        @foreach (var item in Model.Where(x => x.TypeID == 2))
+                        {
+                            TotalExpenses = TotalExpenses + item.Value;
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Value)
+                                </td>
+                                <td></td>
+
+
+                            </tr>
+                        }
+                        <tr style="background-color:#ccc">
+                            <td>Total Expenses</td>
+                            <td></td>
+                            <td>@TotalExpenses</td>
+
+
+                        </tr>
+                        @{ var Total = Math.Abs(TotalIncome - TotalExpenses);}
+                        <tr style="background-color:gray">
+                            <td>Net Income</td>
+                            <td></td>
+                            <td>@Total</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+
+        };
+        InitIndex();
+    });
+</script>
+
+

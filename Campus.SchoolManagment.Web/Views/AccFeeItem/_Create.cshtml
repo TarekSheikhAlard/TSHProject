@@ -1,0 +1,41 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccFeeItemViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+
+@using (Ajax.BeginForm("Create", "AccFeeItem", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="field">
+        @Html.LabelFor(model => model.NAME_EN, htmlAttributes: new { @class = "" })
+        <div class="ui input">
+            @Html.EditorFor(model => model.NAME_EN, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.NAME_EN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.NAME_AR, htmlAttributes: new { @class = "" })
+        <div class="ui input">
+            @Html.EditorFor(model => model.NAME_AR, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.NAME_AR, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="ui primary submit button" name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

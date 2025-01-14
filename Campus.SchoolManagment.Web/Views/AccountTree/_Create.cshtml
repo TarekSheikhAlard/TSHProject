@@ -1,0 +1,113 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountTreeViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel;
+@using Campus.SchoolManagment.Web.Helper
+
+@{
+    SchoolUserViewModel _dbUser = Statistics.GetLogiccookie();
+}
+
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@using (Ajax.BeginForm("Create", "AccountTree", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('#Add').popup('hide'); $('.accountTree.add').form('clear');" }, new { @class = "ui small accountTree add form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    <input name="check" type="hidden" value="True" />
+    <input name="check1" type="hidden" value="True" />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    if (_dbUser.isArabic)
+    {
+        <div class="two fields">
+            <div class="field">
+                @Html.LabelFor(model => model.AccountNameEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AccountNameEN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AccountNameEN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="field">
+                @Html.LabelFor(model => model.AccountNameAR, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AccountNameAR, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AccountNameAR, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="field">
+            @Html.LabelFor(model => model.AccountNameEN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AccountNameEN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccountNameEN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    }
+
+        <div class="field">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.OpenBalance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OpenBalance, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OpenBalance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.CreditDebitFlag, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.DropDown("CreditDebitFlag", ViewBag.CreditDebitFlags as List<SemanticControls.DropdownList>, new { @class = " ui  search selection CreditDebitFlag dropdown ", @placeholder = "Select" })
+            </div>
+            <script>
+                $('.CreditDebitFlag.dropdown').dropdown();
+            </script>
+        </div>
+
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.AccountTreeParentID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="ui accountType search  selection dropdown">
+            <div name="AccountTreeParentID" class="text"></div>
+            @Html.HiddenFor(model => model.AccountTreeParentID)
+            <i class="dropdown icon"></i>
+        </div>
+    </div>
+
+
+    <div class="actions">
+        <button type="submit" class="ui primary small button">@GeneralResource.Save</button>
+        <button type="button" class="ui deny small primary basic button" onclick="$('#Add').popup('hide'); ">@GeneralResource.Close</button>
+    </div>
+
+}
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

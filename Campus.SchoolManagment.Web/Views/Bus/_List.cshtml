@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BusViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+    <table  class="ui selectable  single line Striped celled  compact table" id="myTable">
+        <thead>
+         
+            <tr>
+                <th>@GeneralResource.Actions</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BusNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BusType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Manufactur)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChassisNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LicenseStart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LicenseEnd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssuedFrom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LicenseNo)
+                </th>
+              
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <a href="#" onclick="Edit(@item.BusID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+
+
+                    <a href="#" onclick="Delete(@item.BusID);" class="editDialog"> <i class="feather red icon-delete"></i></a>
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufactur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChassisNo)
+                </td>
+                <td>
+                    @item.LicenseStart.Value.ToString("MM/dd/yyyy")
+                    @*@Html.DisplayFor(modelItem => item.LicenseStart)*@
+                </td>
+                <td>
+                    @item.LicenseEnd.Value.ToString("MM/dd/yyyy")
+                    @*@Html.DisplayFor(modelItem => item.LicenseEnd)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssuedFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseNo)
+                </td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

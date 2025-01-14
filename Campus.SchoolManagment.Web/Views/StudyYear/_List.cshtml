@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.StudyYearViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+            @*<th>
+                @Html.DisplayNameFor(model => model.YearID)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.YearNameE)
+            </th>*@
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDefault)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearStDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearEdDate)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.YearStDateHijri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearEdDateHijri)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.CurrentYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentSem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentQ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentWeek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Is_Upload)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Is_Update)
+            </th>*@
+            @*<th>@GeneralResource.Edit</th>
+            <th>@GeneralResource.Delete</th>*@
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <a href="#" onclick="Edit(@item.YearID);"> <i class="feather icon-edit-1"></i></a>
+            <a href="#" onclick="Delete(@item.YearID);"> <i class="feather red icon-delete"></i></a>
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.YearID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDefault)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearNameEn)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.YearNameA)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.YearStDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearEdDate)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.YearStDateHijri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearEdDateHijri)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CurrentYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentSem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentQ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentWeek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Is_Upload)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Is_Update)
+        </td>*@
+
+
+    </tr>
+    }
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

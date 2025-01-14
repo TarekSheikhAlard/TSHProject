@@ -1,0 +1,220 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.TransportBusesViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBW8rhGD5Kx57RFrcI5N4LDNPVCChbuHQ" >
+    </script>*@
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("EditBus", "Transport", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.Hidden("BusLocations", (object)ViewBag.AllBusLocation)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.BusNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.BusNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BusNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.BusNameEn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.BusNameEn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BusNameEn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.BusNameAr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.BusNameAr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BusNameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="three fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Driver, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.DropDownFor(model => model.Driver, ViewBag.DriverList as List<SemanticControls.DropdownList>, new { @class = " ui  search selection  dropdown ", @placeholder = "Search" })
+
+                @* @Html.EditorFor(model => model.Driver, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Driver, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Supervisor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.DropDownFor(model => model.Supervisor, ViewBag.SupervisorList as List<SemanticControls.DropdownList>, new { @class = " ui  search selection  dropdown ", @placeholder = "Search" })
+                @*@Html.EditorFor(model => model.Supervisor, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Supervisor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.TotalSeats, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.TotalSeats, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TotalSeats, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="five fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.ManufacturerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.ManufacturerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ManufacturerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.LicenseNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.LicenseNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LicenseNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.LicenseExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class=" ui input">
+                @Html.EditorFor(model => model.LicenseExpiryDate, new { htmlAttributes = new { @class = "date-picker" } })
+                @Html.ValidationMessageFor(model => model.LicenseExpiryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.PlateNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.PlateNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlateNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <label class="theme">
+        Hint: Click on button at the top right inside the map to go fullscreen to easily edit bus ruote.
+    </label>
+
+    <div id="BusMap" style="width:100%;height:250px;background-color:#ccc">
+
+
+    </div>
+
+
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.FarestPoint, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.FarestPoint, new { htmlAttributes = new { @class = "form-control", @style = "pointer-events: none;", @placeholder = "Select from Map" } })
+                @Html.ValidationMessageFor(model => model.FarestPoint, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.FarestPointCost, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.FarestPointCost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FarestPointCost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.FarestPointDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.FarestPointDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FarestPointDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="ui primary button ">@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@GeneralResource.Close</button>
+
+    </div>
+}
+
+
+
+<script>
+
+
+    function InitC() {
+        $('.ui.dropdown').dropdown();
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+        });
+
+
+
+
+    };
+
+    $(function () {
+
+        var x = '@ViewBag.SchoolX';
+        var y = '@ViewBag.SchoolY';
+        var endLocation,endX, endY;
+        var BusLocations = JSON.parse($("#BusLocations").val());
+        var FarestPoint = $("[name='FarestPoint']").val();
+
+        console.log(x)
+        console.log(y)
+        console.log(BusLocations)
+
+
+        var map = initMap("BusMap", x, y);
+
+        CreateMarker(map, x, y, false,'/Content/Images/schoolMarker.png')
+
+        CreateMarker(map, FarestPoint.split(',')[0], FarestPoint.split(',')[1], true, '/Content/Images/busMarker.png', $("[name='FarestPoint']"))
+
+
+
+        for (let i = 0; i < BusLocations.length; i++) {
+
+            endLocation = BusLocations[i].Locations.split(',')
+            endX = endLocation[0];
+            endY = endLocation[1];
+            //console.log(BusLocations[i])
+            //console.log(endLocation[1])
+            CreateMarker(map, endX, endY, false, '/Content/Images/busMarker.png')
+            CreatePloyline(map, x, y, endX, endY)
+        }
+
+
+        InitC();
+    });
+
+
+</script>

@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNet.Identity
+@using Campus.School.Management.Logic.Resources
+
+<div class="ui large menu" style="margin-bottom: 1px; margin-top: 0px;">
+    <div class="left  menu">
+        @if (Request.IsAuthenticated)
+        {
+            <div class="ui dropdown item">
+                <i class="user icon"></i>
+                @{
+                    string Name = User.Identity.GetUserName();
+                }
+                @Name
+
+            </div>
+        }
+        else { }
+
+
+        <!-- BEGIN PAGE ACTIONS -->
+        <!-- DOC: Remove "hide" class to enable the page header actions -->
+        <div class="page-actions">
+            <div class="btn-group ">
+                <div type="button" class="ui dropdown item" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                    <span class="hidden-sm hidden-xs">@GeneralResource.Language&nbsp;</span>
+                    <i class="caret down icon"></i>
+                </div>
+                <ul class="dropdown-menu" style="width: 100%;" role="menu">
+                    <li>
+
+                        <div class="flag" style="padding-left:2px">
+                            <img src="~/Content/Img/saudi_logo.png">
+                            @Html.ActionLink("عربي", "ChangeLanguage", "Home", new { lang = "ar-EG", returnUrl = Request.Url.PathAndQuery }, null)
+                        </div>
+
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+
+                        <div class="flag" style="padding-left:2px">
+                            <img src="~/Content/Img/us_flag.png">
+                            @Html.ActionLink("English", "ChangeLanguage", "Home", new { lang = "En", returnUrl = Request.Url.PathAndQuery }, null)
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- END PAGE ACTIONS -->
+
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="item">
+                    <div style="font-size: .92857143rem;" class="ui primary animated small button" onclick="javascript:document.getElementById('logoutForm').submit()">
+
+
+                        <div class="visible content"><text name="SignOut">@GeneralResource.logoff</text></div>
+                        <div class="hidden content">
+                            <i class="sign out flipped alternate icon"></i>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else { }
+    </div>
+</div>
+
+

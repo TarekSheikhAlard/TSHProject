@@ -1,0 +1,60 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountEmployeesMonthlySalaryViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("PayTickets", "Employee", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "list-" + ViewBag.tableid }, new { @class = "ui PayTickets form" }))
+
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.Employee_ID)
+
+    <div class="field">
+        @Html.LabelFor(model => model.EmployeeName, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.EmployeeName, htmlAttributes: new { @class = "", @readonly = "" })
+
+    </div>
+    @*<div class="field">
+        @Html.LabelFor(model => model.flighttickets, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.flighttickets, htmlAttributes: new { @class = "", @readonly = "" })
+
+    </div>*@
+    <div class="field">
+        @Html.LabelFor(model => model.TicketPrice, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.TicketPrice, new { htmlAttributes = new { @class = "" } })
+        @Html.ValidationMessage("", "", new { @class = "text-danger" })
+
+    </div>
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+    <div class="ui primary segment">
+        <div id="list-Ticket">
+            @{Html.RenderAction("GetTicketList", "Employee", new { empid = Model.Employee_ID });}
+        </div>
+    </div>
+}
+<script>
+    $(function () {
+
+        //$("#HREntry-table").empty();
+    })
+    function OnSuccessPayTickets(data) {
+    if (data) {
+        toastr.success("@GeneralResource.toastrSave")
+       // $('#PayTickets-Model .close').click()
+
+    } else {
+          toastr.error("@GeneralResource.toastrOperationFaild")
+    }
+};
+</script>
+

@@ -1,0 +1,127 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.UserPermissionViewModel
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="users" size="45"></clr-icon>
+                @*<i class="feather big icon-book" ></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.UserManagement
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.UserManagement)
+                </div>
+            </h1>
+        </div>
+
+
+    </div>
+</div>
+
+
+    <div class="ui main container">    
+        <div class="ui  segment anim">
+            <div class="field">
+                @Html.LabelFor(model => model.RoleID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="">
+                        @Html.DropDownListFor(model => model.RoleID, ViewBag.RoleID as SelectList, "Select", htmlAttributes: new { @class = "ui dropdown " })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+ 
+
+            <div id="div-record" class="ui placeholder segment">
+                <div class="ui icon header">
+                    <i class="search icon"></i>
+                    Select Role to Get all Permissions
+                </div>
+                @*@Html.Partial("_List", Model)*@
+            </div>
+            @*<div class="ui container">
+            <div id="div-record">
+                @Html.Partial("_Create", Model)
+            </div>
+        </div>*@
+
+        </div>
+    </div>
+
+@{ string New = GeneralResource.New + " " + GeneralResource.Permission;
+    string Update = GeneralResource.Update + " " + GeneralResource.Permission;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.Permission;
+}
+
+@*<div class="modal fade" id="Add-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-full">
+            <div class="modal-dialog">
+                <div class="modal-content modal_Padding modal_content_style ">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@New </h4>
+                    </div>
+                    <div id="divForAdd" class="divForAdd">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Edit-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-full">
+            <div class="modal-dialog  ">
+                <div class="modal-content modal_Padding modal_content_style">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@Update </h4>
+                    </div>
+                    <div id="divForUpdate" class="divForUpdate">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Delete-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-full">
+            <div class="modal-dialog  modal_delete_dialog ">
+                <div class="modal-content modal_Padding modal_content_style_delete">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@Delete </h4>
+                    </div>
+                    <div id="divForDelete" class="divForDelete">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+*@<div class="ui add small modal " id="Add-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">  <i class=" close feather icon-x "></i>     <div class="header">         @New     </div>     <div id="divForAdd" class="divForAdd scrolling content">     </div> </div> <div class="ui edit modal " id="Edit-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">       <i class=" close feather icon-x "></i>     <div class="header">         @Update     </div>     <div id="divForUpdate" class="divForUpdate scrolling content">     </div> </div> <div class="ui modal " id="Delete-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">       <i class=" close feather icon-x "></i>     <div class="header">         @Delete     </div>     <div id="divForDelete" class="divForDelete content">     </div> </div>
+<script src="~/Scripts/DevelopmentJS/UserPermissionJS.js"></script>
+
+
+

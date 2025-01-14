@@ -1,0 +1,52 @@
+﻿@Html.Hidden("BusLocations", (object)ViewBag.AllBusLocation)
+@Html.Hidden("StudentLocation", (object)ViewBag.AllBusLocation)
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<div id="TransportMap" style=" height:350px">
+
+</div>
+<script src="~/Scripts/DevelopmentJS/Transport.Map.js"></script>
+<script>
+
+
+   $(function () {
+
+        var x = '@ViewBag.SchoolX';
+        var y = '@ViewBag.SchoolY';
+       var endLocation, endX, endY;
+
+        var BusLocations = JSON.parse($("#BusLocations").val());
+        var StudentLocation = JSON.parse($("#StudentLocation").val());
+
+        console.log(x)
+        console.log(y)
+        console.log(BusLocations)
+
+
+       var map = initMap("TransportMap", x, y);
+
+        CreateMarker(map, x, y, false,'/Content/Images/schoolMarker.png')
+
+
+    //   CreateMarker(map, StudentLocation.split[0], StudentLocation.split[1], true, '/Content/Images/busMarker.png', $("[name='FarestPoint']"))
+
+
+        for (let i = 0; i < BusLocations.length; i++) {
+
+        endLocation = BusLocations[i].Locations.split(',')
+        endX = endLocation[0];
+        endY = endLocation[1];
+        //console.log(BusLocations[i])
+        //console.log(endLocation[1])
+        CreateMarker(map, endX, endY, false, '/Content/Images/busMarker.png')
+        CreatePloyline(map, x, y, endX, endY)
+        }
+
+
+   
+   });
+
+
+</script>

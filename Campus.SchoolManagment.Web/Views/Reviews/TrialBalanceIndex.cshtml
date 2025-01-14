@@ -1,0 +1,179 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.GenericVModel
+
+@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+
+@{
+    ViewBag.Title = GeneralResource.TrialBalance;
+    if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.TrialBalance
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.TrialBalance)
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="ui main container">
+    <div class="ui segment ">
+
+        <div class="toolspace">
+
+            @using (Ajax.BeginForm("GetTrialBalance", "Reviews", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record" }, new { @class = "ui trailbalance form" }))
+            {
+
+                @Html.AntiForgeryToken()
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="ui ledger report form ">
+                <div class=" fields">
+                    <div class=" six wide field">
+                        @*@Html.DropDownFor(model => model.AccountTree, ViewBag.AccountTreeList as List<SemanticControls.DropdownList>, new { @class = " ui  search selection  dropdown ", @placeholder = "Search" })*@
+                        @Html.Editor("From", new { htmlAttributes = new { @class = " date-picker ui input", @placeholder = "Date", @autocomplete = false } })
+                    </div>
+
+                    <div class=" actions field">
+                        <button type="submit" id="Search" value="Search" class="ui primary submit button ">Run Report</button>
+                    </div>
+                    <div class="field">
+                        <div class="ui  buttons">
+                            <div class="ui download icon button">  <i class="download  icon"></i> Export</div>
+                            <div class="ui floating dropdown icon button">
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <a href="#" id="DownloadExcel" class="item">
+                                        <i class="file excel outline icon"></i>
+                                        @GeneralResource.Excel
+                                    </a>
+                                    <a href="#" id="DownloadPDF" class="item">
+                                        <i class="file pdf outline icon"></i>
+                                        @GeneralResource.PDF
+                                    </a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<a href="#" id="DownloadPDF" class="ui download icon button">
+                            <i class="file pdf outline icon"></i>
+                            Export @GeneralResource.PDF
+                        </a>*@
+                    </div>
+                </div>
+               
+             
+
+            </div>
+
+
+  
+            }
+
+
+        </div>
+
+        <div id="div-record" class=" ">
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+
+    function InitC() {
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+         $("#DownloadPDF").click(function () {
+
+        var $parent = $('.download.button');
+             var acc = $('[name="From"]').val();
+        $parent
+            .addClass("loading");
+
+        if (acc !== '' ) {
+            $.fileDownload("/Reviews/ExportPdfTrailBalance/?from=" + acc , {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+        } else {
+             $parent
+            .removeClass("loading");
+
+            toastr.error("Select Date ")
+        }
+
+
+         });
+
+
+          $("#DownloadExcel").click(function () {
+
+        var $parent = $('.download.button');
+             var acc = $('[name="From"]').val();
+        $parent
+            .addClass("loading");
+
+        if (acc !== '' ) {
+            $.fileDownload("/Reviews/ExportExcelTrailBalance/?from=" + acc , {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+        } else {
+             $parent
+            .removeClass("loading");
+
+            toastr.error("Select Date ")
+        }
+
+
+    });
+
+
+
+    };
+    InitC();
+</script>
+

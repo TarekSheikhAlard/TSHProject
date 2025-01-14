@@ -1,0 +1,191 @@
+﻿
+
+.inlinebtn {
+    display: inline-block !important;
+    padding: .48571429em .48571429em .48571429em !important;
+    margin-left: .75rem !important ;
+    /*vertical-align: middle !important;*/
+    float:right;
+}
+.page-container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+}
+
+.page-sidebar {
+    background: rgb(30, 134, 212) !important;
+}
+
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a,
+    .page-sidebar .page-sidebar-menu > li > a {
+        color: rgba(255, 255, 255, 0.9);
+        background: transparent;
+     
+    }
+
+        .page-sidebar .page-sidebar-menu > li > a > .title,
+        .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > .title {
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > i,
+        .page-sidebar .page-sidebar-menu > li > a > i {
+            color: rgba(255, 255, 255, 0.9)!important;
+            background: transparent;
+        }
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li:hover > a,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.open > a,
+    .page-sidebar .page-sidebar-menu > li:hover > a,
+    .page-sidebar .page-sidebar-menu > li.open > a {
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .page-sidebar .page-sidebar-menu > li, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+/*.active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}*/
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a,
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a,
+.page-sidebar .page-sidebar-menu > li.active > a,
+.page-sidebar .page-sidebar-menu > li.active.open > a,
+.page-sidebar .page-sidebar-menu > li.open > a {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+        .page-sidebar .page-sidebar-menu > li.open.submenu  {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: #ffffff !important;
+        }
+
+    .page-sidebar .page-sidebar-menu .sub-menu {
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+       
+    }
+
+.page-sidebar-menu .sub-menu > li > a,
+.page-sidebar .page-sidebar-menu .sub-menu > li > a {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+        .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li:hover > a,
+        .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.open > a,
+        .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.active > a,
+        .page-sidebar .page-sidebar-menu .sub-menu > li:hover > a,
+        .page-sidebar .page-sidebar-menu .sub-menu > li.open > a,
+        .page-sidebar .page-sidebar-menu .sub-menu > li.active > a {
+            background: transparent !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+            .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li:hover > a > i,
+            .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.open > a > i,
+            .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.active > a > i,
+            .page-sidebar .page-sidebar-menu .sub-menu > li:hover > a > i, .page-sidebar .page-sidebar-menu .sub-menu > li.open > a > i,
+            .page-sidebar .page-sidebar-menu .sub-menu > li.active > a > i {
+                background: transparent !important;
+                color: rgba(255, 255, 255, 0.9) !important;
+            }
+    .page-sidebar .page-sidebar-menu .sub-menu,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu {
+        margin-top:0px !important;
+        margin-bottom:0px!important;
+    }
+        .page-sidebar .page-sidebar-menu .sub-menu li,
+        .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li {
+            margin-top:0px !important;
+        }
+    .page-sidebar .page-sidebar-menu > li > a,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a {
+        margin-top: 0px !important;
+    }
+    .page-sidebar-closed.page-sidebar-fixed
+    .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a > i,
+    .page-sidebar .page-sidebar-menu .sub-menu > li > a > i {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+.flag {
+     padding-left: 0px; 
+}
+.note {
+    margin:0px !important;
+    padding:0px !important;
+    border:0px !important;
+    border-radius:0px !important;
+    box-shadow:none !important;
+
+
+
+}
+.ui.animated.button:focus .hidden.content, .ui.animated.button:hover .hidden.content {
+    display:block!important;
+    visibility:visible !important;
+}
+.caret {
+    border-top: 0px !important;
+}
+.langname-menu {
+position: relative;
+vertical-align: middle;
+line-height: 1;
+text-decoration: none;
+-webkit-tap-highlight-color: transparent;
+background: none;
+border:none;
+text-transform: none;
+color: rgba(0, 0, 0, 0.87);
+font-weight: normal;
+
+
+}
+div a.ui.fade {
+    opacity: 1 !important;
+}
+.portlet.box.green-haze > .portlet-title {
+    background-color: #2185d0 !important;
+    font-family: 'Changa', sans-serif;
+}
+.green.btn {
+   
+    background-color: #2185d0 !important;
+}
+#uploadFile {
+    height: 35px !important;
+}
+label[for=file_upload] {
+     border-radius: 0px !important; 
+
+}
+div.dash div.row {
+    margin-bottom: 30px !important;
+}
+.page-sidebar {
+    min-height:100vh !important;
+}
+button .btn btn-danger {
+
+}
+body[dir="rtl"] i.fa.fa-angle-left, body[dir="rtl"] i.fa.fa-angle-right {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+
+
+.modal .modal-header {
+    border-bottom: 1px solid #2185d0 !important;
+}
+    @media (max-width: 991px) {
+        .page-sidebar.navbar-collapse.collapse {
+            display: block !important;
+            visibility: visible !important;
+        }
+    }

@@ -1,0 +1,161 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.CompanyViewModel
+@using Campus.School.Management.Logic.BusinessLayer;
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="field">
+        @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="uploadFile" disabled="disabled" style="width:300px;" />
+
+            <label for="file_upload" class="btn btn-primary" style="border-radius:15px;width:100px;"><span class="glyphicon glyphicon-arrow-up"></span>  @GeneralResource.upload</label>
+            <input id="file_upload" style="visibility:hidden;" type="file" name="file_upload" required>
+            <img src="@Url.Content(@Statistics.SchoolImagesPath+Model.Logo)" width="60" height="70" id="display" />
+
+        </div>
+
+    </div>
+
+
+}
+
+
+
+@using (Ajax.BeginForm("Edit", "Company", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CompanyID)
+    @Html.HiddenFor(model => model.Logo)
+
+    <div class="field">
+        @Html.LabelFor(model => model.CompanyNameEn, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.CompanyNameEn, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CompanyNameEn, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.CompanyNameAr, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.CompanyNameAr, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CompanyNameAr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="field">
+        @Html.LabelFor(model => model.CompanyPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.CompanyPhone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CompanyPhone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.CompanyMobile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.CompanyMobile, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CompanyMobile, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui toggle showArabic checkbox">
+            <input type="checkbox" name="showArabic" value="@Model.showArabic">
+          
+            <label>
+                Show Arabic Fields
+            </label>
+        </div>
+    </div>
+
+
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+      $(function () {
+
+
+         $('.ui.showArabic.checkbox').checkbox({
+
+            onChange: function () {
+              var $el = $(this)
+                if ($el.parent().hasClass("checked")) {
+                    $el.val(true)
+
+                } else {
+                     $el.val(false)
+                }
+                console.log(this)
+            }
+
+         });
+
+
+          if ('@Model.showArabic'=='True') {
+                 $('.ui.showArabic.checkbox').checkbox('check')
+          }
+    })
+       
+
+    document.getElementById("file_upload").onchange = function () {
+
+        document.getElementById("uploadFile").value = this.value;
+        document.getElementById("display").src = window.URL.createObjectURL(this.files[0]);
+
+    };
+
+
+
+</script>
+
+
+<script>
+    $("#file_upload").change(function () {
+
+
+        var fileData = new FormData();
+
+        var img = $("#file_upload").get(0).files;
+
+        debugger;
+        fileData.append("ImageFile", img[0]);
+        $.ajax({
+            type: "Post",
+            url: '/Company/AddImage/',
+            data: fileData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+
+
+            }
+        });
+
+
+    });
+
+
+</script>

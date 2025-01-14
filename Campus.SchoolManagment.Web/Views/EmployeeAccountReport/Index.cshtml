@@ -1,0 +1,32 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+}
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="building" size="45"></clr-icon>
+                @*<i class="feather  icon-briefcase"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.EmployeeSalaryReport
+                </div>
+                <div id="Sub" class="sub header">
+                    @*@String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.EmployeeSalaryReport)*@
+                </div>
+            </h1>
+        </div>
+
+
+    </div>
+</div>
+<div class="ui main container">
+    <div class="ui segment anim">
+        <div class="ui container">
+            @Html.Partial("_Create")
+            </div>
+        </div>
+    </div>

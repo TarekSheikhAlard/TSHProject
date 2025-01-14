@@ -1,0 +1,287 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.Resources
+
+<div class="ui department form">
+   
+        <div class="field">
+
+            <div class="control-label col-md-2">
+                @GeneralResource.MainBranch
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("MaindepartmentTree", ViewBag.MaindepartmentTree as SelectList, "--Select --", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch1(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+            <div class="control-label col-md-2">
+                @GeneralResource.FristBranche
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownList("fristbranche", new SelectList(""), "select", htmlAttributes: new { @class = "form-control", @onchange = "GetBranch2(this.value);" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+  
+
+        <div class="field">
+            <div class="control-label col-md-2">
+                @GeneralResource.SecondBranche
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("Secondbranche", new SelectList(""), "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+     
+    <div class="actions">
+        <button type="submit" id="ok" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    $('#ok').click(function () {
+
+        var fristbranche = $('#fristbranche').val();
+        var Secondbranche = $('#Secondbranche').val();
+       
+
+        var SecondbrancheText = $("#Secondbranche option:selected").text();
+      
+       
+        if (SecondbrancheText != "Select") {
+            $('#DepartmentName').val(SecondbrancheText);
+
+            $('#DepartmentTreeID,#DepartmentID').val(Secondbranche);
+
+            $("[name='DepartmentName']").val(SecondbrancheText)
+            $("[name='DepartmentTreeID']").val(Secondbranche)
+
+            $('.changeDept.form div.field input[name="DepartmentTreeID"]')
+                .trigger('change');
+
+            $('.EmployeePromotion.form div.field input[name="DepartmentTreeID"]')
+                .trigger('change');
+
+            $('.createEmployee.form div.field input[name="DepartmentTreeID"]')
+                .trigger('change');
+            $('.editEmployee.form div.field input[name="DepartmentTreeID"]')
+                .trigger('change');
+
+            $('.Department.modal').modal('hide');
+
+        }
+        else
+
+        {
+            toastr.error("Select a branch")
+        }
+
+
+
+    });
+
+</script>
+
+
+<script>
+
+    function GetBranch1(id) {
+       
+        var selectedValue = id;
+        $.ajax({
+            url: '/DepartmentTree/GetBranchsDepartment',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var fristbranche = $('#fristbranche');
+                fristbranche.empty();
+                fristbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var fristbranche = $('#fristbranche');
+                fristbranche.empty();
+                fristbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                  
+                    fristbranche.append(
+                        $('<option/>', {
+                            value: this.DepartmentTreeID,
+                            html: getLanguage() == 'ar' ? this.DepartmentNameAR : this.DepartmentNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+<script>
+
+    function GetBranch2(id) {
+       
+        var selectedValue = id;
+        $.ajax({
+            url: '/DepartmentTree/GetBranchsDepartment',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Secondbranche = $('#Secondbranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Secondbranche = $('#Secondbranche');
+                Secondbranche.empty();
+                Secondbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                    
+                    Secondbranche.append(
+                        $('<option/>', {
+                            value: this.DepartmentTreeID,
+                            html: getLanguage() == 'ar' ? this.DepartmentNameAR : this.DepartmentNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+<script>
+
+    function GetBranch3(id) {
+       
+        var selectedValue = id;
+        $.ajax({
+            url: '/AccountDailyJournal/GetBranchsAccount',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Thirdbranche = $('#Thirdbranche');
+                Thirdbranche.empty();
+                Thirdbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Thirdbranche = $('#Thirdbranche');
+                Thirdbranche.empty();
+                Thirdbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                   
+                    Thirdbranche.append(
+                        $('<option/>', {
+                            value: this.AccountTreeCode,
+                            html: getLanguage() == 'ar' ? this.AccountNameAR : this.AccountNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+
+<script>
+
+    function GetBranch4(id) {
+       
+        var selectedValue = id;
+        $.ajax({
+            url: '/AccountDailyJournal/GetBranchsAccount',
+            type: "POST",
+            data: { id: selectedValue },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var Fourthbranche = $('#Fourthbranche');
+                Fourthbranche.empty();
+                Fourthbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+
+            },
+            success: function (result) {
+                var Fourthbranche = $('#Fourthbranche');
+                Fourthbranche.empty();
+                Fourthbranche.append(
+                       $('<option/>', {
+                           value: "",
+                           html: "Select"
+                       })
+                   );
+                $.each(result, function () {
+                   
+                    Fourthbranche.append(
+                        $('<option/>', {
+                            value: this.AccountTreeCode,
+                            html: getLanguage() == 'ar' ? this.AccountNameAR : this.AccountNameEN
+                        })
+                    );
+                });
+            }
+        });
+    };
+
+</script>
+
+
+
+

@@ -1,0 +1,151 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.CompanyViewModel>
+@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+}
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="building" size="45"></clr-icon>
+                @*<i class="feather  icon-briefcase"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.Company
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.Company)
+                </div>
+            </h1>
+        </div>
+
+
+    </div>
+</div>
+
+
+@*@*<a href="#" id="Add" class="btn green"><i class="glyphicon glyphicon-plus"></i>@GeneralResource.CreateNew</a>*@
+<div class="ui main container">
+
+
+
+    <div class="ui segment  anim" style="background-color:#fff;opacity:1">
+        @*<button class="ui labeled icon button">
+            <i class="pause icon"></i>
+            Pause
+        </button>*@
+        <div class="toolspace">
+
+
+
+            <a href="#" id="Add" class="ui labeled icon primary  button">
+                <i class="plus icon"></i>
+                @GeneralResource.CreateNew
+            </a>
+        </div>
+        @*<div class="ui  dividing header">
+            @*<i class="building  icon"></i>
+
+            <div class="content">
+                <a href="#" id="Add" class="ui icon small circular inlinebtn button">
+                    <i class="plus icon"></i>
+                </a>
+
+            @GeneralResource.Company
+            </div>
+
+        </div>*@
+
+
+        <div class="">
+            <div id="div-record">
+                @Html.Partial("_List", Model)
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@*<div class="modal fade" id="Add-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-full">
+            <div class="modal-dialog">
+                <div class="modal-content modal_Padding modal_content_style ">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">  @GeneralResource.New </h4>
+                    </div>
+                    <div id="divForAdd">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Edit-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-full">
+            <div class="modal-dialog  ">
+                <div class="modal-content modal_Padding modal_content_style">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@GeneralResource.Update </h4>
+                    </div>
+                    <div id="divForUpdate">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Delete-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-full">
+            <div class="modal-dialog  modal_delete_dialog ">
+                <div class="modal-content modal_Padding modal_content_style_delete">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@GeneralResource.Delete </h4>
+                    </div>
+                    <div id="divForDelete">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+*@<div class="ui add  modal " id="Add-Model" aria-labelledby="myModalLabel">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        <i class="file alternate icon"></i>
+        @GeneralResource.New
+    </div>
+    <div id="divForAdd" class="divForAdd content">
+    </div>
+</div>
+<div class="ui edit modal " id="Edit-Model">
+      <i class=" close feather icon-x "></i>
+    <div class="header">
+        @GeneralResource.Update
+    </div>
+    <div id="divForUpdate" class="divForUpdate scrolling content">
+    </div>
+</div>
+
+
+<div class="ui modal " id="Delete-Model">
+      <i class=" close feather icon-x "></i>
+    <div class="header">
+        @GeneralResource.Delete
+    </div>
+
+    <div id="divForDelete" class="divForDelete content">
+    </div>
+</div>
+
+<script src="~/Scripts/DevelopmentJS/Company.js"></script>

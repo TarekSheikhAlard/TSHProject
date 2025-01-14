@@ -1,0 +1,161 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeePayrollViewModel>
+@using Campus.School.Management.Logic.Resources
+@{
+
+    int index = 0;
+
+}
+<table class="ui  very basic  table" id="PayrollTable">
+    <thead>
+        <tr>
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.NameE)
+
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.RegularHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeductionHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OTHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bonus)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody class="ui payroll form">
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <h5 class="ui header">
+
+                        <div class="content">
+                            @Html.DisplayFor(modelItem => item.NameE)
+                            <a href="#" onclick="Edit(@item.Employee_ID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+                            <div class="sub header">@Html.DisplayFor(modelItem => item.BasePay) per hour</div>
+                            <input type="hidden" value="@item.Employee_ID" name="model[@index].Employee_ID" />
+                            <input type="hidden" value="@item.BasePay" name="model[@index].BasePay" />
+                            <input type="hidden" value="@item.SalaryMonth" name="model[@index].SalaryMonth" />
+                            <input type="hidden" value="" name="model[@index].Benefits" />
+                            <input type="hidden" value="" name="model[@index].Deductions" />
+                            <input type="hidden" value="" name="model[@index].Taxes" />
+                            <input type="hidden" value="" name="model[@index].GovReq" />
+                        </div>
+
+                    </h5>
+
+                </td>
+
+                <td>
+                    <div class="field">
+
+                        <input type="number" data-validate="RegularHours" name="model[@index].RegularHours" value="@item.RegularHours" readonly/>
+                    </div>
+                    @*@Html.DisplayFor(modelItem => item.RegularHours)*@
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="number" name="model[@index].DeductionHours" />
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="number" name="model[@index].OTHours" />
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="number" name="model[@index].Bonus" />
+                    </div>
+                </td>
+
+
+            </tr>
+            index++;
+        }
+    </tbody>
+</table>
+<div class="ui divider"></div>
+<button class="ui primary button" id="CreatePayroll">Create Payroll</button>
+@{ string Update = GeneralResource.Update + " " + GeneralResource.Employee; }
+<div class="ui edit large modal " id="Edit-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Update
+    </div>
+    <div id="divForUpdate" class="divForUpdate scrolling content" style="padding-top:0px;">
+    </div>
+</div>
+<script>
+    $(function () {
+      
+        $('.payroll.form').form({
+            fields: {
+                RegularHours: 'empty'
+            }
+
+        });
+
+
+
+        $('#CreatePayroll').click(function () {
+            $this = $(this);
+            if ($('.ui.payroll.form').form('validate form')) {
+                $this.addClass("loading");
+                var data = $('table input').serialize()
+                    + '&operDate=' + $('[name="OperationDate"]').val()
+                    + '&BankAccId=' + $('[name="BankId"]').val();
+
+                $.ajax({
+                    type: "POST",
+                    data: data,
+                    url: '/Payroll/CreatePayroll/',
+                    success: function (response) {
+                      toastr.success("Payroll Created Sucessfully")
+                        $("#PayrollTable").html("");
+                    },
+                    complete: function () {
+                            $this.removeClass("loading");
+                    }
+
+                });
+            }
+        });
+    })
+
+
+
+      function Edit(id) {
+
+            $.ajax({
+                type: "Get",
+                url: '/Employee/EditPayrollSetup/' + id,
+                success: function (response) {
+                    $('#divForAdd').empty();
+                    $('#divForUpdate').html(response);
+                    $('#Edit-Model').modal('show');
+                    $('.ui.dropdown.noselected').dropdown();
+                    //$('.employee.menu a.active').removeClass("active");
+                    //    $('.active.tab ').removeClass("active");
+                    //$('.employee.menu a.item[data-tab="fourth"]').addClass("active");
+                    //$('.tab[data-tab="fourth"]').addClass("active");
+                    //$('.field.basePay').addClass('disabled');
+                }
+            });
+
+
+
+        };
+</script>

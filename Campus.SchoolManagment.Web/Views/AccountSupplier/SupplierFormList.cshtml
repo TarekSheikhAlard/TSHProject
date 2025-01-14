@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.SupplierFormViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+            <th>@GeneralResource.Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsClosed)
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+
+                <td>
+                    @switch (item.Type)
+
+                    {
+                        case "Q":
+                            <div class="type label" data-id="@item.ID"><i class="file type alternate outline orange icon"></i><text>Quotation</text></div>
+                            break;
+                        case "P":
+                            <div class="type label">
+                                <i class="file type alternate outline green icon"></i><text>Purchase order</text>
+                            </div>
+                            break;
+
+                        case "I":
+                            <div class="type label">
+                                <i class="file type alternate outline blue icon"></i><text>Invoice</text>
+                            </div>
+                            break;
+                    }
+
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+
+                <td>
+                    @switch (item.Status)
+                    {
+                        case "P":
+                            <div class="ui blue basic small label"><i class="clock outline  icon"></i> Pending</div>
+                            break;
+                        case "A":
+                            <div class="ui green basic small label"><i class="checkmark  icon"></i>Approved</div>
+                            break;
+                        case "R":
+                            <div class="ui red basic small label"><i class="cancel   icon"></i>Rejected</div>
+                            break;
+                    }
+
+                </td>
+
+
+                <td>
+
+
+
+                    @if (item.Status == "A")
+                    {
+                        <a style="cursor:pointer;" onclick="convertQuotation(this)" data-id="@item.ID">Convert to PO</a>
+                    }
+
+                    @if (item.Status == "C")
+                    {
+                        <a style="cursor:pointer;"  href="@Url.Action("ViewPurchaseOrder","Document",new { id=item.ID})" data-id="@item.ID">View PO</a>
+                    }
+
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsClosed)
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+
+
+        };
+        InitIndex();
+    });
+</script>

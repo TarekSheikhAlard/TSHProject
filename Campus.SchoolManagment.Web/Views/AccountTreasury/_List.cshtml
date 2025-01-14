@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountTreasuryViewModel>
+@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = "_List";
+}
+
+
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TreasuryNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TreasuryNameAR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNameAR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            @*<th>@GeneralResource.Edit</th>
+            <th>@GeneralResource.Delete</th>*@
+        </thead>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            <a href="#" onclick="Edit(@item.ID);"> <i class="ui edit icon"></i></a>
+            <a href="#" onclick="Delete(@item.ID);"> <i class="ui delete red icon"></i></a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TreasuryNameEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TreasuryNameAR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNameAR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+
+
+    </tr>
+        }
+
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

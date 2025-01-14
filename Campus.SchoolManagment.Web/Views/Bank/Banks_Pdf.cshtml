@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BankViewModel>
+@using Campus.School.Management.Logic.Resources
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<table>
+    <thead>
+        <tr class="">
+          
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+         
+                <th>
+                    @Html.DisplayNameFor(model => model.BankNameEn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BankAccountNameEn)
+                </th>
+          
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.BranchName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpeningBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+     
+            <td> @Html.DisplayFor(modelItem => item.AccountNumber)</td>
+         
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankNameEn)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankAccountNameEn)
+                </td>
+          
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+
+
+
+        </tr>
+    }
+
+</table>
+

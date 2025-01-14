@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountTreeViewModel>
+
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel;
+
+@{
+    SchoolUserViewModel _dbUser = Statistics.GetLogiccookie();
+}
+
+
+@if (ViewBag.Parentlevel != null)
+{
+    <input id="Parentlevel" type="hidden" value="@ViewBag.Parentlevel" />
+
+}
+<table class="ui selectable single line celled  table" id="AccountTreeTable">
+    <thead>
+        <tr class="">
+
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.AccountTreeCode)
+            </th>
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.AccountNameEN)
+            </th>
+            @if (_dbUser.isArabic)
+            {
+                <th>
+
+                    @Html.DisplayNameFor(model => model.AccountNameAR)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenBalance)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="level-@item.AccountTreeLevel">
+                <td>
+                    @if (item.AccountTreeLevel == 4)
+                    {
+
+
+                        <a href="#" onclick="Edit(@item.AccountTreeID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+                        <a href="#" onclick="Delete(@item.AccountTreeID);" class="editDialog"> <i class="feather red icon-trash"></i></a>
+
+
+
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountTreeCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNameEN)
+                </td>
+                @if (_dbUser.isArabic)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNameAR)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenBalance)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#AccountTreeTable').DataTable({
+
+                paging: false
+            });
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1) {
+                GetAccountTreeIndex();
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2) {
+                GetAccountTreeIndex();
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3) {
+                GetAccountTreeIndex();
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+             else if (Msg == 5) {
+                toastr.error("@GeneralResource.NotAllowedDelete")
+            }
+
+        };
+        InitIndex();
+
+
+    });
+</script>

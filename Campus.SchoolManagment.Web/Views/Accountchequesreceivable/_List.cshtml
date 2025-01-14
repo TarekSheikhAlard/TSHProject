@@ -1,0 +1,175 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountchequesreceivableViewModel>
+
+@using Campus.School.Management.Logic.Resources
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.docementNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.costcenterName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BankBranchName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNameEN1)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNameEN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.operationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChequeDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+        
+            <th>
+                @Html.DisplayNameFor(model => model.NameA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isCollected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.collectionDate)
+            </th>
+            
+            @*<th>@GeneralResource.Edit</th>*@
+            <th>@GeneralResource.Delete</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.docementNumber)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.costcenterName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BankBranchName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNameEN1)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNameEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.operationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChequeDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency_Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.NameA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isCollected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.collectionDate)
+            </td>
+            @if (item.AccountDailyJournal.IsDeleted == false)
+
+            {
+                @*<td>
+
+
+                    تم عمل قيد مرحل
+                     </td>*@
+                <td>
+                    @if (item.AccountDailyJournal.IsPost == false)
+                    {
+                        @GeneralResource.DailyJournalunpostedCreated
+                    }
+                    else
+                    {
+
+                        @GeneralResource.DailyJournalpostedCreated
+
+
+                    }
+
+                </td>
+            }
+            else
+            {
+                @*<td>
+                        <a href="#" onclick="Edit(@item.ID);"> <i class="ui edit icon"></i></a>
+
+                    </td>*@
+                <td>
+                    <a href="#" onclick="Delete(@item.ID);"> <i class="ui delete red icon"></i></a>
+
+
+
+                </td>
+            }
+       
+        </tr>
+    }
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

@@ -1,0 +1,152 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+}
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="building" size="45"></clr-icon>
+                @*<i class="feather  icon-briefcase"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.EmployeeSalaryReport
+                </div>
+                <div id="Sub" class="sub header">
+                   @*@String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.EmployeeSalaryReport)*@
+                </div>
+            </h1>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<div class="ui main container">
+
+    <div class="ui segment  anim" style="background-color:#fff;opacity:1">
+
+        <div class="toolspace">
+            <div class="ui employee report form">
+                <div class="inline fields">
+                    <div class="field">
+                        <div class="ui month selection dropdown">
+                            <input type="hidden" id="month">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Select Month</div>
+                            <div class="menu">
+                                <div class="item" data-value="1">January</div>
+                                <div class="item" data-value="2">February </div>
+                                <div class="item" data-value="3">March </div>
+                                <div class="item" data-value="4">April </div>
+                                <div class="item" data-value="5">May </div>
+                                <div class="item" data-value="6">June </div>
+                                <div class="item" data-value="7">July </div>
+                                <div class="item" data-value="8">August </div>
+                                <div class="item" data-value="9">September </div>
+                                <div class="item" data-value="10">October </div>
+                                <div class="item" data-value="11">November </div>
+                                <div class="item" data-value="12">December</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui year selection dropdown">
+                            <input type="hidden" id="year">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Select Year</div>
+                            <div class="menu">
+                                <div class="item" data-value="2018">2018</div>
+                                <div class="item" data-value="2019">2019</div>     
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inline field">
+                        <div class="ui primary getreport submit button">Get Report</div>
+                        <div class="ui  exportreport submit button">Get Report</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui container">
+            <div id="div-record">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    $(function () {
+
+        $('.ui.form.employee.report').form({
+            fields: {
+                month: 'empty',
+                year: 'empty'
+            }
+        });
+
+        $('.getreport.submit').click(function () {
+         var isvalid =   $('.ui.form.employee.report').form('is valid')
+
+            if (isvalid){
+                $.ajax({
+                    type: "Get",
+                    url: '/EmployeeSalaryReport/GetReport/',
+                    data: { month: $('#month').val(),year:$('#year').val()},
+                    success: function (response) {
+                        $('#div-record').empty();
+                        $('#div-record').html(response);          
+                    }
+                });
+
+
+            }
+
+        })
+        $('.exportreport.submit').click(function () {
+            var isvalid = $('.ui.form.employee.report').form('is valid')
+
+            if (isvalid) {
+              
+                var $parent = $('.exportreport.button');
+
+                $parent
+                    .addClass("loading");
+
+                $.fileDownload("/EmployeeSalaryReport/ExportPdf?month=" + $('#month').val() + "&year=" + $('#year').val(), {
+                    successCallback: function (url) {
+                        // alert();
+                        $parent
+                            .removeClass("loading");
+                    },
+                    failCallback: function (html, url) {
+                        toastr.error("Error Occured while Download")
+                        $parent
+                            .removeClass("loading");
+                    }
+                });
+
+
+            }
+
+        })
+
+
+    })
+
+</script>

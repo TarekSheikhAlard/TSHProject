@@ -1,0 +1,48 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusExpenseItemViewModel
+@using Campus.School.Management.Logic.Resources
+
+<tr>
+    @using (Html.BeginCollectionItem("_BusExpensesItems"))
+    {
+        @Html.HiddenFor(c => c.BusExpenses_ID)
+        @Html.HiddenFor(c => c.ID)
+        <td>
+            <div class="clearfix"></div>
+            <hr />
+            @Html.EditorFor(model => model.ItemDesc)
+            @Html.ValidationMessageFor(model => model.ItemDesc, "", new { @class = "" })
+            <div class="clearfix"></div>
+           
+        </td>
+        <td>
+            <div class="clearfix"></div>
+            <hr />
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "" })
+            <div class="clearfix"></div>
+            
+        </td>
+
+            <td>
+                <div class="clearfix"></div>
+<hr />
+
+                @Html.EditorFor(model => model.Amount)
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "" })
+                <div class="clearfix"></div>
+               
+            </td>
+
+            <td>
+                <div class="clearfix"></div>
+                <hr />
+                <input type="button" onclick="if (confirm('are you sure you want to delete')) { $(this).parent().parent($('td')).remove(); }" value="Delete">
+                <div class="clearfix"></div>
+               
+             </td>
+
+    }
+</tr>
+
+

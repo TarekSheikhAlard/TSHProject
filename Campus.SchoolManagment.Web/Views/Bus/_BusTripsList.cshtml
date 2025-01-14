@@ -1,0 +1,66 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.BusViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+        <div class="ui large dividing header">
+            <i class="fa globe"></i><div class="content">  <a href="#" id="AddBusTrip" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a>@GeneralResource.Details
+        </div>
+
+    </div>
+   <div class="ui container">
+
+        <table class="ui celled table  " id="BusTripsContailner">
+            <thead class="">
+                <tr>
+                    <th>
+                        @Html.Label("BusStation")
+                    </th>
+                    <th>
+                        @Html.Label("PickUpTime")
+
+                    </th>
+                    <th>
+                        @Html.Label("DropTime")
+                    </th>
+                    <th>
+                        @Html.Label("Notes")
+                    </th>
+                    <th>
+                        @Html.Label("TripType")
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @if (Model._BusTrips != null)
+            {
+                foreach (var item in Model._BusTrips)
+                {
+
+            @Html.Partial("_BusTripItem", item)
+
+                }
+            }
+
+
+
+
+        </table>
+    </div>
+
+
+<script>
+
+            $("#AddBusTrip").click(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Bus/AddBusTrip',
+                    data: { BusID: $("#BusID").val() },
+                    success: function (data) {
+                        $('#BusTripsContailner').append(data);
+                    }
+                });
+            })
+
+
+</script>

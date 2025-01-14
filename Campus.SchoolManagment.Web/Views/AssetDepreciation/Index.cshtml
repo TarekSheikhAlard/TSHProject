@@ -1,0 +1,180 @@
+﻿@model  Campus.School.Management.Logic.BusinessLayer.ViewModel.AssetDepreciationViewModel
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = GeneralResource.StudyYear; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.depreciation
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.depreciation)
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+
+    <div class="ui segment anim">
+        <div class="toolspace">
+            <div class="ui depreciation asset form">
+                <div class="inline fields">
+                    <div class="field">
+
+                        @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="ui input">
+                            @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "ui input date-picker" } })
+                            @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="field" onclick="SearchAsset()">
+
+
+                        @Html.LabelFor(model => model.AssetTreeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="ui input">
+                            @Html.EditorFor(model => model.AssetNameEN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.HiddenFor(model => model.AssetTreeID)
+                            @Html.ValidationMessageFor(model => model.AssetTreeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="ui submit primary button" id="SubmitDepreciation">Submit</div>
+                    @*<div class="field">
+                            <input type="submit" value="@GeneralResource.Student" class="ui primary submit button" />
+                        </div>*@
+
+                </div>
+            </div>
+
+        </div>
+        <div class="ui container">
+            <div id="div-record" class="ui placeholder segment">
+                <div class="ui icon header">
+
+
+                </div>
+                @*@Html.Partial("_List", Model)*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@{
+    string Delete = GeneralResource.Delete + " " + GeneralResource.depreciation;
+    string Details = GeneralResource.Details + " " + GeneralResource.DailyJournal;
+}
+<div class=" ui small asset modal " id="Asset-Model">
+
+    <div class="header">
+
+        @GeneralResource.AssetTree
+    </div>
+    <div id="divForAsset" class="divForAsset scrolling content">
+    </div>
+</div>
+
+<div class="ui delete  modal " id="Delete-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Delete
+
+    </div>
+    <div id="divForDelete" class="divForDelete content">
+    </div>
+</div>.
+
+
+<div id="myModal" class="ui large modal">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+
+        @Details
+    </div>
+    <div id="popupDetail" class=" scrolling content">
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    $(function () {
+
+
+        InitC();
+
+        $('#SubmitDepreciation').click(function () {
+
+            isvalid = $('.ui.depreciation.asset.form').form('is valid');
+
+
+            var $cache = $(this).attr("data-cache", $("#AssetTreeID").val());
+
+            if (isvalid) {
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    data: { ToDate: $('#ToDate').val(), AssetTreeID: $("#AssetTreeID").val() },
+                    url: '/AssetDepreciation/SubmitDepreciation',
+                    success: function (response) {
+                        if (!response.IsError) {
+                            $.get("/AssetDepreciation/GetDepreciation/" + response.AssetTreeID, function (data) {
+
+                                $('#div-record')
+                                    .removeClass("placeholder")
+                                    .html(data);
+
+                            });
+
+                        }
+
+
+
+                    }
+                });
+            }
+
+        });
+
+
+
+    })
+
+
+    function InitC() {
+
+        $('.ui.depreciation.asset.form')
+            .form({
+                debug: true,
+                fields: {
+                    ToDate: 'empty',
+                    AssetTreeID: 'empty',
+
+                }
+            })
+            ;
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+        });
+
+    };
+
+
+
+
+</script>
+<script src="~/Scripts/DevelopmentJS/AssetDepreciation.js"></script>

@@ -1,0 +1,44 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+
+@model int
+
+
+
+@using (Ajax.BeginForm("Delete", "AssetDepreciation", new AjaxOptions { HttpMethod = "POST",  OnSuccess = "deleteClient(data);" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+
+    
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group  delete_msg">
+
+            @Html.Label("Note", GeneralResource.DeleteMessageConfirm, htmlAttributes: new { @class = "control-label col-md-10 delete_msg  " })
+            
+
+           
+        </div>
+
+      
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd"> @GeneralResource.ok</button>
+            <button type="button" class="ui deny button">@GeneralResource.Close</button>
+
+        </div>
+
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+

@@ -1,0 +1,59 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.UnitsMeasurementsViewModel
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "UnitsMeasurements", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{ 
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="field">
+        @Html.LabelFor(model => model.UnitNumber, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UnitNumber, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.UnitNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.UnitNameEn, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UnitNameEn, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.UnitNameEn, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.UnitNameAr, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UnitNameAr, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.UnitNameAr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.SymbolEn, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SymbolEn, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.SymbolEn, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(model => model.SymbolAr, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SymbolAr, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.SymbolAr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+
+}
+

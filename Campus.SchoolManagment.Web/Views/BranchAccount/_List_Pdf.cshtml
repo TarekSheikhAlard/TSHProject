@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BranchAccountViewModel>
+@using Campus.School.Management.Logic.Resources
+@{
+    
+ }
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<table >
+    <thead>
+        <tr class="">
+            @*<th>
+                @Html.DisplayNameFor(model => model.AccountID)
+            </th>*@
+            <th>@GeneralResource.Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account_Number)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.BankID)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.BankNameEn)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.BranchID)
+            </th>*@
+          
+            <th>
+                @Html.DisplayNameFor(model => model.BranchName)
+            </th>
+           
+            @*<th>
+                @Html.DisplayNameFor(model => model.BankCurrencyID)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Currency_Type)
+            </th>
+           
+        </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            <a href="#" onclick="Edit(@item.AccountID);"> <i class="feather icon-edit-1"></i></a>
+
+      
+            <a href="#" onclick="Delete(@item.AccountID);"> <i class="feather red icon-trash"></i></a>
+
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.AccountID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Account_Number)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.BankID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.BankNameEn)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.BranchID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.BankCurrencyID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency_Type)
+        </td>
+
+    </tr>
+        }
+
+</table>

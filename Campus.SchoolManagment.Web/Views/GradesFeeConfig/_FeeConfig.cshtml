@@ -1,0 +1,151 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.GradesFeeConfigViewModel>
+@using Campus.School.Management.Logic.Resources
+
+@using Campus.School.Management.Logic.BusinessLayer;
+
+<ul id="sortable" class="draggable grade-configs " style="padding:0">
+    @{
+        var index = 0;
+        var pr = 1;
+
+        var readOnly = "readonly";
+    }
+
+
+    @foreach (var item in Model)
+    {
+
+        <li class="" name="index" data-index="@pr">
+
+            <i class="bars handle icon"></i>
+            <label><b>@item.AccountTreeName.Replace("Income", "")</b></label>
+
+            @if (ViewBag.isCurrentYear)
+            {
+
+                readOnly = "";
+            }
+            <div class="ui  form">
+
+                <div class="inline four fields">
+
+                    <div class="field">
+                        <label>Amount</label>
+                        <input type="number" name="configList[@index].Amount" value="@item.Amount" placeholder="Amount" onkeyup="refreshAmt(@index)" @readOnly>
+                    </div>
+
+                    <div class="field">
+                        <label>Discount</label>
+                        <input type="text" name="configList[@index].Discount" onkeyup="refreshAmt(@index)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="2" value="@item.Discount"  placeholder="Discount" @readOnly>
+                    </div>
+                    @*<div class="field">
+                        <label>tax</label>
+                        <input type="text" name="configList[@index].Tax" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="2" value="@item.Tax" placeholder="Tax %">*@
+                    @{
+                        var total = item.Amount;
+                        var totalAfterDis = item.Amount - ((item.Amount / 100) * item.Discount);
+                        var grandTotalWithTax = totalAfterDis;// + ((totalAfterDis / 100) * item.Tax);
+                    }
+
+                    @*</div>*@
+                    <div class="field">
+                        <label>Installment</label>
+                        @*@Html.DropDownList(item.InstallmentType.ToString(), ViewBag.FeeInstallmentType as SelectList, htmlAttributes: new { @class = "ui selection dropdown", @Name = "configList[" + index + "].InstallmentType", @value = item.InstallmentType })*@
+
+                        @if (ViewBag.isCurrentYear)
+                        {
+
+                            @Html.DropDownListFor(x => x.ToList()[index].InstallmentType, ViewBag.FeeInstallmentType as SelectList, htmlAttributes: new { @class = "ui " + index + " selection fluid dropdown", @Name = "configList[" + index + "].InstallmentType", @data_selected = item.InstallmentType })
+
+
+                            <script>
+                    var $dropdown = $('.ui.'+@index+'.dropdown');
+                    var val = $dropdown.attr('data-selected');
+                                         $dropdown.dropdown('set selected',val);
+
+                            </script>
+                        }
+                        else
+                        {
+
+                            <label>@item.InstallmentName</label>
+
+                        }
+                    </div>
+
+                    <div class="field" style="vertical-align: middle;margin: 15px 0px 0px 5px;"><label >= <text class="@index-grandTotal">@grandTotalWithTax</text></label>   </div>
+
+
+                </div>
+            </div>
+            <input type="hidden" name="configList[@index].AccountTreeID" value="@item.AccountTreeID" />
+            <input type="hidden" name="configList[@index].Id" value="@item.Id" />
+            <input type="hidden" name="configList[@index].GradeID" value="@item.GradeID" />
+            <input type="hidden" name="configList[@index].Priority" data-selector="Priority" value="@pr" />
+
+        </li>
+        index += 1;
+        pr += 1;
+    }
+
+
+</ul>
+
+@if (ViewBag.isCurrentYear)
+{
+    <button class="ui primary saveFee button" id="SaveConfig"> Save Changes</button>
+}
+<script>
+    $(function () {
+        $("#SaveConfig").click(function () {
+            var data = $('ul.grade-configs :input').serialize();
+            $('.saveFee.button').addClass('loading')
+            $.ajax({
+                url: '/GradesFeeConfig/Save/',
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    toastr.success("Saved Successfully")
+                    $('.main.segment')
+                        .empty()
+                        .html(response);
+
+                    BindSortable();
+                },
+                complete: function () { $('.saveFee.button').removeClass('loading') }
+            });
+        })
+
+    });
+
+   refreshAmt = function (index) {
+      // $el = $(el);
+
+
+       console.log(index)
+       var totAmt = 0;
+       var amt = parseFloat( $('[name="configList[' + index + '].Amount"').val());
+        var dis = parseFloat($('[name="configList[' + index + '].Discount"').val());
+
+       totAmt = amt - (dis / 100) * amt 
+
+       $('text.' + index + '-grandTotal').html(totAmt);
+
+       //if (type==='amt') {
+       //    value = $el.val();
+
+       //   amt=  value 
+       //}
+       // if (type==='dis') {
+       //    value = $el.val();
+       //}
+
+        // var total = amt +
+
+
+
+
+    }
+
+
+</script>

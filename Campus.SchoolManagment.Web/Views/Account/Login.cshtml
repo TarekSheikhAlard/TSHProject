@@ -1,0 +1,158 @@
+﻿@using Campus.SchoolManagment.Web.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="ui raised login  segment " style="visibility:hidden">
+    <!-- BEGIN LOGIN FORM -->
+    <section id="loginForm">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "ui login form", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            <h2 style="margin-top:auto" >Login</h2>
+
+            @Html.ValidationSummary(true, "", new { @class = "ui error message",@style="display:block" })
+           <div class="field">
+                @Html.LabelFor(m => m.CompanyID, new { @class = "col-md-4 control-label" })
+                
+                    @Html.DropDownListFor(model => model.CompanyID, ViewBag.Companies as SelectList, "select", htmlAttributes: new { @class = "ui dropdown" })@*, @onchange= "getSchoolList()"*@
+                    @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+               
+            </div>
+                @*<select id="schoolDropDown"></select>*@
+               <div class="field">
+                    @Html.LabelFor(m => m.SchoolID, new { @class = "col-md-4 control-label" })
+                    
+                        @Html.DropDownListFor(model => model.SchoolID, new SelectList(string.Empty, "Value", "Text"), "select", htmlAttributes: new { @class = "ui dropdown" })@*, @onchange= "getSchoolList()"*@
+                        @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                    
+                </div>
+               <div class="two fields">
+                   <div class="field">
+                       @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                       <div class="col-md-8">
+                           @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                           @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                       </div>
+                   </div>
+                   <div class="field">
+                       @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                       <div class="col-md-8">
+                           @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                           @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                       </div>
+                   </div>
+               </div>
+              
+            
+
+                   
+                    @*<div class="field">
+                    <div class="col-md-offset-2 col-md-10">
+                     
+                    </div>
+                </div>*@
+                   <div class="actions">
+                       <button type="submit" class="ui primary button " style="display:inline-block" name="cmd"> Log in </button>
+                       <div class="checkbox " style="display:inline-block">
+                           @Html.CheckBoxFor(m => m.RememberMe)
+                           @Html.LabelFor(m => m.RememberMe)
+                       </div>
+                   </div>
+              
+                @*  <p>
+                         @Html.ActionLink("Register as a new user", "Register")
+                     </p>
+                    Enable this once you have account confirmation enabled for password reset functionality*@
+                @*<p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>*@
+        }
+    </section>
+
+
+</div>
+
+
+@*<script type="text/javascript">
+        function getSchoolList() {
+            debugger;
+            var companyId  = $("#CompanyID").val();
+            $.ajax
+            ({
+                url: '/School/GetSchoolList',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    companyID: +companyId
+                }),
+                success: function (result) {
+                    $("#schoolDropDown").html("");
+                    $.each($.parseJSON(result), function (i, school) {
+                        $("#schoolDropDown").append($('<option></option>').val(school.SchoolID).html(school.SchoolNameAr))
+                    })
+
+                },
+                error: function () {
+                    alert("Whooaaa! Something went wrong..")
+                },
+            });
+        }
+
+    </script>*@
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+
+            $('.login.segment')
+                .transition({
+                    animation: 'fade up',
+                    duration: 1000,
+                    interval: 50,
+
+                })
+                ;
+            //Dropdownlist Selectedchange event
+            $("#CompanyID").change(function () {
+                var companyId = $("#CompanyID").val();
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetSchoolList", "LookUp")', // we are calling json method
+                    dataType: 'json',
+                    data: { companyID: companyId },   
+                    success: function (result) {
+                        debugger
+                        var items = '<option>Select School</option>';
+
+                        var schoolName;
+
+
+                        $.each(JSON.parse(result), function (i, school) {
+                            schoolName = getLanguage() == 'ar' ? school.SchoolNameAr : school.SchoolNameEn
+
+                            items += "<option value='" + school.SchoolID + "'>" + schoolName + "</option>";
+                        });
+                        $('#SchoolID').html(items);
+                      
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+
+
+
+

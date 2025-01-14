@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountsubsidiaryledgerViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line striped celled  compact table">
+    <tr class="">
+        <th>
+            @Html.DisplayNameFor(model => model.DailyJournalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Currency_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.originalamount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Debit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Credit)
+        </th>
+       
+     
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+     
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DailyJournalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SerialNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.originalamount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Debit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Credit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+     
+    </tr>
+  
+}
+    <tr>
+        <td> @GeneralResource.Total</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            @Model.Sum(x => x.Debit)
+        </td>
+        <td>
+            @Model.Sum(x => x.Credit)
+        </td>
+        <td>
+            @Model.Sum(x => x.Balance)
+        </td>
+
+    </tr>
+</table>

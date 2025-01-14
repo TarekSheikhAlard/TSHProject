@@ -1,0 +1,275 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.UserPermissionViewModel>
+
+@using Campus.School.Management.Logic.BusinessLayer
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@{
+
+    List<MenuPageViewModel> PageList = ViewBag.Page as List<MenuPageViewModel>;
+}
+@* @using (Ajax.BeginForm("Create", "UserPermission", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))*@
+
+@Html.AntiForgeryToken()
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+<div class="field">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="">
+
+        <div class="ui container">
+            <div class="table-toolbar">
+
+            </div>
+            <table class="ui selectable  single line Striped celled  compact table" id="roleManagementTable">
+                <thead>
+                    <tr>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.PageID)
+                        </th>
+                        <th style="width:20%">
+                            @Html.DisplayNameFor(model => model.PageName)
+                        </th>
+                        <th class="table-checkbox">
+                            <input type="checkbox" class="group-checkable" data-set="checkboxes1" />
+
+                            @Html.DisplayNameFor(model => model.ViewAct)
+                        </th>
+
+                        <th class="table-checkbox">
+                            <input type="checkbox" class="group-checkable" data-set="checkboxes2" />
+
+                            @Html.DisplayNameFor(model => model.CreateAct)
+                        </th>
+
+                        <th class="table-checkbox">
+
+                            <input type="checkbox" class="group-checkable" data-set="checkboxes3" />
+
+                            @Html.DisplayNameFor(model => model.EditAct)
+                        </th>
+
+                        <th class="table-checkbox">
+                            <input type="checkbox" class="group-checkable" data-set="checkboxes4" />
+
+                            @Html.DisplayNameFor(model => model.DeleteAct)
+                        </th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr class="odd gradeX">
+                            <td>
+                                @item.PageID
+                            </td>
+                            <td>
+                                @Html.HiddenFor(x => item.PageID)
+                                @item.PageName
+                            </td>
+                            <td>
+                                @*@Html.CheckBoxFor(m => item.ViewAct)*@
+                                @if (item.ViewAct == true)
+                                {
+                                    <input type="checkbox" class="checkboxes1" value="1" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="checkboxes1" value="1"  />
+                                }
+
+                            </td>
+                            <td>
+                                @*@Html.CheckBoxFor(m => item.CreateAct)*@
+
+
+                                @if (item.CreateAct == true)
+                                {
+                                    <input type="checkbox" class="checkboxes2" value="2" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="checkboxes2" value="2"  />
+                                }
+
+
+                            </td>
+                            <td>
+                                @*@Html.CheckBoxFor(m => item.EditAct)*@
+
+                                @if (item.EditAct == true)
+                                {
+                                    <input type="checkbox" class="checkboxes3" value="3" checked/>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="checkboxes3" value="3" />
+                                }
+
+                            </td>
+
+                            <td>
+                                @*@Html.CheckBoxFor(m => item.DeleteAct)*@
+
+                                @if (item.DeleteAct == true)
+                                {
+                                    <input type="checkbox" class="checkboxes4" value="4" checked/>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="checkboxes4" value="4" />
+                                }
+
+                                
+                            </td>
+
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+</div>
+<div class="actions">
+    <button type="submit" id="Save" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+    <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+</div>
+
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+
+@*<link href="~/Content/assets/global/plugins/select2/select2.css" rel="stylesheet" />
+    <script src="~/Content/assets/global/plugins/select2/select2.js"></script>
+    <script src="~/Content/assets/admin/pages/scripts/table-managed.js"></script>*@
+
+
+<script>
+    $(document).ready(function () {
+
+        //ComponentsDropdowns.init();
+        //TableManaged.init();
+        // Hide a column
+
+        setTimeout(
+            function () {
+                $('#roleManagementTable').DataTable().column(0).visible(false);
+
+            }, 0);
+
+           function InitIndex() {
+            //$('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1) {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2) {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3) {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+               }
+
+
+        };
+        InitIndex();
+
+
+        $('.group-checkable').click(function () {
+            var $this = $(this);
+            var checkboxes = $("." + $this.attr("data-set"));
+          
+            if ($this.is(':checked')) {
+
+                checkboxes.prop('checked', true);
+
+            }
+            else {
+                checkboxes.prop('checked', false);
+            }
+
+        });
+
+
+       
+    });
+
+
+
+    $('#Save').click(function () {
+        debugger;
+        var Role = $('#RoleID').val();// get user list
+        var PagList = [];// set permission List
+        var rows = $("#roleManagementTable").dataTable().fnGetNodes();
+        if (Role != null) {
+            // UserIDs.forEach(function (User) {// loop on each user to set his permission
+            for (var i = 0; i < rows.length; i++) {//loop on datatable rows to get selected page
+                var view = rows[i].children[1].lastElementChild.checked
+                var create = rows[i].children[2].lastElementChild.checked
+                var Edit = rows[i].children[3].lastElementChild.checked
+                var Delete = rows[i].children[4].lastElementChild.checked
+                //if (view || create || Edit || Delete) {
+                    var Item = {};
+                    Item.RoleID = Role;
+                    Item.PageID = rows[i].children[0].lastElementChild.value;
+                    Item.ViewAct = view;
+                    Item.CreateAct = create;
+                    Item.EditAct = Edit;
+                    Item.DeleteAct = Delete;
+                    PagList.push(Item);// add permission object in permission List
+                //}
+            }
+            //});
+        }
+        if (PagList.length > 0) {
+
+
+            $.ajax({
+                url: '/UserPermission/Create',
+                type: "POST",
+                data: { List: PagList, roleId: Role },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert(xhr.status);
+                    //alert(thrownError);
+
+                },
+                success: function (response) {
+
+                    $('#div-record').html(response);
+
+                    //$('#Add-Model').modal('hide');
+                }
+            });
+        }
+        else {
+            alert("You must choose at least one page with one User");
+        }
+
+    });
+</script>

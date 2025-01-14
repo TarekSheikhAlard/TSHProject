@@ -1,0 +1,99 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountTreeViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using Campus.SchoolManagment.Web.Helper
+@using System.Web.Mvc;
+
+@using Campus.School.Management.Logic.Resources
+
+
+
+@using (Ajax.BeginForm("Edit", "AccountTree", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <input name="check" value="false" type="hidden" />
+
+    @Html.HiddenFor(model => model.AccountTreeID)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    @Html.HiddenFor(model => model.AccountTreeParentID)
+
+
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.AccountNameEN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.AccountNameEN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.AccountNameAR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AccountNameAR, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.OpenBalance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OpenBalance, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OpenBalance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.CreditDebitFlag, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownFor(model => model.CreditDebitFlag, ViewBag.CreditDebitFlags as List<SemanticControls.DropdownList>, new { @class = " ui  search selection  dropdown ", @placeholder = "Select" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+    </div>
+
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    //function InitC() {
+
+    //    $("#AccountNameAR").valid();
+    //}
+
+    //InitC();
+
+
+    //$("#AccountNameAR").keyup(function () {
+    //    $("#check").val(true);
+    //})
+
+</script>
+

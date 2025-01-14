@@ -1,0 +1,46 @@
+﻿div.mainmenu.inverted.accordion.menu {
+    background-color: #ff5722 !important;
+}
+
+.ui.primary.segment:not(.inverted) {
+    border-top: 2px solid #ff5722 !important;
+}
+.dark-background {
+    background-color: #ce3707 !important;
+}
+.primary.button {
+    background-color: #ff5722 !important;
+}
+
+.ui.selectable.table tbody tr:hover, .ui.table tbody tr td.selectable:hover, .ui.table tbody tr.selected {
+    background: rgba(0,0,0,.05) !important;
+    /*color: #039BE5 !important;*/
+    /*background-color: #039BE5 !important;*/
+    /*background-color: #F44336 !important;*/
+    background-color: #ffdfd5 !important;
+    /*background-color: #0aa5f11c !important;*/
+}
+
+.feather.primary ,.primary.icon,.theme {
+    color:#ff5722;
+}
+
+table.report thead th {
+    border-bottom: 1.2px solid #ff5722 !important;
+}
+
+table.report tfoot th {
+    border-top: 3px double #ff5722 !important;
+    font-weight: bold !important;
+}
+
+table.report tbody tr.level-2 {
+    background-color: #ffbc8c !important
+}
+
+table.report tbody tr.level-3 {
+    background-color: #fbcba8 !important 
+}
+
+
+

@@ -1,0 +1,104 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.SemsterViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@using (Ajax.BeginForm("Edit", "Semster", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.SID)
+    @Html.HiddenFor(c => c.GradeID)
+    @Html.HiddenFor(c => c.YearID)
+    @Html.HiddenFor(model => model.check)
+  
+    
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+       <div class="field">
+            @Html.LabelFor(model => model.SemNameA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SemNameA, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.SemNameA, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.SemNameE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SemNameE, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.SemNameE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       <div class="field">
+            @Html.LabelFor(model => model.SemID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+
+                @Html.EditorFor(model => model.SemID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.SemID, "", new { @class = "text-danger" })
+                <p id="sem"></p>
+            </div>
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+        </div>
+      
+       <div class="field">
+            @Html.LabelFor(model => model.SemStDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SemStDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.SemStDate, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.SemEdDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SemEdDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.SemEdDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       <div class="field">
+
+            @Html.LabelFor(model => model.QuartersCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.QuartersCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuartersCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="submit" id="Save" class="ui primary button " name="cmd" >@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Edit</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+
+}
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script>
+
+    function InitC() {
+        @*$('#GradeID').val(@Model.GradeID);
+        $('#YearID').val(@Model.YearID);
+        $('#SemID').get(0).value = @Model.SemID;*@
+        $('#SemID').valid();
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+        });
+    };
+    InitC();
+
+   
+
+</script>

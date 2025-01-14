@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.InventoryTreeViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+@if (ViewBag.Parentlevel != null)
+{
+    <input id="Parentlevel" type="hidden" value="@ViewBag.Parentlevel" />
+  
+}
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+           
+                <th>@GeneralResource.Actions</th>
+            
+                <th>
+
+                    @Html.DisplayNameFor(model => model.InventoryNameAR)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.InventoryNameEN)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.InventoryTreeCode)
+                </th>
+
+                @*@if (Model.Count() > 0 && (Model.FirstOrDefault().InventoryTreeLevel == 3 || Model.FirstOrDefault().InventoryTreeLevel == 4|| Model.FirstOrDefault().InventoryTreeLevel == 5))
+            {*@
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+
+                @*}*@
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+        <tr>
+          
+            
+            <td>
+                @if (item.InventoryTreeParentID != null)
+                {
+                    <a href="#" onclick="Edit(@item.InventoryTreeID);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+
+                    <a href="#" onclick="Delete(@item.InventoryTreeID);" class="editDialog"> <i class="feather red icon-trash"></i></a>
+                }
+            </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryNameAR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryNameEN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryTreeCode)
+                </td>
+
+
+                @*@if (item.InventoryTreeLevel == 3 || item.InventoryTreeLevel == 4||item.InventoryTreeLevel==5)
+            {*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+
+                @*}*@
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1) {
+                GetInventoryTreeIndex();
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2) {
+                GetInventoryTreeIndex();
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3) {
+                GetInventoryTreeIndex();
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+
+
+    });
+</script>

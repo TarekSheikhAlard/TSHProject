@@ -1,0 +1,292 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountCustomerViewModel
+
+@using Campus.School.Management.Logic.Resources
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@{
+    var htmlAttributesactivity = new Dictionary<string, object>
+{
+{ "class" ,"form-control"},
+
+};
+    if (Model.Customeractivity == "فعال")
+    {
+        htmlAttributesactivity.Add("disabled", "disabled");
+    }
+
+}
+
+
+@using (Ajax.BeginForm("Edit", "AccountCustomer", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    <div class="three fields">
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.CustomerNameAr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CustomerNameAr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerNameAr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+
+
+            @Html.LabelFor(model => model.CityID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.CityID, ViewBag.CityList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <div class="three fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="four fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.CustomerNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CustomerNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.FBalance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FBalance, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.FBalance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="field">
+                @Html.LabelFor(model => model.AccountTreeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3" onclick="SearchAccount()">
+                    @Html.EditorFor(model => model.AccountTree, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.HiddenFor(model => model.AccountTreeID)
+                    @Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1">
+                    @*<input type="button" id="Search" value="....." onclick="SearchAccount()" class="ui primary button " />
+                </div>
+            </div>*@
+    </div>
+    <div class="four fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.Commercialregister, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Commercialregister, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Commercialregister, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.Typeofactivity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Typeofactivity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Typeofactivity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.Customer_Employee, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Customer_Employee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer_Employee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="field">
+
+            @Html.LabelFor(model => model.Emp_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Emp_ID, ViewBag.employee as SelectList, "--Select --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Emp_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <div class="four fields">
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.BankAccountNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BankAccountNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BankAccountNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.IBAN1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.IBAN1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IBAN1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.IBAN2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.IBAN2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IBAN2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.IBAN3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.IBAN3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IBAN3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="two fields">
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.Customeractivity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.RadioButtonFor(model => model.Customeractivity, "فعال", new { @checked = "checked" })@AccountCustomer.active &nbsp; &nbsp;
+                @Html.RadioButtonFor(model => model.Customeractivity, "متوقف")@AccountCustomer.Paused
+                @Html.ValidationMessageFor(model => model.Customeractivity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.ReasonStop, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ReasonStop, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.ReasonStop, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <button type="submit" class="ui primary button " name="cmd"> @GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+    $('#Credit,#Depeit').keyup(function () {
+
+        var FBalance = parseInt("0" + $('#Depeit').val()) - parseInt("0" + $('#Credit').val());
+
+        $('#FBalance').val(FBalance);
+
+    });
+
+</script>
+
+
+<script>
+
+    $('input:radio').click(function () {
+
+        var x = $('[name=Customeractivity]:checked').val();
+
+        if (x == "فعال") {
+            $('#ReasonStop').attr("disabled", "disabled");
+
+            $('#ReasonStop').val("");
+
+        }
+        else {
+            $('#ReasonStop').removeAttr("disabled");
+
+
+        }
+    });
+
+</script>

@@ -1,0 +1,164 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountEmployeeSalaryItemViewModel
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+
+
+
+
+
+@using (Ajax.BeginForm("Edit", "AccountEmployeeSalaryItem", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+
+    
+
+   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+       <div class="field">
+
+            @Html.LabelFor(model => model.SalaryItemTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+
+                @Html.DropDownListFor(model => model.SalaryItemTypeID, Enum.GetValues(typeof(Utility.SalaryItemType)).Cast<Utility.SalaryItemType>().Select(x => new SelectListItem
+           {
+               Text = x.ToString(),
+               Value = ((int)x).ToString(),
+           }), "select", htmlAttributes: new { @class = "form-control", @onchange = "BindSalaryItemTypeID(this.value);" })
+
+                @Html.ValidationMessageFor(model => model.SalaryItemTypeID, "", new { @class = "text-danger" })
+            </div>
+           </div>
+    <div class="field">
+            @Html.LabelFor(model => model.SalaryItemID, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.SalaryItemID, ViewBag.SalaryItemID as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SalaryItemID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       <div class="field">
+            @Html.LabelFor(model => model.Employee_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Employee_ID, ViewBag.Employee_ID as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Employee_ID, "", new { @class = "text-danger" })
+            </div>
+           </div>
+           <div class="field">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+       <div class="field">
+            @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.OperationDate, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })
+            </div>
+           </div>
+           <div class="field">    
+
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+
+
+       
+           <div class="field" id="BounsTypeDiv">
+
+                @Html.LabelFor(model => model.BounsType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.BounsType, new SelectList(new List<Object>
+                       {
+                       new { value = "Immediate " , text =GeneralResource.Immediate},
+                        new { value = "Withsalary" , text =GeneralResource.Withsalary}
+
+                       }, "value", "text"), GeneralResource.Select, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BounsType, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">&nbsp;@GeneralResource.Edit</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">&nbsp;@GeneralResource.Close</button>
+
+        </div>
+
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+
+    function Init() {
+
+        debugger;
+
+        $('#Employee_ID').val(@Model.Employee_ID);
+        $('#SalaryItemID').val(@Model.SalaryItemID);
+        $('#BounsType').val("@Model.BounsType");
+
+        if ($('#SalaryItemTypeID').val() == 1)
+        {
+            $('#BounsTypeDiv').hide();
+
+        }
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd'
+        });
+    };
+
+    Init();
+
+</script>
+
+<script>
+
+
+
+                  $('#SalaryItemTypeID').change(function ()
+                  {
+                    if ($('#SalaryItemTypeID').val() == "2")
+                    {
+                        $('#BounsTypeDiv').show();
+                    }
+                    else
+                    {
+                        $('#BounsTypeDiv').hide();
+                    }
+
+
+
+                   });
+
+
+
+</script>

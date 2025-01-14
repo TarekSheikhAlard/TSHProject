@@ -1,0 +1,216 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentFeeViewModel>
+
+@using Campus.School.Management.Logic.BusinessLayer
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel;
+@{ var index = 0;
+    string[] months;
+    string[] schoolMonths = new string[12];
+
+    string lang = Utility.getCultureCookie(false).ToLower();
+    SchoolUserViewModel _dbUser = Statistics.GetLogiccookie();
+    int startMonth = _dbUser.startYearDate.Month;
+    int EndMonth = _dbUser.endYearDate.Month;
+
+    if (lang == "ar")
+    {
+        months = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+    }
+    else
+    {
+        months = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+    }
+    bool firstComplete = false;
+    for (var i = 0; i < months.Length;)
+    {
+
+        if (!firstComplete)
+        {
+            for (var j = startMonth; j < 12; j++)
+            {
+                schoolMonths[i] = months[j];
+                if (j == 11) { firstComplete = true; }
+                i++;
+            }
+        }
+        if (firstComplete)
+        {
+
+            for (var j = 0; j < startMonth; j++)
+            {
+                schoolMonths[i] = months[j];
+                i++;
+            }
+
+        }
+
+    }
+
+
+
+}
+<table class="ui very basic small  celled feePayment table">
+    <thead>
+        <tr>
+
+            @if (Utility.getCultureCookie(false).ToLower() == "ar")
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountNameAR)
+                </th>
+
+            }
+            else
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountNameEN)
+                </th>
+
+            }
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)s %
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.tax) %
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaidAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.paidInstallment)
+            </th>
+            <th>
+                Select Installments
+            </th>
+            <th>
+                Amount
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr data-rid="@index">
+
+                @if (Utility.getCultureCookie(false).ToLower() == "ar")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNameAR)
+                    </td>
+
+
+
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNameEN)
+                    </td>
+
+                }
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @(item.Discount + item.StudentDiscount)
+
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.tax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+
+                <td class="">
+                    @Html.DisplayFor(modelItem => item.PaidAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.paidInstallment)
+
+                    (@if (Utility.getCultureCookie(false).ToLower() == "ar")
+                    {
+
+                        @item.installmentTypeAr;
+
+
+                    }
+                    else
+                    {
+
+                        @item.installmentTypeEn;
+                    })
+
+
+                    @{
+                        int totalInstallment = 0,
+                         paidInstallment = 0,
+                          installmentCount = 0;
+                        if (item.paidInstallment != null)
+                        {
+                            paidInstallment = int.Parse(item.paidInstallment.ToString().Split('/')[0]);
+                            totalInstallment = int.Parse(item.paidInstallment.ToString().Split('/')[1]);
+                            installmentCount = totalInstallment - paidInstallment;
+                        }
+                    }
+                </td>
+                <td>
+                    <div class="ui installment multiple search selection dropdown"  multiple="">
+                        <input type="hidden" name="model[@index].payInstallment">
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                        <div class="menu">
+
+                            @for (var i = 0; i < totalInstallment; i++)
+                            {
+                                if (i < paidInstallment)
+                                {
+                                    <div class="item disabled" style="opacity:1 !important" data-value="@schoolMonths[i]">@schoolMonths[i] <clr-icon shape="check"  size="12" class="is-success is-solid" ></clr-icon></div>}
+                                else
+                                {
+                                    <div class="item" data-value="@schoolMonths[i]">@schoolMonths[i]</div>
+                                }
+
+
+                            }
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input ">
+                        <input type="text" readonly />
+                    </div>
+
+                </td>
+
+            </tr>
+
+            index += 1;
+        }
+    </tbody>
+
+</table>
+
+<script>
+    $(".ui.installment.dropdown").dropdown({
+        useLabels:false
+    });
+
+</script>

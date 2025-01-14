@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BalanceSheetViewModel>
+    <link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+@{
+
+    Decimal TotalCurrentAssets = 0;
+    Decimal TotalFixedAssets = 0;
+    Decimal TotalOtherAssets = 0;
+    Decimal TotalAssets = 0;
+
+    Decimal TotalCurrentLiabilities = 0;
+    Decimal TotalLongTermLiabilities = 0;
+    Decimal TotalLiabilities = 0;
+
+    Decimal TotalCapital = 0;
+    Decimal TotalLiabilitiesCaptital = 0;
+
+
+    Decimal NetIncome = 0;
+    int currentAccount = 0;
+    //Decimal Total = 0;
+
+}
+    <table>
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.AccountName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model)
+            {
+                if (item.AccountTreeID == 6)
+                {
+                    TotalCurrentAssets = item.Amount;
+
+                }
+                if (item.AccountTreeID == 7)
+                {
+                    TotalFixedAssets = item.Amount;
+                    TotalAssets = TotalCurrentAssets + TotalFixedAssets;
+
+                    <tr style="margin-bottom:7px;">
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red; border-bottom: 3px double red;"><b>Total Current Assets</b></td>
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red; border-bottom: 3px double red;"><b>@TotalCurrentAssets</b></td>
+                    </tr>
+                }
+                if (item.AccountTreeID == 8)
+                {
+                    TotalCurrentLiabilities = item.Amount;
+                    <tr>
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>Total Fixed Assets</b></td>
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>@TotalFixedAssets</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                            <b>Total Assets</b>
+                        </td>
+                        <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                            <b>
+                                @TotalAssets SAR
+                            </b>
+                        </td>
+                    </tr>
+                }
+                if (item.AccountTreeID == 9)
+                {
+                    TotalLongTermLiabilities = item.Amount;
+                    TotalLiabilities = TotalCurrentLiabilities + TotalLongTermLiabilities;
+                    <tr style="margin-bottom:7px;">
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red; border-bottom: 3px double red;"><b>Total Current Liabilities</b></td>
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red; border-bottom: 3px double red;"><b>@TotalCurrentLiabilities</b></td>
+                    </tr>
+
+                }
+                if (item.AccountTreeID == 10)
+                {
+                    TotalCapital = item.Amount;
+                    TotalLiabilitiesCaptital = TotalLiabilities + TotalCapital;
+                    <tr>
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>Total Long Term Liabilities</b></td>
+                        <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>@TotalLongTermLiabilities</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                            <b>Total Liabilities</b>
+                        </td>
+                        <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                            <b>
+                                @TotalLiabilities SAR
+                            </b>
+                        </td>
+                    </tr>
+                }
+                <tr class="level-@item.AccountTreeLevel">
+
+
+                    <td>
+                        @if (item.AccountTreeLevel < 4)
+                        {
+                            <b>@Html.DisplayFor(modelItem => item.AccountName)</b>
+
+                        }
+                        else
+                        {
+
+                            @Html.DisplayFor(modelItem => item.AccountName)
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.AccountTreeLevel >= 4)
+                        {
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        }
+                    </td>
+
+                </tr>
+            }
+
+            <tr>
+                <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>Total Capital</b></td>
+                <td style="font-size: 1.15em;padding: 10px;border-top: 3px double red;"><b>@TotalCapital</b></td>
+            </tr>
+            <tr>
+                <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                    <b>Total Liabilities & Capital</b>
+                </td>
+                <td style="font-size: 1.17em;padding: 10px;border-bottom: 3px double red;">
+                    <b>
+                        @TotalLiabilitiesCaptital SAR
+                    </b>
+                </td>
+            </tr>
+        </tbody>
+    </table>

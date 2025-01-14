@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BankTransactionsViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="TransactionHistoryTable">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ReferenceNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Payee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayeeAccountName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.tax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Debit)
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a href="#" onclick="DownloadPdfTransacById(@item.Id,this);" title="@GeneralResource.DownloadPdf" class=""> <i class="feather icon-download"></i></a>
+                @if (!string.IsNullOrEmpty(item.AttachedDocName))
+                {
+                    <a href="#" onclick="ViewAttachedDocument('@item.AttachedDocName');" title="View attached document" class=""> <i class="feather icon-image"></i></a>
+                }
+               
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferenceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayeeAccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Debit)
+            </td>
+
+
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#TransactionHistoryTable').DataTable();
+
+        }
+        InitIndex();
+    });
+
+    DownloadPdfTransacById = function (id, el) {
+        
+    var $parent = $(el).children();
+   
+
+    var iconclass="feather icon-download",
+        spinnerClass = "spinner red loading icon";
+
+
+    $parent
+        .removeClass(iconclass)
+            .addClass(spinnerClass)
+
+          $.fileDownload("/BankTransactions/ExportPdfById/"+id, {
+            successCallback: function (url) {
+                // alert();
+                $parent
+                    .removeClass(spinnerClass)
+                    .addClass(iconclass)
+            },
+           failCallback: function (html, url) {
+               toastr.error("Error Occured while Download")
+                $parent
+                    .removeClass(spinnerClass)
+                    .addClass(iconclass)
+            }
+        });
+
+
+
+    }
+</script>

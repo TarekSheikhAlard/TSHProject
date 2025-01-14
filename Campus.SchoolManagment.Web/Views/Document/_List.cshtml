@@ -1,0 +1,225 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.SupplierFormViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsClosed)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    <div class="ui  buttons">
+                        @if (item.Status == "P" && item.Type=="Q")
+                        {
+                            <button class="ui  basic tini positive approve button" data-id="@item.ID" data-undo="A">
+                                <i class="checkmark icon"></i>
+                                Approve
+                            </button>
+
+                            <button class="ui tini  basic negative reject button" data-id="@item.ID" data-undo="R">
+                                <i class="cancel icon"></i>
+                                Reject
+                            </button>
+                        }
+                        else if ((item.Status == "A" || item.Status == "R" )&& item.Type == "Q")
+                        {
+                            <button class="ui basic tini negative undo button" data-id="@item.ID">
+                                <i class="undo icon"></i>
+                                Undo
+                            </button>
+                        }
+                       
+                        else
+                        {
+
+                        }
+                        </div>
+
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+
+                <td>
+                    @switch (item.Type)
+
+                    {
+                        case "Q":
+                    <a href="@Url.Action("ViewQuotation","Document",new {@id=item.ID })"> <i class="file alternate outline orange icon"></i>Quotation</a>
+                            break;
+                        case "P":
+                            <i class="file alternate outline green icon"></i><text>Purchase order</text>
+                            break;
+                        case "I":
+                            <div class="ui blue  small label"><i class="file alternate outline green icon"></i>Invoice</div>
+                            break;
+                    }
+
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+
+                <td>
+                    @switch (item.Status)
+                    {
+                        case "P":
+                            <div class="ui blue small status label" data-id="@item.ID"><i class="clock outline  icon"></i><text>Pending</text> </div>
+                            break;
+                        case "A":
+                            <div class="ui green status  small label" data-id="@item.ID"><i class="checkmark  icon"></i><text>Approved</text></div>
+                            break;
+                        case "R":
+                            <div class="ui red  status small label" data-id="@item.ID"><i class="cancel   icon"></i><text>Rejected</text></div>
+                            break;
+                    }
+
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsClosed)
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+
+            $(document).on('click', '.approve.button',function () {
+                var $this = $(this);
+                var id = $this.attr('data-id');
+
+                $this.addClass('loading')
+
+                $.ajax({
+                    type: "POST",
+                    data: { id },
+                    dataType: "JSON",
+                    url: '/Document/Approve/',
+                    success: function (response) {
+
+                        $('.status.label[data-id="' + id + '"]')
+                            .html('<i class="checkmark  icon"></i><text>Approved</text>')
+                            .removeClass("blue")
+                            .addClass("green");
+
+                        $this.parent().html(`
+                            <button class="ui basic tini negative undo button" data-id="`+id+`"  data-undo="A">
+                                <i class="undo icon"></i>
+                                Undo
+                            </button>`)
+                    },
+                    complete: function () {
+                        $this.removeClass('loading')
+
+                    }
+                });
+
+
+            })
+            $(document).on('click', '.reject.button', function () {
+                var $this = $(this);
+                var id = $this.attr('data-id');
+
+                $this.addClass('loading')
+
+                $.ajax({
+                    type: "POST",
+                    data: { id },
+                    dataType: "JSON",
+                    url: '/Document/reject/',
+                    success: function (response) {
+
+                        $('.status.label[data-id="' + id + '"]')
+                            .html('<i class="cancel  icon"></i><text>Rejected</text>')
+                            .removeClass("blue ")
+                            .addClass("red");
+
+                        $this.parent().html(`
+                            <button class="ui basic tini negative undo button" data-id="`+ id + `"  >
+                                <i class="undo icon"></i>
+                                Undo
+                            </button>`)
+                    },
+                    complete: function () {
+                        $this.removeClass('loading')
+
+                    }
+                });
+
+
+            })
+
+            $(document).on('click',".undo.button",function () {
+                var $this = $(this);
+                var id = $this.attr('data-id');
+
+                $this.addClass('loading')
+
+                $.ajax({
+                    type: "POST",
+                    data: { id },
+                    dataType: "JSON",
+                    url: '/Document/Undo/',
+                    success: function (response) {
+
+                        $('.status.label[data-id="' + id + '"]')
+                            .html('<i class="clock outline  icon"></i><text>Pending</text>')
+                            .removeClass("green red")
+                            .addClass("blue");
+
+                        $this.parent().html(` <button class="ui  basic tini positive approve button" data-id="`+id+`">
+                                <i class="checkmark icon"></i>
+                                Approve
+                            </button>
+
+                            <button class="ui tini  basic negative reject button" data-id="`+id+`">
+                                <i class="cancel icon"></i>
+                                Reject
+                            </button>
+                           `)
+                    },
+                    complete: function () {
+                        $this.removeClass('loading')
+
+                    }
+                });
+
+
+            })
+
+        };
+        InitIndex();
+    });
+</script>

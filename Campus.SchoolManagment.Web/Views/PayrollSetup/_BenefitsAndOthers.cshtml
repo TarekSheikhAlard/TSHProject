@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeBenefitsOthersViewModel>
+
+@using Campus.School.Management.Logic.Resources
+    <div id="div-record-@ViewBag.type">
+
+        <div class="toolspace">
+
+            <a href="#" name="create" data-create="@ViewBag.type" onclick="addPayrollSetup(this);" class="ui labeled icon primary  button">
+                <i class="plus icon"></i>
+                @GeneralResource.CreateNew
+            </a>
+        </div>
+
+        <table class="ui selectable single line striped celled primary compact table" name="PayrollSetupTable">
+            <thead>
+                <tr>
+                    <th>
+                        @GeneralResource.Actions
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name_AR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name_En)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountTreeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Percentage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsDefault)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" onclick="Edit(@item.Id);"> <i class="feather icon-edit-1"></i></a>
+                            <a href="#" onclick="Delete(@item.Id);"> <i class="feather red icon-trash"></i></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name_AR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name_En)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountTreeName)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Percentage)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsDefault)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+<div class="ui add  modal " id="Add-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @GeneralResource.New
+    </div>
+    <div id="divForAdd" class="divForAdd scrolling content">
+    </div>
+</div>
+
+<div class="ui edit modal " id="Edit-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @GeneralResource.Update
+    </div>
+    <div id="divForUpdate" class="divForUpdate scrolling content">
+    </div>
+</div>
+<div class="ui delete modal " id="Delete-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @GeneralResource.Delete
+    </div>
+    <div id="divForDelete" class="divForDelete content">
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        setTimeout(function () {
+            var table = $('[name=PayrollSetupTable]').DataTable()
+           
+        }, 0);
+    })
+
+</script>

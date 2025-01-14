@@ -1,0 +1,384 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountEmployeesSalaryViewModel
+
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<table>
+    <thead class="">
+        <tr>
+            <th colspan="2">Employee Salary Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Employee_ID)
+                :</b>
+                @Html.DisplayFor(model => model.Employee_ID)
+               </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                :</b>
+                @Html.DisplayFor(model => model.EmployeeName)
+
+            </td>
+            </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.JobName)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.JobName)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.BasicSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.BasicSalary)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.AdditionalSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.AdditionalSalary)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.AllowanceSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.AllowanceSalary)
+
+            </td>
+        </tr>
+        <tr>
+
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.BonusesSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.BonusesSalary)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.extraSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.extraSalary)
+            </td>
+        </tr>
+        <tr>
+
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.TotalSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.TotalSalary)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Socialinsurance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Socialinsurance)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Medicalinsurance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Medicalinsurance)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Taxes)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Taxes)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.Dedecation)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Dedecation)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.TotalDedecated)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.TotalDedecated)
+
+            </td>
+        </tr>
+        <tr>
+
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.NetSalary)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.NetSalary)
+
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.AllowanceSalary2)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.AllowanceSalary2)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.AllowanceSalary3)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.AllowanceSalary3)
+
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.workingHours)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.workingHours)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.BankBranchID)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.BankBranchID)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.AccountNumber)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.AccountNumber)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Transitionallowance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Transitionallowance)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Subsistenceallowance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Subsistenceallowance)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Drivingallowance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Drivingallowance)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.conditionsworkallowance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.conditionsworkallowance)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Airline)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Airline)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Airlineclass)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Airlineclass)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.accommodationallowancetype)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.accommodationallowancetype)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.accommodationallowanc)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.accommodationallowanc)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                <b>
+                    @Html.DisplayNameFor(model => model.valuedate)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.valuedate)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.leavebalance)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.leavebalance)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.LBperMonth)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.LBperMonth)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.flighttickets)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.flighttickets)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.FTperMonth)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.FTperMonth)
+            </td>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Dept_ID)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Dept_ID)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <b>
+                    @Html.DisplayNameFor(model => model.Dept_Name)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.Dept_Name)
+
+            </td>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.BankName)
+                :</b>
+
+
+                @Html.DisplayFor(model => model.BankName)
+            </td>
+        </tr>
+
+    </tbody>
+</table>

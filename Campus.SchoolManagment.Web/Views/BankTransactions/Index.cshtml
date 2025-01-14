@@ -1,0 +1,341 @@
+﻿
+@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+
+@{
+    ViewBag.Title = "Index";
+    if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="bank" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.BankTransactions
+                </div>
+                <div id="Sub" class="sub header">
+
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="ui main container">
+      
+
+    <div class="ui segment anim">
+        <div class="toolspace ui container">
+            <div class="ui form ">
+                <div class="ui inline fields">
+                    <div class="field">
+                        @Html.DropDown("BankId", ViewBag.BankList as List<SemanticControls.DropdownList>, new { @class = " ui  search bank selection  dropdown ", @placeholder = "Search" })
+                    </div>
+                    <div class=" two  wide field">
+                        <div class="ui right aligned container">
+                            <div class="ui tiny balance statistic">
+                                <div class="value">
+                                    0.00
+                                </div>
+                                <div class="label">
+                                    Balance
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="ui pointing blue transactions secondary menu">
+            <a class="active item" data-tab="first">Transactions</a>
+            <a class="item" data-tab="second">History</a>
+        </div>
+        <div class="ui active basic tab   " data-tab="first">
+
+            <div id="div-record" class="ui  primary segment">
+                @{
+                    Html.RenderAction("TransactionList");
+                }
+            </div>
+            <div class="ui basic segment">
+                <div id="SaveTransactions" class="ui primary save button">Save changes</div>
+            </div>
+
+
+        </div>
+        <div class="ui  basic tab segment " data-tab="second">
+            <div class="ui container">
+                <div class="ui historyPeriod form">
+                    <div class="inline fields">
+                        <div class="field">
+                            <input name="fromDate" placeholder="from" type="text" class="date-picker" />
+
+                        </div>
+                        <div class="field">
+                            <input name="toDate" placeholder="to" type="text" class="date-picker" />
+                        </div>
+                        <div class="field">
+
+                            <button id="getTransactionHistory" class="ui primary submit button">
+                                Get Transactions
+                            </button>
+                        </div>
+                        <div class="field">
+
+                            <button id="ExportTransactionHistory" class="ui  submit button">
+                                Export Transactions
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ui historyList placeholder segment">
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="ui basic image-viewer modal" data-root="@Url.Content(ViewBag.AttachedDocumentPath)">
+    <i class="icon close" style="color: #fff;"> </i>
+    <div class="ui center aligned container">  
+        <img class="ui centered huge image" src="~/Content/Images/noimage.png" />
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $('.menu .item').tab();
+        $('.ui.sidebar').sidebar('hide');
+        
+        $('.main.container').css({
+                    width: "auto"
+        });
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        setTimeout(function () {
+
+            $('.bank.selection.dropdown').dropdown({
+                onChange: function (value, text, $choice) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Bank/GetBankBalance/',
+                        data: { id: value },
+                        dataType: "JSON",
+                        success: function (response) {
+
+                            if (typeof response == "number") {
+                                $('.balance .value').html(response);
+                            }
+                        }
+                    });
+
+
+                }
+
+
+            })
+
+        }, 0)
+
+
+
+        $('.ui.historyPeriod.form')
+            .form({
+                fields: {
+                    fromDate: 'empty',
+                    toDate: 'empty'
+                }
+            });
+
+
+
+
+
+        $('#SaveTransactions').click(function () {
+            var $this = $(this);
+
+            var bank = $('[name="BankId"]').val(),
+                isValid = true, $row, mesg;
+
+            uploader.isAttached = false;
+            var totalRowsAttached = $('#BTransacTable tbody tr[data-hasAttach="true"]').length;
+
+
+            $('.ui.Row.validate.form').each(function () {
+                $row = $(this);
+                $row.form('validate form');
+                console.log($row.form('is valid'));
+                console.log($row.form('validate form'));
+                if (!$row.form('is valid')) {
+
+                    isValid = false;
+                }
+
+            })
+
+            if (bank !== "") {
+                if (isValid) {
+
+
+                    if (totalRowsAttached > 0) {
+                        submitUploaders(uploader);
+                    }
+                    if (totalRowsAttached == 0) {
+                        saveTransaction($(this),bank);
+                    }
+                } else {
+                    toastr.error("Validation error(s) on row(s) highlighted")
+                }
+            } else {
+                toastr.error("Bank is not Selected, Select Bank and Try Again ")
+            }
+        });
+
+        $('#getTransactionHistory').click(function () {
+            $form = $('.ui.historyPeriod.form');
+            bankId = $('[name="BankId"]').val();
+            $placeholder = $(".ui.historyList.segment");
+
+            if ($form.form('is valid')) {
+                if (bankId != "") {
+                    $placeholder.addClass('loading');
+
+                    $.ajax({
+                        url: "/BankTransactions/GetTransactionHistory",
+                        type: "POST",
+                        data: { id: bankId, from: $('[name="fromDate"]').val(), to: $('[name="toDate"]').val() },
+                        success: function (response) {
+                            $placeholder
+                                .removeClass('placeholder loading')
+                                .html(response);
+
+                        },
+                        complete: function () {
+
+                            $placeholder
+                                .removeClass('loading');
+
+                        }
+
+                    })
+                } else {
+                    toastr.error("Bank is not Selected, Select Bank and Try Again ")
+                }
+            } else {
+
+            }
+        });
+
+        $('#ExportTransactionHistory').click(function () {
+
+            var $btn = $(this)
+            $form = $('.ui.historyPeriod.form');
+            bankId = $('[name="BankId"]').val();
+            if ($form.form('is valid')) {
+                if (bankId != "") {
+                    $btn.addClass('loading');
+                    $.fileDownload("/BankTransactions/ExportPdfByPeriod?id=" + bankId + "&from=" + $('[name="fromDate"]').val() + "&to=" + $('[name="toDate"]').val(), {
+                        successCallback: function (url) {
+                            // alert();
+                            $btn.removeClass('loading');
+                        },
+                        failCallback: function (html, url) {
+                            toastr.error("Error Occured while Download")
+
+                            $btn.removeClass('loading');
+                        }
+                    });
+
+                } else {
+                    toastr.error("Bank is not Selected, Select Bank and Try Again ")
+
+                }
+            } else { }
+
+
+
+
+        });
+    });
+    saveTransaction = function ($el, bank) {
+      
+        $el.addClass('loading');
+        $.ajax({
+            type: "POST",
+            url: '/BankTransactions/SaveTransaction/',
+           
+            data: serializeTable($('#BTransacTable')) + "&bankId=" + bank,
+
+            //dataType: "JSON",
+            success: function (response) {
+               
+                    toastr.success("Bank transaction has successfully completed.")
+                    $('#div-record').html(response);
+                    
+               
+                //if (typeof response =="number") {
+                //    $('.balance .value').html(response);
+                //}
+            },
+            complete: function (response) {
+                $el.removeClass('loading');
+
+            }
+
+        });
+    }
+    ViewAttachedDocument = function (filename) {
+    var $model = $('.modal.image-viewer'),
+        root = $model.attr('data-root'),
+        path = root + filename;
+    $model.find('img').attr('src', path);
+    $model.modal('show');
+
+};
+    serializeTable = function ($table) {
+
+        var $rows = $table.find("tbody tr.validate");
+        var $inputs, $input;
+        var data = "";
+        $rows.each(function (rIndex) {
+            $inputs = $(this).find(' :input[name*="."]');
+            $inputs.each(function (index) {
+                $input = $(this);
+                data += "items[" + rIndex + "]." + $input.attr("name").split(".")[1] + "=" + $input.val() + "&"
+
+            })
+        });
+
+        return data;
+
+
+
+    }
+    submitUploaders = function (uploders) {
+        for (var i = 0; i < uploders.length; i++) {
+            uploders[i].submit();
+        }
+    }
+</script>

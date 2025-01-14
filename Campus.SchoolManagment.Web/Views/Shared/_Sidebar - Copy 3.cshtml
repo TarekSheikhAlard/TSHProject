@@ -1,0 +1,77 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+<div class="mainmenu ui vertical inverted  accordion menu " style="position:absolute;margin:0px !important; background:rgb(30, 134, 212);height:100vh">
+
+    @*<div class="item">
+            <a class="ui logo icon image" href="/">
+                @*<img src="/images/logo.png">
+            </a>
+            <a href="/"><b>CAMPUS ERP</b></a>
+        </div>*@
+
+    <div class="item ">
+        <a class="title header" href='@Url.Action("Index", "Home" )'>
+            <i class="home icon"></i>
+            @GeneralResource.Home
+        </a>
+    </div>
+
+    <div class="item ">
+        <a  class="title header">
+            <i class="briefcase icon"></i>
+            @GeneralResource.Generaldefinitions
+        </a>
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "Company" )'>
+
+                @GeneralResource.Company
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "School" )'>
+
+                @GeneralResource.School
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "City" )'>
+
+                @GeneralResource.City
+            </a>
+
+        </div>
+    </div>
+
+    <div class="item ">
+        <a  class="title header">
+            <i class="calendar alternate outline icon"></i>
+            @GeneralResource.AcademicConfigration
+        </a>
+        <div class="content menu">
+
+            <a class="item" href='@Url.Action("Index", "Stage" )'>
+
+                @GeneralResource.Stage
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "StudyYear" )'>
+
+                @GeneralResource.StudyYear
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Semster" )'>
+
+                @GeneralResource.Semester
+            </a>
+
+            <a class="item" href='@Url.Action("Index", "Qurter" )' >
+
+                @GeneralResource.Qurter
+            </a>
+
+        </div>
+    </div>
+
+
+
+</div>
+

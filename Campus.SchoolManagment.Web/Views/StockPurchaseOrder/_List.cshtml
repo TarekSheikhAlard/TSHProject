@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.PurchaseOrdersViewModel>
+
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="warehouse" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    Purschase Stock
+                </div>
+                <div id="Sub" class="sub header">
+
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ui main container">
+    <div class="ui segment anim">
+        <div class="toolspace">
+            <a class="ui small button item" href='@Url.Action("Index", "StockPurchaseOrder" )'>
+                <i class="plus icon"></i>
+                Create Order
+            </a>
+        </div>
+        <table class="ui selectable  single line Striped celled  compact table" id="myTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PONo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Supplier)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PODate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalCredit)
+                    </th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PONo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PODate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalCredit)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+    </div>
+  
+</div>
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+
+
+        };
+
+
+        InitIndex();
+
+    });
+</script>

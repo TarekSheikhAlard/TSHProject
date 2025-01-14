@@ -1,0 +1,41 @@
+﻿@using Campus.School.Management.Logic.Resources
+
+
+@model int
+
+@using (Ajax.BeginForm("Delete", "Store", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" },new { @class="ui form"}))
+{
+    @Html.AntiForgeryToken()
+
+    
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group  delete_msg">
+
+            @Html.Label("Note", @GeneralResource.DeleteMessageConfirm, htmlAttributes: new { @class = "control-label col-md-10 delete_msg  " })
+
+
+        </div>
+
+
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.ok</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+   
+}
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+

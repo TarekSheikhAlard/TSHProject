@@ -1,0 +1,197 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.ItemViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceofManufacture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nameAr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.maximumLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.minimumLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.requestLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.currentBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.purchasingCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastPurchasingCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.unitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.unitName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.barcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.exchangeRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.unitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.wholeSalePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.storeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.storeName)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a href="#" onclick="Edit(@item.ItemId);" class="editDialog"> <i class="feather icon-edit-1"></i></a>
+                <a href="#" onclick="Delete(@item.ItemId);" class="editDialog"> <i class="feather red icon-delete"></i></a>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemNumber)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceofManufacture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maximumLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minimumLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.currentBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.purchasingCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastPurchasingCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.barcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.exchangeRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.wholeSalePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.storeNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.storeName)
+            </td>
+
+        </tr>
+
+        }
+    </tbody>
+
+</table>
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1) {
+                GetTreeIndex();
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2) {
+                GetTreeIndex();
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3) {
+                GetTreeIndex();
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+
+
+    });
+</script>

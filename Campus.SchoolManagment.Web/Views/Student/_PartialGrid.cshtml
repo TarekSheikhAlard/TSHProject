@@ -1,0 +1,169 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentFeesViewModel
+
+
+@using Campus.School.Management.Logic.Resources
+
+<div class="ui segment" style="overflow-y: auto;">
+    <h4 class="top attached header">@GeneralResource.StudentfeesHistory </h4>
+    <table class="ui selectable  single line Striped celled  compact table">
+        <thead class="">
+            <tr>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.PaymentWay)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.originalAmount)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.PaidAmount)
+                </th>
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.OperationDate)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.BankCurrencyID)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.docementNumber)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.CostCenterID)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Employee_ID)
+                </th>
+
+
+                <th> @GeneralResource.Delete</th>
+            </tr>
+        </thead>
+        <tbody id="Searchbody">
+            @foreach (var item in Model.AccStudentFee)
+            {
+                string payway = "monetary";
+
+                if (item.PaymentWay == 2)
+                {
+                    payway = "visa";
+                }
+                else if (item.PaymentWay == 3)
+                {
+                    payway = "bank";
+                }
+                else if (item.PaymentWay == 4)
+                {
+                    payway = "cheque";
+                }
+                <tr class="text-center">
+                    <td>
+                        @payway
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.originalAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidAmount)
+                    </td>
+                    <td>
+                        @item.OperationDate.Value.ToShortDateString()
+
+                    </td>
+
+
+
+
+                    @if (item.CashRecivedID != null)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountReciveCash.BankCurrency.Currency_Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountReciveCash.docementNumber)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountReciveCash.AccountCostCenter.CostCenterAR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountReciveCash.AdmEmployee.NameA)
+                        </td>
+
+                        if (item.AccountReciveCash.IsDeleted == false)
+                        {
+                            <td>
+                                @GeneralResource.DailyJournalpostedCreated
+
+
+                            </td>
+                        }
+
+                        else
+                        {
+                            <td>
+                                @Ajax.ActionLink(" ", "DeleteFees", "Student", new { @id = item.ID, @StudentAcdID = Model.StudAcdID, @YearID = Model.YearID, @GradeID = Model.GradeID }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divForFeeSearch", OnSuccess = "", Confirm = GeneralResource.DeleteMessageConfirm }, new { @class = "glyphicon glyphicon-remove" })
+                            </td>
+
+                        }
+
+                    }
+                    else if (item.ChequeRecivedID != null)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Accountchequesreceivable.BankCurrency.Currency_Type)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Accountchequesreceivable.docementNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Accountchequesreceivable.AccountCostCenter.CostCenterAR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Accountchequesreceivable.AdmEmployee.NameA)
+                        </td>
+
+
+                        if (item.Accountchequesreceivable.IsDeleted == false)
+                        {
+                            <td>
+                                @GeneralResource.DailyJournalpostedCreated
+
+
+                            </td>
+                        }
+
+                        else
+                        {
+                            <td>
+                                @Ajax.ActionLink(" ", "DeleteFees", "Student", new { @id = item.ID, @StudentAcdID = Model.StudAcdID, @YearID = Model.YearID, @GradeID = Model.GradeID }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divForFeeSearch", OnSuccess = "", Confirm = GeneralResource.DeleteMessageConfirm }, new { @class = "glyphicon glyphicon-remove" })
+                            </td>
+
+                        }
+
+
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

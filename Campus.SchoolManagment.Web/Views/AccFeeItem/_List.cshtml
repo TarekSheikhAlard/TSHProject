@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccFeeItemViewModel>
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+     <thead>
+ <tr>
+        <th>@GeneralResource.Actions</th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME_EN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME_AR)
+        </th>
+       
+    </tr>
+         </thead>
+
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                
+                <a href="#" onclick="Delete(@item.ID);" class="editDialog"> <i class="feather red icon-trash"></i></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME_EN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME_AR)
+            </td>
+
+        </tr>
+}
+        </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+    });
+</script>

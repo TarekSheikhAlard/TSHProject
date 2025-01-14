@@ -1,0 +1,155 @@
+﻿
+
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalViewModel
+
+@using Campus.School.Management.Logic.Resources
+@if (ViewBag.Pdf =="true")
+{
+    <link href="~/Content/Css/semantic.min.css" rel="stylesheet" />
+}
+<div class="ui form">
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Note, new { @class = "form-control ", @readonly = "readonly" })
+
+            </div>
+        </div>
+        <div class="field">
+
+            @Html.LabelFor(model => model.Note1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Note1, new { @class = "form-control", @readonly = "readonly" })
+
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @readonly = "readonly" })
+
+            </div>
+        </div>
+    </div>
+   
+
+</div>
+
+<div class="ui blue segment">
+    <h4 class="header">@DailyJornal.Dailydetails</h4>
+    <div class="field">
+        <div class="col-md-12">
+            <table class="ui selectable  single line Striped celled  compact table">
+                <thead class="">
+                    <tr>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model._AccountDailyJournalDetail.FirstOrDefault().AccountTreeCode)
+
+
+                        </th>
+
+                        <th>
+                            @DailyJornal.AccountName
+
+                        </th>
+                        <th>
+                            @DailyJornal.Credit
+
+                        </th>
+                        <th>
+                            @DailyJornal.Debit
+
+                        </th>
+
+                        <th>
+                            @GeneralResource.CostCenter
+
+                        </th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody id="Searchbody">
+                    @{ decimal sumcredit = 0;
+                        decimal sumdetbit = 0;}
+                    @foreach (var item in Model._AccountDailyJournalDetail.OrderBy(x => x.Credit))
+                    {
+                        sumcredit = sumcredit + item.Credit;
+                        sumdetbit = sumdetbit + item.Debit;
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountTreeCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountNameEN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Credit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Debit)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CostCenter)
+                            </td>
+
+                        </tr>
+                    }
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <b>@GeneralResource.Total</b>
+                        </td>
+                        <td>
+                            <b>@sumdetbit</b>
+                        </td>
+                        <td>
+                            <b> @sumcredit</b>
+                        </td>
+
+                        <td></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <table class="ui selectable  single line Striped celled  compact table ">
+        <thead class="">
+            <tr>
+                <td> <b>@GeneralResource.Createdby:</b>   @Model.Createdby</td>
+                <td>  <b>@GeneralResource.Modifiedby:</b> @Model.Modifiedby</td>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td><b> @GeneralResource.CreatedDate:</b> @Model.CreatedDate.ToShortDateString()</td>
+                <td><b> @GeneralResource.ModifiedDate:</b>  @Model.ModifiedDate.ToShortDateString()</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+@*<div class="actions">
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>@GeneralResource.Close</button>
+
+    </div>*@

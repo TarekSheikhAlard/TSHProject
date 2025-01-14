@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.FeeReportViewModel>
+@{ 
+    var len = Model.Count();
+}
+@if (len > 30)
+{
+<table class="ui definition compact small table">
+    <thead>
+        <tr>
+            <th class="four wide "></th>
+            @{List<string> addedGrades = new List<string>(); }
+
+            @foreach (var item in Model)
+            {
+
+                if (!addedGrades.Contains(item.Grade))
+                {
+                    <th>
+
+                        @Html.DisplayFor(modelItem => item.Grade)
+
+                    </th>
+                    addedGrades.Add(item.Grade);
+
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+
+        @{var fee = Model.First().Feetype;
+            List<string> addedFees = new List<string>();
+            List<decimal> totalFeesByGrades = new List<decimal>();
+            decimal total = 0;
+        }
+
+
+        @foreach (var item in Model)
+        {
+
+            if (!addedFees.Contains(item.Feetype) && item.Feetype != "NIL" && item.Feetype != "Total")
+            {
+                fee = item.Feetype;
+                total = 0;
+
+                <tr>
+                    <td>@item.Feetype</td>
+
+                    @foreach (var feetype in Model)
+                    {
+
+                        if (fee == feetype.Feetype)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => feetype.Amount)
+                            </td>
+
+                        }
+                        else
+                        {
+
+                            // fee = feetype.Feetype;
+                            // break;
+                        }
+                    }
+
+                </tr>
+
+                addedFees.Add(item.Feetype);
+
+
+            }
+            //if (item.Feetype == "Total") {
+            //     totalFeesByGrades.Add(total);
+            //}
+
+        }
+
+        <tr>
+            <td>
+                Total
+            </td>
+            @foreach (var item in Model)
+            {
+                if (item.Feetype == "Total")
+                {
+                <td>
+                    <b> @item.Amount</b> 
+                </td>
+                }
+            }
+
+        </tr>
+    </tbody>
+
+</table>
+            }
+            else {
+
+                <div class="ui negative message" >
+                    <div class="header">
+                        No Fee Structure Avaliable
+                    </div>
+                    
+                </div>
+
+            }

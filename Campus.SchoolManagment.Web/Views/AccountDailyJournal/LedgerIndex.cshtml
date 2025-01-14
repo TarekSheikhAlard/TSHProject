@@ -1,0 +1,182 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.GenericVModel
+@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.Ledger
+                </div>
+                @*<div id="Sub" class="sub header">
+                        @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.Ledger)
+                    </div>*@
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ui main container">
+    <div class="ui segment ">
+        <div class="toolspace">
+            <div class="" style="padding-left:20px">
+                <div class="ui ledger report form ">
+                    <div class=" fields">
+                        <div class=" six wide field">
+                            @Html.DropDownFor(model => model.AccountTree, ViewBag.AccountTreeList as List<SemanticControls.DropdownList>, new { @class = " ui  search selection  dropdown ", @placeholder = "Search" })
+                        </div>
+                        <div class=" two wide field">
+
+
+                            @Html.Editor("From", new { htmlAttributes = new { @class = " date-picker", @placeholder = "From", @autocomplete = "off" } })
+
+
+                        </div>
+                        <div class=" two wide field">
+                            @Html.Editor("To", new { htmlAttributes = new { @class = "date-picker", @placeholder = "To", @autocomplete = "off" } })
+
+                        </div>
+                        <div class="field">
+                            <button type="submit" id="Search" value="Search" onclick="GetLedgerReport(this)" class="ui primary submit button ">Run Report</button>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui  buttons">
+                                <div class="ui download icon button">  <i class="download  icon"></i> Export</div>
+                                <div class="ui floating dropdown icon button">
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <a href="#" id="DownloadExcel" class="item">
+                                            <i class="file excel outline icon"></i>
+                                            @GeneralResource.Excel
+                                        </a>
+                                        <a href="#" id="DownloadPDF" class="item">
+                                            <i class="file pdf outline icon"></i>
+                                            @GeneralResource.PDF
+                                        </a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*<a href="#" id="DownloadPDF" class="ui download icon button">
+                                    <i class="file pdf outline icon"></i>
+                                    Export @GeneralResource.PDF
+                                </a>*@
+                        </div>
+
+                    </div>
+
+                    @*@Html.DropDownList("AccountTree", ViewBag.AccountTree as SelectList, "Select Account  ", htmlAttributes: new { @class = "ui search selection dropdown" })*@
+
+                </div>
+
+            </div>
+        </div>
+        <div class="ui container">
+            <div id="div-record">
+                @*@Html.Partial("_List", Model)*@
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script>
+    $(function () {
+        InitC();
+
+    })
+
+    function InitC() {
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+
+
+        $("#DownloadPDF").click(function () {
+
+            var $parent = $('.download.button');
+
+            var AccountTreeID = $('[name="AccountTree"]').val()
+            var From = $('[name="From"]').val();
+            var To = $('[name="To"]').val();
+
+            if (AccountTreeID == "" || AccountTreeID == undefined) {
+                toastr.error("You Must Select Account");
+            } else {
+
+                $parent
+                    .addClass("loading");
+                $.fileDownload("/AccountDailyJournal/ExportPdfLedgerReport/?AccountTreeID= " + AccountTreeID + "&From=" + From + "&To=" + To, {
+                    successCallback: function (url) {
+                        // alert();
+                        $parent
+                            .removeClass("loading");
+                    },
+                    failCallback: function (html, url) {
+                        toastr.error("Error Occured while Download")
+                        $parent
+                            .removeClass("loading");
+                    }
+                });
+            }
+
+
+        });
+
+
+
+        $("#DownloadExcel").click(function () {
+
+            var $parent = $('.download.button');
+
+            $parent
+                .addClass("loading");
+
+             var AccountTreeID = $('[name="AccountTree"]').val()
+            var From = $('[name="From"]').val();
+            var To = $('[name="To"]').val();
+
+
+            if (AccountTreeID == "" || AccountTreeID == undefined) {
+                toastr.error("You Must Select Account");
+            } else {
+                 $.fileDownload("/AccountDailyJournal/ExportExcelLedgerReport/?AccountTreeID= " + AccountTreeID + "&From=" + From + "&To=" + To, {
+                    successCallback: function (url) {
+                        // alert();
+                        $parent
+                            .removeClass("loading");
+                    },
+                    failCallback: function (html, url) {
+                        toastr.error("Error Occured while Download")
+                        $parent
+                            .removeClass("loading");
+                    }
+                });
+            }
+
+        });
+
+    };
+</script>
+
+
+<script src="~/Scripts/DevelopmentJS/LedgerJS.js"></script>
+
+

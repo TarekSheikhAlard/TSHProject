@@ -1,0 +1,196 @@
+﻿@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel;
+@using Campus.School.Management.Logic.BusinessLayer;
+@using Campus.SchoolManagment.Web.Helper
+@using System.Configuration;
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    string schoolName = string.Empty;
+
+    if (User.Identity.IsAuthenticated) {
+        SchoolUserViewModel _dbUser = Statistics.GetLogiccookie();
+         schoolName=_dbUser.SchoolName;
+     }
+  }
+
+
+<div class="ui primary basic introduction segment">
+    <h1> @schoolName</h1>
+</div>
+<div class="ui main container">
+
+
+    <div class="ui four column trans grid">
+
+        <div class="row">
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "Company" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="building outline huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.Company
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "AssetTree" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="list alternate outline huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.AssetTree
+                    </div>
+                </a>
+            </div>
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "DepartmentTree" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="sitemap huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.DepartmentTree
+                    </div>
+                </a>
+            </div>
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "Accountsupplier" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="shipping fast huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.Suppliers
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!--next 4 -->
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "AccountCustomer" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="users huge icon"></i>
+
+
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.customer
+                    </div>
+                </a>
+            </div>
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "AccountTree" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="chart line   huge  icon  "></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.AccountTree
+                    </div>
+                </a>
+            </div>
+            <div class="column trans">
+                <a href='@Url.Action("index", "Student", new { Flage = 1 })' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="child huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.Student
+                    </div>
+                </a>
+            </div>
+
+            <div class="column trans">
+                <a href='@Url.Action("Index", "Bus" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="bus huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.Bus
+                    </div>
+                </a>
+            </div>
+            <!--next 4 -->
+        </div>
+
+        <div class="row">
+            <div class="column trans">
+                <a href='@Url.Action("Index", "AccountDailyJournal" )' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="list alternate huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.DailyJournal
+                    </div>
+                </a>
+            </div>
+            <div class="column trans">
+                <a href="#" onclick="window.open('@ConfigurationManager.AppSettings["MadaresLink"]', '_blank') " class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="certificate huge icon"></i>
+
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.AcademicConfigration (Madares)
+                    </div>
+                </a>
+            </div>
+
+            <div class="column trans">
+                <a href='#' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="warehouse huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.Inventory
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="column trans">
+                <a href='#' class="ui animated fade huge button">
+                    <div class="visible content">
+                        <i class="chart pie huge icon"></i>
+                    </div>
+                    <div class="hidden content">
+                        @GeneralResource.Reports
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    $(function () {
+
+
+        setTimeout(function () {
+
+            $('.trans')
+                .transition({
+                    animation: 'scale',
+                    duration: 500,
+                    interval: 80,
+                    displayType: 'block'
+                })
+                ;
+            //$('.trans').removeClass(trans)
+        }, 150);
+
+
+
+    });
+
+</script>

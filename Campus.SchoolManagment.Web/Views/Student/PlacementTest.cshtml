@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.StudentViewModel>
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer;
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="note" size="45"></clr-icon>
+                @*<i class="feather big icon-book" ></i>*@
+                <div id="heading" class="content">
+                    Placement Test Results
+                </div>
+                <div id="Sub" class="sub header">
+
+                </div>
+            </h1>
+        </div>
+
+
+    </div>
+</div>
+<div class="main ui container">
+
+
+
+
+
+
+
+    <div class="ui anim segment">
+        <div class="toolspace">
+
+            <div class="ui form">
+                <div class="inline fields">
+
+                    <div class="field">
+                        <b> @GeneralResource.Grade</b>  @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, GeneralResource.Select, htmlAttributes: new { @class = "ui search selection dropdown", @onchange = "GetInitStudsPlacement(this.value);" })
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="ui container">
+
+
+            <div class="ui inverted testResult dimmer">
+                <div class="ui text loader">@GeneralResource.Loading</div>
+            </div>
+
+
+            <div id="div-record" class="ui placeholder segment">
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="actions">
+        <button id="Save" type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+        <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+    </div>
+</div>
+
+<script>
+ function GetInitStudsPlacement(id) {
+
+    $('.testResult.dimmer').dimmer('show');
+    $.ajax({
+        type: "Get",
+        url: '/Student/PlacementTestStudents/' + id,
+        success: function (response) {
+            $('#div-record').removeClass('placeholder').addClass('basic');
+            $('#div-record').html(response);
+
+        },
+        complete: function () {
+
+            $('.testResult.dimmer').dimmer('hide');
+        }
+    });
+
+}
+
+    $(document).ready(function () {
+    
+        function InitIndex()
+        {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2)
+            {
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3)
+            {
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+            else if (Msg == 5) {
+                toastr.error("@GeneralResource.toastrEmailExist")
+            }
+        };
+        InitIndex();
+    });
+</script>

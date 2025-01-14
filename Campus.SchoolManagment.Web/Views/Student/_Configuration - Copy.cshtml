@@ -1,0 +1,503 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentConfigrationViewModel
+@using Campus.School.Management.Logic.Resources
+
+
+@{
+    var htmlAttributesBus = new Dictionary<string, object>
+{
+{ "class" ,"form-control"},
+
+};
+    if (Model.BusDiscount == null)
+    {
+        htmlAttributesBus.Add("disabled", "disabled");
+    }
+
+}
+
+
+@{
+    var htmlAttributesBooks = new Dictionary<string, object>
+{
+{ "class" , "form-control"},
+
+};
+    if (Model.BooksDiscount == null)
+    {
+        htmlAttributesBooks.Add("disabled", "disabled");
+    }
+
+
+}
+@{
+    var htmlAttributesUniform = new Dictionary<string, object>
+{
+{ "class" , "form-control"},
+
+};
+    if (Model.UniformDiscount == null)
+    {
+        htmlAttributesUniform.Add("disabled", "disabled");
+    }
+
+
+}
+
+@{
+    var htmlAttributesStudyFees = new Dictionary<string, object>
+{
+{ "class" , "form-control"},
+
+};
+    if (Model.StudyFeesDiscount == null)
+    {
+        htmlAttributesStudyFees.Add("disabled", "disabled");
+    }
+
+}
+
+
+
+
+
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Configuration", "Student", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.ID)
+
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+    <div class="two fields">
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.StudentAcdID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StudentAcdID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.StudentAcdID, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.AcademicYear, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.AcademicYear, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.AcademicYear, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <hr />
+
+
+
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.BusID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.BusID, ViewBag.bus as SelectList, "--select Bus--", htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.BusID, "", new { @class = "text-info" })
+            </div>
+
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.TripType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.TripType, new SelectList(new List<Object>
+                   {
+                   new { value = "Oneway" , text = "One way"  },
+                   new { value = "Twoway" , text = "Two way"}}, "value", "text", Model.TripType), "select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TripType, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.BusFees, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BusFees, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.BusFees, "", new { @class = "text-info" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.ISbusDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ISbusDiscount)
+                @Html.ValidationMessageFor(model => model.ISbusDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.BusDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BusDiscount, new { htmlAttributes = htmlAttributesBus })
+                @Html.ValidationMessageFor(model => model.BusDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.BusNetPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BusNetPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.BusNetPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+    <hr />
+
+
+    <div>
+
+        <div class="two fields">
+            <div class="field">
+                @Html.LabelFor(model => model.StudyFees, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.StudyFees, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.StudyFees, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.isStudyDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.CheckBoxFor(model => model.isStudyDiscount)
+                    @Html.ValidationMessageFor(model => model.isStudyDiscount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @Html.LabelFor(model => model.StudyFeesDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.StudyFeesDiscount, new { htmlAttributes = htmlAttributesStudyFees })
+                    @Html.ValidationMessageFor(model => model.StudyFeesDiscount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="field">
+                @Html.LabelFor(model => model.StudyNetFees, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.StudyNetFees, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.StudyNetFees, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <hr />
+
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.UniformPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.UniformPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UniformPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.isUniformDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.isUniformDiscount)
+                @Html.ValidationMessageFor(model => model.isUniformDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.UniformDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.UniformDiscount, new { htmlAttributes = htmlAttributesUniform })
+                @Html.ValidationMessageFor(model => model.UniformDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.UniformNetPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.UniformNetPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UniformNetPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <hr />
+
+
+   
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.BooksPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BooksPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.BooksPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.IsBooksDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+
+                @Html.CheckBoxFor(model => model.IsBooksDiscount)
+                @Html.ValidationMessageFor(model => model.IsBooksDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.BooksDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BooksDiscount, new { htmlAttributes = htmlAttributesBooks })
+                @Html.ValidationMessageFor(model => model.BooksDiscount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.BooksNetPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BooksNetPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.BooksNetPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <hr />
+    <div class="two fields">
+
+
+        <div class="field">
+
+            @Html.LabelFor(model => model.TaxRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.TaxRate, new { htmlAttributes = new { @class = "form-control" } })<span>%</span>
+                @Html.ValidationMessageFor(model => model.TaxRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.OperationDate, new { htmlAttributes = new { @class = "form-control form-control-inline  date-picker" } })
+                @Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+    </div>
+
+
+        <div class="actions">
+            <button type="submit" class="ui primary button " name="cmd">@*<i class="fa fa-check"></i>*@&nbsp;@GeneralResource.Save</button>
+            <button type="button" class="ui deny button" data-dismiss="modal">@*<i class="fa fa-times"></i>*@&nbsp;@GeneralResource.Close</button>
+
+        </div>
+
+        }
+
+
+
+        @section Scripts {
+
+
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+
+
+
+
+
+        <script>
+
+            $('#StudyFeesDiscount,#StudyFees').keyup(function () {
+
+
+                var StudyNetFees = parseInt("0" + $('#StudyFees').val()) - parseInt("0" + $('#StudyFeesDiscount').val());
+
+                $('#StudyNetFees').val(StudyNetFees);
+
+            });
+
+
+
+
+            $('#BusDiscount,#BusFees').keyup(function () {
+
+
+                var BusNetPrice = parseInt("0" + $('#BusFees').val()) - parseInt("0" + $('#BusDiscount').val());
+
+                $('#BusNetPrice').val(BusNetPrice);
+
+            });
+
+
+
+
+            $('#BooksDiscount,#BooksPrice').keyup(function () {
+
+
+                var BooksNetPrice = parseInt("0" + $('#BooksPrice').val()) - parseInt("0" + $('#BooksDiscount').val());
+
+                $('#BooksNetPrice').val(BooksNetPrice);
+
+            });
+
+
+            $('#UniformDiscount,#UniformPrice').keyup(function () {
+
+
+                var UniformNetPrice = parseInt("0" + $('#UniformPrice').val()) - parseInt("0" + $('#UniformDiscount').val());
+
+                $('#UniformNetPrice').val(UniformNetPrice);
+
+            });
+
+
+
+            function InitC() {
+
+
+                $('.date-picker').datepicker({
+                    format: 'yyyy/mm/dd'
+                });
+
+            };
+            InitC();
+
+
+        </script>
+
+
+        <script>
+
+            $('#IsBooksDiscount').click(function () {
+                var $this = $(this);
+
+                if ($this.is(':checked')) {
+                    $('#BooksDiscount').removeAttr("disabled");
+                }
+                else {
+                    $('#BooksDiscount').attr("disabled", "disabled");
+
+                    var BooksNetPrice = parseInt("0" + $('#BooksNetPrice').val()) + parseInt("0" + $('#BooksDiscount').val());
+
+                    $('#BooksDiscount').val(0);
+
+                    $('#BooksNetPrice').val(BooksNetPrice);
+                }
+            });
+
+        </script>
+
+        <script>
+
+            $('#isUniformDiscount').click(function () {
+
+                var $this = $(this);
+
+                if ($this.is(':checked')) {
+                    $('#UniformDiscount').removeAttr("disabled");
+
+                }
+                else {
+                    $('#UniformDiscount').attr("disabled", "disabled");
+
+                    var UniformNetPrice = parseInt("0" + $('#UniformNetPrice').val()) + parseInt("0" + $('#UniformDiscount').val());
+
+                    $('#UniformDiscount').val(0);
+
+                    $('#UniformNetPrice').val(UniformNetPrice);
+                }
+            });
+        </script>
+
+
+        <script>
+
+            $('#ISbusDiscount').click(function () {
+                var $this = $(this);
+
+                if ($this.is(':checked')) {
+                    $('#BusDiscount').removeAttr("disabled");
+                } else {
+                    $('#BusDiscount').attr("disabled", "disabled");
+
+                    var BusNetPrice = parseInt("0" + $('#BusNetPrice').val()) + parseInt("0" + $('#BusDiscount').val());
+
+                    $('#BusDiscount').val(0);
+
+                    $('#BusNetPrice').val(BusNetPrice);
+
+                }
+            });
+        </script>
+
+
+        <script>
+
+            $('#isStudyDiscount').click(function () {
+                var $this = $(this);
+
+                if ($this.is(':checked')) {
+                    $('#StudyFeesDiscount').removeAttr("disabled");
+                }
+                else {
+                    $('#StudyFeesDiscount').attr("disabled", "disabled");
+
+                    var StudyNetFees = parseInt("0" + $('#StudyNetFees').val()) + parseInt("0" + $('#StudyFeesDiscount').val());
+
+                    $('#StudyFeesDiscount').val(0);
+
+                    $('#StudyNetFees').val(StudyNetFees);
+
+                }
+            });
+        </script>
+
+
+
+        <script>
+            $("#TripType").change(function () {
+
+                $.ajax({
+                    type: "Post",
+                    url: '/Student/BusCostSearch',
+                    dataType: "json",
+                    data: { BusID: $("#BusID").val(), TripType: $("#TripType").val() },
+                    success: function (data) {
+                        $('#BusFees').val(data);
+                        $('#BusNetPrice').val(data);
+                    }
+                });
+            })
+        </script>
+
+        <script>
+            $("#BusID").change(function () {
+
+                $('#BusFees').val("");
+                $('#BusNetPrice').val("");
+                $('#TripType').val("");
+            })
+        </script>

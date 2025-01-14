@@ -1,0 +1,151 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalDetailViewModel
+@using Campus.School.Management.Logic.Resources
+
+    <tr>
+        @using (Html.BeginCollectionItem("_AccountDailyJournalDetail"))
+        {
+            @Html.HiddenFor(c => c.DailyJournalID)
+            @Html.HiddenFor(c => c.DailyJournalDetailID)
+
+
+            <td data-name="del"><i class="hide delete feather  red icon-trash" onclick="RemoveRow(this);"></i></td>
+            <td class="three wide column">
+                <div class="ui accountSelect search fluid selection dropdown">
+                    <div name="AccountNameEN" class="text"></div>
+                    @Html.HiddenFor(model => model.AccountTreeID)
+                    <i class="dropdown icon"></i>
+                    <div class="AccountTreeID value">
+                        @Html.HiddenFor(model => model.AccountTreeID)
+                    </div>
+                </div>
+
+                @*@Html.DropDownListFor(model => model.AccountTreeID, ViewBag.AccountTree as SelectList, "select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })*@
+            </td>
+
+
+            <td>
+
+                @Html.TextAreaFor(model => model.Description, new { @class = "desc" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "" })
+
+            </td>
+
+            <td>
+
+                @Html.EditorFor(model => model.Debit, new { htmlAttributes = new { @class = " Debit", @type = "number", @onkeypress = "zerofy(this,'credit')", @onfocus = "$(this).select();" } })
+                @Html.ValidationMessageFor(model => model.Debit, "", new { @class = "" })
+
+
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Credit, new { htmlAttributes = new { @class = "form-control Credit ", @type = "number", @onkeypress = "zerofy(this,'debit')", @onfocus = "$(this).select();" } })
+                @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "" })
+
+            </td>
+            <td>
+                @*@Html.DropDownListFor(model => model.CostCenterID, ViewBag.CostCenter as SelectList, "select", htmlAttributes: new { @class = "" })
+                @Html.ValidationMessageFor(model => model.CostCenterID, "", new { @class = "text-danger" })*@
+
+                <div class="ui CostCenterID search fluid selection dropdown">
+                    <div name="CostCenter" class="text"></div>
+                    @Html.HiddenFor(model => model.CostCenterID)
+                    <i class="dropdown icon"></i>
+                    <div class="CostCenterID value">
+                        @Html.HiddenFor(model => model.CostCenterID)
+                    </div>
+                </div>
+
+            </td>
+
+        }
+    </tr>
+
+<script>
+
+    $(function () {
+
+         populateCostCenter();
+
+         semantic.accountQuickBox(function () {
+          
+           SetSelectedDropdown($("#DetailContainer"));
+
+           BindEventForJournal();
+         });
+
+
+        bindElasticDescTextArea();
+     
+
+        var rows = $('#journalTable tbody tr');
+      
+        if (rows.length > 1) {
+
+            rows.each(function (index, el) {
+                console.log( $(this).find('.delete'))
+                $(this).find('.delete').removeClass('hide');
+            })
+
+            var desc = $(rows.find('td textarea.desc')[0]).val();
+             
+            $(rows.find('td textarea.desc')[rows.length-1]).val(desc)
+        }
+    
+
+     
+       
+    });
+
+
+
+    if ($("#DailyJournalID").val() > 0)
+    { 
+        localStorage.setItem('sum', "equal");
+    }
+  
+    $('.Credit,.Debit').keyup(function ()
+    {
+
+        var sumCredit = 0;
+        var sumDebit = 0;
+      
+        localStorage.clear();
+
+        var Debit = document.getElementsByClassName('Debit');
+
+        for (var i = 0; i < Debit.length; i++)
+        {
+            sumDebit = parseInt(sumDebit) + parseInt("0" + Debit[i].value);
+        }
+     
+        var Credit = document.getElementsByClassName('Credit');
+
+        for (var i = 0; i < Credit.length; i++)
+        {
+            sumCredit = parseInt(sumCredit) + parseInt("0" + Credit[i].value);
+        }
+
+        if (sumCredit == sumDebit)
+        {
+            localStorage.setItem('sum',"equal");
+        }
+        else
+        { 
+            localStorage.setItem('sum', "notequal");
+        }
+     
+        //Difference
+        $("#LsumDebit").val(sumDebit);
+
+        $("#LsumCredit").val(sumCredit);
+        $("#Difference").val(sumDebit - sumCredit);
+    });
+
+
+
+</script>
+
+
+       

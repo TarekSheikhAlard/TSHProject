@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeAssetsViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+<table class="ui selectable single line striped celled primary compact table" id="EmployeeAssets-table">
+    <thead>
+        <tr>
+            <th>
+                @GeneralResource.Actions
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Employee_ID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.AssetId)
+                </th>*@   
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @*<a href="#" onclick="Edit(@item.ID);"> <i class="feather icon-edit-1"></i></a>*@
+                    <a href="#" onclick="Delete(@item.ID);"> <i class="feather red icon-trash"></i></a>
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Employee_ID)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.AssetId)
+                </td>*@
+            </tr>
+
+        }
+    </tbody>
+    </table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex()
+        {
+
+            setTimeout(function () { $('#EmployeeAssets-table').DataTable();},2)
+        
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1)
+            {
+                toastr.success('Save is a SuccessFully Done')
+            }
+            else if (Msg == 2)
+            {
+                toastr.success('Edit is a SuccessFully Done')
+            }
+            else if (Msg == 3)
+            {
+                toastr.success('Delete is a SuccessFully Done')
+            }
+            else if (Msg == 4) {
+                toastr.error('This Operation id Faild')
+            }
+
+        };
+        InitIndex();
+    });
+</script>

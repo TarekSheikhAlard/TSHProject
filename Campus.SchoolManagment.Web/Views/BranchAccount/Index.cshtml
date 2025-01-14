@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.BranchAccountViewModel>
+@using Campus.School.Management.Logic.Resources
+
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="dollar" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    @GeneralResource.BranchAccount
+                </div>
+                <div id="Sub" class="sub header">
+                    @String.Format(GeneralResource.DescriptionAddRemove, @GeneralResource.BranchAccount)
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui segment anim">
+        <div class="toolspace">
+
+            <a href="#" id="Add" class="ui labeled icon primary  button">
+                <i class="plus icon"></i>
+                @GeneralResource.CreateNew
+            </a>
+            <div class="ui  buttons">
+                <div class="ui download icon button">  <i class="download icon"></i> @GeneralResource.Download</div>
+                <div class="ui floating dropdown icon button">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" id="DownloadExcel" class="item">
+                            <i class="file excel outline icon"></i>
+                            @GeneralResource.Excel
+                        </a>
+                        <a href="#" id="DownloadPDF" class="item">
+                            <i class="file pdf outline icon"></i>
+                            @GeneralResource.PDF
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ui container">
+            <div id="div-record">
+                @Html.Partial("_List", Model)
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@{ string New = GeneralResource.New + " " + GeneralResource.BranchAccount;
+    string Update = GeneralResource.Update + " " + GeneralResource.BranchAccount;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.BranchAccount;
+}
+
+<div class="ui add  modal " id="Add-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">  <i class=" close feather icon-x "></i>     <div class="header">         @New     </div>     <div id="divForAdd" class="divForAdd scrolling content">     </div> </div> <div class="ui edit modal " id="Edit-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">       <i class=" close feather icon-x "></i>     <div class="header">         @Update     </div>     <div id="divForUpdate" class="divForUpdate scrolling content">     </div> </div> <div class="ui modal " id="Delete-Model" tabindex="-1" role="" aria-labelledby="myModalLabel" aria-hidden="">       <i class=" close feather icon-x "></i>     <div class="header">         @Delete     </div>     <div id="divForDelete" class="divForDelete content">     </div> </div>
+<script src="~/Scripts/DevelopmentJS/BranchAccount.js"></script>

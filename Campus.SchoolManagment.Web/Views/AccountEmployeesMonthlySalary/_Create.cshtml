@@ -1,0 +1,625 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountEmployeesMonthlySalaryViewModel
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.Resources
+<script src="~/Content/Scripts/jquery.validate.min.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Ajax.BeginForm("Create", "AccountEmployeesMonthlySalary", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }, new { @class = "ui small form" }))
+
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.JobID)
+    <div class="three fields">
+        <div class="field">
+            @Html.LabelFor(model => model.Employee_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.Employee_ID, ViewBag.employee as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Employee_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.SalaryOfMonth, htmlAttributes: new { @class = "" })
+            <div class="ui input">
+                @Html.EditorFor(model => model.SalaryOfMonth, new { htmlAttributes = new { @class = "", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.SalaryOfMonth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.OperationDate, htmlAttributes: new { @class = "" })
+            <div class="ui input">
+                @Html.EditorFor(model => model.OperationDate, new { htmlAttributes = new { @class = "date-picker", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.OperationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*<div class="ui selection salarymonth dropdown">
+                @Html.HiddenFor(model => model.SalaryOfMonth)
+                <i class="dropdown icon"></i>
+                <div class="default text">Month</div>
+                <div class="menu">
+                    <div class="item" data-value="1">January </div>
+                    <div class="item" data-value="2">February </div>
+                    <div class="item" data-value="3">March  </div>
+                    <div class="item" data-value="4">April </div>
+                    <div class="item" data-value="5">May </div>
+                    <div class="item" data-value="6">June </div>
+                    <div class="item" data-value="7">July </div>
+                    <div class="item" data-value="8">August </div>
+                    <div class="item" data-value="9">September </div>
+                    <div class="item" data-value="10">October </div>
+                    <div class="item" data-value="11">November </div>
+                    <div class="item" data-value="12">December</div>
+                </div>
+            </div>*@
+
+
+
+
+        <div class="field">
+            @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="student_box_style">
+        <div class="three fields">
+            <div class="field">
+                @Html.LabelFor(model => model.BasicSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.BasicSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.BasicSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.AdditionalSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.AdditionalSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.AdditionalSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.BonusesSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.BonusesSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.BonusesSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="student_box_style">
+        <div class="two  fields">
+            <div class="field">
+
+                @Html.LabelFor(model => model.Transitionallowance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Transitionallowance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Transitionallowance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+
+                @Html.LabelFor(model => model.Subsistenceallowance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Subsistenceallowance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Subsistenceallowance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two  fields">
+            <div class="field">
+
+                @Html.LabelFor(model => model.Drivingallowance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Drivingallowance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Drivingallowance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+
+                @Html.LabelFor(model => model.conditionsworkallowance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.conditionsworkallowance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.conditionsworkallowance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two  fields">
+            <div class="field">
+                @Html.LabelFor(model => model.AllowanceSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.AllowanceSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.AllowanceSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+
+                @Html.LabelFor(model => model.AllowanceSalary2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.AllowanceSalary2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.AllowanceSalary2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two  fields">
+            <div class="field">
+
+                @Html.LabelFor(model => model.AllowanceSalary3, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.AllowanceSalary3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.AllowanceSalary3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+
+                @Html.LabelFor(model => model.accommodationallowanc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.accommodationallowanc, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.accommodationallowanc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two  fields">
+            <div class="field">
+                @Html.LabelFor(model => model.extraSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.extraSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.extraSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="field">
+                @Html.LabelFor(model => model.sumallowance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.sumallowance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.sumallowance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="student_box_style">
+
+        <div class="two  fields">
+            <div class="field">
+                @Html.LabelFor(model => model.Socialinsurance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Socialinsurance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Socialinsurance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Medicalinsurance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Medicalinsurance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Medicalinsurance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two  fields">
+            <div class="field">
+                @Html.LabelFor(model => model.Dedecation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Dedecation, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Dedecation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Taxes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Taxes, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Taxes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="student_box_style">
+
+        <div class="two  fields">
+
+            <div class="field">
+                @Html.LabelFor(model => model.TotalSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.TotalSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.TotalSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.TotalDedecated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.TotalDedecated, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.TotalDedecated, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="two  fields">
+            <div class="field">
+                @Html.LabelFor(model => model.NetSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.NetSalary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.NetSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="field">
+
+
+                @Html.LabelFor(model => model.paymentsalariesway, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.paymentsalariesway, new SelectList(new List<Object>
+                               {
+                               new { value = "Cash" , text =AccountEmployeesSalary.Cash},new { value = "BankStatment" , text =AccountEmployeesSalary.BankStatment},new { value = "Banktransfer", text =AccountEmployeesSalary.Banktransfer}
+
+                               }, "value", "text"), GeneralResource.Select, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.paymentsalariesway, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="student_box_style">
+        <div class="field">
+
+            @Html.LabelFor(model => model.costcenterID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.costcenterID, ViewBag.CostCenter as SelectList, "Select", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.costcenterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="two  fields">
+
+            <div class="field">
+                @Html.LabelFor(model => model.fromAccount, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                @*@Html.LabelFor(model => model.AccountTreeID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-3">
+                    @*onclick="SearchAccount2()"*@
+
+                    <div class="ui accountSelect search fluid selection dropdown" data-filter="4">
+                        <div name="AccountNameEN" class="text"></div>
+                        @Html.HiddenFor(model => model.AccountTreeID)
+                        <i class="dropdown icon"></i>
+                    </div>
+                    @*@Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.AccountNameEN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                    @Html.HiddenFor(model => model.AccountTreeID)
+                    @Html.ValidationMessageFor(model => model.AccountTreeID, "", new { @class = "text-danger" })*@
+                </div>
+            <div class="col-md-1">
+                @*<input type="button" id="Search" value="....." onclick="SearchAccount2()" class="ui primary button " />*@
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.AccountTreeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3" >
+
+                @*onclick="SearchAccount1()"*@
+                <div class="ui accountSelect search fluid selection dropdown" data-filter="10">
+                    <div name="AccountNameEN1" class="text"></div>
+                    @Html.HiddenFor(model => model.fromAccount)
+                    <i class="dropdown icon"></i>
+                </div>
+                @Html.ValidationMessageFor(model => model.fromAccount, "", new { @class = "text-danger" })
+
+                @*@Html.EditorFor(model => model.AccountNameEN1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        @Html.HiddenFor(model => model.fromAccount)
+        @Html.ValidationMessageFor(model => model.fromAccount, "", new { @class = "text-danger" })*@
+            </div>
+            <div class="col-md-1">
+                @*<input type="button" id="Search" value="....." onclick="SearchAccount1()" class="ui primary button " />*@
+            </div>
+        </div>
+    </div>
+    <div class="two  fields">
+
+        <div class="field">
+            @Html.LabelFor(model => model.fromAccount2, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+            <div class="col-md-3">
+                @*onclick="SearchAccount3()"*@
+                <div class="ui accountSelect search fluid selection dropdown" data-filter="10">
+                    <div name="AccountNameEN2" class="text"></div>
+                    @Html.HiddenFor(model => model.AccountTreeID2)
+                    <i class="dropdown icon"></i>
+                </div>
+                @Html.ValidationMessageFor(model => model.AccountTreeID2, "", new { @class = "text-danger" })
+
+
+            </div>
+            <div class="col-md-1">
+                @*<input type="button" id="Search" value="....." onclick="SearchAccount3()" class="ui primary button " />*@
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.AccountTreeID2, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+            <div class="col-md-3">
+                @*onclick="SearchAccount4()"*@
+                <div class="ui accountSelect search fluid selection dropdown" data-filter="7">
+                    <div name="AccountNameEN11" class="text"></div>
+                    @Html.HiddenFor(model => model.fromAccount2)
+                    <i class="dropdown icon"></i>
+                </div>
+                @Html.ValidationMessageFor(model => model.fromAccount2, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="col-md-1">
+                @*<input type="button" id="Search" value="....." onclick="SearchAccount4()" class="ui primary button " />*@
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div class="actions">
+    <button type="submit" class="ui primary button " name="cmd">@GeneralResource.Save</button>
+    <button type="button" class="ui deny button" data-dismiss="modal">@GeneralResource.Close</button>
+   
+</div>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+    var datesToDisable = [];
+
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    $(function () {
+        InitC();
+        semantic.accountQuickBox();
+    })
+    function InitC() {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        });
+        //var datesToDisable = ["2019/11/01", "2019/08/01", "2019/06/01"];
+
+
+
+        $('#SalaryOfMonth').datepicker({
+            autoclose: true,
+            format: "mm/yyyy",
+            viewMode: "months",
+            minViewMode: "months"
+
+        }).on("show", function (event) {
+            var empId = $("#Employee_ID").val();
+            if (empId === "") {
+                toastr.error("Select a Employee")
+
+                $('#Employee_ID').get(0).selectedIndex = 0;
+                $('#SalaryOfMonth').datepicker('hide')
+
+            } else {
+
+                DisableMonths();
+            }
+
+        });
+
+
+
+        //$('#SalaryOfMonth').dropdown({
+        //    onChange: function (value, text, $choice) {
+        //        var empId = $("#Employee_ID").val();
+
+        //        if (empId === "") {
+
+        //            toastr.error("Select a Employee")
+
+        //            $('#Employee_ID').get(0).selectedIndex = 0;
+
+        //        } else {
+
+        //            GetSalaryDetails(value);
+        //        }
+        //    }
+        //})
+
+    };
+
+
+</script>
+
+
+
+<script>
+    $("#Employee_ID").change(function () {
+
+        GetDisabledMonths();
+
+
+    })
+    $('#SalaryOfMonth').change(function () {
+
+        GetSalaryDetails($(this).val())
+
+    })
+</script>
+
+
+
+
+<script>
+
+    $('#BasicSalary,#AdditionalSalary,#AllowanceSalary,#BonusesSalary,#extraSalary').keyup(function () {
+
+        var sumTotalSalary = parseInt("0" + $('#BasicSalary').val()) + parseInt("0" + $('#AdditionalSalary').val()) + parseInt("0" + $('#AllowanceSalary').val()) + parseInt("0" + $('#BonusesSalary').val()) + parseInt("0" + $('#extraSalary').val());
+
+        $('#TotalSalary').val(sumTotalSalary);
+        var sumNetSalary = parseInt("0" + $('#TotalSalary').val()) - parseInt("0" + $('#TotalDedecated').val());
+        $('#NetSalary').val(sumNetSalary);
+
+    });
+
+</script>
+
+<script>
+
+    $('#Socialinsurance,#Medicalinsurance,#Taxes,#Dedecation').keyup(function () {
+
+        var sumTotalDedecated = parseInt("0" + $('#Socialinsurance').val()) + parseInt("0" + $('#Medicalinsurance').val()) + parseInt("0" + $('#Taxes').val()) + parseInt("0" + $('#Dedecation').val());
+
+        $('#TotalDedecated').val(sumTotalDedecated);
+        var sumNetSalary = parseInt("0" + $('#TotalSalary').val()) - parseInt("0" + $('#TotalDedecated').val());
+        $('#NetSalary').val(sumNetSalary);
+
+    });
+
+    function GetDisabledMonths() {
+        $.ajax({
+            type: "GET",
+            url: '/AccountEmployeesMonthlySalary/EmployeeSalariedMonths',
+            dataType: "json",
+            data: { Employee_ID: $("#Employee_ID").val() },
+            success: function (data) {
+                datesToDisable = data;
+
+                // console.log(data)
+            }
+        });
+    }
+    function GetSalaryDetails(month) {
+
+        $.ajax({
+            type: "GET",
+            url: '/AccountEmployeesMonthlySalary/EmployeeSalaryDetails',
+            dataType: "json",
+            data: { Employee_ID: $("#Employee_ID").val(), monthYear: month },
+            success: function (data) {
+                if (data == "") {
+                    alert("employee not have salary Information ");
+                    $('#Employee_ID').get(0).selectedIndex = 0;
+                    $('#JobID').val("");
+                    $('#JobName').val("");
+                    $('#BasicSalary').val("");
+                    $('#AdditionalSalary').val("");
+                    $('#BonusesSalary').val("");
+                    $('#AllowanceSalary').val("");
+                    $('#extraSalary').val("");
+                    $('#TotalSalary').val("");
+                    $('#Socialinsurance').val("");
+                    $('#Medicalinsurance').val("");
+                    $('#Taxes').val("");
+                    $('#Dedecation').val("");
+                    $('#TotalDedecated').val("");
+                    $('#NetSalary').val("");
+
+
+                }
+                else {
+                    debugger;
+                    $('#JobID').val(data.JobID);
+                    $('#JobName').val(data.JobName);
+                    $('#BasicSalary').val(data.BasicSalary);
+                    $('#AdditionalSalary').val(data.AdditionalSalary);
+                    $('#BonusesSalary').val(data.BonusesSalary);
+                    $('#AllowanceSalary').val(data.AllowanceSalary);
+                    $('#extraSalary').val(data.extraSalary);
+                    $('#TotalSalary').val(data.TotalSalary);
+                    $('#Socialinsurance').val(data.Socialinsurance);
+                    $('#Medicalinsurance').val(data.Medicalinsurance);
+                    $('#Taxes').val(data.Taxes);
+                    $('#Dedecation').val(data.Dedecation);
+                    $('#TotalDedecated').val(data.TotalDedecated);
+                    $('#NetSalary').val(data.NetSalary);
+                    $('#AccountNumber').val(data.AccountNumber);
+                    $('#accommodationallowanc').val(data.accommodationallowanc);
+                    $('#Subsistenceallowance').val(data.Subsistenceallowance);
+                    $('#AllowanceSalary3').val(data.AllowanceSalary3);
+                    $('#AllowanceSalary2').val(data.AllowanceSalary2);
+                    $('#Subsistenceallowance').val(data.Subsistenceallowance);
+                    $('#Drivingallowance').val(data.Drivingallowance);
+                    $('#Transitionallowance').val(data.Transitionallowance);
+                    $('#conditionsworkallowance').val(data.conditionsworkallowance);
+
+
+
+                    var sumTotalSalary = parseInt("0" + $('#conditionsworkallowance').val())
+                        + parseInt("0" + $('#Transitionallowance').val())
+                        + parseInt("0" + $('#Drivingallowance').val())
+                        + parseInt("0" + $('#Subsistenceallowance').val())
+                        + parseInt("0" + $('#accommodationallowanc').val())
+                        + parseInt("0" + $('#AllowanceSalary').val())
+                        + parseInt("0" + $('#AllowanceSalary2').val())
+                        + parseInt("0" + $('#AllowanceSalary3').val())
+                        + parseInt("0" + $('#extraSalary').val());
+                    $('#sumallowance').val(sumTotalSalary);
+                }
+            }
+        });
+    }
+
+    function DisableMonths() {
+
+        var year = $("th.datepicker-switch").eq(1).text();  // there are 3 matches
+
+        $(".month").each(function (index, element) {
+
+            var el = $(element);
+
+            el.removeClass('disabled');
+
+            var hideMonth = $.grep(datesToDisable, function (n, i) {
+                return n.substr(0, 4) == year && months[parseInt(n.substr(5, 2)) - 1] == el.text();
+            });
+
+            if (hideMonth.length)
+                el.addClass('disabled');
+
+            /* To hide them...
+            if (hideMonth.length)
+              el.hide();
+            */
+        });
+    }
+
+
+</script>
+
+
+
+
+
+

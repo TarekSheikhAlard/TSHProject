@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountTreeViewModel>
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer;
+<link href="@Server.MapPath("~/Content/Css/pdf.css")" rel="stylesheet" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+
+<table >
+    <thead>
+        <tr>
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.AccountTreeCode)
+            </th>
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.AccountNameEN)
+            </th>
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.AccountNameAR)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenBalance)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountTreeCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNameEN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNameAR)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenBalance)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

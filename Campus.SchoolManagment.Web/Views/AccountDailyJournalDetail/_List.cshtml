@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccountDailyJournalDetailItemViewModel>
+@using Campus.School.Management.Logic.Resources
+
+
+<div class="row">
+    <div class="col-md-12">
+
+
+        <div class="ui raised blue segment anim">
+            
+                <div class="ui large dividing header">
+                    <i class="fa globe"></i><div class="content">  <a href="#" id="Add" class="ui icon small circular inlinebtn button">  <i class="plus icon"></i> </a>Trial Balance
+                </div>
+
+            </div>
+           <div class="ui container">
+
+                <table class="ui selectable  single line Striped celled  compact table" id="myTable">
+
+                    <thead class="">
+                        <tr>
+                            <th rowspan="2">
+
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().AccountNameEN)
+                            </th>
+                            <th colspan="2">
+
+                                Totals
+                            </th>
+
+
+                            <th colspan="2">
+                                Balance
+                            </th>
+                        </tr>
+                        <tr>
+
+                            <th>
+                                Debit
+                                @*@Html.DisplayNameFor(model => model.FirstOrDefault().TotalDebit)*@
+                            </th>
+                            <th>
+                                Credit
+                                @*@Html.DisplayNameFor(model => model.FirstOrDefault().TotalCredit)*@
+                            </th>
+
+
+                            <th>
+                                Debit
+                                @*@Html.DisplayNameFor(model => model.FirstOrDefault().TotalDebit)*@
+                            </th>
+
+                            <th>
+                                Credit
+                                @*@Html.DisplayNameFor(model => model.FirstOrDefault().TotalDebit)*@
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="Searchbody">
+                        @{
+
+                decimal TotalDebit = 0;
+                decimal TotalCredit = 0;
+                decimal DifferentDebit = 0;
+                decimal DifferentCredit = 0;
+                        }
+                        @foreach (var item in Model)
+            {
+                TotalDebit += item.TotalDebit;
+                TotalCredit += item.TotalCredit;
+                DifferentCredit += item.DifferentCredit;
+                DifferentDebit += item.DifferentDebit;
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountNameEN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalDebit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalCredit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DifferentDebit)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DifferentCredit)
+
+                            </td>
+
+                        </tr>
+            }
+                        <tr style="background-color:gray">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+
+                        </tr>
+                        <tr>
+                            <td>
+                                Total
+
+                            </td>
+                            <td>
+                                @TotalDebit
+                            </td>
+                            <td>
+                                @TotalCredit
+                            </td>
+                            <td>
+                                @DifferentDebit
+                            </td>
+                            <td>
+                                @DifferentCredit
+
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            //$('#myTable').DataTable();
+
+        };
+        InitIndex();
+    });
+</script>
+
+

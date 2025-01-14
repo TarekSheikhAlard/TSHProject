@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.LedgerTrailBalanceViewModel>
+
+
+<table class="ui selectable  single line striped celled  compact table" id="myTable">
+    <thead>
+
+        <tr>
+            <th rowspan="2">
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th rowspan="2">
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+
+            <th colspan="2">
+                Balance Of First Duration
+            </th>
+            <th colspan="2">
+                The Movements
+            </th>
+            <th colspan="2">
+                Aggregates
+            </th>
+            <th colspan="2">
+                Balance
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceDr)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.BalanceCr)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AggDr)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AggCr)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.MovementDr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovementCr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstBalanceDr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstBalanceCr)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstBalanceDr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstBalanceCr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovementDr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovementCr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggDr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggCr)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BalanceDr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BalanceCr)
+            </td>
+
+
+
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+  $(document).ready(function () {
+
+        function InitIndex() {
+            $('#myTable').DataTable();
+        }
+
+   
+        InitIndex();
+
+
+    });
+</script>

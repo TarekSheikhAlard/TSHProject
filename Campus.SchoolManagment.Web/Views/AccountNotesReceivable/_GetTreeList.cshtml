@@ -1,0 +1,15 @@
+﻿
+
+
+
+
+@if (ViewBag.TreeList != null)
+{
+    foreach (var item in ViewBag.TreeList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+
+
+
+}

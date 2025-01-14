@@ -1,0 +1,60 @@
+﻿@*@model Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeeAssetsViewModel*@
+@using Campus.School.Management.Logic.Resources
+
+
+
+<div class="ui container">
+
+    @{Html.RenderAction("Create", "EmployeeAssets",new {empid=ViewBag.empid });}
+
+</div>
+
+<div class="ui primary segment">
+    <div id="list-EmployeeAssets">
+        @{Html.RenderAction("GetList", "EmployeeAssets", new { empid = ViewBag.empid });}  
+    </div>
+</div>
+
+
+
+@{ string New = GeneralResource.New + " " + GeneralResource.Assets;
+    string Update = GeneralResource.Update + " " + GeneralResource.Assets;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.Assets;
+}
+<div class="ui add  modal " id="Add-Model">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @New
+    </div>
+    <div id="divForAdd" class="divForAdd scrolling content">
+    </div>
+</div>
+
+<div class="ui edit modal " id="Edit-Model-EmployeeAssets">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Update
+    </div>
+    <div id="divForUpdate-EmployeeAssets" class="divForUpdate scrolling content">
+    </div>
+</div>
+
+<div class="ui modal " id="Delete-Model-EmployeeAssets">
+    <i class=" close feather icon-x "></i>
+    <div class="header">
+        @Delete
+    </div>
+    <div id="divForDelete-EmployeeAssets" class="divForDelete content">
+    </div>
+</div>
+
+<div class=" ui small asset modal " id="Asset-Model">
+
+    <div class="header">
+        @GeneralResource.AssetTree
+    </div>
+    <div id="divForAsset" class="divForAsset scrolling content">
+    </div>
+</div>
+
+<script src="~/Scripts/DevelopmentJS/EmployeeAssets.js"></script>

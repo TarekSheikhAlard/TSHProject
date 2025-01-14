@@ -1,0 +1,50 @@
+﻿@model Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentFeesViewModel
+@using Campus.School.Management.Logic.Resources
+
+<div class="ui  segment">
+    <div class="inline">
+        <b> @*@GeneralResource.Grade*@</b>   @Html.DropDownList("StudentConfigrationID", ViewBag.StudentConfigrationID as SelectList, GeneralResource.Select, htmlAttributes: new { @class = "ui search selection dropdown", @onchange = "GetFeePayment(this.value);" })
+        @*<b>View all </b><input  type="checkbox" data-id="@ViewBag.StudentAcdID" onchange="getAllFees(this);"/>*@
+    </div>
+</div>
+<div class="ui inverted payment dimmer">
+    <div class="ui text loader">Loading</div>
+</div>
+<div id="divForPayment" class="ui placeholder  segment">
+
+    <div class="ui icon header">
+        <i class="search icon"></i>
+        Select Fee type from dropdpown list
+    </div>
+    <div class="inline">
+
+    </div>
+</div>
+<script src="~/Scripts/DevelopmentJS/FeePayment.js"></script>
+<script>
+    function getAllFees(elem) {
+
+        var isChecked = $(elem).context.checked;
+        var id = $(elem).attr('data-id')
+        console.log(isChecked);
+
+
+
+        if (isChecked) {
+            $.ajax({
+                type: "Get",
+                url: '/Student/getAllFees/' + id,
+                success: function (response) {
+                    $('#divForPayment')
+                        .empty()
+                        .removeClass('placeholder')
+                        .html(response);
+
+                }
+            });
+        }
+
+
+
+    };
+</script>

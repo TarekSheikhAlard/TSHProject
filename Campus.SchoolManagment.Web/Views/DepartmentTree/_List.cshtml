@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.DepartmentTreeViewModel>
+
+@using Campus.School.Management.Logic.Resources
+
+@if (ViewBag.Parentlevel != null)
+{
+    <input id="Parentlevel" type="hidden" value="@ViewBag.Parentlevel" />
+  
+}
+<table class="ui selectable  single line Striped celled  compact table" id="myTable">
+    <thead>
+        <tr class="">
+            <th>@GeneralResource.Actions</th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.DepartmentNameAR)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.DepartmentNameEN)
+            </th>
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.DepartmentTreeCode)
+            </th>
+          
+            @*@if (Model.Count() > 0 && (Model.FirstOrDefault().DepartmentTreeLevel == 3 || Model.FirstOrDefault().DepartmentTreeLevel == 4|| Model.FirstOrDefault().DepartmentTreeLevel == 5))
+            {*@
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+              
+            @*}*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                <a href="#" onclick="Edit(@item.DepartmentTreeID);" class="editDialog"> <i class=" feather icon-edit-1"></i></a>
+            
+                <a href="#" onclick="Delete(@item.DepartmentTreeID);" class="editDialog"> <i class="feather red icon-trash"></i></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentNameAR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentNameEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentTreeCode)
+            </td>
+
+
+            @*@if (item.DepartmentTreeLevel == 3 || item.DepartmentTreeLevel == 4||item.DepartmentTreeLevel==5)
+        {*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+
+            @*}*@
+
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        function InitIndex() {
+            $('#myTable').DataTable();
+            var Msg = '@TempData["Msg"]';
+            if (Msg == 1) {
+                GetDeparmentTreeIndex();
+                toastr.success("@GeneralResource.toastrSave")
+            }
+            else if (Msg == 2) {
+                GetDeparmentTreeIndex();
+                toastr.success("@GeneralResource.toastrEdit")
+            }
+            else if (Msg == 3) {
+                GetDeparmentTreeIndex();
+                toastr.success("@GeneralResource.toastrDelete")
+            }
+            else if (Msg == 4) {
+                toastr.error("@GeneralResource.toastrOperationFaild")
+            }
+
+        };
+        InitIndex();
+
+
+    });
+</script>

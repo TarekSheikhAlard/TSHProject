@@ -1,0 +1,179 @@
+﻿@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <div id="heading" class="content">
+                    Empoyee Payroll
+                </div>
+
+            </h1>
+            <div style="margin-top:7px">
+                <div class="ui mini payrollBy form">
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checked  checkbox">
+                                <input type="radio" name="payrollBy" value="dept" checked="checked">
+                                <label>By Department</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="payrollBy" value="emp">
+                                <label>By Employee Id</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="ui small inheader form " style="">
+
+                    <div class="five fields">
+                        <div class="field">
+                            @Html.DropDown("BankId", ViewBag.BankList as List<SemanticControls.DropdownList>, new { @class = " ui  search bank fluid selection  dropdown ", @placeholder = "Bank" })
+                        </div>
+
+                        <div class="field">
+                            <input name="OperationDate" placeholder="Date" class="date-picker" />
+                        </div>
+                        <div class="field">
+                            @Html.DropDown("month", ViewBag.SalaryMonths as List<SemanticControls.DropdownList>, new { @class = " ui  search  fluid selection   dropdown ", @placeholder = "Month" })
+                        </div>
+                        <div class="field">
+                            <div class="ui year search selection selector dropdown">
+                                <input type="hidden" name="year">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Year</div>
+                                <div class="menu">
+                                    <div class="item" data-value="2018">2018</div>
+                                    <div class="item" data-value="2019">2019</div>
+                                    <div class="item" data-value="2020">2020</div>
+                                    <div class="item" data-value="2021">2021</div>
+                                    <div class="item" data-value="2022">2022</div>
+                                    <div class="item" data-value="2023">2023</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            @Html.DropDown("DeptId", ViewBag.DepartmentList as List<SemanticControls.DropdownList>, new { @class = " ui  search  fluid selection DeptId  dropdown ", @placeholder = "Department" })
+                            <input name="EmpId" placeholder="Employee Id" class="hide none" />
+                        </div>
+
+                        <div class="field">
+                            <button id="RunPayroll" class="ui primary  button">Run Payroll</button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui primary segment container">
+        <div id="div-record">
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    $(function () {
+
+        $('.date-picker').datepicker({
+            format: 'yyyy/mm/dd',
+            endDate: "today",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('.ui.inheader.form')
+            .form({
+                fields: {
+                    DeptId: 'empty',
+                    month: 'empty'
+
+                }
+            });
+
+
+        $('.payrollBy.form .ui.checkbox').checkbox({
+
+            onChecked: function () {
+
+                var $el = $(this);
+                var select = $el.val();
+                if (select === 'dept') {
+                    $('.DeptId.dropdown').removeClass('hide none')
+                    $('[name="EmpId"]').addClass('hide none')
+
+                    $('.ui.inheader.form')
+                        .form({
+                            fields: {
+                                DeptId: 'empty',
+                                month: 'empty'
+
+
+                            }
+                        });
+                }
+                if (select === 'emp') {
+                    $('.DeptId.dropdown').addClass('hide none')
+                    $('[name="EmpId"]').removeClass('hide none')
+                    $('.ui.inheader.form')
+                        .form({
+                            fields: {
+                                EmpId: 'empty',
+                                month: 'empty'
+
+                            }
+                        });
+                }
+
+            }
+        })
+
+
+        $('#RunPayroll').click(function (e) {
+
+            var checked = "";
+            var data;
+            if ($('.radio.checked input').val() === 'dept') {
+                data = { deptId: $('[name="DeptId"]').val(), month: $('[name="month"]').val(),year:$('[name="year"]').val() };
+            } else {
+
+                data = { empId: $('[name="EmpId"]').val(), month: $('[name="month"]').val(),year:$('[name="year"]').val()  };
+
+            }
+
+            if ($('.ui.inheader.form').form('validate form')) {
+                $.ajax({
+                    type: "Get",
+                    data: data,
+                    url: '/Payroll/GetPayroll/',
+                    success: function (response) {
+                        $('#div-record').empty();
+                        $('#div-record').html(response);
+                        //$("#PayrollTable").DataTable();
+                    }
+
+                });
+            }
+            return false;
+
+
+        })
+
+    })
+
+</script>

@@ -1,0 +1,61 @@
+﻿
+@model Campus.School.Management.Logic.BusinessLayer.ViewModel.PurchaseOrdersViewModel
+@using Campus.School.Management.Logic.Resources
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+@*<script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>*@
+@*<script src="~/Content/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="warehouse" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    Purschase Stock
+                </div>
+                <div id="Sub" class="sub header">
+
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+
+    @*<a href="#" id="Add" class="btn green"><i class="glyphicon glyphicon-plus"></i>@GeneralResource.CreateNew</a>*@
+
+    <div class="ui  segment anim">
+        <div class="toolspace" >
+            <a class="ui small button item" href='@Url.Action("GetAllOrder", "StockPurchaseOrder" )'>
+                <i class="list icon"></i>
+                view all orders
+            </a>
+            </div>
+
+            <div class="ui  container">
+                @Html.Partial("_Create")
+            </div>
+
+        </div>
+ 
+</div>
+
+
+@{ string New = GeneralResource.New + " " + GeneralResource.ReceiveItems;
+    string Update = GeneralResource.Update + " " + GeneralResource.ReceiveItems;
+    string Delete = GeneralResource.Delete + " " + GeneralResource.ReceiveItems;
+}
+
+
+
+
+
+<script src="~/Scripts/DevelopmentJS/PurchaseOrder.js"></script>
+

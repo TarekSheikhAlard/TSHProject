@@ -1,0 +1,155 @@
+﻿@using Campus.School.Management.Logic.Resources
+@using Campus.SchoolManagment.Web.Helper
+@{
+    ViewBag.Title = "Index"; if (!Request.IsAjaxRequest()) { Layout = "~/Views/Shared/_Layout.cshtml"; }
+}
+
+@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.EmployeePayrollHistoryViewModel>
+
+
+
+<div class="ui masthead vertical segment primary">
+    <div class="ui container">
+        <div class="introduction">
+            <h1 class="ui header normal ">
+                <clr-icon shape="clock" size="45"></clr-icon>
+                @*<i class="feather  icon-map"></i>*@
+                <div id="heading" class="content">
+                    Transaction History
+                </div>
+
+            </h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui  segment">
+        <div class="toolspace">
+            <div class="ui  buttons">
+                <div class="ui download icon button">  <i class="download  icon"></i> @GeneralResource.Download</div>
+                <div class="ui floating dropdown icon button">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" id="DownloadExcel" class="item">
+                            <i class="file excel outline icon"></i>
+                            @GeneralResource.Excel
+                        </a>
+                        <a href="#" id="DownloadPDF" class="item">
+                            <i class="file pdf outline icon"></i>
+                            @GeneralResource.PDF
+                        </a>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <table id="Payroll-History" class="ui selectable  single line Striped celled  compact table ">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MonthName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BenefitName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MonthName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BenefitName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+
+    $(function () {
+
+        $('#Payroll-History').DataTable();
+
+        $("#DownloadExcel").click(function () {
+
+            var $parent = $('.download.button');
+
+            $parent
+                .addClass("loading");
+
+            $.fileDownload("/Payroll/ExportExcel", {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+
+
+        });
+
+        $("#DownloadPDF").click(function () {
+
+            var $parent = $('.download.button');
+
+            $parent
+                .addClass("loading");
+
+            $.fileDownload("/Payroll/ExportPdf", {
+                successCallback: function (url) {
+                    // alert();
+                    $parent
+                        .removeClass("loading");
+                },
+                failCallback: function (html, url) {
+                    toastr.error("Error Occured while Download")
+                    $parent
+                        .removeClass("loading");
+                }
+            });
+
+
+        });
+
+    })
+
+</script>

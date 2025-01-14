@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentConfigViewModel>
+@using Campus.School.Management.Logic.BusinessLayer
+@using System.Web.Mvc;
+@using Campus.School.Management.Logic.Resources
+<table class="ui selectable single line Striped celled  compact table" id="ConfigDetails">
+    <thead>
+        <tr class="">
+            <th>
+                @GeneralResource.Actions
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeeItemName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+          
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+
+            
+
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+    <tr data-id="@item.ID">
+        <td>
+
+          @if (item.FeeItemId != 7)
+          {
+            <a href="#" onclick="EditConfig(@item.ID);"> <i class="feather icon-edit-1 "></i></a>
+          }
+            <a href="#" onclick="DeleteConfig(@item.ID);"> <i class="feather red icon-trash"></i></a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeeItemName)
+        </td>
+
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+
+    </tr>
+    }
+
+</table>
+<script>
+ $(document).ready(function () {
+        function InitIndex()
+        {
+            $('#ConfigDetails').DataTable();
+           
+            
+        };
+        InitIndex();
+    });
+
+
+</script>

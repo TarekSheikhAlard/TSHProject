@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="533793881f1b42fead03f8b99baaf906" Name="Diagram1" ZoomLevel="20">
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccBusCost" Width="1.5" PointX="22.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountEmployeeSalaryItem" Width="1.5" PointX="19.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountEmployeesMonthlySalary" Width="2.5" PointX="23.875" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountEmployeesSalary" Width="1.5" PointX="19.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountSalaryItem" Width="1.5" PointX="26.375" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountStatementType" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccStudentDiscount" PointX="10.375" PointY="12.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmUser_Level" Width="1.5" PointX="5.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmUser" Width="1.5" PointX="8" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BusDetail" Width="1.5" PointX="19.25" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BusExpens" PointX="19.125" PointY="42" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BusExpensesItem" PointX="0.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BusTrip" Width="1.5" PointX="22.25" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.PhysicalYear" Width="1.5" PointX="0.75" PointY="36.875" IsExpanded="true" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeeSalaryItem_AccountSalaryItem" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmUsers_AdmUser_Level" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="SchoolManagmentDBModel.FK_InvoiceItem_Invoice" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.Bank_Action" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BankBranch" Width="1.5" PointX="1.125" PointY="28.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BankCurrency" Width="1.5" PointX="2.125" PointY="42.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.Nationality" Width="1.5" PointX="8.625" PointY="28.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmCity" Width="1.5" PointX="10.875" PointY="28.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmDepartment" Width="1.5" PointX="12.375" PointY="1.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmCities_Nationalities" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.Bus" PointX="27.375" PointY="44.875" Width="1.5" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccBusCosts_Buses" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusDetails_Bus" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusExpenses_Buses" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusTrip_Bus" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmAcademicYear" PointX="15.875" PointY="35.625" Width="1.5" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmCompany" Width="1.5" PointX="10.875" PointY="39.25" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmEmployee" Width="1.5" PointX="16.875" PointY="18.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmSchool" PointX="13.125" PointY="32.625" Width="1.5" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeeSalaryItem_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesSalaries_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_School_AdmCity" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_School_AdmCompany" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployee_Nationality" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusDetails_AdmEmployee" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Invoice_AdmEmployees" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.MenuPage" Width="1.5" PointX="15.375" PointY="55.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.SchoolUser" Width="1.5" PointX="15.375" PointY="50.25" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_SchoolUser_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmClassRoom" Width="1.5" PointX="21.125" PointY="31" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmClassRoom_AdmAcademicYears" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmClass_AdmEmployee" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountStudentFeesList" Width="1.5" PointX="16.875" PointY="27.5" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountStudentFeesList_AdmAcademicYears" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesSalaries_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusTrips_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmDepartments_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccAcademicCost" Width="1.5" PointX="16.875" PointY="46.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccAcademicCost_AdmAcademicYear" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountDailyJournal" Width="1.5" PointX="4.375" PointY="39.5" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournal_BankCurrencies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournal_PhysicalYear" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.C__MigrationHistory" Width="1.5" PointX="6.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AspNetRole" Width="1.5" PointX="24.375" PointY="2.5" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AspNetUserClaim" Width="1.5" PointX="28.875" PointY="1" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AspNetUserLogin" Width="1.5" PointX="28.875" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AspNetUser" Width="1.5" PointX="26.625" PointY="1.25" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_SchoolUser_AspNetUsers" />
+        <AssociationConnector Association="SchoolManagmentDBModel.AspNetUserRoles" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployees_AdmDepartments" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesSalaries_BankBranches" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesSalaries_AdmDepartments" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AdmDepartments" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_BankBranches" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmCities_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Nationalities_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankCurrencies_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankBranches_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmDepartments_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployees_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployees_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSalaryItem_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSalaryItem_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeeSalaryItem_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeeSalaryItem_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesSalaries_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_PhysicalYear_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_PhysicalYear_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountCostCenter" Width="1.5" PointX="24.375" PointY="43" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCostCenter_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCostCenter_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccFeeItem" Width="1.5" PointX="9.75" PointY="3" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccBusCosts_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccBusCosts_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournal_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournal_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmAcademicYears_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmAcademicYears_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Buses_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusExpenses_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Buses_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusExpenses_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AccountEmployeesMonthlySalary" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AccountEmployeesMonthlySalary1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AccountEmployeesMonthlySalary2" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccAssetDepreciation" Width="1.5" PointX="8.375" PointY="14.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeReturnHistory" Width="1.5" PointX="19.25" PointY="9.625" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.HolidayType" Width="1.5" PointX="13.25" PointY="52.875" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Holiday_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeReturnHistory_AdmEmployees" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeVacation" Width="1.5" PointX="31.125" PointY="37.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeVacation_AccountEmployeesMonthlySalary" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeVacation_HolidayType" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeVacation_AdmEmployees" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeAsset" Width="1.5" PointX="31.375" PointY="30.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeLoan" Width="1.5" PointX="19.5" PointY="0.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeAssets_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployee_EmployeeLoans" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeTermination" Width="1.5" PointX="19.125" PointY="56.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeTermination_AdmEmployees" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.HRAllowanceEntry" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmStudent" Width="1.5" PointX="34.625" PointY="1.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.StudentReference" Width="1.5" PointX="32.375" PointY="5.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmStudents_StudentReference_table" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.admStudyear" Width="1.5" PointX="30.125" PointY="7" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_admStudyear_admStudyear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_StudentReference_Year" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmStudents_studentreference" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_StudentReference_Students" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmGrade_Courses" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.admGrade" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmGradesSchool" Width="1.5" PointX="30.125" PointY="45" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_StudentReference_GradesShool" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.InvenotryStoreKeeper" Width="1.5" PointX="19.125" PointY="37.625" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Invenotry__Emplo__3592E0D8" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.JournalType" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_JournalTypes_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournal_JournalTypes" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.MaterialManufacture" Width="1.5" PointX="10.25" PointY="7.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.StorePlace" Width="1.5" PointX="12.375" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.SchoolGroup" Width="1.5" PointX="6.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.UserGroup" Width="1.5" PointX="14.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.UserPermission" Width="1.5" PointX="17.625" PointY="62.25" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_permission_Page1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_UserPermissions_Groups" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountAsset" Width="1.5" PointX="30.375" PointY="22.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountchequePayable" Width="1.5" PointX="33.75" PointY="32.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.Accountchequesreceivable" Width="1.5" PointX="33.75" PointY="22.875" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountCustomer" Width="1.5" PointX="22.25" PointY="36.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountCustomerTransaction" Width="1.5" PointX="32.5" PointY="53.875" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountDailyJournalDetail" Width="1.5" PointX="29.75" PointY="49.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountFirstBalance" Width="1.5" PointX="35.75" PointY="42.625" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountNotespayable" Width="1.5" PointX="36.5" PointY="35.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountNotesReceivable" Width="1.5" PointX="35.5" PointY="49.125" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountPayableCash" Width="1.5" PointX="27.75" PointY="30.25" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountReciveCash" Width="1.5" PointX="27.75" PointY="22.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountSupplier" Width="1.5" PointX="33.25" PointY="43.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountTreasury" Width="1.5" PointX="25.25" PointY="35.25" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.Store" Width="1.5" PointX="28.75" PointY="54.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_Departement" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AccountDailyJournal" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_BankBranches" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_BankCurrencies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_ChequeRecived" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AccountDailyJournal" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_BankBranches" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_BankCurrencies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__CostCente__3D3402A0" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournalDetail_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountFirstBalance_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotespayable_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotesReceivables_AccountCostCenter1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AccountCostCenter" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_AdmCities" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_BankBranches" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomerTransaction_AccountCustomer" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomerTransaction_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournalDetail_AccountDailyJournal" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AccountDailyJournal" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AccountDailyJournal" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountFirstBalance_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountFirstBalance_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountFirstBalance_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotespayable_AccountTreasury" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotespayable_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotespayable_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotespayable_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotesReceivables_AccountTreasury1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotesReceivables_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotesReceivables_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotesReceivables_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AccountTreasury" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_BankCurrencies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AccountTreasury" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_BankCurrencies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_PhysicalYear" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_AdmCities" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_BankBranches" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTreasury_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTreasury_AdmEmployees" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTreasury_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.UnitsMeasurement" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AssetTree" Width="1.5" PointX="15.375" PointY="63.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_AssetTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AssetTree_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeAssets_schoolid" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AssetTree_AssetTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeAssets_AssetTree" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.DepartmentTree" Width="1.5" PointX="4.375" PointY="14.125" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployees_DepartmentTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_DepartmentTree_DepartmentTree" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.InventoryTree" Width="1.5" PointX="14.375" PointY="7.125" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_InvenotryStoreKeepers_SchoolID" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Invenotry__Inven__36870511" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__Inventory__43E1002F" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_InventoryTree_InventoryTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_InventoryTree_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmJob" Width="1.5" PointX="28.375" PointY="38.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesMonthlySalary_AdmJobs" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountEmployeesSalaries_AdmJobs1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmJobs_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployee_AdmJobs" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmJobs_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmJobs_DepartmentTree" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.InventoryItem" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BusStudentOccupation" Width="1.5" PointX="15.375" PointY="40.875" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusStudentOccupation_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BusStudentOccupation_AdmSchools" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.SupplierForm" Width="1.5" PointX="35.5" PointY="57" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_SupplierForms_Suppliers" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.item" Width="1.5" PointX="36.5" PointY="25.5" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Items_AccountSupplier" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Items_InventoryTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Items_MaterialManufacture" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.GradesFeeConfig" Width="1.5" PointX="23.75" PointY="50.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_GradesFeeConfig_School" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.SupplierFormDetail" Width="1.5" PointX="38.875" PointY="28.625" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_SupplierFormDetails_Items" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_SupplierFormDetails_SupplierForm" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccStudentConfig" Width="2.125" PointX="36.75" PointY="20.5" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccStudentFee" Width="1.5" PointX="39" PointY="21.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_Accountchequesreceivable" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_AccountDailyJournal" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_AccountReciveCash" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentConfig_StudentReference" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentConfig_students" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_AccStudentConfigration" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_Studen" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.FeeInstallmentType" Width="1.5" PointX="0.75" PointY="16.875" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_Installments" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_GradesFeeConfig_InstallmentType" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AdmInitialStudRegistration" Width="1.5" PointX="16.375" PointY="8.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmInitialStudRegistrations_grades" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmInitialStudRegistrations_Nationality" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_schools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_StudentReference_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_users" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_usersdel" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_usersMod" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentConfig_school" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.AccountTree" Width="1.5" PointX="15.375" PointY="69.625" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_AccountAccumalated" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_AccountExpense" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountAssets_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_AccountTree1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_AccountTree1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomerTransaction_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournalDetail_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountFirstBalance_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotespayable_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountNotesReceivables_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountPayableCash_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountReciveCash_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTreasury_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__CostAccou__3A5795F5" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__CostCente__3C3FDE67" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__FundAccou__386F4D83" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__SalesAcco__3B4BBA2E" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__StoreAcco__396371BC" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTree_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTree_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentConfig_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccStudentFees_accounTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_GradesFeeConfig_AccountTree" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.Bank" Width="1.5" PointX="13.125" PointY="25.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountchequePayable_BankBranches1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Accountchequesreceivable_BankBranches1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountCustomer_BankBranches1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountSupplier_BankBranches1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Banks_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankBranch_Banks" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK__Store__BankName__3E2826D9" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Banks_AccountTree" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.BankTransaction" Width="1.5" PointX="17.625" PointY="49.625" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.TransactionType" Width="1.5" PointX="15.375" PointY="58.375" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankTransactions_AccountTree" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankTransactions_PayeeAccount" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_School_SchoolID" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankTransactions_transactionTypes" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_BankTransactions_Banks" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeBenefitsOthersType" Width="2.75" PointX="18.375" PointY="5.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeBenfitsOther" Width="1.5" PointX="17.625" PointY="72.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountTree_Emp_Benefits_others" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeBenfitsOthers_EmployeeBenfitsOthers" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeBenfitsOthers_EmployeeBenfitsOthers1" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmSchool_EmployeeBenfitsOthers" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.EmployeeAddedBenefitsOther" Width="1.5" PointX="3.375" PointY="19.75" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployees_EmployeeAddedBenefitsOthers" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeBenefitOthers_EmployeeAddedBenefitsOthers" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.PurchaseOrderDetail" Width="1.5" PointX="8.625" PointY="19.375" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.PurchaseOrder" Width="1.5" PointX="6.375" PointY="19" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_PurchaseOrders_PurchaseOrderItem" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.HRPayroll" Width="1.5" PointX="27.375" PointY="17" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.HRPayrollEmployeeBenfitsOther" Width="1.5" PointX="39.375" PointY="34.875" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.HRPayrollEmployee" Width="1.5" PointX="33.125" PointY="16.5" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.HRSalaryMonth" Width="1.5" PointX="25.125" PointY="17.25" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AccountDailyJournal_PayrollEmployeeBenefit" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmCompnay_Payroll" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmCompnay_payrollEMployeeBenefit" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_HRPayrollEmployees_AdmCompanies" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmEmployee_PayrollEmployee" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_AdmSchool_payrollEmployeeBenefit" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_HRPayrollEmployees_AdmSchools" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_SchoolID_Payroll" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_DepartmentTree_Payroll" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_EmployeeAddedBenefit_PayrollEmployeeBEnefit" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_HRSalaryMonths_HRPayroll" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_Payroll_PayrollEmployee" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_PayrollEmployee_PayrollEmployeeBenefits" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.TransportBus" Width="1.5" PointX="26.625" PointY="7.25" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.TransportDriver" Width="1.5" PointX="21.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SchoolManagmentDBModel.TransportSupervisor" Width="1.5" PointX="24.375" PointY="9.125" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_TransportBuses_TransportDriver" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_TransportBuses_TransportSupervisor" />
+        <AssociationConnector Association="SchoolManagmentDBModel.FK_TransportBuses_TransportDriver1" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

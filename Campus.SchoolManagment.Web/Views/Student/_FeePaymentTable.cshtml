@@ -1,0 +1,290 @@
+﻿@model IEnumerable<Campus.School.Management.Logic.BusinessLayer.ViewModel.AccStudentFeeViewModel>
+
+@using Campus.School.Management.Logic.BusinessLayer
+@using Campus.School.Management.Logic.Resources
+@using Campus.School.Management.Logic.BusinessLayer.ViewModel;
+@{ var index = 0;
+    string[] months;
+    string[] schoolMonths = new string[12];
+
+    string lang = Utility.getCultureCookie(false).ToLower();
+    SchoolUserViewModel _dbUser = Statistics.GetLogiccookie();
+    int startMonth = _dbUser.startYearDate.Month;
+    int EndMonth = _dbUser.endYearDate.Month;
+
+    if (lang == "ar")
+    {
+        months = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+    }
+    else
+    {
+        months = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+    }
+    bool firstComplete = false;
+    for (var i = 0; i < months.Length;)
+    {
+        if (!firstComplete)
+        {
+            for (var j = startMonth; j < 12; j++)
+            {
+                schoolMonths[i] = months[j];
+                if (j == 11) { firstComplete = true; }
+                i++;
+            }
+        }
+        if (firstComplete)
+        {
+
+            for (var j = 0; j < startMonth; j++)
+            {
+                schoolMonths[i] = months[j];
+                i++;
+            }
+
+        }
+
+    }
+
+
+
+}
+@*<img src="@string.Concat(Statistics.SchoolImagesPath.TrimStart('~'),"logo-wide_2bd41490-90e9-4d49-b7c6-f5faf1336d14.png")"     />*@
+
+@if (Model.Count() > 0)
+{
+    <table class="ui very basic small  celled feePayment table">
+        <thead>
+            <tr>
+
+                @if (Utility.getCultureCookie(false).ToLower() == "ar")
+                {
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.AccountNameAR)*@
+
+                    </th>
+
+                }
+                else
+                {
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.AccountNameEN)*@
+                        Account Name
+                    </th>
+
+                }
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discount)s %
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.tax) %
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaidAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.paidInstallment)
+                </th>
+                <th>
+                    Select Installments
+                </th>
+                <th>
+                    Amount
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr data-rid="@index">
+                    <td>
+                        @if (Utility.getCultureCookie(false).ToLower() == "ar")
+                        {
+
+                            @Html.DisplayFor(modelItem => item.AccountNameAR)
+                        }
+                        else
+                        {
+
+                            @(item.AccountNameEN.Replace("Income", ""))
+
+                        }
+                        <input type="hidden" value="@item.AccountTreeID" name="model[@index].AccountTreeID" />
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+
+
+                    <td>
+                        @(item.Discount + item.StudentDiscount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>
+
+                    <td class="">
+                        @Html.DisplayFor(modelItem => item.PaidAmount)
+                    </td>
+                    <td>
+                        @{
+                            int totalInstallment = 1,
+                            paidInstallment = 0;
+
+                            decimal AmountPerInstall = 0, dueAmount = 0;
+
+                            paidInstallment = item.paidInstallment;
+                            totalInstallment = item.installmentPeriod;
+
+                            //nstallmentCount = totalInstallment - paidInstallment;
+
+
+                            if (totalInstallment != 0)
+                            {
+                                AmountPerInstall = Math.Round(item.TotalAmount / totalInstallment);
+
+                                dueAmount = item.partialAmount == AmountPerInstall ? 0 : item.partialAmount;
+                                paidInstallment = dueAmount > 0 ? paidInstallment - 1 : paidInstallment;
+                            }
+                        }
+
+
+                          @string.Format("{0}/{1}", paidInstallment, totalInstallment)
+
+                        (@if (Utility.getCultureCookie(false).ToLower() == "ar")
+                        {
+
+                            @item.installmentTypeAr;
+
+
+                        }
+                        else
+                        {
+
+                            @item.installmentTypeEn;
+                        })
+
+                    </td>
+                    <td>
+                        <div class="ui installment multiple search selection dropdown" data-factor="@AmountPerInstall" multiple="">
+                            <input type="hidden" name="model[@index].payInstallment">
+                            <i class="dropdown icon"></i>
+                            <div class="default text"></div>
+                            <div class="menu">
+
+                                @for (var i = 0; i < totalInstallment; i++)
+                                {
+                                    var m = (12 / totalInstallment) * i;
+
+                                    if (i < paidInstallment)
+                                    {
+                                        <div class="item disabled" style="opacity:1 !important" data-value="@schoolMonths[m]">@schoolMonths[m] <clr-icon shape="check" size="14" class="is-success "></clr-icon></div>
+
+                                    }
+                                    else if (i == paidInstallment)
+                                    {
+
+                                        if (dueAmount>0)
+                                        {
+                                            <div class="item" data-pamount="@dueAmount" data-value="@schoolMonths[m]">@schoolMonths[m] <clr-icon shape="warning-standard" size="14" class="is-highlight"></clr-icon></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="item" data-value="@schoolMonths[m]">@schoolMonths[m]</div>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <div class="item disabled" style="opacity:1 !important" data-value="@schoolMonths[m]">@schoolMonths[m] <clr-icon shape="error-standard" size="14" class="is-error"></clr-icon></div>
+                                    }
+
+
+                                }
+                            </div>
+                        </div>
+
+
+
+
+                    </td>
+                    <td>
+                        @if (item.PaidAmount >= item.TotalAmount)
+                        {
+                            <div class="ui green label">Paid</div>
+                        }
+                        else
+                        {
+                            <div class="ui amount input ">
+                                <input type="text" name="model[@index].itemAmount" data-enabled="false" />
+                            </div>
+
+                        }
+                    </td>
+
+                </tr>
+
+                index += 1;
+
+            }
+
+
+        </tbody>
+
+    </table>
+}
+else
+{
+
+    <div class="ui icon negative  message">
+        <i class="cancel icon"></i>
+        <div class="content">
+            <div class="header">
+               No Configuration
+            </div>
+            <p>There is no fee details for the grade. You can add fee details in Grades Fee Configuration Page.</p>
+        </div>
+    </div>
+
+}
+
+<script>
+
+    $(function () {
+
+        BindInstallmentDropdown();
+
+         $('.amount.input input').on('keyup', function (e) {
+            
+               OnAmountKeyup(e,this);
+        })
+
+        $('.amount.input input').on('keypress', function () {
+            EnableAnyAmountPayment(this)
+           
+        })
+
+       
+
+    })
+
+
+
+</script>
